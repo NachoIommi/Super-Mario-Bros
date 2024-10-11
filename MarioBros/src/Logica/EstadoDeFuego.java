@@ -1,3 +1,4 @@
+package Logica;
 class EstadoDeFuego extends EstadoDePersonaje {
     constructor(personaje) {
         super(personaje);  // Llama al constructor de la clase base

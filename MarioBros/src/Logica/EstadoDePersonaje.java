@@ -1,3 +1,4 @@
+package Logica;
 class EstadoDePersonaje {
     constructor(personaje) {
         this.personaje = personaje;  // Referencia al personaje

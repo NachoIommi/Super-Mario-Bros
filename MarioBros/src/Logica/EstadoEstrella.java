@@ -1,3 +1,4 @@
+package Logica;
 public class EstadoEstrella extends EstadoDePersonaje {
     public EstadoEstrella(Personaje personaje) {
         super(personaje);

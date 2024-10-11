@@ -1,3 +1,4 @@
+package Logica;
 class Personaje {
     constructor() {
         this.vidas = 3;        // Inicialmente 3 vidas
