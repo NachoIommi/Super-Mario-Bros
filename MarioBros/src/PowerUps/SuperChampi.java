@@ -1,11 +1,10 @@
-package Enemigos;
+package PowerUps;
 
-public class Goomba extends Enemigo{
+public class SuperChampi extends PowerUps{
 	
-	public Goomba() {
+	public SuperChampi() {
 		
 	}
-	
 	public void moverse() {
 		
 	}
@@ -18,7 +17,4 @@ public class Goomba extends Enemigo{
 		
 	}
 	
-	public void morir() {
-		
-	}
 }

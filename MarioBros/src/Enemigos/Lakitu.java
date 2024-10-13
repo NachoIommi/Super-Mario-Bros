@@ -1,8 +1,8 @@
 package Enemigos;
 
-public class Goomba extends Enemigo{
+public class Lakitu extends Enemigo{
 	
-	public Goomba() {
+	public Lakitu() {
 		
 	}
 	

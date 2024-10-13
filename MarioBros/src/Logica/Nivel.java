@@ -5,6 +5,7 @@ import Personaje.*;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Fabricas.*;
 import Personaje.Personaje;
 
 public class Nivel {
@@ -19,11 +20,11 @@ public class Nivel {
 			
 			GenerarBolaDeFuego fabricaBolaDeFuego = new GenerarBolaDeFuego();
 			
-			GenerarPlataforma fabricaLadrilloSolido = new GenerarLadrilloSolido();
-			GenerarPlataforma fabricaBloqueDePregunta = new GenerarBloqueDePregunta();
-			GenerarPlataforma fabricaBloqueSolido = new GenerarBloqueSolido();
-			GenerarPlataforma fabricaTuberia = new GenerarTuberia();
-			GenerarPlataforma fabricaVacio = new GenerarVacio();
+			GenerarPlataformas fabricaLadrilloSolido = new GenerarLadrilloSolido();
+			GenerarPlataformas fabricaBloqueDePregunta = new GenerarBloqueDePreguntas();
+			GenerarPlataformas fabricaBloqueSolido = new GenerarBloqueSolido();
+			GenerarPlataformas fabricaTuberia = new GenerarTuberia();
+			GenerarPlataformas fabricaVacio = new GenerarVacio();
 			
 			GenerarEnemigos fabricaPiranhaPlant = new GenerarPiranhaPlant();
 			GenerarEnemigos fabricaLakitu = new GenerarLakitu();

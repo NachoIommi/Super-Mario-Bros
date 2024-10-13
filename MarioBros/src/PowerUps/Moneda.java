@@ -1,8 +1,8 @@
-package Enemigos;
+package PowerUps;
 
-public class Goomba extends Enemigo{
+public class Moneda extends PowerUps{
 	
-	public Goomba() {
+	public Moneda() {
 		
 	}
 	
@@ -15,10 +15,6 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
-	}
-	
-	public void morir() {
 		
 	}
 }

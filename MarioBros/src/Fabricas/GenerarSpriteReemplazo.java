@@ -1,8 +1,8 @@
 package Fabricas;
 
-public class GenerarSpriteReemplazo implements GenerarSprite{
+public class GenerarSpriteReemplazo extends GenerarSprite{
 	
-	public SpriteReemplazo crearSprite() {
-		return new SpriteReemplazo();
+	public GenerarSpriteReemplazo() {
+		super("imagenes/sprites/reemplazo");
 	}
 }
