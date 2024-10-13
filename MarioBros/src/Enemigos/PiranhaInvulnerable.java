@@ -1,4 +1,4 @@
-package Logica;
+package Enemigos;
 public class PiranhaInvulnerable implements EstadosDePiranhaPlant {
     private PiranhaPlant piranha;
 

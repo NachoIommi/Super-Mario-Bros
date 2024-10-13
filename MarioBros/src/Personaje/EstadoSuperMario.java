@@ -1,4 +1,4 @@
-package Logica;
+package Personaje;
 
 class EstadoSuperMario extends EstadoDePersonaje {
 	

@@ -1,4 +1,4 @@
-package Logica;
+package Personaje;
 class EstadoDePersonaje {
 	
 	protected Personaje personaje;

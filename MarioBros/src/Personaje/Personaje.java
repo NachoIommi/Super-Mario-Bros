@@ -1,5 +1,9 @@
-package Logica;
-class Personaje {
+package Personaje;
+
+import Logica.Entidad;
+import Logica.Sprite;
+
+public class Personaje extends Entidad{
 	
 	//atributos
 	protected int vidas;
@@ -7,7 +11,7 @@ class Personaje {
 	protected int puntuacion;
 	private EstadoDePersonaje estado;
 	
-    Personaje() {
+    public Personaje() {
         this.vidas = 3;        // Inicialmente 3 vidas
         this.monedas = 0;      // Monedas iniciales
         this.puntuacion = 0;   // Puntos iniciales
@@ -42,8 +46,8 @@ class Personaje {
         this.estado = nuevoEstado;
     }
 
-    public void aceptarVisita(Visitor visitor) {
-        visitor.visitarPersonaje(this);
+    public void aceptarVisita(Visitor v) {
+        v.visitarPersonaje(this);
     }
 
     public int getVidas(){
@@ -78,4 +82,10 @@ class Personaje {
     public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }
+
+	@Override
+	public void cargarSprite(Sprite s) {
+		// TODO Auto-generated method stub
+		
+	}
 }

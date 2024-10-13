@@ -1,8 +1,11 @@
 package Logica;
 
 import java.io.BufferedReader;
+import Personaje.*;
 import java.io.FileReader;
 import java.io.IOException;
+
+import Personaje.Personaje;
 
 public class Nivel {
 	
@@ -75,7 +78,9 @@ public class Nivel {
 				//61 a 99 enemigos
 				//100 -> otros
 				    case 0:
+				    	
 				    	fabricaPersonaje.crearPersonaje(posX, posY);
+				    	//juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(x,y))
 				        break;
 						
 				    case 1:
@@ -133,7 +138,7 @@ public class Nivel {
 				    case 100: //no se va a parsear nunca , mario las crea , no el parser
 				    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
 				        break;
-				    case 101:
+				    case 101://podemos usarlo para cargar el fondo
 				    	fabricaSpriteOriginal.crearSpriteOriginal(posX, posY);
 				        break;
 				    case 102:
