@@ -7,6 +7,7 @@ import java.io.IOException;
 public class Nivel {
 	
 	private int reloj;
+	private int nivel_actual;
 	 
 	
 	public Nivel(int tiempo) {
@@ -36,14 +37,18 @@ public class Nivel {
 			GenerarPowerUps fabricaChampiVerde = new GenerarChampiVerde();
 			
 			GenerarSprite fabricaSpriteOriginal = new GenerarSpriteOriginal();
-			GenerarSprite fabricaSpriteReemplazo = new GenerarSpriteReemplazo();
-				
+			GenerarSprite fabricaSpriteReemplazo = new GenerarSpriteReemplazo();		
+	}
+
+	public int getNivelActual(){
+		return nivel_actual;
+	}
+
+	public void setNivelActual(int i){
+		nivel_actual=i;
 	}
 		
-		
-	
 	public void cargarNivel(int i) {
-		
 		try {
 			String ruta = "ruta al archivo"+i+".txt"; //Por ejemplo: C:/Desktop/ParserNivel+i+.txt con i = 1,2,3.
 			String contenido; //es el renglon leido por iteracion
@@ -60,93 +65,122 @@ public class Nivel {
 				int posX = Integer.parseInt(partes[1]);
 				int posY = Integer.parseInt(partes[2]);
 				int tipoPUp = 0; //considerando que ningun powerUp tiene asignado 0
-				if(partes.length == 4) {                 //Si tiene long cuatro, la cuarta posicion es el PUp contenido
+				if(partes.length == 4) {//Si tiene long cuatro, la cuarta posicion es el PUp contenido
 					tipoPUp = Integer.parseInt(partes[3]); 
 				}
-				
 				switch (tipoEntidad) {
-				
-			    case 0:
-			    	fabricaPersonaje.crearPersonaje(posX, posY);
-			        break;
-			    case 1:
-			    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
-			        break;
-			    case 2:
-			    	fabricaLadrilloSolido.crearLadrilloSolido(posX, posY);
-			        break;
-			    case 3:
-			    	fabricaBloqueDePregunta.crearBloqueDePregunta(posX, posY, tipoPUp);
-			        break;
-			    case 4:
-			    	fabricaBloqueSolido.crearBloqueSolido(posX, posY);
-			        break;
-			    case 5:
-			    	fabricaTuberia.crearTuberia(posX, posY, tipoPUp); //3er parametro determina piranha si/no
-			        break;
-			    case 6:
-			    	fabricaVacio.crearVacio(posX, posY);
-			        break;
-			    case 7:
-			    	fabricaPiranhaPlant.crearPiranhaPlant(posX, posY);
-			        break;
-			    case 8:
-			    	fabricaLakitu.crearLakitu(posX, posY);
-			        break;
-			    case 9:
-			    	fabricaSpiny.crearSpiny(posX, posY);
-			        break;
-			    case 10:
-			    	fabricaBuzzyBeetle.crearBuzzyBeetle(posX, posY);
-			        break;
-			    case 11:
-			    	fabricaGoomba.crearGoomba(posX, posY);
-			        break;
-			    case 12:
-			    	fabricaKoopaTroopa.crearKoopaTroopa(posX, posY);
-			        break;
-			    case 13:
-			    	fabricaMoneda.crearMoneda(posX, posY);
-			        break;
-			    case 14:
-			    	fabricaEstrella.crearEstrella(posX, posY);
-			        break;
-			    case 15:
-			    	fabricaSuperChampi.crearSuperChampi(posX, posY);
-			        break;
-			    case 16:
-			    	fabricaFlorDeFuego.crearFlorDeFuego(posX, posY);
-			        break;
-			    case 17:
-			    	fabricaChampiVerde.crearChampiVerde(posX, posY);
-			        break;
-			    case 18:
-			    	fabricaSpriteOriginal.crearSpriteOriginal(posX, posY);
-			        break;
-			    case 19:
-			    	fabricaSpriteReemplazo.crearSpriteReemplazo(posX, posY);
-			        break;
-			    default:
-			        System.out.println("Tipo no válido");
-			        break;
-				}
-				
-			}
-				
-				//generar entidad segun tipoEntidad
-				//pos x de entidad
-				//pos y de entidad
-				// si tiene PUp asignarselo
-				
-				contenido = lectura.readLine(); //Leo prox renglon del txt
-				
-	
-				
-			}catch(IOException | NumberFormatException e) {
-				System.out.println(e.getMessage());
-			}
-		
-	}
-	
+				//0 personaje
+				//1 a 30 bloques
+				//31 a 60 power ups
+				//61 a 99 enemigos
+				//100 -> otros
+				    case 0:
+				    	fabricaPersonaje.crearPersonaje(posX, posY);
+				        break;
+						
+				    case 1:
+				    	fabricaLadrilloSolido.crearLadrilloSolido(posX, posY);
+				        break;
+				    case 2:
+				    	fabricaBloqueDePregunta.crearBloqueDePregunta(posX, posY, tipoPUp);
+				        break;
+				    case 3:
+				    	fabricaBloqueSolido.crearBloqueSolido(posX, posY);
+				        break;
+				    case 4:
+				    	fabricaTuberia.crearTuberia(posX, posY, tipoPUp); //3er parametro determina piranha si/no
+				        break;
+				    case 5:
+				    	fabricaVacio.crearVacio(posX, posY);
+				        break;
 
+				    case 31:
+				    	fabricaMoneda.crearMoneda(posX, posY);
+				        break;
+				    case 32:
+				    	fabricaEstrella.crearEstrella(posX, posY);
+				        break;
+				    case 33:
+				    	fabricaSuperChampi.crearSuperChampi(posX, posY);
+				        break;
+				    case 34:
+				    	fabricaFlorDeFuego.crearFlorDeFuego(posX, posY);
+				        break;
+				    case 35:
+				    	fabricaChampiVerde.crearChampiVerde(posX, posY);
+				        break;
+				    
+				    case 61:
+				    	fabricaPiranhaPlant.crearPiranhaPlant(posX, posY);
+				        break;
+				    case 62:
+				    	fabricaLakitu.crearLakitu(posX, posY);
+				        break;
+				    case 63:
+				    	fabricaSpiny.crearSpiny(posX, posY);
+				        break;
+				    case 64:
+				    	fabricaBuzzyBeetle.crearBuzzyBeetle(posX, posY);
+				        break;
+				    case 65:
+				    	fabricaGoomba.crearGoomba(posX, posY);
+				        break;
+				    case 66:
+				    	fabricaKoopaTroopa.crearKoopaTroopa(posX, posY);
+				        break;
+				    
+						
+				    case 100: //no se va a parsear nunca , mario las crea , no el parser
+				    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
+				        break;
+				    case 101:
+				    	fabricaSpriteOriginal.crearSpriteOriginal(posX, posY);
+				        break;
+				    case 102:
+				    	fabricaSpriteReemplazo.crearSpriteReemplazo(posX, posY);
+				        break;
+						
+				    default:
+				        System.out.println("Tipo no válido");
+				        break;
+				}
+				contenido = lectura.readLine(); //Leo prox renglon del txt
+			}//esta llave cierra el while
+			setReloj();
+			setNivelActual(i);
+			
+				
+
+		}catch(IOException | NumberFormatException e) {
+				System.out.println(e.getMessage());}
+		
+	}//llave cargarNivel
+
+	public void perderVida(Personaje p){
+		if(p.getVidas() != 1){
+			p.setVidas(p.getVidas() - 1);
+			reiniciarNivel();
+		}
+		else
+			perderJuego();
+	}
+
+	public void reiniciarNivel(){
+		cargarNivel(getNivelActual());
+	}
+
+	public void ganarJuego(){
+		//hay que ver caso nivel final
+		cargarNivel(getNivelActual()+1);
+	}
+
+	public void perderJuego(){
+		//pantalla especial
+			//botones
+				//reiniciar juego
+				//volver a pantalla inicial
+		//cargar al ranking 
+	}
+	//ver tema RELOJ
+	
 }
