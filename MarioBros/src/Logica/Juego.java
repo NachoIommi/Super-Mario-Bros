@@ -1,14 +1,26 @@
 package Logica;
+import GUI.ControladorVistas;
 
 public class Juego {
-	protected Ranking ranking;
-	protected Mundo [] mundos;
+	//protected Ranking ranking;
+	//protected Mundo [] mundos;
 	protected int modoDeJuego;
 	
+	protected ControladorVistas controladorVistas;
+	
+	
 	public Juego() {
-		
+		//Creo las fabricas de entidades. TO DO
 	}
 	
+	public void setControladorVistas(ControladorVistas controladorVistas) {
+		this.controladorVistas = controladorVistas;
+	}
+	
+	public void iniciarJuego() {
+		controladorVistas.mostrarPantallaJuego();
+	}
+	/*
 	public void seleccionarMundo(Mundo m) {
 		
 	}
@@ -40,7 +52,7 @@ public class Juego {
 	public void setRanking(Ranking r) {
 		
 	}
-	
+	*/
 	
 	
 }

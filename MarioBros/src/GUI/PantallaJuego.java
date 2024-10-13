@@ -1,0 +1,69 @@
+package GUI;
+
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+// numero 3376
+// numero 240
+
+public class PantallaJuego extends JPanel {
+
+    protected ControladorVistas controladorVistas;
+    protected JLabel imagenFondo;
+    protected int posicionInicialX = 0;  
+    protected int velocidadDesplazamiento = 10; 
+
+    public PantallaJuego(ControladorVistas controladorVistas) {
+        this.controladorVistas = controladorVistas;
+        this.setPreferredSize(new Dimension(1600, 600));
+        
+        setLayout(null);  // Usar layout nulo para posicionamiento manual
+        agregarImagen();   // Agregar la imagen de fondo
+
+        // Agregar el KeyListener para capturar las teclas
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_RIGHT) {
+                    moverFondo(-velocidadDesplazamiento);  // Mover solo hacia la derecha
+                }
+            }
+        });
+        setFocusable(true);  // Permite que el panel capture los eventos del teclado
+    }
+
+    public void agregarImagen() {
+        // Crear el JLabel para la imagen de fondo
+        imagenFondo = new JLabel();
+        imagenFondo.setLayout(null);  // Sin layout para posicionar manualmente
+        imagenFondo.setBounds(posicionInicialX, 0, 1600, 930);  // Posicionar la imagen en el panels
+
+        // Cargar la imagen desde los recursos
+        ImageIcon icono = new ImageIcon(this.getClass().getResource("/imagenes/nivel1.png"));
+        Image imagenEscalada = icono.getImage().getScaledInstance(5000, 960, Image.SCALE_SMOOTH);  // Escalar imagen al tamaño adecuado
+        Icon iconoEscalado = new ImageIcon(imagenEscalada);
+        imagenFondo.setIcon(iconoEscalado);  // Establecer la imagen escalada en el JLabel
+       
+        // Agregar la imagen al panel
+        add(imagenFondo);
+    }
+
+    // Método para mover la imagen de fondo solo en X (hacia la derecha)
+    public void moverFondo(int posicionX) {
+        posicionInicialX += posicionX;  // Actualiza la posición en X
+
+        // Limitar el movimiento para que no salga del área visible
+        if (posicionInicialX < -4340) posicionInicialX = -4340;  // Limitar movimiento hacia la derecha
+
+        // Actualizar la posición de la imagen de fondo
+        imagenFondo.setBounds(posicionInicialX, 0, 5000, 930);
+        repaint();  // Redibuja el panel para reflejar el cambio
+    }
+}
+
