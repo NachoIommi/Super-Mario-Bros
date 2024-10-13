@@ -11,7 +11,7 @@ public class PanelPantallaPrincipal extends JPanel{
 	protected JLabel imagenFondo;
 	protected JButton ingresarNombre, seleccionarModoDeJuego;
 	
-	
+
 	public PanelPantallaPrincipal() {
 		setSize(600, 800);
 		setLayout(null);
