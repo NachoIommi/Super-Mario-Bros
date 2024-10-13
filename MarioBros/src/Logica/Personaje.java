@@ -1,74 +1,81 @@
 package Logica;
 class Personaje {
-    constructor() {
+	
+	//atributos
+	protected int vidas;
+	protected int monedas;
+	protected int puntuacion;
+	private EstadoDePersonaje estado;
+	
+    Personaje() {
         this.vidas = 3;        // Inicialmente 3 vidas
         this.monedas = 0;      // Monedas iniciales
         this.puntuacion = 0;   // Puntos iniciales
         this.estado = new EstadoNormal(this);  // Comienza en estado normal
     }
 
-    correr() {
+    public void correr() {
         this.estado.correr();
     }
 
-    saltar() {
+    public void saltar() {
         this.estado.saltar();
     }
 
-    morir() {
+    public void morir() {
         this.estado.morir();
         this.vidas -= 1;
-        if (this.vidas === 0) {
-            console.log("Game Over");
+        if (this.vidas == 0) {
+        	System.out.println("Game Over");
         }
     }
 
-    sumarVida() {
+    public void sumarVida() {
         this.vidas += 1;
     }
 
-    sumarPuntos(puntos) {
+    public void sumarPuntos(int puntos) {
         this.puntuacion += puntos;
     }
 
-    cambiarEstado(nuevoEstado) {
+    public void cambiarEstado(EstadoDePersonaje nuevoEstado) {
         this.estado = nuevoEstado;
     }
 
-    aceptarVisita(visitor) {
+    public void aceptarVisita(Visitor visitor) {
         visitor.visitarPersonaje(this);
     }
 
-    getVidas(){
+    public int getVidas(){
         return this.vidas;
     }
     
-    setVidas(n){
+    public void setVidas(int n){
         this.vidas = n;
     }
     
-    getMonedas(){
+    public int getMonedas(){
         return this.monedas;
     }
     
-    setMonedas(n){
+    public void setMonedas(int n){
         this.monedas = n;
     }
 
     
-     getPuntuacion(){
+    public int getPuntuacion(){
         return this.puntuacion;
     }
     
-    setPuntuacion(n){
+    public void setPuntuacion(int n){
         this.puntuacion = n;
     }
     
-    getEstado(){
+    public EstadoDePersonaje getEstado(){
         return this.estado;
     }
     
-    setEstado(nuevoEstado){
+    public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }
 }

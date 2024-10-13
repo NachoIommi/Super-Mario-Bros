@@ -1,34 +1,32 @@
 package Logica;
 class EstadoDeFuego extends EstadoDePersonaje {
-    constructor(personaje) {
+	
+    public EstadoDeFuego(Personaje personaje) {
         super(personaje);  // Llama al constructor de la clase base
     }
 
-    correr() {
-        console.log("El personaje corre lanzando bolas de fuego.");
+    public void correr() {
+    	System.out.println("El personaje corre lanzando bolas de fuego.");
     }
 
-    saltar() {
-        console.log("El personaje salta mientras lanza bolas de fuego.");
+    public void saltar() {
+    	System.out.println("El personaje salta mientras lanza bolas de fuego.");
     }
 
-    morir() {
-        console.log("El personaje ha muerto en estado de fuego.");
+    public void morir() {
+    	System.out.println("El personaje ha muerto en estado de fuego.");
     }
 
-    aceptarVisita(visitor) {
+    public void aceptarVisita(Visitor visitor) {
         visitor.visitarPersonaje(this.personaje);
     }
 
-    getPersonaje() {
+    public Personaje getPersonaje() {
         return this.personaje;
     }
 
-    setPersonaje(personaje) {
+    public void setPersonaje(Personaje personaje) {
         this.personaje = personaje;
     }
-}
-
-setPersonaje(personaje) {
-        this.personaje = personaje;
+      
 }

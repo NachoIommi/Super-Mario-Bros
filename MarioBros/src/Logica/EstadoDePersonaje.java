@@ -1,22 +1,25 @@
 package Logica;
 class EstadoDePersonaje {
-    constructor(personaje) {
-        this.personaje = personaje;  // Referencia al personaje
+	
+	protected Personaje personaje;
+	
+	public EstadoDePersonaje(Personaje personaje) {
+        this.personaje = personaje;  // Referencia al personaje. (Esto no esta en el diagrama, va con constructor?)
     }
-
-    correr() {
+	
+    public void correr() {
         throw new Error("Este método debe ser implementado por las subclases");
     }
 
-    saltar() {
+    public void saltar() {
         throw new Error("Este método debe ser implementado por las subclases");
     }
 
-    morir() {
+    public void morir() {
         throw new Error("Este método debe ser implementado por las subclases");
     }
 
-    aceptarVisita(visitor) {
+    public void aceptarVisita(Visitor visitor) {
         throw new Error("Este método debe ser implementado por las subclases");
     }
 }

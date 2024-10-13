@@ -1,26 +1,28 @@
 package Logica;
+
 class EstadoNormal extends EstadoDePersonaje {
-    constructor(personaje) {
+	
+    public EstadoNormal(Personaje personaje) {
         super(personaje);  // Llama al constructor de la clase base
     }
 
-    correr() {
-        console.log("El personaje corre normalmente.");
+    public void correr() {
+        System.out.println("El personaje corre normalmente.");
     }
 
-    saltar() {
-        console.log("El personaje salta.");
+    public void saltar() {
+    	System.out.println("El personaje salta.");
     }
 
-    morir() {
-        console.log("El personaje ha muerto en estado normal.");
+    public void morir() {
+    	System.out.println("El personaje ha muerto en estado normal.");
     }
 
-    aceptarVisita(visitor) {
+    public void aceptarVisita(Visitor visitor) {
         visitor.visitarPersonaje(this.personaje);
     }
 
-    getPersonaje() {
+    public Personaje getPersonaje() {
         return this.personaje;
     }
 }
