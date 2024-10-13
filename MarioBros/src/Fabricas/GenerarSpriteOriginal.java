@@ -1,8 +1,8 @@
 package Fabricas;
 
-public interface GenerarSpriteOriginal implements GenerarSprite{
+public class GenerarSpriteOriginal extends GenerarSprite{
 	
-	public SpriteOriginal crearSprite() {
-		return new SpriteOriginal();
+	public GenerarSpriteOriginal() {
+		super("imagenes/spritesMario/originales");
 	}
 }

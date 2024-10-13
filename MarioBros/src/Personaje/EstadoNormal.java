@@ -1,28 +1,37 @@
 package Personaje;
 
-class EstadoNormal extends EstadoDePersonaje {
+class EstadoNormal implements EstadoDePersonaje {
+	private Personaje personaje;
 	
     public EstadoNormal(Personaje personaje) {
-        super(personaje);  // Llama al constructor de la clase base
+    	this.personaje = personaje;
     }
 
     public void correr() {
-        System.out.println("El personaje corre normalmente.");
+        
     }
 
     public void saltar() {
-    	System.out.println("El personaje salta.");
+    	
     }
 
     public void morir() {
-    	System.out.println("El personaje ha muerto en estado normal.");
+    	
     }
 
-    public void aceptarVisita(Visitor visitor) {
-        visitor.visitarPersonaje(this.personaje);
+    public void aceptarVisita(Visitor v) {
+        
     }
 
     public Personaje getPersonaje() {
-        return this.personaje;
+        return personaje;
     }
+    //estos dos de aca abajo tal vez no hacen falta :: ver!
+	public void sumarVida() {
+		
+	}
+
+	public void sumarPuntos(int n) {
+
+	}
 }

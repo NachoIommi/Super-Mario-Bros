@@ -1,6 +1,6 @@
 package Enemigos;
 
-public class PiranhaExtendida implements EstadosDePiranha{
+public class PiranhaExtendida implements EstadosDePiranhaPlant{
 	private PiranhaPlant piranha;
 	
 	public PiranhaExtendida() {

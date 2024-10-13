@@ -1,8 +1,8 @@
 package Enemigos;
 
-public class KoopaTroopa {
+public class KoopaTroopa extends Enemigo{
 	protected Sprite sprite;
-	private EstadoActual estadoActual;
+	private EstadoDeKoopa estadoActual;
 	
 	public KoopaTroopa() {
 		

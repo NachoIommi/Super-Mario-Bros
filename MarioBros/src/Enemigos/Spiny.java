@@ -1,8 +1,8 @@
 package Enemigos;
 
-public class Goomba extends Enemigo{
+public class Spiny extends Enemigo{
 	
-	public Goomba() {
+	public Spiny() {
 		
 	}
 	
@@ -11,7 +11,7 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+					
 	}
 	
 	public void cargarSprite(Sprite s) {

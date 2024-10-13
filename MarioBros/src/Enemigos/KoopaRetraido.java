@@ -1,6 +1,6 @@
 package Enemigos;
 
-public class KoopaRetraido implements EstadosDeKoopa{
+public class KoopaRetraido extends EstadosDeKoopa{
 	private KoopaTroopa koopa;
 	
 	public KoopaRetraido() {
