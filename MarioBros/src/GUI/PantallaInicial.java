@@ -68,7 +68,7 @@ public class PantallaInicial extends JPanel{
 	public void registrarOyenteBotonNombre() {
 		botonIngresarNombre.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				controladorVistas.juego.iniciarJuego();
+				controladorVistas.juego.getMundo().cargarPrimerNivel();
 				}
 		});
 	}

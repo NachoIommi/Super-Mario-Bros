@@ -3,7 +3,7 @@ import GUI.ControladorVistas;
 
 public class Juego {
 	//protected Ranking ranking;
-	//protected Mundo [] mundos;
+	protected Mundo mundos;
 	protected int modoDeJuego;
 	
 	protected ControladorVistas controladorVistas;
@@ -20,7 +20,10 @@ public class Juego {
 	public void iniciarJuego() {
 		controladorVistas.mostrarPantallaJuego();
 	}
-	/*
+	public void perderJuego() {
+		controladorVistas.mostrarPantallaPerder();
+	}
+	
 	public void seleccionarMundo(Mundo m) {
 		
 	}
@@ -33,8 +36,8 @@ public class Juego {
 		
 	}
 	
-	public Mundo getMundo(int pos) {
-		
+	public Mundo getMundo() {
+		return mundos;
 	}
 	
 	public int getModoDeJuego() {
@@ -52,7 +55,6 @@ public class Juego {
 	public void setRanking(Ranking r) {
 		
 	}
-	*/
 	
 	
 }

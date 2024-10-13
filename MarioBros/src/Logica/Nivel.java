@@ -10,9 +10,9 @@ import Personaje.Personaje;
 
 public class Nivel {
 	
-	private int reloj;
-	private int nivel_actual;
-	 
+	protected int reloj;
+	protected int nivel_actual;
+	protected Juego juego;
 	
 	public Nivel(int tiempo) {
 			reloj = tiempo;
@@ -152,9 +152,9 @@ public class Nivel {
 				}
 				contenido = lectura.readLine(); //Leo prox renglon del txt
 			}//esta llave cierra el while
-			setReloj();
+			//setReloj();
 			setNivelActual(i);
-			
+			juego.iniciarJuego();
 				
 
 		}catch(IOException | NumberFormatException e) {
@@ -182,6 +182,7 @@ public class Nivel {
 
 	public void perderJuego(){
 		//pantalla especial
+		juego.perderJuego();
 			//botones
 				//reiniciar juego
 				//volver a pantalla inicial
