@@ -31,6 +31,7 @@ public class PantallaJuego extends JPanel {
           
         mostrarPersonaje(); // el orden importa, si primero va el personaje se superpone al fondo
         agregarImagen();   // Agregar la imagen de fondo
+        eventosTeclado();
        
 
         // Agregar el KeyListener para capturar las teclas
@@ -74,16 +75,16 @@ public class PantallaJuego extends JPanel {
         repaint();  // Redibuja el panel para reflejar el cambio
     }
     public void mostrarPersonaje() {
-        Personaje personaje = controladorVistas.agregarPersonaje();
+        Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
         
         // Cargar la imagen desde los recursos
         ImageIcon icono = new ImageIcon(this.getClass().getResource("/spritesMario/quietoNormal.png"));
-        Image imagenEscalada = icono.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imagenEscalada);
       
         personaje.setIcon(iconoEscalado);
-        personaje.setBounds(personaje.getPosX(),personaje.getPosY(),20,20);
+        personaje.setBounds(personaje.getPosX(),personaje.getPosY(),50,50);
         add(personaje);
         revalidate();
         repaint();
@@ -95,20 +96,22 @@ public class PantallaJuego extends JPanel {
             
             public void keyPressed(KeyEvent k) {
                 int keyCode = k.getKeyCode();
+                
                 switch(keyCode) {
+                
                 	case(KeyEvent.VK_D):
-                		controladorVistas.agregarPersonaje().establecerDireccion(1);
+                		controladorVistas.obtenerPersonaje().establecerDireccion(1);
                 		break;
                 			
                 	case(KeyEvent.VK_A):
-                		controladorVistas.agregarPersonaje().establecerDireccion(3);
+                		controladorVistas.obtenerPersonaje().establecerDireccion(3);
                 		break;		
                 }
             }
             
-           /* public void keyReleased(KeyEvent k) {
-            	controladorVistas.agregarPersonaje().establecerDireccion(0);
-            }*/
+            public void keyReleased(KeyEvent k) {
+            	controladorVistas.obtenerPersonaje().establecerDireccion(0);
+            }
         });
     	
     }

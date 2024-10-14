@@ -17,11 +17,9 @@ public class Launcher {
 				try {
 					Juego juego = new Juego();
 					ControladorVistas controladorVistas = new ControladorVistas(juego);
-					
-					controladorVistas.ventana.setVisible(true);
 					juego.setControladorVistas(controladorVistas);
+					controladorVistas.ventana.setVisible(true);
 					controladorVistas.mostrarPantallaJuego();
-
 					
 				} catch (Exception e) {
 					e.printStackTrace();

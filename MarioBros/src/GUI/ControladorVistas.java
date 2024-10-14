@@ -47,7 +47,11 @@ public class ControladorVistas {
 		ventana.setContentPane(pantallaPerder);
 	}
 	
-	public Personaje agregarPersonaje() {
+	public Personaje obtenerPersonaje() {
 		return juego.getPersonaje();
+	}
+	
+	public PantallaJuego obtenerPantallaJuego() {
+		return pantallaJuego;
 	}
 }

@@ -29,6 +29,10 @@ public class Juego {
 		this.controladorVistas = controladorVistas;
 	}
 	
+	public ControladorVistas getControladorVistas() {
+		return controladorVistas;
+	}
+	
 	public void iniciarJuego() {
 		controladorVistas.mostrarPantallaJuego();
 	}
