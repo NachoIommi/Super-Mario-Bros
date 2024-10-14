@@ -1,16 +1,25 @@
 package Logica;
+import java.util.ArrayList;
+import java.util.List;
+
 import GUI.ControladorVistas;
+import Personaje.Personaje;
 
 public class Juego {
 	//protected Ranking ranking;
 	protected Mundo mundos;
+	protected Nivel n;
 	protected int modoDeJuego;
+	
+	protected Personaje personaje;
 	
 	protected ControladorVistas controladorVistas;
 	
 	
 	public Juego() {
-		//Creo las fabricas de entidades. TO DO
+		n = new Nivel(300,this);
+		personaje = null;
+		n.cargarNivel(0);
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {
@@ -41,20 +50,18 @@ public class Juego {
 	}
 	
 	public int getModoDeJuego() {
-		
+		return 2; //borrar
 	}
 	
 	public void setModoDeJuego(int n) {
 		
 	}
 	
-	public Ranking getRanking() {
-		
+	public void agregarPersonaje(Personaje p) {
+		personaje = p;
 	}
-	
-	public void setRanking(Ranking r) {
-		
+	public Personaje getPersonaje() {
+		return personaje;
 	}
-	
 	
 }

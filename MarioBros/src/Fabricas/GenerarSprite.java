@@ -13,7 +13,7 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getPersonaje() {
-		return new Sprite(rutaImagen + "/SpriteMario/estadoNormal/quieto/0.png");
+		return new Sprite(rutaImagen + "/spritesMario/quietoNormal.png");
 	}
 	
 	public Sprite getBolaDeFuego() {

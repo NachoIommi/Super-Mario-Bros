@@ -1,10 +1,12 @@
 package Enemigos;
 
+import Fabricas.Sprite;
+
 public class PiranhaPlant extends Enemigo{
 	private EstadosDePiranhaPlant estadoActual;
 	
 	
-	public PiranhaPlant(int x, int y) {
+	public PiranhaPlant() {
 		
 	}
 	
@@ -18,7 +20,6 @@ public class PiranhaPlant extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
 	}
 	
 	public void morir() {

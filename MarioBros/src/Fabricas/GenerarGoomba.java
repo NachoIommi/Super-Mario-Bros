@@ -1,6 +1,8 @@
 package Fabricas;
 
-public class GenerarGoomba extends GenerarEnemigos{
+import Enemigos.Goomba;
+
+public class GenerarGoomba implements GenerarEnemigos{
 	
 	public Goomba crearEnemigo(int x, int y) {
 		return new Goomba();

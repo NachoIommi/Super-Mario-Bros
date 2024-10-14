@@ -1,8 +1,11 @@
 package Fabricas;
 
-public class GenerarLakitu extends GenerarEnemigo{
+import Enemigos.Lakitu;
+
+public class GenerarLakitu implements GenerarEnemigos{
 	
 	public Lakitu crearEnemigo(int x, int y) {
-		return new Lakitu(int x, int y);
+		return new Lakitu();
 	}
+
 }

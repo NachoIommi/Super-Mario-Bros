@@ -1,6 +1,8 @@
 package Fabricas;
 
+import PowerUps.PowerUps;
+
 public interface GenerarPowerUps extends GeneradorDeEntidades{
 	
-	public PowerUp crearPowerUp(int x, int y);
+	public PowerUps crearPowerUp(int x, int y);
 }

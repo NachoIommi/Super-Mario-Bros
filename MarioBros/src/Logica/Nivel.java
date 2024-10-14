@@ -1,6 +1,6 @@
 package Logica;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import Personaje.*;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,34 +14,62 @@ public class Nivel {
 	protected int nivel_actual;
 	protected Juego juego;
 	
-	public Nivel(int tiempo) {
-			reloj = tiempo;
-			GenerarPersonaje fabricaPersonaje = new GenerarPersonaje();
-			
-			GenerarBolaDeFuego fabricaBolaDeFuego = new GenerarBolaDeFuego();
-			
-			GenerarPlataformas fabricaLadrilloSolido = new GenerarLadrilloSolido();
-			GenerarPlataformas fabricaBloqueDePregunta = new GenerarBloqueDePreguntas();
-			GenerarPlataformas fabricaBloqueSolido = new GenerarBloqueSolido();
-			GenerarPlataformas fabricaTuberia = new GenerarTuberia();
-			GenerarPlataformas fabricaVacio = new GenerarVacio();
-			
-			GenerarEnemigos fabricaPiranhaPlant = new GenerarPiranhaPlant();
-			GenerarEnemigos fabricaLakitu = new GenerarLakitu();
-			GenerarEnemigos fabricaSpiny = new GenerarSpiny();
-			GenerarEnemigos fabricaBuzzyBeetle = new GenerarBuzzyBeetle();
-			GenerarEnemigos fabricaGoomba = new GenerarGoomba();
-			GenerarEnemigos fabricaKoopaTroopa = new GenerarKoopaTroopa();
-			
+	GenerarPersonaje fabricaPersonaje;
+	
+	GenerarBolaDeFuego fabricaBolaDeFuego;
+	
+	GenerarPlataformas fabricaLadrilloSolido;
+	GenerarPlataformas fabricaBloqueDePregunta;
+	GenerarPlataformas fabricaBloqueSolido;
+	GenerarPlataformas fabricaTuberia;
+	GenerarPlataformas fabricaVacio; 
+	
+	GenerarEnemigos fabricaPiranhaPlant;
+	GenerarEnemigos fabricaLakitu;
+	GenerarEnemigos fabricaSpiny; 
+	GenerarEnemigos fabricaBuzzyBeetle;
+	GenerarEnemigos fabricaGoomba;
+	GenerarEnemigos fabricaKoopaTroopa;
+	
 
-			GenerarPowerUps fabricaMoneda = new GenerarMoneda();
-			GenerarPowerUps fabricaEstrella = new GenerarEstrella();
-			GenerarPowerUps fabricaSuperChampi = new GenerarSuperChampi();
-			GenerarPowerUps fabricaFlorDeFuego = new GenerarFlorDeFuego();
-			GenerarPowerUps fabricaChampiVerde = new GenerarChampiVerde();
+	GenerarPowerUps fabricaMoneda;
+	GenerarPowerUps fabricaEstrella;
+	GenerarPowerUps fabricaSuperChampi;
+	GenerarPowerUps fabricaFlorDeFuego;
+	GenerarPowerUps fabricaChampiVerde;
+	
+	GenerarSprite fabricaSprite;
+	
+	public Nivel(int tiempo, Juego juego) {
+		
+			reloj = tiempo;
+			this.juego = juego;
+			fabricaPersonaje = new GenerarPersonaje();
 			
-			GenerarSprite fabricaSpriteOriginal = new GenerarSpriteOriginal();
-			GenerarSprite fabricaSpriteReemplazo = new GenerarSpriteReemplazo();		
+			fabricaBolaDeFuego = new GenerarBolaDeFuego();
+			
+			fabricaLadrilloSolido = new GenerarLadrilloSolido();
+			fabricaBloqueDePregunta = new GenerarBloqueDePreguntas();
+			fabricaBloqueSolido = new GenerarBloqueSolido();
+			fabricaTuberia = new GenerarTuberia();
+			fabricaVacio = new GenerarVacio();
+			
+			fabricaPiranhaPlant = new GenerarPiranhaPlant();
+			fabricaLakitu = new GenerarLakitu();
+			fabricaSpiny = new GenerarSpiny();
+			fabricaBuzzyBeetle = new GenerarBuzzyBeetle();
+			fabricaGoomba = new GenerarGoomba();
+			fabricaKoopaTroopa = new GenerarKoopaTroopa();
+			
+	
+			fabricaMoneda = new GenerarMoneda();
+			fabricaEstrella = new GenerarEstrella();
+			fabricaSuperChampi = new GenerarSuperChampi();
+			fabricaFlorDeFuego = new GenerarFlorDeFuego();
+			fabricaChampiVerde = new GenerarChampiVerde();		
+			
+			fabricaSprite = new GenerarSpriteOriginal();
+			
 	}
 
 	public int getNivelActual(){
@@ -54,7 +82,8 @@ public class Nivel {
 		
 	public void cargarNivel(int i) {
 		try {
-			String ruta = "ruta al archivo"+i+".txt"; //Por ejemplo: C:/Desktop/ParserNivel+i+.txt con i = 1,2,3.
+			//String ruta = "ruta al archivo"+i+".txt"; //Por ejemplo: C:/Desktop/ParserNivel+i+.txt con i = 1,2,3.
+			String ruta = "C:/Users/juans/OneDrive/Desktop/Niveles/nivel-1.txt";
 			String contenido; //es el renglon leido por iteracion
 			
 			FileReader lector = new FileReader(ruta);  //Indico el archivo a leer
@@ -79,17 +108,17 @@ public class Nivel {
 				//61 a 99 enemigos
 				//100 -> otros
 				    case 0:
-				    	
-				    	fabricaPersonaje.crearPersonaje(posX, posY);
-				    	//juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(x,y))
+				    	//fabricaPersonaje.crearPersonaje(posX, posY);
+				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(posX,posY));
 				        break;
 						
 				    case 1:
-				    	fabricaLadrilloSolido.crearLadrilloSolido(posX, posY);
+				    	fabricaLadrilloSolido.crearPlataforma(posX, posY);
 				        break;
 				    case 2:
-				    	fabricaBloqueDePregunta.crearBloqueDePregunta(posX, posY, tipoPUp);
+				    	fabricaBloqueDePregunta.crearPlataforma(posX, posY);
 				        break;
+				   /*
 				    case 3:
 				    	fabricaBloqueSolido.crearBloqueSolido(posX, posY);
 				        break;
@@ -145,7 +174,7 @@ public class Nivel {
 				    case 102:
 				    	fabricaSpriteReemplazo.crearSpriteReemplazo(posX, posY);
 				        break;
-						
+					*/
 				    default:
 				        System.out.println("Tipo no válido");
 				        break;
@@ -153,14 +182,12 @@ public class Nivel {
 				contenido = lectura.readLine(); //Leo prox renglon del txt
 			}//esta llave cierra el while
 			//setReloj();
-			setNivelActual(i);
-			juego.iniciarJuego();
-				
-
+			setNivelActual(i);			
 		}catch(IOException | NumberFormatException e) {
 				System.out.println(e.getMessage());}
 		
 	}//llave cargarNivel
+	
 
 	public void perderVida(Personaje p){
 		if(p.getVidas() != 1){

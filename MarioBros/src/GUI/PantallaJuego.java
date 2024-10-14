@@ -8,8 +8,11 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Logica.Entidad;
 // numero 3376
 // numero 240
+import Personaje.Personaje;
 
 public class PantallaJuego extends JPanel {
 
@@ -23,7 +26,10 @@ public class PantallaJuego extends JPanel {
         this.setPreferredSize(new Dimension(1600, 600));
         
         setLayout(null);  // Usar layout nulo para posicionamiento manual
+          
+        mostrarPersonaje(); // el orden importa, si primero va el personaje se superpone al fondo
         agregarImagen();   // Agregar la imagen de fondo
+       
 
         // Agregar el KeyListener para capturar las teclas
         addKeyListener(new KeyAdapter() {
@@ -64,6 +70,20 @@ public class PantallaJuego extends JPanel {
         // Actualizar la posición de la imagen de fondo
         imagenFondo.setBounds(posicionInicialX, 0, 5000, 930);
         repaint();  // Redibuja el panel para reflejar el cambio
+    }
+    public void mostrarPersonaje() {
+        Personaje personaje = controladorVistas.agregarPersonaje();
+        personaje.setVisible(true);
+        // Cargar la imagen desde los recursos
+        ImageIcon icono = new ImageIcon(this.getClass().getResource("/spritesMario/quietoNormal.png"));
+        Image imagenEscalada = icono.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        Icon iconoEscalado = new ImageIcon(imagenEscalada);
+      
+        personaje.setIcon(iconoEscalado);
+        personaje.setBounds(personaje.getPosX(),personaje.getPosY(),20,20);
+        add(personaje);
+        revalidate();
+        repaint();
     }
 }
 

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import GUI.ControladorVistas;
 import Logica.Juego;
+import Logica.Nivel;
 
 public class Launcher {
 	
@@ -16,6 +17,7 @@ public class Launcher {
 				try {
 					Juego juego = new Juego();
 					ControladorVistas controladorVistas = new ControladorVistas(juego);
+					
 					controladorVistas.ventana.setVisible(true);
 					juego.setControladorVistas(controladorVistas);
 					controladorVistas.mostrarPantallaJuego();

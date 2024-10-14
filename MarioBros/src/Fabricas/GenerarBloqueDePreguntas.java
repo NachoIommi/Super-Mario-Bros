@@ -1,8 +1,11 @@
 package Fabricas;
 
+import Plataformas.BloqueDePregunta;
+
 public class GenerarBloqueDePreguntas implements GenerarPlataformas{
 	
-	public BloqueDePreguntas crearPlataforma(int x, int y){
-		return new BloqueDePreguntas();
+	public BloqueDePregunta crearPlataforma(int x, int y){
+		return new BloqueDePregunta(x,y);
+		
 	}
 }

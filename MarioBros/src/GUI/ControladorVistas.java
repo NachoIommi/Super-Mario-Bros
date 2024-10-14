@@ -2,7 +2,9 @@ package GUI;
 
 import javax.swing.JFrame;
 
+import Logica.Entidad;
 import Logica.Juego;
+import Personaje.Personaje;
 
 public class ControladorVistas {
 
@@ -43,5 +45,9 @@ public class ControladorVistas {
 	
 	public void mostrarPantallaPerder() {
 		ventana.setContentPane(pantallaPerder);
+	}
+	
+	public Personaje agregarPersonaje() {
+		return juego.getPersonaje();
 	}
 }

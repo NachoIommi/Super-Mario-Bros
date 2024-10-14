@@ -1,9 +1,7 @@
 package Personaje;
 
-import Logica.Entidad;
-import Logica.Sprite;
-
-import java.awt.image.BufferedImage;
+import Logica.Entidad; 
+import Logica.Visitor;
 
 import Fabricas.*;
 
@@ -15,13 +13,18 @@ public class Personaje extends Entidad{
 	protected int puntuacion;
 	private EstadoDePersonaje estado;
 	protected Sprite sprite;
+	protected int posX;
+	protected int posY;
 
 	
-    public Personaje() {
+    public Personaje(Sprite s, int x, int y) {
         vidas = 3;        // Inicialmente 3 vidas
         monedas = 0;      // Monedas iniciales
         puntuacion = 0;   // Puntos iniciales
         estado = new EstadoNormal(this);  // Comienza en estado normal
+        posX = x;
+        posY = y;
+        sprite = s;
     }
 
     public void correr() {
@@ -53,7 +56,7 @@ public class Personaje extends Entidad{
     }
 
     public void aceptarVisita(Visitor v) {
-        v.visitarPersonaje(this);
+        //v.visitarPersonaje(this);
     }
 
     public int getVidas(){
@@ -93,15 +96,17 @@ public class Personaje extends Entidad{
     	
     }
     
-    String rutaQuieto = "/MarioBros/src/imagenes/spritesMario/estadoNormal/quieto/0.png";
-
+	@Override
 	public void cargarSprite(Sprite s) {
 		sprite = s;
-		sprite.setRutaImagen(rutaQuieto);
-		sprite.cargarImagen(); //Esto puede ir en el constructor, o en el generarPersonaje 
 	}
-	
-	public void mostrarSprite() {
-		BufferedImage imagen = sprite.getImagen();
+	public Sprite getSprite() {
+		return sprite;
+	}
+	public int getPosX() {
+		return posX;
+	}
+	public int getPosY() {
+		return posY;
 	}
 }

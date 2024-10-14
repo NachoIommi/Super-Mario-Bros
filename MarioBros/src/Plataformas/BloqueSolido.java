@@ -1,11 +1,11 @@
 package Plataformas;
 
-import Logica.Sprite;
+import Fabricas.Sprite;
 import Logica.Visitor;
 
 public class BloqueSolido extends Plataforma{
 	
-	public BloqueSolido() {
+	public BloqueSolido(int x, int y) {
 		
 	}
 	

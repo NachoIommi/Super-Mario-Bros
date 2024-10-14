@@ -1,12 +1,15 @@
 package Plataformas;
 
+import Logica.Visitor;
+import PowerUps.PowerUps;
+
 public class BloqueDePregunta extends BloqueSolido {
 	
 	protected EstadoDeBloque estado;
 	protected PowerUps contenido;
 	
-	public BloqueDePregunta() {
-		
+	public BloqueDePregunta(int x, int y) {
+		super(x,y);
 	}
 	
 	public void cambiarEstado(EstadoDeBloque e) {

@@ -1,7 +1,7 @@
 package Fabricas;
 
-import Enemigos.Enemigo;
+import Enemigos.*;
 
 public interface GenerarEnemigos extends GeneradorDeEntidades{
-	public Enemigo crearEnemeigo(int x, int y);
+	public Enemigo crearEnemigo(int x, int y);
 }
