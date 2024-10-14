@@ -6,9 +6,11 @@ import Personaje.Personaje;
 public class HiloPersonaje extends Thread {
 	
 	Juego juego;
+
 	
 	public HiloPersonaje(Juego j) {
 		juego = j;
+		
 	}
 	
 	public void run() {
@@ -22,12 +24,16 @@ public class HiloPersonaje extends Thread {
 	                    System.out.println("Posición X del personaje: " + personaje.getPosX());
 	                }
 	            }
-	            Thread.sleep(100);  // Pausar el hilo
+	        	
+	        	
+	            Thread.sleep(200);  // Pausar el hilo
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }
+	           
 	    }
 	}
+
 
 	
 	

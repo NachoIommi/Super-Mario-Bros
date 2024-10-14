@@ -3,6 +3,11 @@ package Personaje;
 import Logica.Entidad; 
 import Logica.Visitor;
 
+import java.awt.Image;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import Fabricas.*;
 
 public class Personaje extends Entidad{
@@ -27,6 +32,7 @@ public class Personaje extends Entidad{
         posX = x;
         posY = y;
         sprite = s;
+        System.out.println("la ruta del sprite es: "+sprite.getRutaImagen());
     }
 
     public void correr() {

@@ -8,21 +8,21 @@ import Personaje.Personaje;
 public class Juego {
 	//protected Ranking ranking;
 	protected Mundo mundos;
-	protected Nivel n;
+	protected Nivel nivel;
 	protected int modoDeJuego;
 	
 	protected Personaje personaje;
-	HiloPersonaje h;
+	HiloPersonaje hilo;
 	
 	protected ControladorVistas controladorVistas;
 	
 	
 	public Juego() {
-		n = new Nivel(300,this);
+		nivel = new Nivel(300,this);
 		personaje = null;
-		n.cargarNivel(0);
-		h = new HiloPersonaje(this); //prueba
-		h.start();
+		nivel.cargarNivel(0);
+		hilo = new HiloPersonaje(this); //prueba
+		hilo.start();
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {

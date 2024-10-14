@@ -67,9 +67,10 @@ public class PantallaJuego extends JPanel {
     	
         Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
-        
-        // Cargar la imagen desde los recursos
-        ImageIcon icono = new ImageIcon(this.getClass().getResource("/spritesMario/quietoNormal.png"));
+       
+        //Cargar la imagen desde los SPRITES
+        String ruta = personaje.getSprite().getRutaImagen();
+        ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
         Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imagenEscalada);
       
@@ -88,7 +89,7 @@ public class PantallaJuego extends JPanel {
     public void actualizarFondo() {
     	// if pos de pj es mayor a 300 moverFondo
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	if(personaje.getPosX() == 285) {
+    	if(personaje.getPosX() == 290) {
     		moverFondo(-velocidadDesplazamiento);
     	}
     }

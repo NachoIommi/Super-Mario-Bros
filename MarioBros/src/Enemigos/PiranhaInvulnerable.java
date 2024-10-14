@@ -1,4 +1,7 @@
 package Enemigos;
+
+import Logica.Visitor;
+
 public class PiranhaInvulnerable implements EstadosDePiranhaPlant {
     private PiranhaPlant piranha;
 
@@ -6,18 +9,18 @@ public class PiranhaInvulnerable implements EstadosDePiranhaPlant {
         this.piranha = piranha;
     }
 
-    @Override
+   
     public void moverse() {
-        System.out.println("La Piranha Plant es invulnerable y no se mueve.");
+       
     }
 
-    @Override
+    
     public void morir() {
-        System.out.println("La Piranha Plant invulnerable no puede morir.");
+      
     }
 
-    @Override
-    public void aceptarVisita(Visitor visitor) {
-        visitor.visitarPiranhaPlant(piranha);
+    
+    public void aceptarVisita(Visitor v) {
+       
     }
 }
