@@ -23,7 +23,7 @@ public class Personaje extends Entidad{
         monedas = 0;      // Monedas iniciales
         puntuacion = 0;   // Puntos iniciales
         estado = new EstadoNormal(this);  // Comienza en estado normal
-	direccionDelPersonaje = 0; //inicialmente en 0 , sino arranca moviendose
+        direccionDelPersonaje = 0; //inicialmente en 0 , sino arranca moviendose
         posX = x;
         posY = y;
         sprite = s;
@@ -95,19 +95,28 @@ public class Personaje extends Entidad{
     }
 
    public void moverPersonaje(){
-	   switch(direccionDelPersonaje){
-	   	case(1):
-			posX = posX + 50;
-			break;
-			   
-		case(3):
-			posX = posX -50;
-			break;
+	   if (direccionDelPersonaje != 0) {
+		   switch(direccionDelPersonaje){
+		   	case(1):
+				posX = posX + 10;
+				break;
+				
+			case(3):
+				posX = posX -10;
+				break;
+				
+			default: // Si la dirección es 0, no se mueve
+	            break;
+		   }
 	   }
+	   
    }
     
     public void establecerDireccion(int d) {
 	    direccionDelPersonaje = d;
+    }
+    public int getDireccion() {
+    	return direccionDelPersonaje;
     }
     
 	@Override

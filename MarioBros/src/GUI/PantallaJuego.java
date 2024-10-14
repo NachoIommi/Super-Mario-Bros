@@ -75,6 +75,7 @@ public class PantallaJuego extends JPanel {
         repaint();  // Redibuja el panel para reflejar el cambio
     }
     public void mostrarPersonaje() {
+    	
         Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
         
@@ -89,7 +90,12 @@ public class PantallaJuego extends JPanel {
         revalidate();
         repaint();
     }
-    
+    public void actualizarPosicionPersonaje() {
+        Personaje personaje = controladorVistas.obtenerPersonaje();
+        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50); // Actualiza la posición
+        revalidate(); // Para recalcular el layout
+        repaint();    // Redibuja el panel
+    }
     public void eventosTeclado() {
     
     	addKeyListener(new KeyAdapter() {
@@ -107,6 +113,7 @@ public class PantallaJuego extends JPanel {
                 		controladorVistas.obtenerPersonaje().establecerDireccion(3);
                 		break;		
                 }
+                actualizarPosicionPersonaje();  // Actualiza la posición del personaje
             }
             
             public void keyReleased(KeyEvent k) {
@@ -115,7 +122,6 @@ public class PantallaJuego extends JPanel {
         });
     	
     }
-    
     
     	
   
