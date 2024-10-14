@@ -20,9 +20,13 @@ public class Sprite {
 		return rutaImagen;
 	}
 	
+	public void setRutaImagen(String s) {
+		rutaImagen = s
+	}
+	
 	public void cargarImagen() {
 		try {
-			imagen = ImageIO.read(new File(rutaImagen))
+			imagen = ImageIO.read(new File(rutaImagen));
 		} catch(IOException e) {
 			e.printStackTrace();
 			System.out.println("Error al cargar la imagen: "+ rutaImagen);

@@ -92,13 +92,15 @@ public class Personaje extends Entidad{
     public void cambiarDireccion(int d) {
     	
     }
+    
+    String rutaQuieto = "/MarioBros/src/imagenes/spritesMario/estadoNormal/quieto/0.png";
 
 	public void cargarSprite(Sprite s) {
 		sprite = s;
+		sprite.cargarImagen();
 	}
 	
 	public void mostrarSprite() {
 		BufferedImage imagen = sprite.getImagen();
-		//el de mario es: /MarioBros/src/imagenes/spritesMario/estadoNormal/quieto/0.png SUERTE JAJAJAJ
 	}
 }
