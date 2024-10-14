@@ -33,17 +33,6 @@ public class PantallaJuego extends JPanel {
         agregarImagen();   // Agregar la imagen de fondo
         eventosTeclado();
        
-
-        // Agregar el KeyListener para capturar las teclas
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_RIGHT) {
-                  //  moverFondo(-velocidadDesplazamiento);  // Mover solo hacia la derecha
-                }
-            }
-        });
         setFocusable(true);  // Permite que el panel capture los eventos del teclado
     }
 
@@ -96,6 +85,13 @@ public class PantallaJuego extends JPanel {
         revalidate(); // Para recalcular el layout
         repaint();    // Redibuja el panel
     }
+    public void actualizarFondo() {
+    	// if pos de pj es mayor a 300 moverFondo
+    	Personaje personaje = controladorVistas.obtenerPersonaje();
+    	if(personaje.getPosX() > 300) {
+    		moverFondo(-velocidadDesplazamiento);
+    	}
+    }
     public void eventosTeclado() {
     
     	addKeyListener(new KeyAdapter() {
@@ -114,6 +110,7 @@ public class PantallaJuego extends JPanel {
                 		break;		
                 }
                 actualizarPosicionPersonaje();  // Actualiza la posición del personaje
+                actualizarFondo();
             }
             
             public void keyReleased(KeyEvent k) {
