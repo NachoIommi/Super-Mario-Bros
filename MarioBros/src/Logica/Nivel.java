@@ -83,7 +83,7 @@ public class Nivel {
 	public void cargarNivel(int i) {
 		try {
 			//String ruta = "ruta al archivo"+i+".txt"; //Por ejemplo: C:/Desktop/ParserNivel+i+.txt con i = 1,2,3.
-			String ruta = "C:/Users/juans/OneDrive/Desktop/Niveles/nivel-1.txt";
+			String ruta = "C:/Users/juanm/OneDrive/Escritorio/nivel-1.txt";
 			String contenido; //es el renglon leido por iteracion
 			
 			FileReader lector = new FileReader(ruta);  //Indico el archivo a leer

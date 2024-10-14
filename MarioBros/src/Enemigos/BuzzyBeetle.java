@@ -1,5 +1,8 @@
 package Enemigos;
 
+import Fabricas.Sprite;
+import Logica.Visitor;
+
 public class BuzzyBeetle extends Enemigo{
 	
 	public BuzzyBeetle() {
@@ -20,5 +23,12 @@ public class BuzzyBeetle extends Enemigo{
 	
 	public void morir() {
 		
+	}
+
+
+	@Override
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

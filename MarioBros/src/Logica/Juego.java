@@ -12,6 +12,7 @@ public class Juego {
 	protected int modoDeJuego;
 	
 	protected Personaje personaje;
+	HiloPersonaje h;
 	
 	protected ControladorVistas controladorVistas;
 	
@@ -20,6 +21,8 @@ public class Juego {
 		n = new Nivel(300,this);
 		personaje = null;
 		n.cargarNivel(0);
+		h = new HiloPersonaje(this); //prueba
+		h.start();
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {

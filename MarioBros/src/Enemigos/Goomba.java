@@ -1,5 +1,8 @@
 package Enemigos;
 
+import Fabricas.Sprite;
+import Logica.Visitor;
+
 public class Goomba extends Enemigo{
 	
 	public Goomba() {
@@ -21,4 +24,10 @@ public class Goomba extends Enemigo{
 	public void morir() {
 		
 	}
+
+	public Sprite getSprite() {
+		return null;
+	}
+	
 }
+

@@ -97,11 +97,11 @@ public class Personaje extends Entidad{
    public void moverPersonaje(){
 	   switch(direccionDelPersonaje){
 	   	case(1):
-			posX = posX + 5;
+			posX = posX + 50;
 			break;
 			   
 		case(3):
-			posX = posX -5;
+			posX = posX -50;
 			break;
 	   }
    }

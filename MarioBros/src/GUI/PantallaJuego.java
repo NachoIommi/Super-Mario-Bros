@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -37,7 +39,7 @@ public class PantallaJuego extends JPanel {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_RIGHT) {
-                    moverFondo(-velocidadDesplazamiento);  // Mover solo hacia la derecha
+                  //  moverFondo(-velocidadDesplazamiento);  // Mover solo hacia la derecha
                 }
             }
         });
@@ -74,6 +76,7 @@ public class PantallaJuego extends JPanel {
     public void mostrarPersonaje() {
         Personaje personaje = controladorVistas.agregarPersonaje();
         personaje.setVisible(true);
+        
         // Cargar la imagen desde los recursos
         ImageIcon icono = new ImageIcon(this.getClass().getResource("/spritesMario/quietoNormal.png"));
         Image imagenEscalada = icono.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -85,5 +88,35 @@ public class PantallaJuego extends JPanel {
         revalidate();
         repaint();
     }
+    
+    public void eventosTeclado() {
+    
+    	addKeyListener(new KeyAdapter() {
+            
+            public void keyPressed(KeyEvent k) {
+                int keyCode = k.getKeyCode();
+                switch(keyCode) {
+                	case(KeyEvent.VK_D):
+                		controladorVistas.agregarPersonaje().establecerDireccion(1);
+                		break;
+                			
+                	case(KeyEvent.VK_A):
+                		controladorVistas.agregarPersonaje().establecerDireccion(3);
+                		break;		
+                }
+            }
+            
+           /* public void keyReleased(KeyEvent k) {
+            	controladorVistas.agregarPersonaje().establecerDireccion(0);
+            }*/
+        });
+    	
+    }
+    
+    
+    	
+  
+    
+      
 }
 
