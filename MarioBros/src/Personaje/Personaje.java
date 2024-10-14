@@ -97,7 +97,8 @@ public class Personaje extends Entidad{
 
 	public void cargarSprite(Sprite s) {
 		sprite = s;
-		sprite.cargarImagen();
+		sprite.setRutaImagen(rutaQuieto);
+		sprite.cargarImagen(); //Esto puede ir en el constructor, o en el generarPersonaje 
 	}
 	
 	public void mostrarSprite() {

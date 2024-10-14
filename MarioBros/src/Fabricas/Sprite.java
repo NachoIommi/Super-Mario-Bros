@@ -21,7 +21,7 @@ public class Sprite {
 	}
 	
 	public void setRutaImagen(String s) {
-		rutaImagen = s
+		rutaImagen = s;
 	}
 	
 	public void cargarImagen() {
