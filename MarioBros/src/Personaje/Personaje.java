@@ -98,11 +98,16 @@ public class Personaje extends Entidad{
 	   if (direccionDelPersonaje != 0) {
 		   switch(direccionDelPersonaje){
 		   	case(1):
-				posX = posX + 10;
+		   		if(posX < 285) {
+		   			posX = posX + 10;
+		   		}				
 				break;
 				
 			case(3):
-				posX = posX -10;
+				if(posX > 10) {
+					posX = posX -10;
+				}
+				
 				break;
 				
 			default: // Si la dirección es 0, no se mueve

@@ -88,7 +88,7 @@ public class PantallaJuego extends JPanel {
     public void actualizarFondo() {
     	// if pos de pj es mayor a 300 moverFondo
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	if(personaje.getPosX() > 300) {
+    	if(personaje.getPosX() == 285) {
     		moverFondo(-velocidadDesplazamiento);
     	}
     }
