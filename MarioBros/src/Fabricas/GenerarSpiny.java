@@ -1,11 +1,14 @@
 package Fabricas;
 
-import Enemigos.Enemigo;
+import Enemigos.*;
 
 public class GenerarSpiny implements GenerarEnemigos {
 	
-	public Spiny crearEnemeigo(int x, int y) {
-		return new Spiny();
+	public Spiny crearEnemigo(int x, int y) {
+		return new Spiny(x,y);
 	}
+
+
 	
+
 }

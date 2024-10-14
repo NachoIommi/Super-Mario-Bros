@@ -6,7 +6,7 @@ import Personaje.Personaje;
 
 public class ChampiVerde extends PowerUps{
 	
-	public ChampiVerde() {
+	public ChampiVerde(int x,int y) {
 		
 	}
 	
@@ -22,9 +22,11 @@ public class ChampiVerde extends PowerUps{
 		
 	}
 
-	@Override
 	public void afectarPersonaje(Personaje p) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	public Sprite getSprite() {
+		return null;
 	}
 }

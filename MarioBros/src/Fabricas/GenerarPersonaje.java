@@ -4,14 +4,10 @@ import Personaje.Personaje;
 
 public class GenerarPersonaje implements GeneradorDeEntidades{
 	
-	protected GenerarSprite generarSprite;
+	protected Sprite spritePersonaje;
 	
-	public GenerarPersonaje() {
-		this.generarSprite = new GenerarSpriteOriginal();
-	}
-	
-	public Personaje crearPersonaje(int x, int y) {
-		Sprite spritePersonaje = generarSprite.getPersonaje();
+	public Personaje crearPersonaje(Sprite s,int x, int y) {
+		spritePersonaje = s;
 		Personaje personaje = new Personaje(spritePersonaje,x,y);
 		return personaje;
 	}

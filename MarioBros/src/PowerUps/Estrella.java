@@ -1,8 +1,12 @@
 package PowerUps;
 
+import Fabricas.Sprite;
+import Logica.Visitor;
+import Personaje.Personaje;
+
 public class Estrella extends PowerUps{
 	
-	public Estrella() {
+	public Estrella(int x,int y) {
 		
 	}
 	
@@ -16,5 +20,13 @@ public class Estrella extends PowerUps{
 	
 	public void cargarSprite(Sprite s) {
 		
+	}
+
+	public void afectarPersonaje(Personaje p) {
+		
+	}
+
+	public Sprite getSprite() {
+		return null;
 	}
 }

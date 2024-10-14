@@ -68,7 +68,11 @@ public class Nivel {
 			fabricaFlorDeFuego = new GenerarFlorDeFuego();
 			fabricaChampiVerde = new GenerarChampiVerde();		
 			
-			fabricaSprite = new GenerarSpriteOriginal();
+			if(juego.getModoDeJuego() == 2 ) {
+				fabricaSprite = new GenerarSpriteOriginal();
+			}else {
+				fabricaSprite = new GenerarSpriteReemplazo();
+			}
 			
 	}
 
@@ -109,7 +113,7 @@ public class Nivel {
 				//100 -> otros
 				    case 0:
 				    	//fabricaPersonaje.crearPersonaje(posX, posY);
-				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(posX,posY));
+				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonaje(),posX,posY));
 				        break;
 						
 				    case 1:
@@ -118,63 +122,63 @@ public class Nivel {
 				    case 2:
 				    	fabricaBloqueDePregunta.crearPlataforma(posX, posY);
 				        break;
-				   /*
+				   
 				    case 3:
-				    	fabricaBloqueSolido.crearBloqueSolido(posX, posY);
+				    	fabricaBloqueSolido.crearPlataforma(posX, posY);
 				        break;
+				     /*   
 				    case 4:
-				    	fabricaTuberia.crearTuberia(posX, posY, tipoPUp); //3er parametro determina piranha si/no
+				    	fabricaTuberia.crearPlataforma(posX, posY, tipoPUp); //Tuberia con Piranha 
 				        break;
+				       */ 
 				    case 5:
-				    	fabricaVacio.crearVacio(posX, posY);
+				    	fabricaTuberia.crearPlataforma(posX, posY); //Tuberia sin Piranha
+				        break;
+				    case 6:
+				    	fabricaVacio.crearPlataforma(posX, posY);
 				        break;
 
 				    case 31:
-				    	fabricaMoneda.crearMoneda(posX, posY);
+				    	fabricaMoneda.crearPowerUp(posX, posY); 
 				        break;
 				    case 32:
-				    	fabricaEstrella.crearEstrella(posX, posY);
+				    	fabricaEstrella.crearPowerUp(posX, posY);
 				        break;
 				    case 33:
-				    	fabricaSuperChampi.crearSuperChampi(posX, posY);
+				    	fabricaSuperChampi.crearPowerUp(posX, posY);
 				        break;
 				    case 34:
-				    	fabricaFlorDeFuego.crearFlorDeFuego(posX, posY);
+				    	fabricaFlorDeFuego.crearPowerUp(posX, posY);
 				        break;
 				    case 35:
-				    	fabricaChampiVerde.crearChampiVerde(posX, posY);
+				    	fabricaChampiVerde.crearPowerUp(posX, posY);
 				        break;
 				    
 				    case 61:
-				    	fabricaPiranhaPlant.crearPiranhaPlant(posX, posY);
+				    	fabricaPiranhaPlant.crearEnemigo(posX, posY);
 				        break;
 				    case 62:
-				    	fabricaLakitu.crearLakitu(posX, posY);
+				    	fabricaLakitu.crearEnemigo(posX, posY);
 				        break;
 				    case 63:
-				    	fabricaSpiny.crearSpiny(posX, posY);
+				    	fabricaSpiny.crearEnemigo(posX, posY);
 				        break;
 				    case 64:
-				    	fabricaBuzzyBeetle.crearBuzzyBeetle(posX, posY);
+				    	fabricaBuzzyBeetle.crearEnemigo(posX, posY);
 				        break;
 				    case 65:
-				    	fabricaGoomba.crearGoomba(posX, posY);
+				    	fabricaGoomba.crearEnemigo(posX, posY);
 				        break;
 				    case 66:
-				    	fabricaKoopaTroopa.crearKoopaTroopa(posX, posY);
+				    	fabricaKoopaTroopa.crearEnemigo(posX, posY);
 				        break;
 				    
 						
 				    case 100: //no se va a parsear nunca , mario las crea , no el parser
 				    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
 				        break;
-				    case 101://podemos usarlo para cargar el fondo
-				    	fabricaSpriteOriginal.crearSpriteOriginal(posX, posY);
-				        break;
-				    case 102:
-				    	fabricaSpriteReemplazo.crearSpriteReemplazo(posX, posY);
-				        break;
-					*/
+				    
+					
 				    default:
 				        System.out.println("Tipo no válido");
 				        break;

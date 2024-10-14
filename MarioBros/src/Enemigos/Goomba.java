@@ -5,8 +5,12 @@ import Logica.Visitor;
 
 public class Goomba extends Enemigo{
 	
-	public Goomba() {
-		
+	protected int x;
+	protected int y;
+	
+	public Goomba(int x,int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void moverse() {

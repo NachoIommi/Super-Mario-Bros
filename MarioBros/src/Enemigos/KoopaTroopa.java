@@ -7,8 +7,11 @@ public class KoopaTroopa extends Enemigo{
 	protected Sprite sprite;
 	private EstadoDeKoopa estadoActual;
 	
-	public KoopaTroopa() {
-		
+	protected int x;
+	protected int y;
+	public KoopaTroopa(int x,int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void cambiarEstado(EstadoDeKoopa e) {

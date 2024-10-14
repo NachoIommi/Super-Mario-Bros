@@ -23,7 +23,7 @@ public class Personaje extends Entidad{
         monedas = 0;      // Monedas iniciales
         puntuacion = 0;   // Puntos iniciales
         estado = new EstadoNormal(this);  // Comienza en estado normal
-	direccionDelPersonaje = 0; //inicialmente en 0 , sino arranca moviendose
+        direccionDelPersonaje = 0; //inicialmente en 0 , sino arranca moviendose
         posX = x;
         posY = y;
         sprite = s;

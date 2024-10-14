@@ -4,8 +4,12 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	
 	protected String rutaImagen;
 	
-	protected GenerarSprite(String rutaImagen) {
+	public GenerarSprite(String rutaImagen) {
 		this.rutaImagen = rutaImagen;
+	}
+	
+	public String ruta() {
+		return rutaImagen;
 	}
 	
 	public Sprite getNivel(int n) {

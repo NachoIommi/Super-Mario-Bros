@@ -1,13 +1,17 @@
 package Enemigos;
 
 import Fabricas.Sprite;
+import Logica.Visitor;
 
 public class PiranhaPlant extends Enemigo{
 	private EstadosDePiranhaPlant estadoActual;
 	
+	protected int x;
+	protected int y;
 	
-	public PiranhaPlant() {
-		
+	public PiranhaPlant(int x,int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	
@@ -32,5 +36,9 @@ public class PiranhaPlant extends Enemigo{
 	
 	public void setEstadoActual(EstadosDePiranhaPlant e) {
 		
+	}
+
+	public Sprite getSprite() {
+		return null;
 	}
 }

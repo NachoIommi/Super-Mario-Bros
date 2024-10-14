@@ -1,10 +1,12 @@
 package Personaje;
 
+import Fabricas.Sprite;
 import Logica.Entidad;
+import Logica.Visitor;
 
 public class BolaDeFuego extends Entidad{
 	
-	public BolaDeFuego() {
+	public BolaDeFuego(int x,int y) {
 		
 	}
 	
@@ -14,5 +16,10 @@ public class BolaDeFuego extends Entidad{
 	
 	public void cargarSprite(Sprite s) {
 		
+	}
+
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

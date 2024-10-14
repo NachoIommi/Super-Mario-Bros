@@ -1,8 +1,12 @@
 package PowerUps;
 
+import Fabricas.Sprite;
+import Logica.Visitor;
+import Personaje.Personaje;
+
 public class SuperChampi extends PowerUps{
 	
-	public SuperChampi() {
+	public SuperChampi(int x,int y) {
 		
 	}
 	public void moverse() {
@@ -15,6 +19,14 @@ public class SuperChampi extends PowerUps{
 	
 	public void cargarSprite(Sprite s) {
 		
+	}
+	
+	public void afectarPersonaje(Personaje p) {
+		
+	}
+
+	public Sprite getSprite() {
+		return null;
 	}
 	
 }

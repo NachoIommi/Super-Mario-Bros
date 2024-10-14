@@ -1,11 +1,13 @@
 package Plataformas;
+import Logica.*;
+import Enemigos.*;
+import Fabricas.Sprite;
 
-import Logica.Sprite;
 import Logica.Visitor;
 
 public class Vacio extends Plataforma {
 	
-	public Vacio() {
+	public Vacio(int x,int y) {
 		
 	}
 
@@ -18,6 +20,11 @@ public class Vacio extends Plataforma {
 	public void cargarSprite(Sprite s) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

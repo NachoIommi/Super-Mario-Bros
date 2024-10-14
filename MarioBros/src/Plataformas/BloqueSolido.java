@@ -20,6 +20,10 @@ public class BloqueSolido extends Plataforma{
 	public void cargarSprite(Sprite s) {
 		
 	}
+
+	public Sprite getSprite() {
+		return null;
+	}
 	
 	
 
