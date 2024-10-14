@@ -3,6 +3,10 @@ package Personaje;
 import Logica.Entidad;
 import Logica.Sprite;
 
+import java.awt.image.BufferedImage;
+
+import Fabricas.*;
+
 public class Personaje extends Entidad{
 	
 	//atributos
@@ -10,16 +14,18 @@ public class Personaje extends Entidad{
 	protected int monedas;
 	protected int puntuacion;
 	private EstadoDePersonaje estado;
+	protected Sprite sprite;
+
 	
     public Personaje() {
-        this.vidas = 3;        // Inicialmente 3 vidas
-        this.monedas = 0;      // Monedas iniciales
-        this.puntuacion = 0;   // Puntos iniciales
-        this.estado = new EstadoNormal(this);  // Comienza en estado normal
+        vidas = 3;        // Inicialmente 3 vidas
+        monedas = 0;      // Monedas iniciales
+        puntuacion = 0;   // Puntos iniciales
+        estado = new EstadoNormal(this);  // Comienza en estado normal
     }
 
     public void correr() {
-        this.estado.correr();
+        estado.correr();
     }
 
     public void saltar() {
@@ -82,10 +88,17 @@ public class Personaje extends Entidad{
     public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }
+    
+    public void cambiarDireccion(int d) {
+    	
+    }
 
-	@Override
 	public void cargarSprite(Sprite s) {
-		// TODO Auto-generated method stub
-		
+		sprite = s;
+	}
+	
+	public void mostrarSprite() {
+		BufferedImage imagen = sprite.getImagen();
+		//el de mario es: /MarioBros/src/imagenes/spritesMario/estadoNormal/quieto/0.png SUERTE JAJAJAJ
 	}
 }
