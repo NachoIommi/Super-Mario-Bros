@@ -45,7 +45,7 @@ public class PantallaJuego extends JPanel {
         imagenFondo.setBounds(posicionInicialX, 0, 1600, 930);  // Posicionar la imagen en el panels
 
         // Cargar la imagen desde los recursos
-        ImageIcon icono = new ImageIcon(this.getClass().getResource("/IMAGEN/nivel1.png"));
+        ImageIcon icono = new ImageIcon(this.getClass().getResource("/img/nivel1.png"));
         Image imagenEscalada = icono.getImage().getScaledInstance(5000, 960, Image.SCALE_SMOOTH);  // Escalar imagen al tamaño adecuado
         Icon iconoEscalado = new ImageIcon(imagenEscalada);
         imagenFondo.setIcon(iconoEscalado);  // Establecer la imagen escalada en el JLabel

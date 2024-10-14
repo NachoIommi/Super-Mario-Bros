@@ -21,7 +21,7 @@ public class PantallaPerder extends JPanel {
 	public void agregarImagen() {
 		imagenPerder = new JLabel();
 		imagenPerder.setSize(800, 600);
-		ImageIcon icono = new ImageIcon(this.getClass().getResource("/imagenes/pantallaPerder.jpg"));
+		ImageIcon icono = new ImageIcon(this.getClass().getResource("/img/pantallaPerder.jpg"));
 		Image imagenEscalada = icono.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
 		Icon iconoEscalado = new ImageIcon(imagenEscalada);
 		imagenPerder.setIcon(iconoEscalado);
