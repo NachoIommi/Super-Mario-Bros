@@ -1,6 +1,6 @@
 package Launcher;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue; 
 
 import GUI.ControladorVistas;
 import Logica.Juego;

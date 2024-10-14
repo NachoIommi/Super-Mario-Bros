@@ -31,14 +31,14 @@ public class PantallaInicial extends JPanel{
 		agregarNombre();
 		agregarBotonIngresarNombre();
 		agregarModosDeJuego();
-		agregarImagen();
+		//agregarImagen();
 		
 	}
 	
 	public void agregarImagen() {
 		imagenInicio = new JLabel();
 		imagenInicio.setSize(800, 600);
-		ImageIcon icono = new ImageIcon(this.getClass().getResource("/imagenes/pantallaPrincipal.png"));
+		ImageIcon icono = new ImageIcon(this.getClass().getResource("/IMAGEN/pantallaPrincipal.png"));
 		Image imagenEscalada = icono.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
 		Icon iconoEscalado = new ImageIcon(imagenEscalada);
 		imagenInicio.setIcon(iconoEscalado);
