@@ -1,6 +1,8 @@
 package Logica;
 
-import java.io.BufferedReader; 
+import java.io.BufferedReader;
+import java.io.File;
+
 import Personaje.*;
 import java.io.FileReader;
 import java.io.IOException;
@@ -86,14 +88,11 @@ public class Nivel {
 		
 	public void cargarNivel(int i) {
 		try {
-			//String ruta = "ruta al archivo"+i+".txt"; //Por ejemplo: C:/Desktop/ParserNivel+i+.txt con i = 1,2,3.
-			String ruta = "C:/Users/juanm/OneDrive/Escritorio/nivel-1.txt";
-			String contenido; //es el renglon leido por iteracion
-			
-			FileReader lector = new FileReader(ruta);  //Indico el archivo a leer
-			BufferedReader lectura = new BufferedReader(lector); //Nos permite leer
-			
-			contenido = lectura.readLine(); //leo 1 renglon
+			 String ruta = "Niveles" + File.separator + "nivel-1.txt";
+			    FileReader lector = new FileReader(ruta);
+			    BufferedReader lectura = new BufferedReader(lector);
+			    
+			    String contenido = lectura.readLine();
 			
 			while(contenido != null) {
 				
