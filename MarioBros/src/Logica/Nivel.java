@@ -65,12 +65,16 @@ public class Nivel {
 			}else {
 				fabricaSprite = new GenerarSpriteReemplazo();
 			}
-			spriteNivel = fabricaSprite.getNivel(nivelActual);
+			spriteNivel = null;
 			
 	}
 	
 	public Sprite getSprite() {
 		return spriteNivel;
+	}
+	
+	public void cargarSprite(Sprite sprite) {
+		spriteNivel = fabricaSprite.getNivel(nivelActual);
 	}
 
 	public int getNivelActual(){
@@ -166,6 +170,7 @@ public class Nivel {
 				        break;
 				}
 				contenido = lectura.readLine(); //Leo prox renglon del txt
+				cargarSprite(fabricaSprite.getNivel(nivelActual));
 			}
 			//setReloj();
 			//setNivelActual(i);			
