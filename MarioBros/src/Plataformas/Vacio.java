@@ -8,9 +8,13 @@ import Logica.Visitor;
 public class Vacio extends Plataforma {
 	
 	protected Sprite sprite;
+	protected int x;
+	protected int y;
 	
 	public Vacio(Sprite sprite, int x,int y) {
 		this.sprite = sprite;
+		this.x = x;
+		this.y = y;
 	}
 
 
@@ -25,8 +29,19 @@ public class Vacio extends Plataforma {
 	}
 
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
+	}
+
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+
+
+	@Override
+	public int getPosY() {
+		return y;
 	}
 	
 

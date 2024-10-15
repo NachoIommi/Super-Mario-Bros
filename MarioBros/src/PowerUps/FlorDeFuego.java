@@ -35,4 +35,14 @@ public class FlorDeFuego extends PowerUps{
 	public Sprite getSprite() {
 		return sprite;
 	}
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+
+	@Override
+	public int getPosY() {
+		return y;
+	}
 }

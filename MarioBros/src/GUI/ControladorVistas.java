@@ -64,11 +64,11 @@ public class ControladorVistas {
 		return juego.getEnemigo();
 	}
 	
-	public Plataforma obtenerPlataforma() {
+	public List<Plataforma> obtenerPlataforma() {
 		return juego.getPlataforma();
 	}
 	
-	public PowerUps obtenerPowerUp() {
+	public List<PowerUps> obtenerPowerUp() {
 		return juego.getPowerUp();
 	}
 }

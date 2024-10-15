@@ -41,6 +41,18 @@ public class PiranhaPlant extends Enemigo{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
+	}
+
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+
+
+	@Override
+	public int getPosY() {
+		return y;
 	}
 }

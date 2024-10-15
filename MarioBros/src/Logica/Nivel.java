@@ -111,7 +111,7 @@ public class Nivel {
 				//61 a 99 enemigos
 				//100 -> otros
 				    case 0:
-				    	//fabricaPersonaje.crearPersonaje(posX, posY);
+				
 				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonaje(),posX,posY));
 				        break;
 						
@@ -157,7 +157,7 @@ public class Nivel {
 				    	juego.agregarEnemigo(fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
 				        break;
 				    case 62://lakitu
-				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
+				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getLakitu(), posX, posY));
 				        break;
 				    case 63://spiny
 				    	juego.agregarEnemigo(fabricaSpiny.crearEnemigo(fabricaSprite.getSpiny(), posX, posY));

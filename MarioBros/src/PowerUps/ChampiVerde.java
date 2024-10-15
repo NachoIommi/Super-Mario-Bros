@@ -34,6 +34,16 @@ public class ChampiVerde extends PowerUps{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
+	}
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+
+	@Override
+	public int getPosY() {
+		return y;
 	}
 }

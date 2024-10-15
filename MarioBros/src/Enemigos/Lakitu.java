@@ -34,4 +34,14 @@ public class Lakitu extends Enemigo{
 	public Sprite getSprite() {
 		return sprite;
 	}
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+
+	@Override
+	public int getPosY() {
+		return y;
+	}
 }

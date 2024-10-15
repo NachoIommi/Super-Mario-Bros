@@ -13,6 +13,7 @@ public class BloqueSolido extends Plataforma{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+		System.out.println("ruta de bloquesolido: "+ sprite.getRutaImagen());
 	}
 	
 	public void recibirGolpe() {
@@ -28,7 +29,17 @@ public class BloqueSolido extends Plataforma{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
+	}
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+
+	@Override
+	public int getPosY() {
+		return y;
 	}
 	
 	

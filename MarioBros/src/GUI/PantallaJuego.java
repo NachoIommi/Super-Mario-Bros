@@ -16,6 +16,8 @@ import Logica.Entidad;
 // numero 3376
 // numero 240
 import Personaje.Personaje;
+import Plataformas.Plataforma;
+import PowerUps.PowerUps;
 
 public class PantallaJuego extends JPanel {
 
@@ -30,7 +32,9 @@ public class PantallaJuego extends JPanel {
         
         setLayout(null);  // Usar layout nulo para posicionamiento manual
         
+        mostrarPowerUps();
         mostrarEnemigo();
+        mostrarPlataformas();
         mostrarPersonaje(); // el orden importa, si primero va el personaje se superpone al fondo
         agregarImagen();   // Agregar la imagen de fondo
         eventosTeclado();
@@ -147,11 +151,63 @@ public class PantallaJuego extends JPanel {
             revalidate();
             repaint();
     	}
-    	
-    	
-    	
+    }
+    
+    public void mostrarPlataformas() {
+    	Plataforma plataforma;
+    	while(!controladorVistas.obtenerPlataforma().isEmpty()) {
+    		plataforma = controladorVistas.obtenerPlataforma().removeFirst();
+    		plataforma.setVisible(true);
+    		
+    		String ruta = plataforma.getSprite().getRutaImagen();
+    		if(ruta.toLowerCase().endsWith(".gif")) {
+    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+                Image gifImage = icono.getImage();
+                Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
+                plataforma.setIcon(iconoAgrandado);
+                plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), 50, 50);
+    		}else{
+    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+    	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+    	        Icon iconoEscalado = new ImageIcon(imagenEscalada);
+    	        plataforma.setIcon(iconoEscalado);
+    	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), 50, 50);
+    		}
+
+            add(plataforma);
+            revalidate();
+            repaint();
+    	}
     
     }  
+    
+    public void mostrarPowerUps() {
+    	PowerUps powerUp;
+    	while(!controladorVistas.obtenerPowerUp().isEmpty()) {
+    		powerUp = controladorVistas.obtenerPowerUp().removeFirst();
+    		powerUp.setVisible(true);
+    		
+    		String ruta = powerUp.getSprite().getRutaImagen();
+    		if(ruta.toLowerCase().endsWith(".gif")) {
+    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+                Image gifImage = icono.getImage();
+                Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+                ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
+                powerUp.setIcon(iconoAgrandado);
+                powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
+    		}else{
+    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+    	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+    	        Icon iconoEscalado = new ImageIcon(imagenEscalada);
+    	        powerUp.setIcon(iconoEscalado);
+    	        powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
+    		}
+    		add(powerUp);
+            revalidate();
+            repaint();
+    	}
       
+    }
 }
 

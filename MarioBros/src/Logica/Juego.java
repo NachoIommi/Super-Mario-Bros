@@ -18,7 +18,7 @@ public class Juego {
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
-	HiloPersonaje hilo;
+	MoverPersonaje hilo;
 	
 	protected ControladorVistas controladorVistas;
 	
@@ -28,8 +28,9 @@ public class Juego {
 		personaje = null;
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
+		powerUps = new ArrayList<PowerUps>();
 		nivel.cargarNivel(0);
-		hilo = new HiloPersonaje(this); //prueba
+		hilo = new MoverPersonaje(this); //prueba
 		hilo.start();
 	}
 	
@@ -89,16 +90,16 @@ public class Juego {
 	public void agregarPlataforma(Plataforma e) {
 		plataformas.addLast(e);
 	}
-	public Plataforma getPlataforma() {
-		return plataformas.removeFirst();
+	public List<Plataforma> getPlataforma() {
+		return plataformas;
 	}
 	
 	public void agregarPowerUp(PowerUps p) {
 		powerUps.addLast(p);
 	}
 	
-	public PowerUps getPowerUp() {
-		return powerUps.removeFirst();
+	public List<PowerUps> getPowerUp() {
+		return powerUps;
 	}
 	
 }

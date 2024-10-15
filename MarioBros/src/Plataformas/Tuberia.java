@@ -7,12 +7,18 @@ public class Tuberia extends Plataforma{
 	
 	protected Sprite sprite;
 	protected PiranhaPlant contenido;
+	protected int x;
+	protected int y;
 	
 	public Tuberia(int x,int y,PiranhaPlant piranha) {
 		contenido = piranha;
+		this.x = x;
+		this.y = y;
 	}
 	public Tuberia(Sprite sprite, int x,int y) {
 		this.sprite = sprite;
+		this.x = x;
+		this.y = y;
 	}
 
 	
@@ -40,8 +46,15 @@ public class Tuberia extends Plataforma{
 	}
 
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
+	}
+	@Override
+	public int getPosX() {
+		return x;
+	}
+	@Override
+	public int getPosY() {
+		return y;
 	}
 
 }

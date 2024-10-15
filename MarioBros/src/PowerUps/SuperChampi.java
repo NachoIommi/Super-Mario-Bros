@@ -6,6 +6,8 @@ import Personaje.Personaje;
 
 public class SuperChampi extends PowerUps{
 	
+	protected int x;
+	protected int y;
 	protected Sprite sprite;
 	
 	public SuperChampi(Sprite sprite, int x, int y) {
@@ -28,7 +30,15 @@ public class SuperChampi extends PowerUps{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
+	}
+	@Override
+	public int getPosX() {
+		return x;
+	}
+	@Override
+	public int getPosY() {
+		return y;
 	}
 	
 }

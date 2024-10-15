@@ -21,19 +21,19 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getBolaDeFuego() {
-		return new Sprite(rutaImagen + "/sprites/bolaDeFuego.png");
+		return new Sprite(rutaImagen + "/bolaDeFuegoViajando.gif");
 	}
 	
 	public Sprite getPiranhaPlant() {
-		return new Sprite(rutaImagen + "/spritesEnemigos/piranhaPlant.png");
+		return new Sprite(rutaImagen + "/piranhaPlant.gif");
 	}
 	
 	public Sprite getLakitu() {
-		return new Sprite(rutaImagen + "/spritesEnemigos/lakitu.png");
+		return new Sprite(rutaImagen + "/lakituApuntandoDerecha.png");
 	}
 	
 	public Sprite getSpiny() {
-		return new Sprite(rutaImagen + "/spritesEnemigos/Spiny.png");
+		return new Sprite(rutaImagen + "/spinyCaminandoDerecha.gif");
 	}
 	
 	public Sprite getBuzzyBeetle() {
@@ -45,43 +45,43 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getKoopaTroopa() {
-		return new Sprite(rutaImagen + "/spritesEnemigos/KoopaTroopa.png");
+		return new Sprite(rutaImagen + "/koopaCaminaDerecha.gif");
 	}
 	
 	public Sprite getMoneda() {
-		return new Sprite(rutaImagen + "/spritesPowerUps/moneda.png");
+		return new Sprite(rutaImagen + "/monedaQuieta.gif");
 	}
 	
 	public Sprite getEstrella() {
-		return new Sprite(rutaImagen + "/spritesPowerUps/estrella.png");
+		return new Sprite(rutaImagen + "/estrella.gif");
 	}
 	
 	public Sprite getSuperChampi() {
-		return new Sprite(rutaImagen + "/spritesPowerUps/superChampi.png");
+		return new Sprite(rutaImagen + "/superChampi.png");
 	}
 	
 	public Sprite getChampiVerde() {
-		return new Sprite(rutaImagen + "/spritesPowerUps/champiVerde.png");
+		return new Sprite(rutaImagen + "/champiVerde.png");
 	}
 	
 	public Sprite getFlorDeFuego() {
-		return new Sprite(rutaImagen + "/florDeFuego.png");
+		return new Sprite(rutaImagen + "/florDeFuego.gif");
 	}
 	
 	public Sprite getBloqueSolido() {
-		return new Sprite(rutaImagen + "/spritesPlataformas/bloqueSolido.png");
+		return new Sprite(rutaImagen + "/bloqueSolido1.png");
 	}
 	
 	public Sprite getLadrilloSolido() {
-		return new Sprite(rutaImagen + "/spritesPlataforma/ladrilloSolido.png");
+		return new Sprite(rutaImagen + "/ladrilloSolido.png");
 	}
 	
 	public Sprite getVacio() {
-		return new Sprite(rutaImagen + "/spritesPlataformas/vacio.png");
+		return new Sprite(rutaImagen + "/vacio.png");
 	}
 	
 	public Sprite getBloqueDePregunta() {
-		return new Sprite(rutaImagen + "/spritesPlataformas/bloqueDePregunta.png");
+		return new Sprite(rutaImagen + "/bloqueDePregunta.gif");
 	}
 	
 	public Sprite getTuberia() {
