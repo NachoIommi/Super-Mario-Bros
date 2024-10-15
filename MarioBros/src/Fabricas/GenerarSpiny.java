@@ -8,7 +8,4 @@ public class GenerarSpiny implements GenerarEnemigos {
 		return new Spiny(sprite, x, y);
 	}
 
-
-	
-
 }

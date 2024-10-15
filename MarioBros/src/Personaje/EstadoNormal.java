@@ -30,16 +30,12 @@ class EstadoNormal implements EstadoDePersonaje {
         return personaje;
     }
 
-	@Override
 	public void sumarVida() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
-	@Override
 	public void sumarPuntos(int n) {
-		// TODO Auto-generated method stub
-		
+
 	}
  
 }

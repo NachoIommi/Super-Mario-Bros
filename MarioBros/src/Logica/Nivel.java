@@ -13,57 +13,47 @@ import Personaje.Personaje;
 public class Nivel {
 	
 	protected int reloj;
-	protected int nivel_actual;
+	protected int nivelActual;
 	protected Juego juego;
-	
-	GenerarPersonaje fabricaPersonaje;
-	
-	GenerarBolaDeFuego fabricaBolaDeFuego;
-	
-	GenerarPlataformas fabricaLadrilloSolido;
-	GenerarPlataformas fabricaBloqueDePregunta;
-	GenerarPlataformas fabricaBloqueSolido;
-	GenerarPlataformas fabricaTuberia;
-	GenerarPlataformas fabricaVacio; 
-	
-	GenerarEnemigos fabricaPiranhaPlant;
-	GenerarEnemigos fabricaLakitu;
-	GenerarEnemigos fabricaSpiny; 
-	GenerarEnemigos fabricaBuzzyBeetle;
-	GenerarEnemigos fabricaGoomba;
-	GenerarEnemigos fabricaKoopaTroopa;
-	
-
-	GenerarPowerUps fabricaMoneda;
-	GenerarPowerUps fabricaEstrella;
-	GenerarPowerUps fabricaSuperChampi;
-	GenerarPowerUps fabricaFlorDeFuego;
-	GenerarPowerUps fabricaChampiVerde;
-	
-	GenerarSprite fabricaSprite;
+	protected Sprite spriteNivel;
+	protected GenerarPersonaje fabricaPersonaje;
+	protected GenerarBolaDeFuego fabricaBolaDeFuego;
+	protected GenerarPlataformas fabricaLadrilloSolido;
+	protected GenerarPlataformas fabricaBloqueDePregunta;
+	protected GenerarPlataformas fabricaBloqueSolido;
+	protected GenerarPlataformas fabricaTuberia;
+	protected GenerarPlataformas fabricaVacio; 
+	protected GenerarEnemigos fabricaPiranhaPlant;
+	protected GenerarEnemigos fabricaLakitu;
+	protected GenerarEnemigos fabricaSpiny; 
+	protected GenerarEnemigos fabricaBuzzyBeetle;
+	protected GenerarEnemigos fabricaGoomba;
+	protected GenerarEnemigos fabricaKoopaTroopa;
+	protected GenerarPowerUps fabricaMoneda;
+	protected GenerarPowerUps fabricaEstrella;
+	protected GenerarPowerUps fabricaSuperChampi;
+	protected GenerarPowerUps fabricaFlorDeFuego;
+	protected GenerarPowerUps fabricaChampiVerde;
+	protected GenerarSprite fabricaSprite;
 	
 	public Nivel(int tiempo, Juego juego) {
 		
 			reloj = tiempo;
 			this.juego = juego;
+			
 			fabricaPersonaje = new GenerarPersonaje();
-			
 			fabricaBolaDeFuego = new GenerarBolaDeFuego();
-			
 			fabricaLadrilloSolido = new GenerarLadrilloSolido();
 			fabricaBloqueDePregunta = new GenerarBloqueDePreguntas();
 			fabricaBloqueSolido = new GenerarBloqueSolido();
 			fabricaTuberia = new GenerarTuberia();
 			fabricaVacio = new GenerarVacio();
-			
 			fabricaPiranhaPlant = new GenerarPiranhaPlant();
 			fabricaLakitu = new GenerarLakitu();
 			fabricaSpiny = new GenerarSpiny();
 			fabricaBuzzyBeetle = new GenerarBuzzyBeetle();
 			fabricaGoomba = new GenerarGoomba();
 			fabricaKoopaTroopa = new GenerarKoopaTroopa();
-			
-	
 			fabricaMoneda = new GenerarMoneda();
 			fabricaEstrella = new GenerarEstrella();
 			fabricaSuperChampi = new GenerarSuperChampi();
@@ -75,26 +65,30 @@ public class Nivel {
 			}else {
 				fabricaSprite = new GenerarSpriteReemplazo();
 			}
+			spriteNivel = fabricaSprite.getNivel(nivelActual);
 			
+	}
+	
+	public Sprite getSprite() {
+		return spriteNivel;
 	}
 
 	public int getNivelActual(){
-		return nivel_actual;
+		return nivelActual;
 	}
 
 	public void setNivelActual(int i){
-		nivel_actual=i;
+		nivelActual=i;
 	}
-		
+
 	public void cargarNivel(int i) {
 		try {
-			 String ruta = "Niveles" + File.separator + "nivel-1.txt";
-			    FileReader lector = new FileReader(ruta);
-			    BufferedReader lectura = new BufferedReader(lector);
-			    
-			    String contenido = lectura.readLine();
-			
-			while(contenido != null) {
+			 setNivelActual(i);	
+			 String ruta = "Niveles" + File.separator + "nivel-"+getNivelActual()+".txt";
+			 FileReader lector = new FileReader(ruta);
+			 BufferedReader lectura = new BufferedReader(lector);
+			 String contenido = lectura.readLine();
+			 while(contenido != null) {
 				
 				String [] partes = contenido.split("\\s+"); //Guardo en el array cada cadena separada
 				int tipoEntidad = Integer.parseInt(partes[0]);
@@ -105,23 +99,15 @@ public class Nivel {
 					tipoPUp = Integer.parseInt(partes[3]); 
 				}
 				switch (tipoEntidad) {
-				//0 personaje
-				//1 a 30 bloques
-				//31 a 60 power ups
-				//61 a 99 enemigos
-				//100 -> otros
 				    case 0:
-				
 				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonaje(),posX,posY));
 				        break;
-						
-				    case 1://ladrillosolido
+				    case 1:
 				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY));
 				        break;
 				    case 2:
 				    	juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY));
 				        break;
-				   
 				    case 3:
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));
 				        break;
@@ -137,61 +123,56 @@ public class Nivel {
 				    	juego.agregarPlataforma(fabricaVacio.crearPlataforma(fabricaSprite.getVacio(), posX, posY));
 				        break;
 
-				    case 31://moneda
+				    case 31:
 				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getMoneda(), posX, posY));
 				        break;
-				    case 32://estrella
+				    case 32:
 				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getEstrella(), posX, posY));
 				        break;
-				    case 33://superchampi
+				    case 33:
 				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY));
 				        break;
-				    case 34://flordfuego
+				    case 34:
 				    	juego.agregarPowerUp(fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY));
 				        break;
-				    case 35://champiverde
+				    case 35:
 				    	juego.agregarPowerUp(fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY));
 				        break;
-				    
-				    case 61://piranha
+				    case 61:
 				    	juego.agregarEnemigo(fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
 				        break;
-				    case 62://lakitu
+				    case 62:
 				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getLakitu(), posX, posY));
 				        break;
-				    case 63://spiny
+				    case 63:
 				    	juego.agregarEnemigo(fabricaSpiny.crearEnemigo(fabricaSprite.getSpiny(), posX, posY));
 				        break;
-				    case 64://buzzy
+				    case 64:
 				    	juego.agregarEnemigo(fabricaBuzzyBeetle.crearEnemigo(fabricaSprite.getBuzzyBeetle(), posX, posY));
 				        break;
 				    case 65:
 				    	juego.agregarEnemigo(fabricaGoomba.crearEnemigo(fabricaSprite.getGoomba(),posX, posY));
 				        break;
-				    case 66://koopa
+				    case 66:
 				    	juego.agregarEnemigo(fabricaKoopaTroopa.crearEnemigo(fabricaSprite.getKoopaTroopa(), posX, posY));
 				        break;
-				    
-						
-				    case 100: //no se va a parsear nunca , mario las crea , no el parser
+				        
+				    /*case 100: 
 				    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
-				        break;
-				    
-					
+				        break;*/ //El case 100 se debe parsear? 
+				        
 				    default:
 				        System.out.println("Tipo no válido");
 				        break;
 				}
 				contenido = lectura.readLine(); //Leo prox renglon del txt
-			}//esta llave cierra el while
+			}
 			//setReloj();
-			setNivelActual(i);			
+			//setNivelActual(i);			
 		}catch(IOException | NumberFormatException e) {
 				System.out.println(e.getMessage());}
-		
-	}//llave cargarNivel
+	}
 	
-
 	public void perderVida(Personaje p){
 		if(p.getVidas() != 1){
 			p.setVidas(p.getVidas() - 1);

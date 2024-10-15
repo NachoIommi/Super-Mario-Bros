@@ -13,7 +13,7 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getNivel(int n) {
-		return new Sprite(rutaImagen + "/nivel-"+n+".png");
+		return new Sprite("/img/nivel-"+n+".png");
 	}
 	
 	public Sprite getPersonaje() {

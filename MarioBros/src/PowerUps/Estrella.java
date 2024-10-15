@@ -36,13 +36,12 @@ public class Estrella extends PowerUps{
 		return sprite;
 	}
 
-	@Override
 	public int getPosX() {
 		return x;
 	}
 
-	@Override
 	public int getPosY() {
 		return y;
 	}
+	
 }

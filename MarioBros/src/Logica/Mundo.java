@@ -5,7 +5,7 @@ public class Mundo {
 	protected Nivel nivel;
 	
 	public Mundo() {
-
+		
 	}
 	
 	public void cargarPrimerNivel() {

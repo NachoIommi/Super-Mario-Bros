@@ -3,10 +3,10 @@ package GUI;
 import java.util.List;
 
 import javax.swing.JFrame;
-
 import Enemigos.Enemigo;
 import Logica.Entidad;
 import Logica.Juego;
+import Logica.Nivel;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -14,14 +14,15 @@ import PowerUps.PowerUps;
 public class ControladorVistas {
 
 	public JFrame ventana;
-	protected PantallaInicial pantallaInicial;
+	protected PantallaPrincipal pantallaInicial;
 	protected PantallaJuego pantallaJuego;
 	protected PantallaPerder pantallaPerder;
 	protected Juego juego;
 	
+	
 	public ControladorVistas(Juego juego) {
 		this.juego = juego;
-		pantallaInicial = new PantallaInicial(this);
+		pantallaInicial = new PantallaPrincipal(this);
 		pantallaJuego = new PantallaJuego(this);
 		pantallaPerder = new PantallaPerder(this);
 		iniciar();
@@ -54,10 +55,6 @@ public class ControladorVistas {
 	
 	public Personaje obtenerPersonaje() {
 		return juego.getPersonaje();
-	}
-	
-	public PantallaJuego obtenerPantallaJuego() {
-		return pantallaJuego;
 	}
 	
 	public List<Enemigo> obtenerEnemigo() {

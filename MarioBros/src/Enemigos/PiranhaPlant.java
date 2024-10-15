@@ -16,11 +16,28 @@ public class PiranhaPlant extends Enemigo{
 		this.sprite = sprite;
 	}
 	
+	// :: getters y setter ::
+	public EstadosDePiranhaPlant getEstadoActual() {
+		return estadoActual;
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public int getPosX() {
+		return x;
+	}
+
+	public int getPosY() {
+		return y;
+	}
 	
 	public void moverse() {
 		
 	}
 	
+	// :: Comandos ::
 	public void aceptarVisita(Visitor v) {
 		
 	}
@@ -31,28 +48,9 @@ public class PiranhaPlant extends Enemigo{
 	public void morir() {
 		
 	}
-	
-	public EstadosDePiranhaPlant getEstadoActual() {
-		return estadoActual;
-	}
-	
+
 	public void setEstadoActual(EstadosDePiranhaPlant e) {
 		
 	}
 
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-
-	@Override
-	public int getPosX() {
-		return x;
-	}
-
-
-	@Override
-	public int getPosY() {
-		return y;
-	}
 }

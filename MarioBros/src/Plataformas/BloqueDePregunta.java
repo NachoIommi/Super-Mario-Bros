@@ -29,9 +29,12 @@ public class BloqueDePregunta extends BloqueSolido {
 		return estado;
 	}
 	
-	//public void setEstado(EstadoDeBloque e) {
-	//	estado = e;
-	//} no estaba en diagrama, lo dejo comentado por si lo usamos
+	/*
+	public void setEstado(EstadoDeBloque e) {
+		estado = e;
+	} 
+	no estaba en diagrama, lo dejo comentado por si lo usamos 
+	*/
 	
 	public PowerUps getContenido() {
 		return contenido;

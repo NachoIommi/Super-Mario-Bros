@@ -12,27 +12,24 @@ import Fabricas.*;
 
 public class Personaje extends Entidad{
 	
-	//atributos
+	private EstadoDePersonaje estado;
+	protected Sprite sprite;
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion;
-	private EstadoDePersonaje estado;
-	protected Sprite sprite;
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
-
 	
-    public Personaje(Sprite s, int x, int y) {
-        vidas = 3;        // Inicialmente 3 vidas
-        monedas = 0;      // Monedas iniciales
-        puntuacion = 0;   // Puntos iniciales
-        estado = new EstadoNormal(this);  // Comienza en estado normal
-        direccionDelPersonaje = 0; //inicialmente en 0 , sino arranca moviendose
+    public Personaje(Sprite sprite, int x, int y) {
+        vidas = 3;        
+        monedas = 0;      
+        puntuacion = 0;   
+        estado = new EstadoNormal(this); 
+        direccionDelPersonaje = 0; // direccion 0 -> Quieto
         posX = x;
         posY = y;
-        sprite = s;
-        System.out.println("la ruta del sprite es: "+sprite.getRutaImagen());
+        this.sprite = sprite;
     }
 
     public void correr() {
@@ -104,18 +101,16 @@ public class Personaje extends Entidad{
 	   if (direccionDelPersonaje != 0) {
 		   switch(direccionDelPersonaje){
 		   	case(1):
-		   		if(posX < 285) {
+		   		if(posX < 285) { //El personaje solo llega a la mitad de la pantalla
 		   			posX = posX + 10;
 		   		}				
 				break;
 				
 			case(3):
-				if(posX > 10) {
+				if(posX > 10) { //El personaje solo llega al inicio de la pantalla
 					posX = posX -10;
 				}
-				
 				break;
-				
 			default: // Si la dirección es 0, no se mueve
 	            break;
 		   }
@@ -130,7 +125,6 @@ public class Personaje extends Entidad{
     	return direccionDelPersonaje;
     }
     
-	@Override
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PantallaInicial extends JPanel{
+public class PantallaPrincipal extends JPanel{
 	
 	protected ControladorVistas controladorVistas;
 	protected JLabel imagenInicio;
@@ -21,7 +21,7 @@ public class PantallaInicial extends JPanel{
 	/*
 	 * Creo el panel
 	 */
-	public PantallaInicial(ControladorVistas controladorVistas) {
+	public PantallaPrincipal(ControladorVistas controladorVistas) {
 		this.controladorVistas = controladorVistas;
 		this.setSize(800,600);
 		this.setLayout(null);

@@ -7,10 +7,6 @@ public class PiranhaExtendida implements EstadosDePiranhaPlant{
 		
 	}
 	
-	public void moverse() {
-		
-	}
-	
 	public PiranhaPlant getPiranhaPlant() {
 		return piranha;
 	}
@@ -18,4 +14,9 @@ public class PiranhaExtendida implements EstadosDePiranhaPlant{
 	public void setPiranhaPlant(PiranhaPlant p) {
 		piranha = p;
 	}
+	
+	public void moverse() {
+		
+	}
+
 }

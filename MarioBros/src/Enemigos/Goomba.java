@@ -5,15 +5,26 @@ import Logica.Visitor;
 
 public class Goomba extends Enemigo{
 	
+	protected Sprite sprite;
 	protected int x;
 	protected int y;
-	protected Sprite sprite;
-	
+
 	public Goomba(Sprite sprite,int x,int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		System.out.println("la ruta del sprite de goomba es: "+sprite.getRutaImagen());
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public int getPosX() {
+		return x;
+	}
+	
+	public int getPosY() {
+		return y;
 	}
 	
 	public void moverse() {
@@ -30,20 +41,6 @@ public class Goomba extends Enemigo{
 	
 	public void morir() {
 		
-	}
-
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	@Override
-	public int getPosX() {
-		return x;
-	}
-	
-	@Override
-	public int getPosY() {
-		return y;
 	}
 	
 }

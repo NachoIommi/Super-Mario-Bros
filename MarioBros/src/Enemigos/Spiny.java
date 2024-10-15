@@ -14,7 +14,18 @@ public class Spiny extends Enemigo{
 		this.y = y;
 		this.sprite = sprite;
 	}
-	
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public int getPosX() {
+		return x;
+	}
+
+	public int getPosY() {
+		return y;
+	}
 	public void moverse() {
 		
 	}
@@ -31,17 +42,4 @@ public class Spiny extends Enemigo{
 		
 	}
 
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	@Override
-	public int getPosX() {
-		return x;
-	}
-
-	@Override
-	public int getPosY() {
-		return y;
-	}
 }

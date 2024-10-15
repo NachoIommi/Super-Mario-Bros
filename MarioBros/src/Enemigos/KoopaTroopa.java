@@ -9,11 +9,26 @@ public class KoopaTroopa extends Enemigo{
 	protected int x;
 	protected int y;
 	
-	
 	public KoopaTroopa(Sprite sprite, int x,int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+	}
+	
+	public EstadoDeKoopa getEstadoActual() {
+		return estadoActual;
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public int getPosX() {
+		return x;
+	}
+
+	public int getPosY() {
+		return y;
 	}
 	
 	public void cambiarEstado(EstadoDeKoopa e) {
@@ -31,23 +46,5 @@ public class KoopaTroopa extends Enemigo{
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
-	
-	public EstadoDeKoopa getEstadoActual() {
-		return estadoActual;
-	}
 
-	@Override
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	@Override
-	public int getPosX() {
-		return x;
-	}
-
-	@Override
-	public int getPosY() {
-		return y;
-	}
 }	

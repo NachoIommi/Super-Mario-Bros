@@ -6,8 +6,14 @@ import Logica.Visitor;
 
 public class BolaDeFuego extends Entidad{
 	
-	public BolaDeFuego(int x,int y) {
-		
+	protected Sprite sprite;
+	protected int x;
+	protected int y;
+	
+	public BolaDeFuego(Sprite sprite, int x, int y) {
+		this.x = x;
+		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -15,11 +21,10 @@ public class BolaDeFuego extends Entidad{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
+		sprite = s;
 	}
 
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 }

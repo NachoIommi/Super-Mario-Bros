@@ -5,15 +5,26 @@ import Logica.Visitor;
 
 public class BuzzyBeetle extends Enemigo{
 	
+	protected Sprite sprite;
 	protected int x;
 	protected int y;
-	protected Sprite sprite;
 	
 	public BuzzyBeetle(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		System.out.println("la ruta del sprite de buzzy es: "+sprite.getRutaImagen());
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public int getPosX() {
+		return x;
+	}
+
+	public int getPosY() {
+		return y;
 	}
 	
 	public void moverse() {
@@ -32,17 +43,4 @@ public class BuzzyBeetle extends Enemigo{
 		
 	}
 
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	@Override
-	public int getPosX() {
-		return x;
-	}
-
-	@Override
-	public int getPosY() {
-		return y;
-	}
 }

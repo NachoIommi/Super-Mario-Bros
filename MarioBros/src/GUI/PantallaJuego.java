@@ -29,47 +29,27 @@ public class PantallaJuego extends JPanel {
     public PantallaJuego(ControladorVistas controladorVistas) {
         this.controladorVistas = controladorVistas;
         this.setPreferredSize(new Dimension(1600, 600));
-        
-        setLayout(null);  // Usar layout nulo para posicionamiento manual
-        
+        setLayout(null);
         mostrarPowerUps();
         mostrarEnemigo();
         mostrarPlataformas();
-        mostrarPersonaje(); // el orden importa, si primero va el personaje se superpone al fondo
-        agregarImagen();   // Agregar la imagen de fondo
+        mostrarPersonaje();
+        agregarImagenNivel();  
         eventosTeclado();
-       
-        setFocusable(true);  // Permite que el panel capture los eventos del teclado
+        setFocusable(true);
     }
 
-    public void agregarImagen() {
-        // Crear el JLabel para la imagen de fondo
+    public void agregarImagenNivel() {
         imagenFondo = new JLabel();
-        imagenFondo.setLayout(null);  // Sin layout para posicionar manualmente
-        imagenFondo.setBounds(posicionInicialX, 0, 1600, 930);  // Posicionar la imagen en el panels
-
-        // Cargar la imagen desde los recursos
-        ImageIcon icono = new ImageIcon(this.getClass().getResource("/img/nivel1.png"));
-        Image imagenEscalada = icono.getImage().getScaledInstance(5000, 960, Image.SCALE_SMOOTH);  // Escalar imagen al tamaño adecuado
-        Icon iconoEscalado = new ImageIcon(imagenEscalada);
-        imagenFondo.setIcon(iconoEscalado);  // Establecer la imagen escalada en el JLabel
-       
-        // Agregar la imagen al panel
+        imagenFondo.setLayout(null); 
+        imagenFondo.setVisible(true);
+        imagenFondo.setBounds(posicionInicialX, 0, 1600, 930);   
+        String ruta = controladorVistas.juego.getNivel().getSprite().getRutaImagen();
+        imagenFondo.setIcon(verificarExtension(ruta));
         add(imagenFondo);
+        refrescar();
     }
-
-    // Método para mover la imagen de fondo solo en X (hacia la derecha)
-    public void moverFondo(int posicionX) {
-        posicionInicialX += posicionX;  // Actualiza la posición en X
-
-        // Limitar el movimiento para que no salga del área visible
-        if (posicionInicialX < -4340) posicionInicialX = -4340;  // Limitar movimiento hacia la derecha
-
-        // Actualizar la posición de la imagen de fondo
-        imagenFondo.setBounds(posicionInicialX, 0, 5000, 930);
-        repaint();  // Redibuja el panel para reflejar el cambio
-    }
-    
+ 
     public void mostrarPersonaje() {	
         Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
@@ -84,17 +64,25 @@ public class PantallaJuego extends JPanel {
         personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50);
         
         add(personaje);
-        revalidate();
-        repaint();
+        refrescar();
     }
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
-        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50); // Actualiza la posición
-        revalidate(); // Para recalcular el layout
-        repaint();    // Redibuja el panel
+        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50);
+        refrescar();
     }
-    
+
+    // Método para mover la imagen de fondo solo en X (hacia la derecha)
+    public void moverFondo(int posicionX) {
+        posicionInicialX += posicionX;
+        if (posicionInicialX < -4340) {
+        	posicionInicialX = -4340;
+        }
+        imagenFondo.setBounds(posicionInicialX, 0, 5000, 930);
+        repaint();
+    }
+   
     public void actualizarFondo() {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
     	if(personaje.getPosX() == 290) {
@@ -103,12 +91,9 @@ public class PantallaJuego extends JPanel {
     }
     
     public void eventosTeclado() {
-    
     	addKeyListener(new KeyAdapter() {
-            
             public void keyPressed(KeyEvent k) {
-                int keyCode = k.getKeyCode();
-                
+                int keyCode = k.getKeyCode(); 
                 switch(keyCode) {
                 
                 	case(KeyEvent.VK_D):
@@ -119,15 +104,13 @@ public class PantallaJuego extends JPanel {
                 		controladorVistas.obtenerPersonaje().establecerDireccion(3);
                 		break;		
                 }
-                actualizarPosicionPersonaje();  // Actualiza la posición del personaje
+                actualizarPosicionPersonaje();
                 actualizarFondo();
             }
-            
             public void keyReleased(KeyEvent k) {
             	controladorVistas.obtenerPersonaje().establecerDireccion(0);
             }
         });
-    	
     }
     
     public void mostrarEnemigo() {
@@ -135,21 +118,11 @@ public class PantallaJuego extends JPanel {
     	while(!controladorVistas.obtenerEnemigo().isEmpty()) {
     		enemigo = controladorVistas.obtenerEnemigo().removeFirst();
     		enemigo.setVisible(true);
-        	
-        	String ruta = enemigo.getSprite().getRutaImagen();
-            ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-            
-            Image gifImage = icono.getImage();
-            Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-            
-            ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
-            
-            enemigo.setIcon(iconoAgrandado);
+    		String ruta = enemigo.getSprite().getRutaImagen();
+            enemigo.setIcon(verificarExtension(ruta));
             enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 50, 50);
-            
             add(enemigo);
-            revalidate();
-            repaint();
+            refrescar();
     	}
     }
     
@@ -158,56 +131,50 @@ public class PantallaJuego extends JPanel {
     	while(!controladorVistas.obtenerPlataforma().isEmpty()) {
     		plataforma = controladorVistas.obtenerPlataforma().removeFirst();
     		plataforma.setVisible(true);
-    		
     		String ruta = plataforma.getSprite().getRutaImagen();
-    		if(ruta.toLowerCase().endsWith(".gif")) {
-    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-                Image gifImage = icono.getImage();
-                Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-                ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
-                plataforma.setIcon(iconoAgrandado);
-                plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), 50, 50);
-    		}else{
-    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-    	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-    	        Icon iconoEscalado = new ImageIcon(imagenEscalada);
-    	        plataforma.setIcon(iconoEscalado);
-    	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), 50, 50);
-    		}
-
+    		plataforma.setIcon(verificarExtension(ruta));
+	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), 50, 50);
             add(plataforma);
-            revalidate();
-            repaint();
+            refrescar();
     	}
-    
     }  
     
     public void mostrarPowerUps() {
     	PowerUps powerUp;
     	while(!controladorVistas.obtenerPowerUp().isEmpty()) {
     		powerUp = controladorVistas.obtenerPowerUp().removeFirst();
-    		powerUp.setVisible(true);
-    		
+    		powerUp.setVisible(true);	
     		String ruta = powerUp.getSprite().getRutaImagen();
-    		if(ruta.toLowerCase().endsWith(".gif")) {
-    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-                Image gifImage = icono.getImage();
-                Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-                ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
-                powerUp.setIcon(iconoAgrandado);
-                powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
-    		}else{
-    			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-    	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-    	        Icon iconoEscalado = new ImageIcon(imagenEscalada);
-    	        powerUp.setIcon(iconoEscalado);
-    	        powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
-    		}
+    		powerUp.setIcon(verificarExtension(ruta));
+    		powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
     		add(powerUp);
-            revalidate();
-            repaint();
+            refrescar();
     	}
-      
+    }
+    
+    public ImageIcon verificarExtension(String ruta) {
+    	ImageIcon iconoEscalado;
+    	if(ruta.toLowerCase().endsWith(".gif")) {
+			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+            Image gifImage = icono.getImage();
+            Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            iconoEscalado = new ImageIcon(gifAgrandado);
+		}else{
+			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+	        iconoEscalado = new ImageIcon(imagenEscalada);
+		}
+    	if(ruta == controladorVistas.juego.getNivel().getSprite().getRutaImagen()) {
+    		ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+	        Image imagenEscalada = icono.getImage().getScaledInstance(5000, 960, Image.SCALE_SMOOTH);
+	        iconoEscalado = new ImageIcon(imagenEscalada);
+    	}
+    	return iconoEscalado;
+    }
+    
+    public void refrescar() {
+    	   revalidate();
+           repaint();
     }
 }
 

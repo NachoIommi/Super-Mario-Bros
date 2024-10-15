@@ -35,16 +35,12 @@ public class EstadoEstrella implements EstadoDePersonaje {
        
     }
 
-	@Override
 	public void sumarVida() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
-	@Override
 	public void sumarPuntos(int n) {
-		// TODO Auto-generated method stub
-		
+
 	}
     
 }

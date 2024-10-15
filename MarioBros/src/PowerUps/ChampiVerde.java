@@ -10,7 +10,6 @@ public class ChampiVerde extends PowerUps{
 	protected int y;
 	protected Sprite sprite;
 	
-	
 	public ChampiVerde(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -37,12 +36,10 @@ public class ChampiVerde extends PowerUps{
 		return sprite;
 	}
 
-	@Override
 	public int getPosX() {
 		return x;
 	}
 
-	@Override
 	public int getPosY() {
 		return y;
 	}

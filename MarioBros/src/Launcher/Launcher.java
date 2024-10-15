@@ -8,9 +8,6 @@ import Logica.Nivel;
 
 public class Launcher {
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -20,7 +17,6 @@ public class Launcher {
 					juego.setControladorVistas(controladorVistas);
 					controladorVistas.ventana.setVisible(true);
 					controladorVistas.mostrarPantallaJuego();
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -11,8 +11,11 @@ public class SuperChampi extends PowerUps{
 	protected Sprite sprite;
 	
 	public SuperChampi(Sprite sprite, int x, int y) {
+		this.x = x;
+		this.y = y;
 		this.sprite = sprite;
 	}
+	
 	public void moverse() {
 		
 	}
@@ -32,11 +35,11 @@ public class SuperChampi extends PowerUps{
 	public Sprite getSprite() {
 		return sprite;
 	}
-	@Override
+
 	public int getPosX() {
 		return x;
 	}
-	@Override
+	
 	public int getPosY() {
 		return y;
 	}

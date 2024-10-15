@@ -9,19 +9,17 @@ import Plataformas.Plataforma;
 import PowerUps.PowerUps;
 
 public class Juego {
+	
 	//protected Ranking ranking;
 	protected Mundo mundos;
 	protected Nivel nivel;
 	protected int modoDeJuego;
-	
 	protected Personaje personaje;
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
-	MoverPersonaje hilo;
-	
+	protected MoverPersonaje hilo;
 	protected ControladorVistas controladorVistas;
-	
 	
 	public Juego() {
 		nivel = new Nivel(300,this);
@@ -65,9 +63,13 @@ public class Juego {
 		return mundos;
 	}
 	
-	public int getModoDeJuego() {
-		return 2; //borrar
+	public Nivel getNivel() {
+		return nivel;
 	}
+	
+	public int getModoDeJuego() {
+		return 2; 
+	}//Retonarmos un '2' a modo de convension ya que no hicimos el metodo de seleccion del modoDeJuego
 	
 	public void setModoDeJuego(int n) {
 		
