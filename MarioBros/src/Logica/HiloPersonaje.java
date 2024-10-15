@@ -3,11 +3,11 @@ package Logica;
 import GUI.ControladorVistas;
 import Personaje.Personaje;
 
-public class MoverPersonaje extends Thread {
+public class HiloPersonaje extends Thread {
 	
 	protected Juego juego;
 
-	public MoverPersonaje(Juego juego) {
+	public HiloPersonaje(Juego juego) {
 		this.juego = juego;
 	}
 	

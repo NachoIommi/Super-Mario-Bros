@@ -18,7 +18,7 @@ public class Juego {
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
-	protected MoverPersonaje hilo;
+	protected HiloPersonaje hilo;
 	protected ControladorVistas controladorVistas;
 	
 	public Juego() {
@@ -28,7 +28,7 @@ public class Juego {
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
 		nivel.cargarNivel(0);
-		hilo = new MoverPersonaje(this); //prueba
+		hilo = new HiloPersonaje(this); //prueba
 		hilo.start();
 	}
 	
