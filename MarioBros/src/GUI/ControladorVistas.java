@@ -1,5 +1,7 @@
 package GUI;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 
 import Enemigos.Enemigo;
@@ -58,7 +60,7 @@ public class ControladorVistas {
 		return pantallaJuego;
 	}
 	
-	public Enemigo obtenerEnemigo() {
+	public List<Enemigo> obtenerEnemigo() {
 		return juego.getEnemigo();
 	}
 	

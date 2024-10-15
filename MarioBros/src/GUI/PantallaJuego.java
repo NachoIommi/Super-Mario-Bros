@@ -127,27 +127,31 @@ public class PantallaJuego extends JPanel {
     }
     
     public void mostrarEnemigo() {
-    	Enemigo enemigo = controladorVistas.obtenerEnemigo();
-    	enemigo.setVisible(true);
+    	Enemigo enemigo;
+    	while(!controladorVistas.obtenerEnemigo().isEmpty()) {
+    		enemigo = controladorVistas.obtenerEnemigo().removeFirst();
+    		enemigo.setVisible(true);
+        	
+        	String ruta = enemigo.getSprite().getRutaImagen();
+            ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+            
+            Image gifImage = icono.getImage();
+            Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            
+            ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
+            
+            enemigo.setIcon(iconoAgrandado);
+            enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 50, 50);
+            
+            add(enemigo);
+            revalidate();
+            repaint();
+    	}
     	
-    	String ruta = enemigo.getSprite().getRutaImagen();
-        ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-        
-        Image gifImage = icono.getImage();
-        Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-        
-        ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
-        
-        enemigo.setIcon(iconoAgrandado);
-        enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 50, 50);
-        
-        add(enemigo);
-        revalidate();
-        repaint();
+    	
+    	
     
-    }
-  
-    
+    }  
       
 }
 

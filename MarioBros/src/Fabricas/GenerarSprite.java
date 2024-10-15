@@ -37,7 +37,7 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getBuzzyBeetle() {
-		return new Sprite(rutaImagen + "/spritesEnemigos/BuzzyBeetle.png");
+		return new Sprite(rutaImagen + "/buzzyCaminandoDerecha.gif");
 	}
 	
 	public Sprite getGoomba() {

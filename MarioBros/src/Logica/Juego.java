@@ -82,8 +82,8 @@ public class Juego {
 	public void agregarEnemigo(Enemigo e) {
 		enemigos.addLast(e);
 	}
-	public Enemigo getEnemigo() {
-		return enemigos.removeFirst();
+	public List<Enemigo> getEnemigo() {
+		return enemigos;
 	}
 	
 	public void agregarPlataforma(Plataforma e) {
