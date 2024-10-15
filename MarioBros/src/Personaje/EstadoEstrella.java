@@ -1,32 +1,50 @@
 package Personaje;
-public class EstadoEstrella extends EstadoDePersonaje {
+
+import Logica.Visitor;
+
+public class EstadoEstrella implements EstadoDePersonaje {
 	
-    public EstadoEstrella(Personaje personaje) {
-        super(personaje);
+	private Personaje personaje;
+	
+    public EstadoEstrella() {
+     
     }
 
     public void correr() {
-        System.out.println("El personaje corre invulnerable en estado de estrella.");
+     
     }
 
     public void saltar() {
-        System.out.println("El personaje salta invulnerable en estado de estrella.");
+       
     }
 
     public void morir() {
-        System.out.println("El personaje no puede morir en estado de estrella.");
+       
     }
 
     public void aceptarVisita(Visitor visitor) {
-        visitor.visitarPersonaje(personaje);
+     
     }
     
     public Personaje getPersonaje() {
-        return this.personaje;
+		return personaje;
+        
     }
 
     public void setPersonaje(Personaje personaje) {
-        this.personaje = personaje;
+       
     }
+
+	@Override
+	public void sumarVida() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sumarPuntos(int n) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

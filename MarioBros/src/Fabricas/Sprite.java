@@ -12,7 +12,7 @@ public class Sprite {
 		return rutaImagen;
 	}
 	
-	public void setRutaImagen(String s) {
-		rutaImagen = s;
+	public void setRutaImagen(String nuevaRuta) {
+		rutaImagen = nuevaRuta;
 	}
 }

@@ -4,11 +4,15 @@ import Fabricas.Sprite;
 import Logica.Visitor;
 
 public class BuzzyBeetle extends Enemigo{
+	
 	protected int x;
 	protected int y;
-	public BuzzyBeetle(int x,int y) {
+	protected Sprite sprite;
+	
+	public BuzzyBeetle(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void moverse() {
@@ -27,10 +31,7 @@ public class BuzzyBeetle extends Enemigo{
 		
 	}
 
-
-	@Override
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 }

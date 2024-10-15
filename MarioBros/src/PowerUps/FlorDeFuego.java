@@ -6,8 +6,14 @@ import Personaje.Personaje;
 
 public class FlorDeFuego extends PowerUps{
 	
-	public FlorDeFuego(int x, int y) {
-		
+	protected int x;
+	protected int y;
+	protected Sprite sprite;
+	
+	public FlorDeFuego(Sprite sprite, int x, int y) {
+		this.x = x;
+		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void moverse() {
@@ -27,6 +33,6 @@ public class FlorDeFuego extends PowerUps{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
 	}
 }

@@ -2,8 +2,11 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import Enemigos.Enemigo;
 import GUI.ControladorVistas;
 import Personaje.Personaje;
+import Plataformas.Plataforma;
+import PowerUps.PowerUps;
 
 public class Juego {
 	//protected Ranking ranking;
@@ -12,6 +15,9 @@ public class Juego {
 	protected int modoDeJuego;
 	
 	protected Personaje personaje;
+	protected List<Enemigo> enemigos;
+	protected List<Plataforma> plataformas;
+	protected List<PowerUps> powerUps;
 	HiloPersonaje hilo;
 	
 	protected ControladorVistas controladorVistas;
@@ -20,6 +26,8 @@ public class Juego {
 	public Juego() {
 		nivel = new Nivel(300,this);
 		personaje = null;
+		enemigos = new ArrayList<Enemigo>();
+		plataformas = new ArrayList<Plataforma>();
 		nivel.cargarNivel(0);
 		hilo = new HiloPersonaje(this); //prueba
 		hilo.start();
@@ -69,6 +77,28 @@ public class Juego {
 	}
 	public Personaje getPersonaje() {
 		return personaje;
+	}
+	
+	public void agregarEnemigo(Enemigo e) {
+		enemigos.addLast(e);
+	}
+	public Enemigo getEnemigo() {
+		return enemigos.removeFirst();
+	}
+	
+	public void agregarPlataforma(Plataforma e) {
+		plataformas.addLast(e);
+	}
+	public Plataforma getPlataforma() {
+		return plataformas.removeFirst();
+	}
+	
+	public void agregarPowerUp(PowerUps p) {
+		powerUps.addLast(p);
+	}
+	
+	public PowerUps getPowerUp() {
+		return powerUps.removeFirst();
 	}
 	
 }

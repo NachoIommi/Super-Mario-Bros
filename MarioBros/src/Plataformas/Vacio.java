@@ -7,8 +7,10 @@ import Logica.Visitor;
 
 public class Vacio extends Plataforma {
 	
-	public Vacio(int x,int y) {
-		
+	protected Sprite sprite;
+	
+	public Vacio(Sprite sprite, int x,int y) {
+		this.sprite = sprite;
 	}
 
 

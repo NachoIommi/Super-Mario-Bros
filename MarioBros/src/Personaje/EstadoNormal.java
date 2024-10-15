@@ -1,6 +1,9 @@
 package Personaje;
 
+import Logica.Visitor;
+
 class EstadoNormal implements EstadoDePersonaje {
+	
 	private Personaje personaje;
 	
     public EstadoNormal(Personaje personaje) {
@@ -26,12 +29,17 @@ class EstadoNormal implements EstadoDePersonaje {
     public Personaje getPersonaje() {
         return personaje;
     }
-    //estos dos de aca abajo tal vez no hacen falta :: ver!
+
+	@Override
 	public void sumarVida() {
+		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
 	public void sumarPuntos(int n) {
-
+		// TODO Auto-generated method stub
+		
 	}
+ 
 }

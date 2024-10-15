@@ -1,5 +1,7 @@
 package Personaje;
 
+import Logica.Visitor;
+
 class EstadoDeFuego extends EstadoSuperMario {
 	
     public EstadoDeFuego(Personaje personaje) {

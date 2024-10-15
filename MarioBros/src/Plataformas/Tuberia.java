@@ -5,13 +5,14 @@ import Fabricas.Sprite;
 
 public class Tuberia extends Plataforma{
 	
+	protected Sprite sprite;
 	protected PiranhaPlant contenido;
 	
 	public Tuberia(int x,int y,PiranhaPlant piranha) {
 		contenido = piranha;
 	}
-	public Tuberia(int x,int y) {
-		
+	public Tuberia(Sprite sprite, int x,int y) {
+		this.sprite = sprite;
 	}
 
 	

@@ -2,9 +2,12 @@ package GUI;
 
 import javax.swing.JFrame;
 
+import Enemigos.Enemigo;
 import Logica.Entidad;
 import Logica.Juego;
 import Personaje.Personaje;
+import Plataformas.Plataforma;
+import PowerUps.PowerUps;
 
 public class ControladorVistas {
 
@@ -53,5 +56,17 @@ public class ControladorVistas {
 	
 	public PantallaJuego obtenerPantallaJuego() {
 		return pantallaJuego;
+	}
+	
+	public Enemigo obtenerEnemigo() {
+		return juego.getEnemigo();
+	}
+	
+	public Plataforma obtenerPlataforma() {
+		return juego.getPlataforma();
+	}
+	
+	public PowerUps obtenerPowerUp() {
+		return juego.getPowerUp();
 	}
 }

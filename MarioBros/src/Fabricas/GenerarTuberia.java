@@ -11,8 +11,8 @@ public class GenerarTuberia implements GenerarPlataformas{
 	}
 
 	
-	public Plataforma crearPlataforma(int x, int y) {
-		return new Tuberia(x,y);
+	public Plataforma crearPlataforma(Sprite sprite, int x, int y) {
+		return new Tuberia(sprite, x, y);
 	}
 
 	

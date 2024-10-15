@@ -6,8 +6,15 @@ import Personaje.Personaje;
 
 public class ChampiVerde extends PowerUps{
 	
-	public ChampiVerde(int x,int y) {
-		
+	protected int x;
+	protected int y;
+	protected Sprite sprite;
+	
+	
+	public ChampiVerde(Sprite sprite, int x, int y) {
+		this.x = x;
+		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void moverse() {

@@ -4,14 +4,16 @@ import Fabricas.Sprite;
 import Logica.Visitor;
 
 public class PiranhaPlant extends Enemigo{
-	private EstadosDePiranhaPlant estadoActual;
 	
+	private EstadosDePiranhaPlant estadoActual;
 	protected int x;
 	protected int y;
+	protected Sprite sprite;
 	
-	public PiranhaPlant(int x,int y) {
+	public PiranhaPlant(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	

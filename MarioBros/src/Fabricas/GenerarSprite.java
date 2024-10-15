@@ -41,7 +41,7 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getGoomba() {
-		return new Sprite(rutaImagen + "/spritesEnemigos/Goomba.png");
+		return new Sprite(rutaImagen + "/goombaCaminando.gif");
 	}
 	
 	public Sprite getKoopaTroopa() {
@@ -64,6 +64,10 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite(rutaImagen + "/spritesPowerUps/champiVerde.png");
 	}
 	
+	public Sprite getFlorDeFuego() {
+		return new Sprite(rutaImagen + "/florDeFuego.png");
+	}
+	
 	public Sprite getBloqueSolido() {
 		return new Sprite(rutaImagen + "/spritesPlataformas/bloqueSolido.png");
 	}
@@ -80,6 +84,9 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite(rutaImagen + "/spritesPlataformas/bloqueDePregunta.png");
 	}
 	
+	public Sprite getTuberia() {
+		return new Sprite(rutaImagen + "/tuberia.png");
+	}
 	
 	
 	

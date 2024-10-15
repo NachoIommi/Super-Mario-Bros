@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Enemigos.Enemigo;
 import Logica.Entidad;
 // numero 3376
 // numero 240
@@ -28,7 +29,8 @@ public class PantallaJuego extends JPanel {
         this.setPreferredSize(new Dimension(1600, 600));
         
         setLayout(null);  // Usar layout nulo para posicionamiento manual
-          
+        
+        mostrarEnemigo();
         mostrarPersonaje(); // el orden importa, si primero va el personaje se superpone al fondo
         agregarImagen();   // Agregar la imagen de fondo
         eventosTeclado();
@@ -63,8 +65,8 @@ public class PantallaJuego extends JPanel {
         imagenFondo.setBounds(posicionInicialX, 0, 5000, 930);
         repaint();  // Redibuja el panel para reflejar el cambio
     }
-    public void mostrarPersonaje() {
-    	
+    
+    public void mostrarPersonaje() {	
         Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
        
@@ -73,26 +75,29 @@ public class PantallaJuego extends JPanel {
         ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
         Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imagenEscalada);
-      
+   
         personaje.setIcon(iconoEscalado);
-        personaje.setBounds(personaje.getPosX(),personaje.getPosY(),50,50);
+        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50);
+        
         add(personaje);
         revalidate();
         repaint();
     }
+    
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50); // Actualiza la posición
         revalidate(); // Para recalcular el layout
         repaint();    // Redibuja el panel
     }
+    
     public void actualizarFondo() {
-    	// if pos de pj es mayor a 300 moverFondo
     	Personaje personaje = controladorVistas.obtenerPersonaje();
     	if(personaje.getPosX() == 290) {
     		moverFondo(-velocidadDesplazamiento);
     	}
     }
+    
     public void eventosTeclado() {
     
     	addKeyListener(new KeyAdapter() {
@@ -121,7 +126,26 @@ public class PantallaJuego extends JPanel {
     	
     }
     
+    public void mostrarEnemigo() {
+    	Enemigo enemigo = controladorVistas.obtenerEnemigo();
+    	enemigo.setVisible(true);
     	
+    	String ruta = enemigo.getSprite().getRutaImagen();
+        ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+        
+        Image gifImage = icono.getImage();
+        Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        
+        ImageIcon iconoAgrandado = new ImageIcon(gifAgrandado);
+        
+        enemigo.setIcon(iconoAgrandado);
+        enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 50, 50);
+        
+        add(enemigo);
+        revalidate();
+        repaint();
+    
+    }
   
     
       

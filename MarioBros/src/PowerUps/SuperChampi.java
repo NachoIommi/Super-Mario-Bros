@@ -6,8 +6,10 @@ import Personaje.Personaje;
 
 public class SuperChampi extends PowerUps{
 	
-	public SuperChampi(int x,int y) {
-		
+	protected Sprite sprite;
+	
+	public SuperChampi(Sprite sprite, int x, int y) {
+		this.sprite = sprite;
 	}
 	public void moverse() {
 		

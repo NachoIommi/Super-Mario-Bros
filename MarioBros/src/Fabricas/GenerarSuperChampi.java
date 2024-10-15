@@ -4,7 +4,7 @@ import PowerUps.SuperChampi;
 
 public class GenerarSuperChampi implements GenerarPowerUps{
 	
-	public SuperChampi crearPowerUp(int x, int y) {
-		return new SuperChampi(x,y);
+	public SuperChampi crearPowerUp(Sprite sprite, int x, int y) {
+		return new SuperChampi(sprite, x, y);
 	}
 }

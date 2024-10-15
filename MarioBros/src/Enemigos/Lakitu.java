@@ -4,11 +4,15 @@ import Fabricas.Sprite;
 import Logica.Visitor;
 
 public class Lakitu extends Enemigo{
+	
 	protected int x;
 	protected int y;
-	public Lakitu(int x,int y) {
+	protected Sprite sprite;
+	
+	public Lakitu(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void moverse() {
@@ -28,6 +32,6 @@ public class Lakitu extends Enemigo{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
 	}
 }

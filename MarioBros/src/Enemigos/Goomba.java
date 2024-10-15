@@ -7,10 +7,13 @@ public class Goomba extends Enemigo{
 	
 	protected int x;
 	protected int y;
+	protected Sprite sprite;
 	
-	public Goomba(int x,int y) {
+	public Goomba(Sprite sprite,int x,int y) {
 		this.x = x;
 		this.y = y;
+		this.sprite = sprite;
+		System.out.println("la ruta del sprite de goomba es: "+sprite.getRutaImagen());
 	}
 	
 	public void moverse() {
@@ -22,7 +25,7 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
+		sprite = s;
 	}
 	
 	public void morir() {
@@ -30,7 +33,17 @@ public class Goomba extends Enemigo{
 	}
 
 	public Sprite getSprite() {
-		return null;
+		return sprite;
+	}
+
+	@Override
+	public int getPosX() {
+		return x;
+	}
+	
+	@Override
+	public int getPosY() {
+		return y;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package Plataformas;
 
+import Fabricas.Sprite;
 import Logica.Visitor;
 import PowerUps.PowerUps;
 
@@ -8,8 +9,8 @@ public class BloqueDePregunta extends BloqueSolido {
 	protected EstadoDeBloque estado;
 	protected PowerUps contenido;
 	
-	public BloqueDePregunta(int x, int y) {
-		super(x,y);
+	public BloqueDePregunta(Sprite sprite, int x, int y) {
+		super(sprite, x, y);
 	}
 	
 	public void cambiarEstado(EstadoDeBloque e) {

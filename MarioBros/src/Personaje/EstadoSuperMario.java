@@ -1,6 +1,9 @@
 package Personaje;
 
+import Logica.Visitor;
+
 class EstadoSuperMario implements EstadoDePersonaje {
+	
 	private Personaje personaje;
 	
     public EstadoSuperMario(Personaje personaje) {

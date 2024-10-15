@@ -4,14 +4,16 @@ import Logica.Visitor;
 
 public class KoopaTroopa extends Enemigo{
 	
-	protected Sprite sprite;
 	private EstadoDeKoopa estadoActual;
-	
+	protected Sprite sprite;
 	protected int x;
 	protected int y;
-	public KoopaTroopa(int x,int y) {
+	
+	
+	public KoopaTroopa(Sprite sprite, int x,int y) {
 		this.x = x;
 		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void cambiarEstado(EstadoDeKoopa e) {

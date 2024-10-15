@@ -115,15 +115,15 @@ public class Nivel {
 				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonaje(),posX,posY));
 				        break;
 						
-				    case 1:
-				    	fabricaLadrilloSolido.crearPlataforma(posX, posY);
+				    case 1://ladrillosolido
+				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY));
 				        break;
 				    case 2:
-				    	fabricaBloqueDePregunta.crearPlataforma(posX, posY);
+				    	juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY));
 				        break;
 				   
 				    case 3:
-				    	fabricaBloqueSolido.crearPlataforma(posX, posY);
+				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));
 				        break;
 				     /*   
 				    case 4:
@@ -131,45 +131,45 @@ public class Nivel {
 				        break;
 				       */ 
 				    case 5:
-				    	fabricaTuberia.crearPlataforma(posX, posY); //Tuberia sin Piranha
+				    	juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY)); //Tuberia sin Piranha
 				        break;
 				    case 6:
-				    	fabricaVacio.crearPlataforma(posX, posY);
+				    	juego.agregarPlataforma(fabricaVacio.crearPlataforma(fabricaSprite.getVacio(), posX, posY));
 				        break;
 
-				    case 31:
-				    	fabricaMoneda.crearPowerUp(posX, posY); 
+				    case 31://moneda
+				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getMoneda(), posX, posY));
 				        break;
-				    case 32:
-				    	fabricaEstrella.crearPowerUp(posX, posY);
+				    case 32://estrella
+				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getEstrella(), posX, posY));
 				        break;
-				    case 33:
-				    	fabricaSuperChampi.crearPowerUp(posX, posY);
+				    case 33://superchampi
+				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY));
 				        break;
-				    case 34:
-				    	fabricaFlorDeFuego.crearPowerUp(posX, posY);
+				    case 34://flordfuego
+				    	juego.agregarPowerUp(fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY));
 				        break;
-				    case 35:
-				    	fabricaChampiVerde.crearPowerUp(posX, posY);
+				    case 35://champiverde
+				    	juego.agregarPowerUp(fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY));
 				        break;
 				    
-				    case 61:
-				    	fabricaPiranhaPlant.crearEnemigo(posX, posY);
+				    case 61://piranha
+				    	juego.agregarEnemigo(fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
 				        break;
-				    case 62:
-				    	fabricaLakitu.crearEnemigo(posX, posY);
+				    case 62://lakitu
+				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
 				        break;
-				    case 63:
-				    	fabricaSpiny.crearEnemigo(posX, posY);
+				    case 63://spiny
+				    	juego.agregarEnemigo(fabricaSpiny.crearEnemigo(fabricaSprite.getSpiny(), posX, posY));
 				        break;
-				    case 64:
-				    	fabricaBuzzyBeetle.crearEnemigo(posX, posY);
+				    case 64://buzzy
+				    	juego.agregarEnemigo(fabricaBuzzyBeetle.crearEnemigo(fabricaSprite.getSpiny(), posX, posY));
 				        break;
 				    case 65:
-				    	fabricaGoomba.crearEnemigo(posX, posY);
+				    	juego.agregarEnemigo(fabricaGoomba.crearEnemigo(fabricaSprite.getGoomba(),posX, posY));
 				        break;
-				    case 66:
-				    	fabricaKoopaTroopa.crearEnemigo(posX, posY);
+				    case 66://koopa
+				    	juego.agregarEnemigo(fabricaKoopaTroopa.crearEnemigo(fabricaSprite.getKoopaTroopa(), posX, posY));
 				        break;
 				    
 						

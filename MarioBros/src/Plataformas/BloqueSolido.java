@@ -5,8 +5,14 @@ import Logica.Visitor;
 
 public class BloqueSolido extends Plataforma{
 	
-	public BloqueSolido(int x, int y) {
-		
+	protected Sprite sprite;
+	protected int x;
+	protected int y;
+	
+	public BloqueSolido(Sprite sprite, int x, int y) {
+		this.x = x;
+		this.y = y;
+		this.sprite = sprite;
 	}
 	
 	public void recibirGolpe() {
