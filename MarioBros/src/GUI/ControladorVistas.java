@@ -22,10 +22,11 @@ public class ControladorVistas {
 	
 	public ControladorVistas(Juego juego) {
 		this.juego = juego;
+		iniciar();
 		pantallaInicial = new PantallaPrincipal(this);
 		pantallaJuego = new PantallaJuego(this);
 		pantallaPerder = new PantallaPerder(this);
-		iniciar();
+		
 	}
 	
 	/*
@@ -34,7 +35,7 @@ public class ControladorVistas {
 	public void iniciar() {
 		ventana = new JFrame();
 		ventana.setTitle("Super Mario Bros");
-		ventana.setSize(600,500);
+		ventana.setSize(ConstantesVistas.VENTANA_ANCHO,ConstantesVistas.VENTANA_ALTO);
 		ventana.setLayout(null);
 		ventana.setLocationRelativeTo(null);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

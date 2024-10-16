@@ -10,6 +10,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import Enemigos.Enemigo;
 import Logica.Entidad;
@@ -22,64 +23,81 @@ import PowerUps.PowerUps;
 public class PantallaJuego extends JPanel {
 
     protected ControladorVistas controladorVistas;
+    protected JScrollPane panelScrollNivel;
+    protected JPanel panelNivel;
+    protected JPanel panelEntidades;
     protected JLabel imagenFondo;
     protected int posicionInicialX = 0;  
     protected int velocidadDesplazamiento = 10; 
 
     public PantallaJuego(ControladorVistas controladorVistas) {
         this.controladorVistas = controladorVistas;
-        this.setPreferredSize(new Dimension(1600, 600));
+        this.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ANCHO));
         setLayout(null);
-        mostrarPowerUps();
-        mostrarEnemigo();
-        mostrarPlataformas();
-        mostrarPersonaje();
-        agregarImagenNivel();  
+        
+        agregarPanelNivel();
+        agregarImagenNivel();
+        
+        
+        
+        //mostrarPowerUps();
+        //mostrarEnemigo();
+       
         eventosTeclado();
-        setFocusable(true);
+      
     }
 
+ 
+    
+    public void agregarPanelNivel() {
+    	panelNivel = new JPanel(null);
+    	mostrarPersonaje();
+    	mostrarPlataformas();
+    	mostrarEnemigos();
+    	mostrarPowerUps();
+    	agregarImagenNivel();
+    	panelNivel.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), ConstantesVistas.PANEL_ALTO));
+    	
+    	panelScrollNivel = new JScrollPane(panelNivel);
+    	panelScrollNivel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		panelScrollNivel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		panelScrollNivel.setBounds(posicionInicialX, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+		
+		panelScrollNivel.setFocusable(true);
+		panelScrollNivel.requestFocusInWindow();
+		
+		add(panelScrollNivel);
+		refrescar();
+    }
+    
     public void agregarImagenNivel() {
-        imagenFondo = new JLabel();
-        imagenFondo.setLayout(null); 
-        imagenFondo.setVisible(true);
-        imagenFondo.setBounds(posicionInicialX, 0, 1600, 930);   
-        String ruta = controladorVistas.juego.getNivel().getSprite().getRutaImagen();
-        imagenFondo.setIcon(verificarExtension(ruta));
-        add(imagenFondo);
-        refrescar();
+    	String ruta = controladorVistas.juego.getNivel().getSprite().getRutaImagen();
+    	imagenFondo = new JLabel();
+    	imagenFondo.setLayout(null);
+    	ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+    	Image imagenEscalada = icono.getImage().getScaledInstance(icono.getIconWidth(), ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+        ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
+        imagenFondo.setIcon(iconoEscalado);
+        imagenFondo.setBounds(posicionInicialX, 0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
+        panelNivel.add(imagenFondo);
     }
  
-    public void mostrarPersonaje() {	
-        Personaje personaje = controladorVistas.obtenerPersonaje();
-        personaje.setVisible(true);
-       
-        //Cargar la imagen desde los SPRITES
-        String ruta = personaje.getSprite().getRutaImagen();
-        ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        Icon iconoEscalado = new ImageIcon(imagenEscalada);
-   
-        personaje.setIcon(iconoEscalado);
-        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50);
-        
-        add(personaje);
-        refrescar();
-    }
+  
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
-        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), 50, 50);
+        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
+        System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
         refrescar();
     }
 
     // Método para mover la imagen de fondo solo en X (hacia la derecha)
     public void moverFondo(int posicionX) {
         posicionInicialX += posicionX;
-        if (posicionInicialX < -4340) {
-        	posicionInicialX = -4340;
+        if (posicionInicialX < -imagenFondo.getIcon().getIconWidth()) {
+        	posicionInicialX = -imagenFondo.getIcon().getIconWidth();
         }
-        imagenFondo.setBounds(posicionInicialX, 0, 5000, 930);
+        panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+10);
         repaint();
     }
    
@@ -99,13 +117,13 @@ public class PantallaJuego extends JPanel {
                 	case(KeyEvent.VK_D):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(1);
                 		break;
-                			
                 	case(KeyEvent.VK_A):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(3);
                 		break;		
                 }
                 actualizarPosicionPersonaje();
-                actualizarFondo();
+        		actualizarFondo();
+                
             }
             public void keyReleased(KeyEvent k) {
             	controladorVistas.obtenerPersonaje().establecerDireccion(0);
@@ -113,7 +131,20 @@ public class PantallaJuego extends JPanel {
         });
     }
     
-    public void mostrarEnemigo() {
+    public void mostrarPersonaje() {	
+        Personaje personaje = controladorVistas.obtenerPersonaje();
+        personaje.setVisible(true);
+        //Cargar la imagen desde los SPRITES
+        String ruta = personaje.getSprite().getRutaImagen();
+        personaje.setIcon(verificarExtension(ruta));
+        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
+        
+        panelNivel.add(personaje);
+        refrescar();
+    }
+    
+    
+    public void mostrarEnemigos() {
     	Enemigo enemigo;
     	while(!controladorVistas.obtenerEnemigo().isEmpty()) {
     		enemigo = controladorVistas.obtenerEnemigo().removeFirst();
@@ -121,7 +152,7 @@ public class PantallaJuego extends JPanel {
     		String ruta = enemigo.getSprite().getRutaImagen();
             enemigo.setIcon(verificarExtension(ruta));
             enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 50, 50);
-            add(enemigo);
+            panelNivel.add(enemigo);
             refrescar();
     	}
     }
@@ -133,8 +164,8 @@ public class PantallaJuego extends JPanel {
     		plataforma.setVisible(true);
     		String ruta = plataforma.getSprite().getRutaImagen();
     		plataforma.setIcon(verificarExtension(ruta));
-	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), 50, 50);
-            add(plataforma);
+	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
+            panelNivel.add(plataforma);
             refrescar();
     	}
     }  
@@ -147,7 +178,7 @@ public class PantallaJuego extends JPanel {
     		String ruta = powerUp.getSprite().getRutaImagen();
     		powerUp.setIcon(verificarExtension(ruta));
     		powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
-    		add(powerUp);
+    		panelNivel.add(powerUp);
             refrescar();
     	}
     }
@@ -164,11 +195,6 @@ public class PantallaJuego extends JPanel {
 	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 	        iconoEscalado = new ImageIcon(imagenEscalada);
 		}
-    	if(ruta == controladorVistas.juego.getNivel().getSprite().getRutaImagen()) {
-    		ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-	        Image imagenEscalada = icono.getImage().getScaledInstance(5000, 960, Image.SCALE_SMOOTH);
-	        iconoEscalado = new ImageIcon(imagenEscalada);
-    	}
     	return iconoEscalado;
     }
     
