@@ -12,6 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import Enemigos.Enemigo;
 import Logica.Entidad;
 // numero 3376
@@ -29,6 +33,7 @@ public class PantallaJuego extends JPanel {
     protected JLabel imagenFondo;
     protected int posicionInicialX = 0;  
     protected int velocidadDesplazamiento = 10; 
+    protected Timer refrescarPantalla;
 
     public PantallaJuego(ControladorVistas controladorVistas) {
         this.controladorVistas = controladorVistas;
@@ -44,7 +49,24 @@ public class PantallaJuego extends JPanel {
         //mostrarEnemigo();
        
         eventosTeclado();
+<<<<<<< HEAD
       
+=======
+        setFocusable(true);
+        
+        iniciarTimerRefresco();
+    }
+    
+    public void iniciarTimerRefresco() {
+        // Iniciar un Timer que actualice la pantalla cada 50 ms
+        refrescarPantalla = new Timer(50, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                actualizarPosicionPersonaje();  // Refrescar posición de Mario
+                actualizarFondo();  // Actualizar la posición del fondo
+            }
+        });
+        refrescarPantalla.start();
+>>>>>>> e469e4f4d8190e0610b0e42107d725e00ad66792
     }
 
  
