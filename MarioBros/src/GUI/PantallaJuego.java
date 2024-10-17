@@ -18,8 +18,6 @@ import java.awt.event.ActionListener;
 
 import Enemigos.Enemigo;
 import Logica.Entidad;
-// numero 3376
-// numero 240
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -49,9 +47,6 @@ public class PantallaJuego extends JPanel {
         //mostrarEnemigo();
        
         eventosTeclado();
-<<<<<<< HEAD
-      
-=======
         setFocusable(true);
         
         iniciarTimerRefresco();
@@ -66,7 +61,6 @@ public class PantallaJuego extends JPanel {
             }
         });
         refrescarPantalla.start();
->>>>>>> e469e4f4d8190e0610b0e42107d725e00ad66792
     }
 
  

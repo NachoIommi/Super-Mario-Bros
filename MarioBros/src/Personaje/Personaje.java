@@ -1,6 +1,7 @@
 package Personaje;
 
-import Logica.Entidad; 
+import Logica.Entidad;
+import Logica.Hitbox;
 import Logica.Visitor;
 
 import java.awt.Image;
@@ -20,8 +21,9 @@ public class Personaje extends Entidad{
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
+	protected Hitbox hitb;
 	
-    public Personaje(Sprite sprite, int x, int y) {
+	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;   
@@ -29,7 +31,12 @@ public class Personaje extends Entidad{
         direccionDelPersonaje = 0; // direccion 0 -> Quieto
         posX = x;
         posY = y;
-        this.sprite = sprite;
+        this.sprite = sprite;       
+        hitb = new Hitbox(x ,y,30 ,40);
+    }
+
+ public Hitbox getHitbox() {
+    	return hitb;
     }
 
     public void correr() {
