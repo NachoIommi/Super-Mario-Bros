@@ -22,6 +22,7 @@ public class Personaje extends Entidad{
 	protected int posY;
 	protected int direccionDelPersonaje;
 	protected Hitbox hitb;
+	protected int min = 10;
 	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
@@ -108,14 +109,14 @@ public class Personaje extends Entidad{
 	   if (direccionDelPersonaje != 0) {
 		   switch(direccionDelPersonaje){
 		   	case(1):
-		   		if(posX < 285) { //El personaje solo llega a la mitad de la pantalla
-		   			posX = posX + 10;
-		   		}				
+		   		if(posX < 3300) {
+		   			posX += 10;
+		   		}		
 				break;
 				
 			case(3):
-				if(posX > 10) { //El personaje solo llega al inicio de la pantalla
-					posX = posX -10;
+				if(posX > min) { //El personaje solo llega al inicio de la pantalla
+					posX = posX - 10;
 				}
 				break;
 			default: // Si la dirección es 0, no se mueve
@@ -124,6 +125,11 @@ public class Personaje extends Entidad{
 	   }
 	   
    }
+   
+   public void actualizarMin() {
+	   min += 10;
+   }
+   
     
     public void establecerDireccion(int d) {
 	    direccionDelPersonaje = d;
@@ -143,5 +149,9 @@ public class Personaje extends Entidad{
 	}
 	public int getPosY() {
 		return posY;
+	}
+	
+	public int getMin() {
+		return min;
 	}
 }

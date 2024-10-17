@@ -1,12 +1,8 @@
-package Plataformas;
+package Logica;
 
 
 import Enemigos.*;
 import Fabricas.Sprite;
-import Logica.Animador;
-import Logica.Juego;
-import Logica.Musica;
-import Logica.Visitor;
 import Personaje.*;
 import Plataformas.*;
 import PowerUps.*;

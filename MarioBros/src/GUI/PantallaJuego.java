@@ -32,6 +32,9 @@ public class PantallaJuego extends JPanel {
     protected int posicionInicialX = 0;  
     protected int velocidadDesplazamiento = 10; 
     protected Timer refrescarPantalla;
+    protected int maximoDerecha = 300;
+    protected int maximoIzquierda = 10;
+    
 
     public PantallaJuego(ControladorVistas controladorVistas) {
         this.controladorVistas = controladorVistas;
@@ -40,11 +43,8 @@ public class PantallaJuego extends JPanel {
         
         agregarPanelNivel();
         agregarImagenNivel();
-        
-        
-        
-        //mostrarPowerUps();
-        //mostrarEnemigo();
+        mostrarPowerUps();
+        mostrarEnemigos();
        
         eventosTeclado();
         setFocusable(true);
@@ -102,9 +102,12 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
-        personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
-        System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
-        refrescar();
+        if(personaje.getPosX() < 3350) {
+        	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
+            System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
+            refrescar();
+        }
+
     }
 
     // Método para mover la imagen de fondo solo en X (hacia la derecha)
@@ -114,12 +117,16 @@ public class PantallaJuego extends JPanel {
         	posicionInicialX = -imagenFondo.getIcon().getIconWidth();
         }
         panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+10);
+        maximoDerecha += 10;
+        if(controladorVistas.obtenerPersonaje().getMin() < 2780) { //Cuando el scroll esta en el final, el minimo mas alto al q llega es 2780
+        	controladorVistas.obtenerPersonaje().actualizarMin();
+        }
         repaint();
     }
    
     public void actualizarFondo() {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	if(personaje.getPosX() == 290) {
+    	if(personaje.getPosX() == maximoDerecha) {
     		moverFondo(-velocidadDesplazamiento);
     	}
     }

@@ -11,6 +11,7 @@ import Plataformas.Tuberia;
 import Plataformas.Vacio;
 import PowerUps.*;
 public interface Visitor {
+	
 	public void visitarPersonaje(Personaje p);
 	public void visitarPowerUp(PowerUps p);
 	public void visitarBolaDeFuego(BolaDeFuego b);

@@ -1,6 +1,7 @@
 package GUI;
 
 public class ConstantesVistas {
+	
 	public static final int VENTANA_ALTO = 500;
 	public static final int VENTANA_ANCHO = 600;
 	
