@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -162,47 +163,44 @@ public class PantallaJuego extends JPanel {
         String ruta = personaje.getSprite().getRutaImagen();
         personaje.setIcon(verificarExtension(ruta));
         personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
-        
+  
         panelNivel.add(personaje);
         refrescar();
     }
     
     
     public void mostrarEnemigos() {
-    	Enemigo enemigo;
-    	while(!controladorVistas.obtenerEnemigo().isEmpty()) {
-    		enemigo = controladorVistas.obtenerEnemigo().removeFirst();
-    		enemigo.setVisible(true);
-    		String ruta = enemigo.getSprite().getRutaImagen();
-            enemigo.setIcon(verificarExtension(ruta));
-            enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 50, 50);
-            panelNivel.add(enemigo);
+    	List<Enemigo> listaEnemigos = controladorVistas.obtenerEnemigo();
+    	for(Enemigo e : listaEnemigos) {
+    		e.setVisible(true);
+    		String ruta = e.getSprite().getRutaImagen();
+            e.setIcon(verificarExtension(ruta));
+            e.setBounds(e.getPosX(), e.getPosY(), 50, 50);
+            panelNivel.add(e);
             refrescar();
     	}
     }
     
     public void mostrarPlataformas() {
-    	Plataforma plataforma;
-    	//while(!controladorVistas.obtenerPlataforma().isEmpty()) {
-    		plataforma = controladorVistas.obtenerPlataforma().getFirst();
-    		plataforma.setVisible(true);
-    		String ruta = plataforma.getSprite().getRutaImagen();
-    		plataforma.setIcon(verificarExtension(ruta));
-	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
-            panelNivel.add(plataforma);
+    	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
+    	for (Plataforma p : listaPlataformas) {
+    		p.setVisible(true);
+    		String ruta = p.getSprite().getRutaImagen();
+    		p.setIcon(verificarExtension(ruta));
+	        p.setBounds(p.getPosX(), p.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
+            panelNivel.add(p);
             refrescar();
-    	//}
+    	}   	
     }  
     
     public void mostrarPowerUps() {
-    	PowerUps powerUp;
-    	while(!controladorVistas.obtenerPowerUp().isEmpty()) {
-    		powerUp = controladorVistas.obtenerPowerUp().removeFirst();
-    		powerUp.setVisible(true);	
-    		String ruta = powerUp.getSprite().getRutaImagen();
-    		powerUp.setIcon(verificarExtension(ruta));
-    		powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 50, 50);
-    		panelNivel.add(powerUp);
+    	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();
+    	for(PowerUps p : listaPowerUps) {
+    		p.setVisible(true);
+    		String ruta = p.getSprite().getRutaImagen();
+    		p.setIcon(verificarExtension(ruta));
+    		p.setBounds(p.getPosX(), p.getPosY(), 50, 50);
+    		panelNivel.add(p);
             refrescar();
     	}
     }
