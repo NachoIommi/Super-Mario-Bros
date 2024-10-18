@@ -2,6 +2,7 @@ package Enemigos;
 
 import Fabricas.Sprite;
 import Logica.Visitor;
+import Personaje.Personaje;
 
 public class Spiny extends Enemigo{
 	
@@ -26,20 +27,24 @@ public class Spiny extends Enemigo{
 	public int getPosY() {
 		return y;
 	}
+	
 	public void moverse() {
 		
 	}
 	
 	public void aceptarVisita(Visitor v) {
-					
+		v.visitarSpiny(this);
+	}
+
+	public void cargarSprite(Sprite s) {
+		
 	}
 	
-	public void cargarSprite(Sprite s) {
+	public void afectarPersonaje(Personaje p) {
 		
 	}
 	
 	public void morir() {
 		
 	}
-
 }

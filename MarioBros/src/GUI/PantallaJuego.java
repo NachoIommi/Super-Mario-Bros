@@ -215,7 +215,7 @@ public class PantallaJuego extends JPanel {
             iconoEscalado = new ImageIcon(gifAgrandado);
 		}else{
 			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-	        Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+	        Image imagenEscalada = icono.getImage().getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
 	        iconoEscalado = new ImageIcon(imagenEscalada);
 		}
     	return iconoEscalado;

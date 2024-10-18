@@ -1,7 +1,8 @@
 package Enemigos;
 
-import Fabricas.Sprite;
+import Fabricas.Sprite; 
 import Logica.Visitor;
+import Personaje.Personaje;
 
 public class Goomba extends Enemigo{
 	
@@ -32,13 +33,16 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarGoomba(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
 	
+	public void afectarPersonaje(Personaje p) {
+		
+	}
 	public void morir() {
 		
 	}

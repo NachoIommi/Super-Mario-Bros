@@ -21,7 +21,7 @@ public class FlorDeFuego extends PowerUps{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarFlorDeFuego(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -29,7 +29,7 @@ public class FlorDeFuego extends PowerUps{
 	}
 
 	public void afectarPersonaje(Personaje p) {
-		
+		p.getEstado().setPuntuacionFlorDeFuego();
 	}
 
 	public Sprite getSprite() {

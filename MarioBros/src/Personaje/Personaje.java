@@ -13,7 +13,7 @@ import Fabricas.*;
 
 public class Personaje extends Entidad{
 	
-	private EstadoDePersonaje estado;
+	private EstadoDePersonaje estado; 
 	protected Sprite sprite;
 	protected int vidas;
 	protected int monedas;
@@ -69,7 +69,7 @@ public class Personaje extends Entidad{
     }
 
     public void aceptarVisita(Visitor v) {
-        //v.visitarPersonaje(this);
+        v.visitarPersonaje(this);
     }
 
     public int getVidas(){
@@ -85,7 +85,7 @@ public class Personaje extends Entidad{
     }
     
     public void setMonedas(int n){
-        this.monedas = n;
+        this.monedas += n;
     }
 
     
@@ -94,13 +94,12 @@ public class Personaje extends Entidad{
     }
     
     public void setPuntuacion(int n){
-        this.puntuacion = n;
+        this.puntuacion += n;
     }
     
     public EstadoDePersonaje getEstado(){
         return this.estado;
     }
-    
     public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }

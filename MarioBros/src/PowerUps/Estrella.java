@@ -21,7 +21,7 @@ public class Estrella extends PowerUps{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarEstrella(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -29,7 +29,7 @@ public class Estrella extends PowerUps{
 	}
 
 	public void afectarPersonaje(Personaje p) {
-		
+		p.getEstado().setPuntuacionEstrella();
 	}
 
 	public Sprite getSprite() {

@@ -2,6 +2,7 @@ package Enemigos;
 
 import Fabricas.Sprite;
 import Logica.Visitor;
+import Personaje.Personaje;
 
 public class Lakitu extends Enemigo{
 	
@@ -32,10 +33,13 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarLakitu(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
+		
+	}
+	public void afectarPersonaje(Personaje p) {
 		
 	}
 	

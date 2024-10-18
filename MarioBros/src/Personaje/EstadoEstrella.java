@@ -42,5 +42,35 @@ public class EstadoEstrella implements EstadoDePersonaje {
 	public void sumarPuntos(int n) {
 
 	}
+
+	@Override
+	public void setPuntuacion(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPuntuacionChampiVerde() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPuntuacionEstrella() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPuntuacionFlorDeFuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPuntuacionSuperChampi() {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

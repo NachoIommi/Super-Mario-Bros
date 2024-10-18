@@ -17,7 +17,7 @@ public class BolaDeFuego extends Entidad{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarBolaDeFuego(this);
 	}
 	
 	public void cargarSprite(Sprite s) {

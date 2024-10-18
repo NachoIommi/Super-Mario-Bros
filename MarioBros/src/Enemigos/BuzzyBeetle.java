@@ -1,7 +1,8 @@
 package Enemigos;
 
-import Fabricas.Sprite;
+import Fabricas.Sprite; 
 import Logica.Visitor;
+import Personaje.Personaje;
 
 public class BuzzyBeetle extends Enemigo{
 	
@@ -36,6 +37,9 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
+		
+	}
+	public void afectarPersonaje(Personaje p) {
 		
 	}
 	

@@ -21,7 +21,7 @@ public class SuperChampi extends PowerUps{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarSuperChampi(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -29,7 +29,7 @@ public class SuperChampi extends PowerUps{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		
+		p.getEstado().setPuntuacionSuperChampi();
 	}
 
 	public Sprite getSprite() {

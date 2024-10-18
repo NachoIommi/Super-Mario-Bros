@@ -21,7 +21,7 @@ public class ChampiVerde extends PowerUps{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarChampiVerde(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -29,7 +29,7 @@ public class ChampiVerde extends PowerUps{
 	}
 
 	public void afectarPersonaje(Personaje p) {
-		
+		p.getEstado().setPuntuacionChampiVerde();
 	}
 
 	public Sprite getSprite() {

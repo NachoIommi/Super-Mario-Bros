@@ -2,7 +2,7 @@ package Personaje;
 
 import Logica.Visitor;
 
-class EstadoNormal implements EstadoDePersonaje {
+public class EstadoNormal implements EstadoDePersonaje {
 	
 	private Personaje personaje;
 	
@@ -23,7 +23,6 @@ class EstadoNormal implements EstadoDePersonaje {
     }
 
     public void aceptarVisita(Visitor v) {
-        
     }
 
     public Personaje getPersonaje() {
@@ -34,8 +33,28 @@ class EstadoNormal implements EstadoDePersonaje {
 
 	}
 
-	public void sumarPuntos(int n) {
+	public void setPuntuacion(int n) {
+		personaje.setPuntuacion(n);
+	}
 
+	@Override
+	public void setPuntuacionChampiVerde() {
+		personaje.setPuntuacion(100);
+	}
+
+	@Override
+	public void setPuntuacionEstrella() {
+		personaje.setPuntuacion(20);
+	}
+
+	@Override
+	public void setPuntuacionFlorDeFuego() {
+		personaje.setPuntuacion(5);
+	}
+
+	@Override
+	public void setPuntuacionSuperChampi() {
+		personaje.setPuntuacion(10);
 	}
  
 }

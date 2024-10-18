@@ -1,14 +1,10 @@
 package Logica;
 
-import Enemigos.*;
+import Enemigos.*; 
 import Fabricas.Sprite;
 import Logica.Entidad;
-import Personaje.BolaDeFuego;
-import Personaje.Personaje;
-import Plataformas.BloqueDePregunta;
-import Plataformas.LadrilloSolido;
-import Plataformas.Tuberia;
-import Plataformas.Vacio;
+import Personaje.*;
+import Plataformas.*;
 import PowerUps.*;
 public interface Visitor {
 	

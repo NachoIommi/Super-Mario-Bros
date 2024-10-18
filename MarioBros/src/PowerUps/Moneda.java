@@ -21,7 +21,7 @@ public class Moneda extends PowerUps{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarMoneda(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -29,9 +29,9 @@ public class Moneda extends PowerUps{
 	}
 
 	public void afectarPersonaje(Personaje p) { 
-		
+		p.setPuntuacion(5);
+    	p.setMonedas(1);
 	}
-
 	public Sprite getSprite() {
 		return sprite;
 	}

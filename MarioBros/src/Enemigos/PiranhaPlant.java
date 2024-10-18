@@ -2,6 +2,7 @@ package Enemigos;
 
 import Fabricas.Sprite;
 import Logica.Visitor;
+import Personaje.Personaje;
 
 public class PiranhaPlant extends Enemigo{
 	
@@ -16,7 +17,6 @@ public class PiranhaPlant extends Enemigo{
 		this.sprite = sprite;
 	}
 	
-	// :: getters y setter ::
 	public EstadosDePiranhaPlant getEstadoActual() {
 		return estadoActual;
 	}
@@ -36,21 +36,19 @@ public class PiranhaPlant extends Enemigo{
 	public void moverse() {
 		
 	}
-	
-	// :: Comandos ::
 	public void aceptarVisita(Visitor v) {
+		v.visitarPiranhaPlant(this);
+	}
+	public void cargarSprite(Sprite s) {
 		
 	}
-	
-	public void cargarSprite(Sprite s) {
+	public void afectarPersonaje(Personaje p) {
+		
 	}
-	
 	public void morir() {
 		
 	}
-
 	public void setEstadoActual(EstadosDePiranhaPlant e) {
 		
 	}
-
 }
