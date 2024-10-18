@@ -23,7 +23,9 @@ public class Personaje extends Entidad{
 	protected int direccionDelPersonaje;
 	protected Hitbox hitb;
 	protected int min = 10;
+	
 	protected boolean tocandoBloque;
+	protected boolean tocandoBloqueDerecha;
 	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
@@ -36,13 +38,14 @@ public class Personaje extends Entidad{
         this.sprite = sprite;       
         hitb = new Hitbox(x ,y,30 ,40);
         tocandoBloque=false;
+        tocandoBloqueDerecha=false;
     }
 	
 	public void moverPersonaje(){
-		   if (direccionDelPersonaje != 0 && tocandoBloque==false) {
+		   if (direccionDelPersonaje != 0 ) {
 			   switch(direccionDelPersonaje){
 			   	case(1):
-			   		if(posX < 3300) {
+			   		if(posX < 3300&& tocandoBloqueDerecha==false) {
 			   			posX += 10;
 			   			hitb.actualizar(posX, posY);
 			   		}		
@@ -63,6 +66,12 @@ public class Personaje extends Entidad{
 	
 	public void setTocandoBloque(boolean b) {
 		tocandoBloque=b;
+	}
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
+	}
+	public boolean tocandoBloque() {
+		return tocandoBloque;
 	}
 	
 	public Hitbox getHitbox() {

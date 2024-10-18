@@ -20,16 +20,21 @@ public class HiloPersonaje extends Thread {
 	public void run() {
 	    while (true) {
 	        try {             
-	            // Imprime la posición del personaje y la hitbox para depurar
-	            //System.out.println("Posición del personaje: " + personaje.getPosX() + ", " + personaje.getPosY());
-	            //System.out.println("Hitbox del personaje: " + personaje.getHitbox());
-	            //System.out.println("Hitbox de la plataforma: " + plataforma.getHitbox());
-
 	            if (personaje.getHitbox().intersects(plataforma.getHitbox())) {            
 	                personaje.setTocandoBloque(b);
-	                System.out.println("INTERSECCION");
+	                if(personaje.getHitbox().getX()+personaje.getHitbox().getWidth()>=plataforma.getHitbox().getX()) {
+	                	System.out.println("Colision der Per Izq bloque");
+	                	personaje.setTocandoBloqueDerecha(b);
+	                }
+	                
+	                
 	            }
+	                //System.out.println("Hitbox Personaje"+personaje.getHitbox().getX());
+	                //System.out.println("Hitbox bloque"+plataforma.getHitbox().getX());
+	            
 	            personaje.moverPersonaje();
+	            personaje.setTocandoBloqueDerecha(false);
+	            
 	            Thread.sleep(65);
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
