@@ -28,6 +28,9 @@ public class Personaje extends Entidad{
 	protected boolean tocandoBloqueDerecha;
 	protected boolean tocandoBloqueIzquierda;
 	
+	protected int velX;
+	
+	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
         monedas = 0;      
@@ -43,19 +46,25 @@ public class Personaje extends Entidad{
         tocandoBloqueIzquierda=false;
     }
 	
+	//D 4
+	
 	public void moverPersonaje(){
-		   if (direccionDelPersonaje != 0 ) {
+		   if (direccionDelPersonaje != 0) {
 			   switch(direccionDelPersonaje){
 			   	case(1):
 			   		if(posX < 3300 && tocandoBloqueDerecha==false) {
-			   			posX += 10;
+			   			if(velX<11)
+			   				velX=velX+1;
+			   			posX = posX+ velX;
 			   			hitb.actualizar(posX, posY);
 			   		}		
 					break;
 					
 				case(3):
 					if(posX > min && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
-						posX = posX - 10;
+						if (velX<11)
+							velX=velX+1;
+						posX = posX - velX;
 						hitb.actualizar(posX, posY);
 					}
 					break;
@@ -63,8 +72,13 @@ public class Personaje extends Entidad{
 		            break;
 			   }
 		   }
+		   else
+			   velX=0;
 		   
 	   }
+	public int getVelX() {
+		return velX;
+	}
 	
 	public void setTocandoBloque(boolean b) {
 		tocandoBloque=b;
@@ -148,7 +162,7 @@ public class Personaje extends Entidad{
    
    
    public void actualizarMin() {
-	   min += 10;
+	   min += velX;
    }
    
     

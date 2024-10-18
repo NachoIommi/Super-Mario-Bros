@@ -32,7 +32,7 @@ public class PantallaJuego extends JPanel {
     protected int posicionInicialX = 0;  
     protected int velocidadDesplazamiento = 10; 
     protected Timer refrescarPantalla;
-    protected int maximoDerecha = 300;
+    protected int maximoDerecha = 280;//ES PERFECTO
     protected int maximoIzquierda = 10;
     
 
@@ -112,12 +112,13 @@ public class PantallaJuego extends JPanel {
 
     // Método para mover la imagen de fondo solo en X (hacia la derecha)
     public void moverFondo(int posicionX) {
+    	Personaje personaje = controladorVistas.obtenerPersonaje();
         posicionInicialX += posicionX;
         if (posicionInicialX < -imagenFondo.getIcon().getIconWidth()) {
         	posicionInicialX = -imagenFondo.getIcon().getIconWidth();
         }
-        panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+10);
-        maximoDerecha += 10;
+        panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getVelX());
+        maximoDerecha += personaje.getVelX();
         if(controladorVistas.obtenerPersonaje().getMin() < 2780) { //Cuando el scroll esta en el final, el minimo mas alto al q llega es 2780
         	controladorVistas.obtenerPersonaje().actualizarMin();
         }
@@ -126,8 +127,8 @@ public class PantallaJuego extends JPanel {
    
     public void actualizarFondo() {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	if(personaje.getPosX() == maximoDerecha) {
-    		moverFondo(-velocidadDesplazamiento);
+    	if(personaje.getPosX() >= maximoDerecha) {
+    		moverFondo(-personaje.getVelX());
     	}
     }
     
