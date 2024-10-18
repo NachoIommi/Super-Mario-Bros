@@ -14,7 +14,7 @@ import PowerUps.PowerUps;
 public class ControladorVistas {
 
 	public JFrame ventana;
-	protected PantallaPrincipal pantallaInicial;
+	protected PantallaPrincipal pantallaPrincipal;
 	protected PantallaJuego pantallaJuego;
 	protected PantallaPerder pantallaPerder;
 	protected Juego juego;
@@ -23,10 +23,9 @@ public class ControladorVistas {
 	public ControladorVistas(Juego juego) {
 		this.juego = juego;
 		iniciar();
-		pantallaInicial = new PantallaPrincipal(this);
+		pantallaPrincipal = new PantallaPrincipal(this);
 		pantallaJuego = new PantallaJuego(this);
 		pantallaPerder = new PantallaPerder(this);
-		
 	}
 	
 	/*
@@ -42,8 +41,8 @@ public class ControladorVistas {
 		ventana.setResizable(false);
 	}
 	
-	public void mostrarPantallaInicial() {
-		ventana.setContentPane(pantallaInicial);
+	public void mostrarPantallaPrincipal() {
+		ventana.setContentPane(pantallaPrincipal);
 	}
 	
 	public void mostrarPantallaJuego() {

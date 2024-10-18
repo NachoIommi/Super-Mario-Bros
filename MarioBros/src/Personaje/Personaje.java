@@ -123,8 +123,9 @@ public class Personaje extends Entidad{
     }
 
     public void aceptarVisita(Visitor v) {
-        //v.visitarPersonaje(this);
+        v.visitarPersonaje(this);
     }
+
 
     public int getVidas(){
         return this.vidas;

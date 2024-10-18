@@ -48,8 +48,7 @@ public class EstadoSuperMario implements EstadoDePersonaje {
 
 	public void setPuntuacionFlorDeFuego() {
 		personaje.setPuntuacion(30);
-	}
-
+	}
 	public void setPuntuacionSuperChampi() {
 		personaje.setPuntuacion(50);
 	}

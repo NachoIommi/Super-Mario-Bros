@@ -18,6 +18,7 @@ public class PantallaPrincipal extends JPanel{
 	protected JLabel imagenInicio;
 	protected JTextField ingresarNombre;
 	protected JButton botonIngresarNombre;
+	
 	/*
 	 * Creo el panel
 	 */
@@ -31,20 +32,23 @@ public class PantallaPrincipal extends JPanel{
 		agregarNombre();
 		agregarBotonIngresarNombre();
 		agregarModosDeJuego();
-		//agregarImagen();
+		agregarImagen();
 		
 	}
 	
 	public void agregarImagen() {
+		String ruta = "imagenesOriginales/img/pantallaPrincipal.png";
 		imagenInicio = new JLabel();
-		imagenInicio.setSize(800, 600);
-		ImageIcon icono = new ImageIcon(this.getClass().getResource("/img/pantallaPrincipal.png"));
-		Image imagenEscalada = icono.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+		imagenInicio.setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+		ImageIcon icono = new ImageIcon(ruta);
+		Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
 		Icon iconoEscalado = new ImageIcon(imagenEscalada);
 		imagenInicio.setIcon(iconoEscalado);
 		this.add(imagenInicio);
+		
 	}
 	
+
 	public void agregarBotonIngresarNombre() {
 		botonIngresarNombre = new JButton();
 		botonIngresarNombre.setText("Ingresar Nombre");

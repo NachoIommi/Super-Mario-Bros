@@ -1,8 +1,7 @@
 package PowerUps;
-import Logica.*;
+import Logica.*; 
 import Personaje.Personaje;
 import Fabricas.Sprite;
-
 
 public class Moneda extends PowerUps{
 	

@@ -1,7 +1,7 @@
 package Logica;
 
 
-import Enemigos.*;
+import Enemigos.*; 
 import Fabricas.Sprite;
 import Personaje.*;
 import Plataformas.*;
@@ -58,7 +58,7 @@ public class CollisionVisitor implements Visitor {
     	b.afectarPersonaje(personaje);
     }
     public void visitarGoomba(Goomba g) {
-    	g.afectarPersonaje(personaje);
+    	//g.afectarPersonaje(personaje, estaChocado);
     }
     public void visitarKoopaTroopa(KoopaTroopa k) {
     	k.afectarPersonaje(personaje);

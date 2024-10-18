@@ -43,7 +43,13 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		
+		// si te choca mario de costado ejecutas p.morir()
+		// podría ir un boolean de si chocoDeCostado
+		p.morir();
+		// else
+			morir();
+			p.setPuntuacion(5);
+		// si te choca ejecutas morir de goomba y sumas puntos
 	}
 	public void morir() {
 		

@@ -3,8 +3,7 @@ package Logica;
 import Personaje.Personaje;
 import Plataformas.*;
 
-public class HiloPersonaje extends Thread {
-	
+public class HiloPersonaje extends Thread { 
 	protected Juego juego; 
 	Personaje personaje;// = juego.getPersonaje();
 	BloqueSolido plataforma;// = juego.getPlataforma().getFirst();
