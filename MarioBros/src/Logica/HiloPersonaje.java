@@ -15,8 +15,7 @@ public class HiloPersonaje extends Thread {
 		this.juego = juego;
 		personaje = juego.getPersonaje();
 		plataforma = juego.getPlataforma();
-		b=true;
-		
+		b=true;		
 	}
 	
 	public void run() {
@@ -24,48 +23,37 @@ public class HiloPersonaje extends Thread {
 	        try {
 	            for(Plataforma p: plataforma) {
 	            	if (personaje.getHitbox().intersects(p.getHitbox())) { 	//COLISION JUGADOR BLOQUE
-		                personaje.setTocandoBloque(true);
-		               
-
-		                
+		                personaje.setTocandoBloque(true);		              		                
 		                if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&	//COLISION LADO DERECHO JUGADOR IZQ BLOQUE
-		                    personaje.getHitbox().getX() < p.getHitbox().getX()) {
-		                    personaje.setTocandoBloqueDerecha(true);
-		                    personaje.setTocandoBloqueIzquierda(false);
-		                    System.out.println("Colision derecha");
-		                }
-
-		                
+		                    personaje.getHitbox().getX() < p.getHitbox().getX()) 
+		                {
+		                	personaje.setTocandoBloqueDerecha(true);
+			                personaje.setTocandoBloqueIzquierda(false);
+			                System.out.println("Colision Der");
+		                }                
 		              else 
 		            	  if (personaje.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&	//COLISION LADO IZQ JUGADOR DERECHO BLOQUE
-		                         personaje.getHitbox().getX() > p.getHitbox().getX()) {
-		                
-		             
-		                    personaje.setTocandoBloqueIzquierda(true);
+		                         personaje.getHitbox().getX() > p.getHitbox().getX()) 
+		            	  {
+		               		personaje.setTocandoBloqueIzquierda(true);
 		                    personaje.setTocandoBloqueDerecha(false);
-		                    System.out.println("Colision izq");
-		                }
-
-		            } 
-		            
-		            else {		//NO COLISION 
-		                
-		                personaje.setTocandoBloque(false);
-		                personaje.setTocandoBloqueDerecha(false);
-		                personaje.setTocandoBloqueIzquierda(false);
+		                    System.out.println("Colision Izq");
+		                  }
 		            }
-	            }
-	            
-
-	            System.out.println(" personaje: "+personaje.getX());
-	            //System.out.println("Hitbox del bloque :"+ (plataforma.getHitbox().getX() + plataforma.getHitbox().getWidth()) );
+		            		          
+	            }	          
+	            //System.out.println(" personaje: "+personaje.getX());	           
 	            personaje.moverPersonaje();
-
+	            personaje.setTocandoBloque(false);
+                personaje.setTocandoBloqueDerecha(false);
+                personaje.setTocandoBloqueIzquierda(false);
 	            Thread.sleep(65); 
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
+	        } 
+	        catch (InterruptedException e) {
+	            e.printStackTrace();}
 	    }
+	    
+	    
 	}
 	
 
