@@ -13,7 +13,7 @@ import Fabricas.*;
 
 public class Personaje extends Entidad{
 	
-	private EstadoDePersonaje estado; 
+	private EstadoDePersonaje estado;
 	protected Sprite sprite;
 	protected int vidas;
 	protected int monedas;
@@ -23,6 +23,7 @@ public class Personaje extends Entidad{
 	protected int direccionDelPersonaje;
 	protected Hitbox hitb;
 	protected int min = 10;
+	protected boolean tocandoBloque;
 	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
@@ -34,9 +35,37 @@ public class Personaje extends Entidad{
         posY = y;
         this.sprite = sprite;       
         hitb = new Hitbox(x ,y,30 ,40);
+        tocandoBloque=false;
     }
-
- public Hitbox getHitbox() {
+	
+	public void moverPersonaje(){
+		   if (direccionDelPersonaje != 0 && tocandoBloque==false) {
+			   switch(direccionDelPersonaje){
+			   	case(1):
+			   		if(posX < 3300) {
+			   			posX += 10;
+			   			hitb.actualizar(posX, posY);
+			   		}		
+					break;
+					
+				case(3):
+					if(posX > min) { //El personaje solo llega al inicio de la pantalla
+						posX = posX - 10;
+						hitb.actualizar(posX, posY);
+					}
+					break;
+				default: // Si la dirección es 0, no se mueve
+		            break;
+			   }
+		   }
+		   
+	   }
+	
+	public void setTocandoBloque(boolean b) {
+		tocandoBloque=b;
+	}
+	
+	public Hitbox getHitbox() {
     	return hitb;
     }
 
@@ -69,7 +98,7 @@ public class Personaje extends Entidad{
     }
 
     public void aceptarVisita(Visitor v) {
-        v.visitarPersonaje(this);
+        //v.visitarPersonaje(this);
     }
 
     public int getVidas(){
@@ -85,7 +114,7 @@ public class Personaje extends Entidad{
     }
     
     public void setMonedas(int n){
-        this.monedas += n;
+        this.monedas = n;
     }
 
     
@@ -94,36 +123,18 @@ public class Personaje extends Entidad{
     }
     
     public void setPuntuacion(int n){
-        this.puntuacion += n;
+        this.puntuacion = n;
     }
     
     public EstadoDePersonaje getEstado(){
         return this.estado;
     }
+    
     public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }
 
-   public void moverPersonaje(){
-	   if (direccionDelPersonaje != 0) {
-		   switch(direccionDelPersonaje){
-		   	case(1):
-		   		if(posX < 3300) {
-		   			posX += 10;
-		   		}		
-				break;
-				
-			case(3):
-				if(posX > min) { //El personaje solo llega al inicio de la pantalla
-					posX = posX - 10;
-				}
-				break;
-			default: // Si la dirección es 0, no se mueve
-	            break;
-		   }
-	   }
-	   
-   }
+   
    
    public void actualizarMin() {
 	   min += 10;

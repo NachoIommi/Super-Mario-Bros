@@ -10,4 +10,6 @@ public abstract class Entidad extends JLabel{
 	
 	public abstract Sprite getSprite();
 	
+	public abstract Hitbox getHitbox();
+	
 }

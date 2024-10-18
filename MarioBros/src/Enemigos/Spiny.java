@@ -1,6 +1,7 @@
 package Enemigos;
 
 import Fabricas.Sprite;
+import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -9,6 +10,7 @@ public class Spiny extends Enemigo{
 	protected int x;
 	protected int y;
 	protected Sprite sprite;
+	protected Hitbox hitb;
 	
 	public Spiny(Sprite sprite, int x, int y) {
 		this.x = x;
@@ -46,5 +48,11 @@ public class Spiny extends Enemigo{
 	
 	public void morir() {
 		
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

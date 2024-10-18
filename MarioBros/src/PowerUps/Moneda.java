@@ -9,6 +9,7 @@ public class Moneda extends PowerUps{
 	protected Sprite sprite;
 	protected int x;
 	protected int y;
+	protected Hitbox hitb;
 	
 	public Moneda(Sprite sprite, int x, int y) {
 		this.x = x;
@@ -42,6 +43,12 @@ public class Moneda extends PowerUps{
 
 	public int getPosY() {
 		return y;
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

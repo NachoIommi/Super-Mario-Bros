@@ -16,9 +16,8 @@ public class Hitbox extends Rectangle{
 	    }
 	
 	 public void actualizar(int x, int y) {
-	        this.x = x;
-	        this.y = y;
-	    }
+		    setBounds(x, y, width, height); // IMPORTANNNNNTISIMO
+		}
 	
 	 public boolean colisionaCon(Hitbox otraHitbox) {
 	        return this.intersects(otraHitbox);

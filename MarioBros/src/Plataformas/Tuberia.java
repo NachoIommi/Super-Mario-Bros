@@ -9,6 +9,7 @@ public class Tuberia extends Plataforma{
 	protected PiranhaPlant contenido;
 	protected int x;
 	protected int y;
+	protected Hitbox hitb;
 	
 	public Tuberia(Sprite sprite, int x, int y, PiranhaPlant piranha) {
 		contenido = piranha;
@@ -55,6 +56,11 @@ public class Tuberia extends Plataforma{
 
 	public void mostrarPiranha() {
 		
+	}
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

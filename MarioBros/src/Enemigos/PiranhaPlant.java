@@ -1,6 +1,7 @@
 package Enemigos;
 
 import Fabricas.Sprite;
+import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -10,6 +11,7 @@ public class PiranhaPlant extends Enemigo{
 	protected int x;
 	protected int y;
 	protected Sprite sprite;
+	protected Hitbox hitb;
 	
 	public PiranhaPlant(Sprite sprite, int x, int y) {
 		this.x = x;
@@ -50,5 +52,11 @@ public class PiranhaPlant extends Enemigo{
 	}
 	public void setEstadoActual(EstadosDePiranhaPlant e) {
 		
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

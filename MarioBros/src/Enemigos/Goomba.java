@@ -1,6 +1,7 @@
 package Enemigos;
 
-import Fabricas.Sprite; 
+import Fabricas.Sprite;
+import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -9,6 +10,7 @@ public class Goomba extends Enemigo{
 	protected Sprite sprite;
 	protected int x;
 	protected int y;
+	protected Hitbox hitb;
 
 	public Goomba(Sprite sprite,int x,int y) {
 		this.x = x;
@@ -45,6 +47,12 @@ public class Goomba extends Enemigo{
 	}
 	public void morir() {
 		
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

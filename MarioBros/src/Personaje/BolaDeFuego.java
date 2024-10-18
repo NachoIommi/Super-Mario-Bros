@@ -2,6 +2,7 @@ package Personaje;
 
 import Fabricas.Sprite;
 import Logica.Entidad;
+import Logica.Hitbox;
 import Logica.Visitor;
 
 public class BolaDeFuego extends Entidad{
@@ -9,6 +10,7 @@ public class BolaDeFuego extends Entidad{
 	protected Sprite sprite;
 	protected int x;
 	protected int y;
+	protected Hitbox hitb;
 	
 	public BolaDeFuego(Sprite sprite, int x, int y) {
 		this.x = x;
@@ -26,5 +28,11 @@ public class BolaDeFuego extends Entidad{
 
 	public Sprite getSprite() {
 		return sprite;
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

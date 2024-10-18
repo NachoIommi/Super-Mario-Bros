@@ -1,6 +1,7 @@
 package PowerUps;
 
 import Fabricas.Sprite;
+import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -9,6 +10,7 @@ public class ChampiVerde extends PowerUps{
 	protected int x;
 	protected int y;
 	protected Sprite sprite;
+	protected Hitbox hitb;
 	
 	public ChampiVerde(Sprite sprite, int x, int y) {
 		this.x = x;
@@ -42,5 +44,11 @@ public class ChampiVerde extends PowerUps{
 
 	public int getPosY() {
 		return y;
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

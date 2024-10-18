@@ -1,5 +1,6 @@
 package Plataformas;
 import Fabricas.Sprite;
+import Logica.Hitbox;
 import Logica.Visitor;
 
 public class Vacio extends Plataforma {
@@ -7,6 +8,7 @@ public class Vacio extends Plataforma {
 	protected Sprite sprite;
 	protected int x;
 	protected int y;
+	protected Hitbox hitb;
 	
 	public Vacio(Sprite sprite, int x,int y) {
 		this.x = x;
@@ -32,6 +34,12 @@ public class Vacio extends Plataforma {
 
 	public int getPosY() {
 		return y;
+	}
+
+	@Override
+	public Hitbox getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

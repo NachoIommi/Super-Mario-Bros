@@ -104,7 +104,7 @@ public class PantallaJuego extends JPanel {
         Personaje personaje = controladorVistas.obtenerPersonaje();
         if(personaje.getPosX() < 3350) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
-            System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
+            //System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
             refrescar();
         }
 
@@ -182,15 +182,15 @@ public class PantallaJuego extends JPanel {
     
     public void mostrarPlataformas() {
     	Plataforma plataforma;
-    	while(!controladorVistas.obtenerPlataforma().isEmpty()) {
-    		plataforma = controladorVistas.obtenerPlataforma().removeFirst();
+    	//while(!controladorVistas.obtenerPlataforma().isEmpty()) {
+    		plataforma = controladorVistas.obtenerPlataforma().getFirst();
     		plataforma.setVisible(true);
     		String ruta = plataforma.getSprite().getRutaImagen();
     		plataforma.setIcon(verificarExtension(ruta));
 	        plataforma.setBounds(plataforma.getPosX(), plataforma.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
             panelNivel.add(plataforma);
             refrescar();
-    	}
+    	//}
     }  
     
     public void mostrarPowerUps() {
@@ -207,18 +207,18 @@ public class PantallaJuego extends JPanel {
     }
     
     public ImageIcon verificarExtension(String ruta) {
-    	ImageIcon iconoEscalado;
-    	if(ruta.toLowerCase().endsWith(".gif")) {
-			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+        ImageIcon iconoEscalado;
+        if(ruta.toLowerCase().endsWith(".gif")) {
+            ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image gifImage = icono.getImage();
             Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(gifAgrandado);
-		}else{
-			ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-	        Image imagenEscalada = icono.getImage().getScaledInstance(100, 100, Image.SCALE_AREA_AVERAGING);
-	        iconoEscalado = new ImageIcon(imagenEscalada);
-		}
-    	return iconoEscalado;
+        }else{
+            ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+            Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            iconoEscalado = new ImageIcon(imagenEscalada);
+        }
+        return iconoEscalado;
     }
     
     public void refrescar() {
