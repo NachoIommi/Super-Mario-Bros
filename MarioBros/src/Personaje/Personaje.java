@@ -26,6 +26,7 @@ public class Personaje extends Entidad{
 	
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
 	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
@@ -39,20 +40,21 @@ public class Personaje extends Entidad{
         hitb = new Hitbox(x ,y,30 ,40);
         tocandoBloque=false;
         tocandoBloqueDerecha=false;
+        tocandoBloqueIzquierda=false;
     }
 	
 	public void moverPersonaje(){
 		   if (direccionDelPersonaje != 0 ) {
 			   switch(direccionDelPersonaje){
 			   	case(1):
-			   		if(posX < 3300&& tocandoBloqueDerecha==false) {
+			   		if(posX < 3300 && tocandoBloqueDerecha==false) {
 			   			posX += 10;
 			   			hitb.actualizar(posX, posY);
 			   		}		
 					break;
 					
 				case(3):
-					if(posX > min) { //El personaje solo llega al inicio de la pantalla
+					if(posX > min && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
 						posX = posX - 10;
 						hitb.actualizar(posX, posY);
 					}
@@ -70,8 +72,8 @@ public class Personaje extends Entidad{
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha=b;
 	}
-	public boolean tocandoBloque() {
-		return tocandoBloque;
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda=b;
 	}
 	
 	public Hitbox getHitbox() {
@@ -172,5 +174,10 @@ public class Personaje extends Entidad{
 	
 	public int getMin() {
 		return min;
+	}
+
+	public void setPosX(int x) {
+	    this.posX = x;
+	    hitb.actualizar(posX, posY);  // Actualizar la hitbox después de ajustar la posición
 	}
 }

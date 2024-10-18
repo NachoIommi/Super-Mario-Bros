@@ -19,26 +19,40 @@ public class HiloPersonaje extends Thread {
 	
 	public void run() {
 	    while (true) {
-	        try {             
-	            if (personaje.getHitbox().intersects(plataforma.getHitbox())) {            
-	                personaje.setTocandoBloque(b);
-	                if(personaje.getHitbox().getX()+personaje.getHitbox().getWidth()>=plataforma.getHitbox().getX()) {
-	                	System.out.println("Colision der Per Izq bloque");
-	                	personaje.setTocandoBloqueDerecha(b);
+	        try {
+	            
+	            if (personaje.getHitbox().intersects(plataforma.getHitbox())) { 	//COLISION JUGADOR BLOQUE
+	                personaje.setTocandoBloque(true);
+
+	                
+	                if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > plataforma.getHitbox().getX() &&	//COLISION LADO DERECHO JUGADOR IZQ BLOQUE
+	                    personaje.getHitbox().getX() < plataforma.getHitbox().getX()) {
+	                    personaje.setTocandoBloqueDerecha(true);
+	                    personaje.setTocandoBloqueIzquierda(false);
 	                }
+
 	                
+	                else if (personaje.getHitbox().getX() < plataforma.getHitbox().getX() + plataforma.getHitbox().getWidth() &&	//COLISION LADO IZQ JUGADOR DERECHO BLOQUE
+	                         personaje.getHitbox().getX() > plataforma.getHitbox().getX()) {
+	                    personaje.setTocandoBloqueIzquierda(true);
+	                    personaje.setTocandoBloqueDerecha(false);
+	                }
+
+	            } else {		//NO COLISION 
 	                
+	                personaje.setTocandoBloque(false);
+	                personaje.setTocandoBloqueDerecha(false);
+	                personaje.setTocandoBloqueIzquierda(false);
 	            }
-	                //System.out.println("Hitbox Personaje"+personaje.getHitbox().getX());
-	                //System.out.println("Hitbox bloque"+plataforma.getHitbox().getX());
-	            
+
+	           
 	            personaje.moverPersonaje();
-	            personaje.setTocandoBloqueDerecha(false);
-	            
-	            Thread.sleep(65);
+
+	            Thread.sleep(65); 
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
-	        }   
+	        }
 	    }
 	}
+
 }
