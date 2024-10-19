@@ -8,14 +8,15 @@ import Personaje.Personaje;
 public class Goomba extends Enemigo{
 	
 	protected Sprite sprite;
-	protected int x;
-	protected int y;
+	protected int posX;
+	protected int posY;
 	protected Hitbox hitb;
 
 	public Goomba(Sprite sprite,int x,int y) {
-		this.x = x;
-		this.y = y;
-		this.sprite = sprite;
+		posX = x;
+        posY = y;
+        this.sprite = sprite;
+        hitb = new Hitbox(x ,y,30 ,30);
 	}
 	
 	public Sprite getSprite() {
@@ -23,11 +24,11 @@ public class Goomba extends Enemigo{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 	
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 	
 	public void moverse() {
@@ -54,11 +55,9 @@ public class Goomba extends Enemigo{
 		
 	}
 
-	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    	return hitb;
+    }
 	
 }
 

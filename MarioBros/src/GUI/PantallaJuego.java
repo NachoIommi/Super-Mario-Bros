@@ -96,7 +96,7 @@ public class PantallaJuego extends JPanel {
         ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
         imagenFondo.setIcon(iconoEscalado);
         imagenFondo.setBounds(posicionInicialX, 0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
-        panelNivel.add(imagenFondo);
+        //panelNivel.add(imagenFondo);
     }
  
   
@@ -145,6 +145,11 @@ public class PantallaJuego extends JPanel {
                 	case(KeyEvent.VK_A):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(3);
                 		break;		
+                	case(KeyEvent.VK_W):
+                		controladorVistas.obtenerPersonaje().establecerDireccion(2); //o llamar a saltar
+                		//controladorVistas.obtenerPersonaje().saltar();
+                		
+                		break;
                 }
                 actualizarPosicionPersonaje();
         		actualizarFondo();

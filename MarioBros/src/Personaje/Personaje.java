@@ -1,6 +1,6 @@
 package Personaje;
 
-import Logica.Entidad; 
+import Logica.Entidad;
 import Logica.Hitbox;
 import Logica.Visitor;
 
@@ -27,8 +27,17 @@ public class Personaje extends Entidad{
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
 	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
+    protected boolean saltando;
 	
 	protected int velX;
+	protected int gravedad=1;
+	protected int velY;
+	protected int velSalto = -50;
+	
+	protected int tiempoSaltando=0;
+	protected final int maxTiempoSalto=20;
 	
 	
 	public Personaje(Sprite sprite, int x, int y) {
@@ -44,6 +53,10 @@ public class Personaje extends Entidad{
         tocandoBloque=false;
         tocandoBloqueDerecha=false;
         tocandoBloqueIzquierda=false;
+        tocandoBloqueAbajo=false;
+        tocandoBloqueArriba=false;
+        saltando=false;  
+        
     }
 	
 	//D 4
@@ -68,14 +81,55 @@ public class Personaje extends Entidad{
 						hitb.actualizar(posX, posY);
 					}
 					break;
+					
+				case(2):
+					if( tocandoBloqueAbajo) { //saltar
+						saltando=true;
+						velY = velSalto;
+						hitb.actualizar(posX, posY);
+					}
+					break;
+					
 				default: // Si la dirección es 0, no se mueve
 		            break;
 			   }
 		   }
-		   else
-			   velX=0;
+		   else //DIRECCION 0
+			   velX=0;	//REINICIO VELOCIDAD
+		   
+		   if (saltando) {
+		        posY= posY + velY; // Aplicar la velocidad vertical
+		        if(tiempoSaltando < maxTiempoSalto) {
+		        	velY+=1;
+		        	tiempoSaltando++;}
+		        else 
+		        	velY+=gravedad;
+		        
+		        if (tocandoBloqueAbajo) {// Si el personaje ha caído, detener el salto
+		            saltando = false; 
+		            velY = 0; 			// Reset
+		            tiempoSaltando=0;
+		        }}
+		   else 
+			   if (!tocandoBloqueAbajo) { //NO HAY BLOQUE ABAJO -> CAIDA LIBRE
+				   velY+=gravedad;					   
+				   posY = posY+ velY; // Actualizar la posición Y del personaje con la velocidad de caída
+		        	} 
+			   else 
+		        velY = 0; // Si toca un bloque debajo, detener la caída
+		    
+		    
+		    // Actualizar la hitbox del personaje
+		    hitb.actualizar(posX, posY);
 		   
 	   }
+
+	public boolean isJumping() {
+		return saltando;
+	}
+	public void setJumping(boolean b){
+		saltando=b;
+	}
 	public int getVelX() {
 		return velX;
 	}
@@ -89,7 +143,12 @@ public class Personaje extends Entidad{
 	public void setTocandoBloqueIzquierda(boolean b) {
 		tocandoBloqueIzquierda=b;
 	}
-	
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
+	}
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
+	}
 	public Hitbox getHitbox() {
     	return hitb;
     }
@@ -99,7 +158,11 @@ public class Personaje extends Entidad{
     }
 
     public void saltar() {
-        this.estado.saltar();
+        if (tocandoBloqueAbajo) { // Solo saltar si está tocando el suelo
+        	saltando=true;
+        	velY = velSalto;
+        	tiempoSaltando=0;
+        }
     }
 
     public void morir() {
@@ -125,7 +188,6 @@ public class Personaje extends Entidad{
     public void aceptarVisita(Visitor v) {
         //v.visitarPersonaje(this);
     }
-
 
     public int getVidas(){
         return this.vidas;
