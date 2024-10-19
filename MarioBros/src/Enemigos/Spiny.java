@@ -43,9 +43,13 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		
+		p.setPuntuacion(-30);
+		p.morir();
 	}
-	
+	public void serAfectadoPorPersonaje(Personaje p) {
+		p.setPuntuacion(60);
+		morir();
+	}
 	public void morir() {
 		
 	}

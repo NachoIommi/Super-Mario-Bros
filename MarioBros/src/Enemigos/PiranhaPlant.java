@@ -45,7 +45,12 @@ public class PiranhaPlant extends Enemigo{
 		
 	}
 	public void afectarPersonaje(Personaje p) {
-		
+		p.setPuntuacion(-30);
+		p.morir();
+	}
+	public void serAfectadoPorPersonaje(Personaje p) {
+		p.setPuntuacion(30);
+		morir();
 	}
 	public void morir() {
 		

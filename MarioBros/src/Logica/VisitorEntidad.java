@@ -1,21 +1,14 @@
 package Logica;
 
-
 import Enemigos.*; 
-import Fabricas.Sprite;
+import Fabricas.*;
 import Personaje.*;
 import Plataformas.*;
 import PowerUps.*;
 
-public class CollisionVisitor implements Visitor {
+public class VisitorEntidad implements Visitor{
 	protected Personaje personaje;
-    public void visitarPersonaje(Personaje p) {
-    	
-    }
-    public void visitarPowerUp(PowerUps p) {
-    	
-    }
-    public void visitarBolaDeFuego(BolaDeFuego b) {
+public void visitarBolaDeFuego(BolaDeFuego b) {
     	
     } // ???????
     public void visitarMoneda(Moneda m) {
@@ -46,27 +39,26 @@ public class CollisionVisitor implements Visitor {
     	
     }
     public void visitarPiranhaPlant(PiranhaPlant p) {
-    	p.afectarPersonaje(personaje);
+    	
     }
     public void visitarLakitu(Lakitu l) {
-    	l.afectarPersonaje(personaje);
+    	
     }
     public void visitarSpiny(Spiny s) {
-    	s.afectarPersonaje(personaje);
+    	
     }
     public void visitarBuzzyBeetle(BuzzyBeetle b) {
-    	b.afectarPersonaje(personaje);
+    	
     }
     public void visitarGoomba(Goomba g) {
-    	//g.afectarPersonaje(personaje, estaChocado);
+    	
     }
     public void visitarKoopaTroopa(KoopaTroopa k) {
-    	k.afectarPersonaje(personaje);
+    	
     }
     public void visitarSprite(Sprite s) {
     	
     }
-    
 	public void visitarMusica(Musica m) {
 		
 	}
@@ -76,5 +68,4 @@ public class CollisionVisitor implements Visitor {
 	public void visitarAnimador(Animador a) {
 		
 	}
-
 }

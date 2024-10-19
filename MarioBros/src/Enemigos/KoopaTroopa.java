@@ -43,14 +43,19 @@ public class KoopaTroopa extends Enemigo{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarKoopaTroopa(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
 	public void afectarPersonaje(Personaje p) {
-		
+		p.setPuntuacion(-45);
+		p.morir();
+	}
+	public void serAfectadoPorPersonaje(Personaje p) {
+		p.setPuntuacion(90);
+		morir();
 	}
 	public void morir() {
 		

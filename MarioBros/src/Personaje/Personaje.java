@@ -1,6 +1,6 @@
 package Personaje;
 
-import Logica.Entidad;
+import Logica.Entidad; 
 import Logica.Hitbox;
 import Logica.Visitor;
 
@@ -123,7 +123,7 @@ public class Personaje extends Entidad{
     }
 
     public void aceptarVisita(Visitor v) {
-        v.visitarPersonaje(this);
+        //v.visitarPersonaje(this);
     }
 
 

@@ -35,16 +35,20 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarBuzzyBeetle(this);
 	}
 	
 	public void cargarSprite(Sprite s) {
 		
 	}
 	public void afectarPersonaje(Personaje p) {
-		
+		p.setPuntuacion(-15);
+		p.morir();
 	}
-	
+	public void serAfectadoPorPersonaje(Personaje p) {
+		p.setPuntuacion(30);
+		morir();
+	}
 	public void morir() {
 		
 	}

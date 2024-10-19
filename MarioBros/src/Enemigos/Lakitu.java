@@ -42,9 +42,12 @@ public class Lakitu extends Enemigo{
 		
 	}
 	public void afectarPersonaje(Personaje p) {
-		
+		p.morir();
 	}
-	
+	public void serAfectadoPorPersonaje(Personaje p) {
+		p.setPuntuacion(60);
+		morir();
+	}
 	public void morir() {
 		
 	}
