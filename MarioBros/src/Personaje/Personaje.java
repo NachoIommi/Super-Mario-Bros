@@ -61,6 +61,7 @@ public class Personaje extends Entidad{
 	
 	//D 4
 	
+
 	public void moverPersonaje(){
 		   if (direccionDelPersonaje != 0) {
 			   switch(direccionDelPersonaje){
@@ -82,34 +83,28 @@ public class Personaje extends Entidad{
 					}
 					break;
 					
-				case(2):
-					if( tocandoBloqueAbajo) { //saltar
-						saltando=true;
-						velY = velSalto;
-						hitb.actualizar(posX, posY);
-					}
-					break;
-					
+				
 				default: // Si la dirección es 0, no se mueve
 		            break;
 			   }
 		   }
+		   
 		   else //DIRECCION 0
 			   velX=0;	//REINICIO VELOCIDAD
 		   
 		   if (saltando) {
-		        posY= posY + velY; // Aplicar la velocidad vertical
-		        if(tiempoSaltando < maxTiempoSalto) {
-		        	velY+=1;
-		        	tiempoSaltando++;}
-		        else 
-		        	velY+=gravedad;
-		        
-		        if (tocandoBloqueAbajo) {// Si el personaje ha caído, detener el salto
-		            saltando = false; 
-		            velY = 0; 			// Reset
-		            tiempoSaltando=0;
-		        }}
+			    // Aplicar la gravedad y la velocidad inicial
+			   
+			    velY += gravedad;
+			    if(!tocandoBloqueArriba)
+			    	posY += velY;
+
+			    // Verificar si el personaje ha tocado el suelo
+			    if (tocandoBloqueAbajo==true) {
+			        saltando = false;
+			        velY = 0;
+			    }
+			}
 		   else 
 			   if (!tocandoBloqueAbajo) { //NO HAY BLOQUE ABAJO -> CAIDA LIBRE
 				   velY+=gravedad;					   
@@ -123,6 +118,15 @@ public class Personaje extends Entidad{
 		    hitb.actualizar(posX, posY);
 		   
 	   }
+	
+	public void saltar() {
+        //if (tocandoBloqueAbajo) { // Solo saltar si está tocando el suelo
+        	saltando=true;
+        	velY = velSalto;
+        	tiempoSaltando=0;
+        //}
+    }
+
 
 	public boolean isJumping() {
 		return saltando;
@@ -157,14 +161,7 @@ public class Personaje extends Entidad{
         estado.correr();
     }
 
-    public void saltar() {
-        if (tocandoBloqueAbajo) { // Solo saltar si está tocando el suelo
-        	saltando=true;
-        	velY = velSalto;
-        	tiempoSaltando=0;
-        }
-    }
-
+    
     public void morir() {
         this.estado.morir();
         this.vidas -= 1;
