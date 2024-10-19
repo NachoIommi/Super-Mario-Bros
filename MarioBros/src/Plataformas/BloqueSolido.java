@@ -42,9 +42,7 @@ public class BloqueSolido extends Plataforma{
 		return y;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
 		return hitb;
 	}
 	

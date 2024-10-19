@@ -16,6 +16,7 @@ public class Estrella extends PowerUps{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+		hitb = new Hitbox(x ,y,30 ,30);
 	}
 	
 	public void moverse() {
@@ -46,10 +47,8 @@ public class Estrella extends PowerUps{
 		return y;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 	
 }

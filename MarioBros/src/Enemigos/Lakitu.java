@@ -16,6 +16,7 @@ public class Lakitu extends Enemigo{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+		hitb = new Hitbox(x ,y,30 ,30);
 	}
 	
 	public Sprite getSprite() {
@@ -54,8 +55,7 @@ public class Lakitu extends Enemigo{
 
 	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 
 }

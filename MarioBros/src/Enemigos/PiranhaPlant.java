@@ -17,6 +17,7 @@ public class PiranhaPlant extends Enemigo{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+		hitb = new Hitbox(x ,y,30 ,30);
 	}
 	
 	public EstadosDePiranhaPlant getEstadoActual() {
@@ -61,7 +62,6 @@ public class PiranhaPlant extends Enemigo{
 
 	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 }

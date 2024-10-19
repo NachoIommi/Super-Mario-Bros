@@ -14,6 +14,7 @@ public class Vacio extends Plataforma {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+		hitb = new Hitbox(x ,y,30 ,30);
 	}
 
 	public void aceptarVisita(Visitor v) {
@@ -38,8 +39,7 @@ public class Vacio extends Plataforma {
 
 	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 
 }

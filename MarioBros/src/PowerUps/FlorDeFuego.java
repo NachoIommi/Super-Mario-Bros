@@ -16,6 +16,7 @@ public class FlorDeFuego extends PowerUps{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
+		hitb = new Hitbox(x ,y,30 ,30);
 	}
 	
 	public void moverse() {
@@ -50,7 +51,6 @@ public class FlorDeFuego extends PowerUps{
 
 	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 }
