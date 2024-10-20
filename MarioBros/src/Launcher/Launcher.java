@@ -20,7 +20,7 @@ public class Launcher {
                     ControladorVistas controladorVistas = new ControladorVistas(juego,ranking);
                     juego.setControladorVistas(controladorVistas);
                     controladorVistas.ventana.setVisible(true);
-                    controladorVistas.mostrarPantallaPrincipal();
+                    controladorVistas.mostrarPantallaJuego();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

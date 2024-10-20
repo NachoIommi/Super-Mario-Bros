@@ -146,8 +146,8 @@ public class PantallaJuego extends JPanel {
                 		controladorVistas.obtenerPersonaje().establecerDireccion(3);
                 		break;		
                 	case(KeyEvent.VK_W):
-                		//controladorVistas.obtenerPersonaje().establecerDireccion(2); //o llamar a saltar
-                		controladorVistas.obtenerPersonaje().saltar();	
+                		controladorVistas.obtenerPersonaje().establecerDireccion(2); //o llamar a saltar
+                		//controladorVistas.obtenerPersonaje().saltar();	
                 		break;
                 }
                 actualizarPosicionPersonaje();

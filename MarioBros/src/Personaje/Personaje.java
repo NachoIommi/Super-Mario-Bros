@@ -14,6 +14,7 @@ import Fabricas.*;
 public class Personaje extends Entidad{
 	
 	private EstadoDePersonaje estado;
+	
 	protected Sprite sprite;
 	protected int vidas;
 	protected int monedas;
@@ -40,11 +41,13 @@ public class Personaje extends Entidad{
 	protected final int maxTiempoSalto=20;
 	
 	
+	
+	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;   
-        estado = new EstadoNormal(this); 
+        //estado = new EstadoNormal(this); 
         direccionDelPersonaje = 0; // direccion 0 -> Quieto
         posX = x;
         posY = y;
@@ -63,25 +66,31 @@ public class Personaje extends Entidad{
 	
 
 	public void moverPersonaje(){
-		   if (direccionDelPersonaje != 0) {
+		if (direccionDelPersonaje != 0) {
 			   switch(direccionDelPersonaje){
-			   	case(1):
-			   		if(posX < 3300 && tocandoBloqueDerecha==false) {
-			   			if(velX<11)
-			   				velX=velX+1;
-			   			posX = posX+ velX;
-			   			hitb.actualizar(posX, posY);
-			   		}		
-					break;
-					
-				case(3):
-					if(posX > min && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
-						if (velX<11)
-							velX=velX+1;
-						posX = posX - velX;
-						hitb.actualizar(posX, posY);
-					}
-					break;
+				   	case(1):
+				   		if(posX < 3300 && tocandoBloqueDerecha==false) {
+				   			if(velX<11)
+				   				velX=velX+1;
+				   			posX = posX+ velX;
+				   			hitb.actualizar(posX, posY);}		
+						break;
+						
+					case(3):
+						if(posX > min && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
+							if (velX<11)
+								velX=velX+1;
+							posX = posX - velX;
+							hitb.actualizar(posX, posY);}
+						break;
+						
+					case (2): // Saltar
+		                if (tocandoBloqueAbajo && !saltando) { // Solo si está en el suelo
+		                    saltando = true;
+		                    velY = velSalto;  // Aplicar la velocidad de salto
+		                    tiempoSaltando = 0;  // Reiniciar tiempo de salto
+		                }
+		                break;
 					
 				
 				default: // Si la dirección es 0, no se mueve
@@ -95,23 +104,23 @@ public class Personaje extends Entidad{
 		   if (saltando) {
 			    // Aplicar la gravedad y la velocidad inicial
 			   
-			    velY += gravedad;
+			    velY = velY + gravedad;
 			    if(!tocandoBloqueArriba)
-			    	posY += velY;
+			    	posY = posY + velY;
 
-			    // Verificar si el personaje ha tocado el suelo
-			    if (tocandoBloqueAbajo==true) {
+			   
+			    if (tocandoBloqueAbajo==true) { // Verificar si el personaje ha tocado el suelo
 			        saltando = false;
 			        velY = 0;
 			    }
 			}
 		   else 
 			   if (!tocandoBloqueAbajo) { //NO HAY BLOQUE ABAJO -> CAIDA LIBRE
-				   velY+=gravedad;					   
+				   velY=velY+gravedad;					   
 				   posY = posY+ velY; // Actualizar la posición Y del personaje con la velocidad de caída
 		        	} 
 			   else 
-		        velY = 0; // Si toca un bloque debajo, detener la caída
+				   velY = 0; // Si toca un bloque debajo, detener la caída
 		    
 		    
 		    // Actualizar la hitbox del personaje
@@ -120,11 +129,12 @@ public class Personaje extends Entidad{
 	   }
 	
 	public void saltar() {
-        //if (tocandoBloqueAbajo) { // Solo saltar si está tocando el suelo
+        if (tocandoBloqueAbajo && !saltando) { // Solo saltar si está tocando el suelo
         	saltando=true;
         	velY = velSalto;
         	tiempoSaltando=0;
-        //}
+        	System.out.println("Saltando");
+        }
     }
 
 

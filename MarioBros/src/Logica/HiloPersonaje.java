@@ -85,7 +85,6 @@ public class HiloPersonaje extends Thread {
                 personaje.setTocandoBloqueIzquierda(false);
                 personaje.setTocandoBloqueAbajo(false);
                 personaje.setTocandoBloqueArriba(false);
-                System.out.println("X = "+personaje.getPosX());
 
                 Thread.sleep(50);
             } catch (InterruptedException e) {
