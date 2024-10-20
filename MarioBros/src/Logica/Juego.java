@@ -103,5 +103,8 @@ public class Juego {
 	public List<PowerUps> getPowerUp() {
 		return powerUps;
 	}
+	public HiloPersonaje getHiloPersonaje() {
+		return hilo;
+	}
 	
 }

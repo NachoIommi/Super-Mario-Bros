@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import Logica.Jugador;
 import Logica.Ranking;
 
 public class PantallaPrincipal extends JPanel{
@@ -55,40 +56,43 @@ public class PantallaPrincipal extends JPanel{
 		registrarOyenteBotonNombre();
 		this.add(botonIngresarNombre);
 	}
-	
 	public void agregarNombre() {
-		ingresarNombre = new JTextField();
-		ingresarNombre.setText("Ingrese su Nombre");
-		ingresarNombre.setBounds(250, 350, 300, 20);
-		ingresarNombre.setBorder(null);
-		ingresarNombre.setBackground(Color.black);
-		this.add(ingresarNombre);
+	    ingresarNombre = new JTextField();
+	    ingresarNombre.setBounds(250, 350, 300, 20);
+	    ingresarNombre.setBorder(null);
+	    ingresarNombre.setBackground(Color.decode("#87CEEB"));
+
+	    // Agregar ActionListener para detectar cuando se presiona "Enter"
+	    ingresarNombre.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            // Verificar que el nombre no esté vacío antes de cambiar de pantalla
+	            if (!ingresarNombre.getText().trim().isEmpty()) {
+	                controladorVistas.guardarJugadorEnRanking(new Jugador(ingresarNombre.getText(), 0));  // Guardar el nombre
+	                controladorVistas.mostrarPantallaJuego();  // Cambiar a la pantalla de juego
+	            }
+	        }
+	    });
+
+	    this.add(ingresarNombre);
+	}
+	public void guardarJugadorEnRanking(Jugador j) {
+	    ranking.addJugador(j);
+	    controladorVistas.cierreDeJuego(); // Asegúrate de que el ranking se guarde en el archivo
 	}
 	
 	public void registrarOyenteBotonNombre() {
-		botonIngresarNombre.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				controladorVistas.juego.getMundo().cargarPrimerNivel();
-				}
-		});
+	    botonIngresarNombre.addActionListener(new ActionListener(){
+	        public void actionPerformed(ActionEvent e) {
+	            String nombreJugador = ingresarNombre.getText();
+	            Jugador j = new Jugador(nombreJugador,0);
+	            controladorVistas.guardarJugadorEnRanking(j); // Puntaje inicial 0
+	            controladorVistas.mostrarPantallaJuego(); // Cambiar a la pantalla de juego
+	        }
+	    });   
 	}
 	
 	public void agregarModosDeJuego() {
 		
 	}
-	public void mostrarRanking() {
-        // Aquí muestras el ranking. Puedes usar JLabel para mostrar el texto.
-        JLabel labelRanking = new JLabel("Ranking:");
-        labelRanking.setBounds(50, 50, 200, 30);  // Ajusta las coordenadas según el diseño
-        add(labelRanking);
-        
-        // Supongamos que ranking tiene un método para obtener los puntajes como lista de cadenas
-        int yOffset = 80;
-        for (String puntaje : ranking.getPuntajes()) {
-            JLabel labelPuntaje = new JLabel(puntaje);
-            labelPuntaje.setBounds(50, yOffset, 200, 30);
-            add(labelPuntaje);
-            yOffset += 30;  // Desplazar hacia abajo para cada puntaje
-        }
-    }
 }

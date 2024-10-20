@@ -2,26 +2,32 @@ package Logica;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Ranking implements Serializable{
 
-	protected List<String> jugadores;
-	protected List<String> puntajes;
+	protected List<Jugador> jugadores;
 	
 	public Ranking() {
-		jugadores = new ArrayList<String>();
-		puntajes = new ArrayList<String>();
+		jugadores = new ArrayList<Jugador>();
 	}
-	public void addPuntaje(String jugador, String puntaje) {
-		jugadores.add(jugador);
-		puntajes.add(puntaje);
+	public void addJugador(Jugador j) {
+		jugadores.add(j);
 	}
-	public List<String> getJugadores(){
+	public void imprimirJugadores() {
+		Collections.sort(this.jugadores, Collections.reverseOrder());
+		System.out.println("\n Mejores Jugadores");
+		int i = 0;
+		for(Jugador j : this.jugadores) {
+			System.out.println(j.getJugador() + " " + j.getPuntaje());
+			if(i == 5)
+				break;
+			i++;
+		}
+	}
+	public List<Jugador> getJugadores(){
 		return jugadores;
-	}
-	public List<String> getPuntajes(){
-		return puntajes;
 	}
 		
 }
