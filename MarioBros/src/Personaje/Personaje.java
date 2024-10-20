@@ -47,7 +47,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;   
-        //estado = new EstadoNormal(this); 
+        estado = new EstadoNormal(this); 
         direccionDelPersonaje = 0; // direccion 0 -> Quieto
         posX = x;
         posY = y;
@@ -66,12 +66,15 @@ public class Personaje extends Entidad{
 	
 
 	public void moverPersonaje(){
+		
+		int factorVelocidad = estado.getFactorVelocidad(); //en estado estrella mueve mas rapido, en el resto es = 1
+		
 		if (direccionDelPersonaje != 0) {
 			   switch(direccionDelPersonaje){
 				   	case(1):
 				   		if(posX < 3300 && tocandoBloqueDerecha==false) {
 				   			if(velX<11)
-				   				velX=velX+1;
+				   				velX=(velX+1 * factorVelocidad);
 				   			posX = posX+ velX;
 				   			hitb.actualizar(posX, posY);}		
 						break;
@@ -79,7 +82,7 @@ public class Personaje extends Entidad{
 					case(3):
 						if(posX > min && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
 							if (velX<11)
-								velX=velX+1;
+								velX=(velX+1* factorVelocidad);
 							posX = posX - velX;
 							hitb.actualizar(posX, posY);}
 						break;
@@ -178,6 +181,10 @@ public class Personaje extends Entidad{
         if (this.vidas == 0) {
         	System.out.println("Game Over");
         }
+    }
+    
+    public void recibirDano() {
+    	estado.recibirDano();
     }
 
     public void sumarVida() {

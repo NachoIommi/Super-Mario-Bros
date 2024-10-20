@@ -2,13 +2,13 @@ package Personaje;
 
 import Logica.Visitor;
 
-public class EstadoSuperMario implements EstadoDePersonaje {
+public class EstadoSuperMario extends EstadoDePersonaje {
 	
-	private Personaje personaje;
+	protected Personaje personaje;
 	
-    public EstadoSuperMario(Personaje personaje) {
-      
-    }
+	public EstadoSuperMario(Personaje personaje) {
+		super(personaje);
+	}
 
     public void correr() {
       
@@ -20,6 +20,10 @@ public class EstadoSuperMario implements EstadoDePersonaje {
 
     public void morir() {
     	
+    }
+    
+    public void recibirDano() {
+    	personaje.cambiarEstado(new EstadoNormal(personaje));
     }
 
     public void aceptarVisita(Visitor v) {
@@ -51,6 +55,10 @@ public class EstadoSuperMario implements EstadoDePersonaje {
 	}
 	public void setPuntuacionSuperChampi() {
 		personaje.setPuntuacion(50);
+	}
+	
+	public int getFactorVelocidad() {
+		return 1;
 	}
 	
 }

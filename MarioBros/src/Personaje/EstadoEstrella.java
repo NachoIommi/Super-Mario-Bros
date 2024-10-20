@@ -2,13 +2,13 @@ package Personaje;
 
 import Logica.Visitor;
 
-public class EstadoEstrella implements EstadoDePersonaje {
+public class EstadoEstrella extends EstadoDePersonaje {
 	
-	private Personaje personaje;
+	protected Personaje personaje;
 	
-    public EstadoEstrella() {
-     
-    }
+	public EstadoEstrella(Personaje personaje) {
+		super(personaje);
+	}
 
     public void correr() {
      
@@ -20,6 +20,10 @@ public class EstadoEstrella implements EstadoDePersonaje {
 
     public void morir() {
        
+    }
+    
+    public void recibirDano() {
+    	//No va a recibir danio nunca en este estado, solo de vacio
     }
 
     public void aceptarVisita(Visitor visitor) {
@@ -43,34 +47,31 @@ public class EstadoEstrella implements EstadoDePersonaje {
 
 	}
 
-	@Override
+	
 	public void setPuntuacion(int n) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
+
+	
 	public void setPuntuacionChampiVerde() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
+	
 	public void setPuntuacionEstrella() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setPuntuacionFlorDeFuego() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setPuntuacionSuperChampi() {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public int getFactorVelocidad() {
+		return 4;
 	}
     
 }

@@ -19,6 +19,10 @@ public class EstadoDeFuego extends EstadoSuperMario {
     public void morir() {
     	
     }
+    
+    public void recibirDano() {
+    	super.personaje.cambiarEstado(new EstadoSuperMario(super.personaje));
+    }
 
     public void aceptarVisita(Visitor v) {
     

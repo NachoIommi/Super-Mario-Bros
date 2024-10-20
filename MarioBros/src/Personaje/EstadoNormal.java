@@ -2,13 +2,14 @@ package Personaje;
 
 import Logica.Visitor;
 
-public class EstadoNormal implements EstadoDePersonaje {
+public class EstadoNormal extends EstadoDePersonaje {
 	
-	private Personaje personaje;
+	protected Personaje personaje;
 	
-    public EstadoNormal(Personaje personaje) {
-    	this.personaje = personaje;
-    }
+	public EstadoNormal(Personaje personaje) {
+		super(personaje);
+	}
+	
 
     public void correr() {
         
@@ -19,9 +20,14 @@ public class EstadoNormal implements EstadoDePersonaje {
     }
 
     public void morir() {
-    	
+    	personaje.setVidas(personaje.getVidas()-1);
+    	//personaje.cargarSprite("spritesOriginales\marioNormalMuerto.png"); 
     }
-
+    
+    public void recibirDano() {
+		personaje.morir();
+	}
+    
     public void aceptarVisita(Visitor v) {
     }
 
@@ -37,24 +43,26 @@ public class EstadoNormal implements EstadoDePersonaje {
 		personaje.setPuntuacion(n);
 	}
 
-	@Override
 	public void setPuntuacionChampiVerde() {
 		personaje.setPuntuacion(100);
 	}
 
-	@Override
 	public void setPuntuacionEstrella() {
 		personaje.setPuntuacion(20);
 	}
-
-	@Override
+
 	public void setPuntuacionFlorDeFuego() {
 		personaje.setPuntuacion(5);
 	}
-
-	@Override
+
 	public void setPuntuacionSuperChampi() {
 		personaje.setPuntuacion(10);
 	}
+
+
+	public int getFactorVelocidad() {
+		return 1;
+	}
+	
  
 }
