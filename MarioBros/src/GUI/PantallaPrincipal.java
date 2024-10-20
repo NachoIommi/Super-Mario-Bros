@@ -1,16 +1,11 @@
 package GUI;
 
-import java.awt.Color; 
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+
+import Logica.Ranking;
 
 public class PantallaPrincipal extends JPanel{
 	
@@ -18,12 +13,13 @@ public class PantallaPrincipal extends JPanel{
 	protected JLabel imagenInicio;
 	protected JTextField ingresarNombre;
 	protected JButton botonIngresarNombre;
-	
+	protected Ranking ranking;
 	/*
 	 * Creo el panel
 	 */
-	public PantallaPrincipal(ControladorVistas controladorVistas) {
+	public PantallaPrincipal(ControladorVistas controladorVistas, Ranking ranking) {
 		this.controladorVistas = controladorVistas;
+		this.ranking = ranking;
 		this.setSize(800,600);
 		this.setLayout(null);
 		this.setVisible(true);
@@ -80,7 +76,19 @@ public class PantallaPrincipal extends JPanel{
 	public void agregarModosDeJuego() {
 		
 	}
-	
-	
+	public void mostrarRanking() {
+        // Aquí muestras el ranking. Puedes usar JLabel para mostrar el texto.
+        JLabel labelRanking = new JLabel("Ranking:");
+        labelRanking.setBounds(50, 50, 200, 30);  // Ajusta las coordenadas según el diseño
+        add(labelRanking);
+        
+        // Supongamos que ranking tiene un método para obtener los puntajes como lista de cadenas
+        int yOffset = 80;
+        for (String puntaje : ranking.getPuntajes()) {
+            JLabel labelPuntaje = new JLabel(puntaje);
+            labelPuntaje.setBounds(50, yOffset, 200, 30);
+            add(labelPuntaje);
+            yOffset += 30;  // Desplazar hacia abajo para cada puntaje
+        }
+    }
 }
-	

@@ -1,12 +1,10 @@
 package GUI;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.swing.JFrame;
 import Enemigos.Enemigo;
-import Logica.Entidad;
-import Logica.Juego;
-import Logica.Nivel;
+import Logica.*;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -18,12 +16,14 @@ public class ControladorVistas {
 	protected PantallaJuego pantallaJuego;
 	protected PantallaPerder pantallaPerder;
 	protected Juego juego;
+	protected Ranking ranking;
 	
 	
-	public ControladorVistas(Juego juego) {
+	public ControladorVistas(Juego juego, Ranking ranking) {
 		this.juego = juego;
+		this.ranking = ranking;
 		iniciar();
-		pantallaPrincipal = new PantallaPrincipal(this);
+		pantallaPrincipal = new PantallaPrincipal(this,ranking);
 		pantallaJuego = new PantallaJuego(this);
 		pantallaPerder = new PantallaPerder(this);
 	}
