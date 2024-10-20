@@ -1,6 +1,8 @@
 package Personaje;
 
 import Logica.Visitor;
+import Plataformas.BloqueGolpeable;
+import Plataformas.LadrilloSolido;
 
 public class EstadoEstrella extends EstadoDePersonaje {
 	
@@ -49,7 +51,8 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	
 	public void setPuntuacion(int n) {
-
+		
+	}
 
 	
 	public void setPuntuacionChampiVerde() {
@@ -72,6 +75,24 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public int getFactorVelocidad() {
 		return 4;
+	}
+
+	@Override
+	public void romperBloque(LadrilloSolido l) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moverLadrilloSolido(LadrilloSolido l) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moverBloqueGolpeable(BloqueGolpeable b) {
+		// TODO Auto-generated method stub
+		
 	}
     
 }

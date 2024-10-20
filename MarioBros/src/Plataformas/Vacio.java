@@ -2,6 +2,8 @@ package Plataformas;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
+import Logica.VisitorEntidad;
+import Personaje.Personaje;
 
 public class Vacio extends Plataforma {
 	
@@ -18,13 +20,16 @@ public class Vacio extends Plataforma {
 	}
 
 	public void aceptarVisita(Visitor v) {
-		
+		v.visitarVacio(this);
 	}
-
+	public void afectarPersonaje(Personaje p) {
+		p.morir();
+		p.setPuntuacion(-15);
+	}
 	public void cargarSprite(Sprite s) {
 		
 	}
-
+	
 	public Sprite getSprite() {
 		return sprite;
 	}

@@ -1,6 +1,8 @@
 package Personaje;
 
 import Logica.Visitor;
+import Plataformas.BloqueGolpeable;
+import Plataformas.LadrilloSolido;
 
 public class EstadoNormal extends EstadoDePersonaje {
 	
@@ -62,6 +64,24 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	public int getFactorVelocidad() {
 		return 1;
+	}
+
+
+	public void romperBloque(LadrilloSolido l) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void moverLadrilloSolido(LadrilloSolido l) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void moverBloqueGolpeable(BloqueGolpeable b) {
+		// TODO Auto-generated method stub
+		
 	}
 	
  

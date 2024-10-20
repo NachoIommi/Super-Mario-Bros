@@ -8,9 +8,9 @@ import PowerUps.*;
 
 public class VisitorEntidad implements Visitor{
 	protected Personaje personaje;
-public void visitarBolaDeFuego(BolaDeFuego b) {
+	public void visitarBolaDeFuego(BolaDeFuego b) {
     	
-    } // ???????
+    } 
     public void visitarMoneda(Moneda m) {
     	m.afectarPersonaje(personaje);
     }
@@ -33,28 +33,28 @@ public void visitarBolaDeFuego(BolaDeFuego b) {
     	
     }
     public void visitarVacio(Vacio v) {
-    	
+    	v.afectarPersonaje(personaje);
     }
     public void visitarTuberia(Tuberia t) {
     	
     }
     public void visitarPiranhaPlant(PiranhaPlant p) {
-    	
+    	p.moverse();
     }
     public void visitarLakitu(Lakitu l) {
-    	
+    	l.moverse();
     }
     public void visitarSpiny(Spiny s) {
-    	
+    	s.moverse();
     }
     public void visitarBuzzyBeetle(BuzzyBeetle b) {
-    	
+    	b.moverse();
     }
     public void visitarGoomba(Goomba g) {
-    	
+    	g.moverse();
     }
     public void visitarKoopaTroopa(KoopaTroopa k) {
-    	
+    	k.moverse();
     }
     public void visitarSprite(Sprite s) {
     	

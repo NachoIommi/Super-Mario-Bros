@@ -60,7 +60,7 @@ public class ControladorVistas {
 	
 	public void mostrarPantallaJuego() {
 	   ventana.setContentPane(pantallaJuego);
-	    ventana.revalidate();
+	   ventana.revalidate();
 	    pantallaJuego.requestFocus();
 	    
 	    // Iniciar el hilo del personaje
@@ -94,13 +94,12 @@ public class ControladorVistas {
 	    cierreDeJuego(); // Asegúrate de que el ranking se guarde en el archivo
 	    System.out.println("Ranking actualizado:");
 	    for (Jugador jugador : ranking.getJugadores()) { // Asegúrate de tener un método para obtener la lista de jugadores
-	        System.out.println("Nombre: " + jugador.getJugador() + ", Puntaje: " + jugador.getPuntaje());
+	        System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
 	    }
 	}
 	public void cierreDeJuego() {
 	    try (FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/juans/git/p-comision-16/MarioBros/resources/score.tdp");
 	         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
-	        
 	        objectOutputStream.writeObject(this.ranking);
 	        System.out.println("Ranking guardado correctamente.");
 	    } catch (IOException e) {

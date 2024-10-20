@@ -1,5 +1,6 @@
 package Plataformas;
 import Logica.*;
+import Personaje.Personaje;
 import Enemigos.*;
 import Fabricas.Sprite;
 
@@ -63,5 +64,7 @@ public class Tuberia extends Plataforma{
 	public Hitbox getHitbox() {
 		return hitb;
 	}
-
+	public void afectarPersonaje(Personaje p) {
+		
+	}
 }

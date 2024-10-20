@@ -3,14 +3,14 @@ package Logica;
 import java.io.Serializable;
 
 public class Jugador implements Comparable<Jugador>, Serializable{
-	private String jugador;
+	private String nombre;
 	private Integer puntaje;
 	public Jugador(String nombre, Integer puntos) {
-		this.jugador = nombre;
+		this.nombre = nombre;
 		this.puntaje = puntos;
 	}
-	public String getJugador() {
-		return this.jugador;
+	public String getNombre() {
+		return this.nombre;
 	}
 	public Integer getPuntaje() {
 		return this.puntaje;

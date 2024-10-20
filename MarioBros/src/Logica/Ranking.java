@@ -20,7 +20,7 @@ public class Ranking implements Serializable{
 		System.out.println("\n Mejores Jugadores");
 		int i = 0;
 		for(Jugador j : this.jugadores) {
-			System.out.println(j.getJugador() + " " + j.getPuntaje());
+			System.out.println(j.getNombre() + " " + j.getPuntaje());
 			if(i == 5)
 				break;
 			i++;

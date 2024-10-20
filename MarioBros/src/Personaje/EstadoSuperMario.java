@@ -1,6 +1,8 @@
 package Personaje;
 
 import Logica.Visitor;
+import Plataformas.BloqueGolpeable;
+import Plataformas.LadrilloSolido;
 
 public class EstadoSuperMario extends EstadoDePersonaje {
 	
@@ -59,6 +61,16 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 	public int getFactorVelocidad() {
 		return 1;
+	}
+	public void romperBloque(LadrilloSolido l) {
+		//l.cargarSprite(null);
+		//l. tiene que haber un metodo que lo setee nulo al ladrillo
+	}
+	public void moverLadrilloSolido(LadrilloSolido l) {
+		
+	}
+	public void moverBloqueGolpeable(BloqueGolpeable b) {
+		
 	}
 	
 }

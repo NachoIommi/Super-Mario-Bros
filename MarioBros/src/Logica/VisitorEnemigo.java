@@ -12,7 +12,7 @@ public class VisitorEnemigo implements Visitor {
    
     public void visitarBolaDeFuego(BolaDeFuego b) {
     	
-    } // ???????
+    }
     public void visitarMoneda(Moneda m) {
     	m.afectarPersonaje(personaje);
     }

@@ -3,6 +3,7 @@ package Plataformas;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
+import Personaje.Personaje;
 
 public class BloqueSolido extends Plataforma{
 	
@@ -25,7 +26,9 @@ public class BloqueSolido extends Plataforma{
 	public void aceptarVisita(Visitor v) {
 		
 	}
-
+	public void afectarPersonaje(Personaje p) {
+		
+	}
 	public void cargarSprite(Sprite s) {
 		
 	}

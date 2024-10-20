@@ -60,7 +60,7 @@ public class PantallaPrincipal extends JPanel{
 	    ingresarNombre = new JTextField();
 	    ingresarNombre.setBounds(250, 350, 300, 20);
 	    ingresarNombre.setBorder(null);
-	    ingresarNombre.setBackground(Color.white);
+	    ingresarNombre.setBackground(Color.WHITE);
 
 	    // Agregar ActionListener para detectar cuando se presiona "Enter"
 	    ingresarNombre.addActionListener(new ActionListener() {

@@ -21,7 +21,10 @@ public class HiloPersonaje extends Thread {
         enemigo = juego.getEnemigo();
         b = true;       
     }
-
+    // si chocan de costado
+    // juego.getEnemigo().aceptarVisita(VisitorEnemigo) llama al metodo afectar personaje(), resta puntos y lo mata
+    // si chocan verticalmente
+    // juego.getEnemigo().aceptarVisita(VisitorEnemigoAfectado) llama al metodo serAfectadoPorPersonaje(), suma puntos y muere el enemigo
     public void run() {
         while (true) {
             try {
