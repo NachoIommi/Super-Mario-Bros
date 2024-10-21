@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.Icon;
@@ -113,7 +114,7 @@ public class PantallaJuego extends JPanel {
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
         if(personaje.getPosX() < 3350) {
-        	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
+        	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             //System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
             refrescar();
         }
@@ -229,15 +230,18 @@ public class PantallaJuego extends JPanel {
     }
     
     public ImageIcon verificarExtension(String ruta) {
+    	Personaje personaje = controladorVistas.obtenerPersonaje();
+    	
         ImageIcon iconoEscalado;
         if(ruta.toLowerCase().endsWith(".gif")) {
+        	
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image gifImage = icono.getImage();
-            Image gifAgrandado = gifImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto(), Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(gifAgrandado);
         }else{
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-            Image imagenEscalada = icono.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+            Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto(), Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(imagenEscalada);
         }
         return iconoEscalado;

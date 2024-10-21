@@ -24,6 +24,7 @@ public class Personaje extends Entidad{
 	protected int direccionDelPersonaje;
 	protected Hitbox hitb;
 	protected int min = 10;
+	protected int alto;
 	
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
@@ -59,12 +60,18 @@ public class Personaje extends Entidad{
         tocandoBloqueAbajo=false;
         tocandoBloqueArriba=false;
         saltando=false;  
+        alto=30;
         
     }
 	
 	//D 4
 	
-
+	public void colisionSuperChampi() {
+		estado.colisionSuperChampi();
+	}
+	public int getAlto() {
+		return estado.getAlto();
+	}
 	public void moverPersonaje(){	
 		estado.moverPersonaje();
 	}
@@ -115,10 +122,7 @@ public class Personaje extends Entidad{
 	public Hitbox getHitbox() {
     	return estado.getHitbox();
     }
-
-   
-
-    
+ 
     public void morir() {
         this.estado.morir();
         this.vidas -= 1;

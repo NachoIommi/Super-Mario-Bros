@@ -5,6 +5,7 @@ import java.util.List;
 import Enemigos.Enemigo;
 import Personaje.Personaje;
 import Plataformas.*;
+import PowerUps.PowerUps;
 
 public class HiloPersonaje extends Thread {
 
@@ -12,6 +13,7 @@ public class HiloPersonaje extends Thread {
     Personaje personaje;
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
+    List<PowerUps> powerUp;
     boolean b;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
@@ -22,6 +24,7 @@ public class HiloPersonaje extends Thread {
         personaje = juego.getPersonaje();
         plataforma = juego.getPlataforma();
         enemigo = juego.getEnemigo();
+        powerUp = juego.getPowerUp();
         b = true;       
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
@@ -77,7 +80,7 @@ public class HiloPersonaje extends Thread {
                             personaje.getHitbox().getY() < p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueAbajo(true);
-                            System.out.println("Colisión tocando piso");
+           //                 System.out.println("Colisión tocando piso");
                         }
                         // Colisión desde arriba (tocando el techo)
                         else if (personaje.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
@@ -117,10 +120,17 @@ public class HiloPersonaje extends Thread {
                         	
                 	}
                 }
+                
+                for(PowerUps p : powerUp) {
+                	if(personaje.getHitbox().intersects(p.getHitbox())) {
+                		p.aceptarVisita(visitorEntidad);}
+                	
+                }
 
                 // Mover el personaje
                 personaje.moverPersonaje();        
-               // System.out.println("pos x"+personaje.getPosX());
+                //System.out.println("pos x"+personaje.getPosX());
+                System.out.println("pos y"+personaje.getPosY());
 
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);

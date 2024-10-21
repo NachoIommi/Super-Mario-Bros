@@ -35,7 +35,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected int gravedad=1;
 	protected int velY;
 	protected int velSalto = -50;
-	
+	protected int alto;
 	protected int tiempoSaltando=0;
 	protected final int maxTiempoSalto=20;
 	
@@ -55,6 +55,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 	    saltando=false;  
+	    alto=30;
 		
 	}
 	
@@ -129,7 +130,10 @@ public class EstadoNormal extends EstadoDePersonaje {
 		    hitb.actualizar(posX, posY);
 		   
 	   }
+	
+	
 
+	
     public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	switch(direccionDelPersonaje){
@@ -150,8 +154,15 @@ public class EstadoNormal extends EstadoDePersonaje {
         personaje.cargarSprite(sprite);
     }
 
+    public void colisionSuperChampi() {
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),posX,posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision hecha");
+    	System.out.println(personaje.getSprite().getRutaImagen());
+    }
+    
     public void saltar() {
-    	
     }
 
     public void morir() {
@@ -293,6 +304,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void moverBloqueGolpeable(BloqueGolpeable b) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getAlto() {
+		return alto;
 	}
 
 	

@@ -34,20 +34,21 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected int velX;
 	protected int gravedad=1;
 	protected int velY;
-	protected int velSalto = -50;
+	protected int velSalto = -100;
 	
 	protected int tiempoSaltando=0;
 	protected final int maxTiempoSalto=20;
-	
+	protected int ancho;
+	protected int alto;
 
 
 	
 	public EstadoSuperMario(Personaje personaje,Sprite s,int x,int y) {
 		
 		super(personaje);
-		hitb = new Hitbox(x ,y,30 ,60);
+		hitb = new Hitbox(x ,y,30 ,62);
 		setPosX(x);
-		setPosY(y);
+		setPosY(y-30);
 		sprite =s;
 		tocandoBloque=false;
 	    tocandoBloqueDerecha=false;
@@ -55,6 +56,9 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 	    saltando=false;  
+	    ancho=30;
+	    alto=60;
+	    
 		
 	}
 	
@@ -129,18 +133,23 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		    hitb.actualizar(posX, posY);
 		   
 	   }
+	public int getAlto() {
+		return alto;
+	}
 
     public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	switch(direccionDelPersonaje){
     		case(1):
-	    		sprite = fabrica.getPersonajeNormalCorriendo();
+	    		sprite = fabrica.getSuperMarioCorriendoDerecha();
 	    		break;
     		case(3):
-	    		sprite = fabrica.getPersonajeNormalCorriendo();
+	    		sprite = fabrica.getSuperMarioCorriendoIzquierda();
+    			System.out.println("GOGOGOOG ");
 	    		break;
     		case(0):
-	    		sprite = fabrica.getPersonaje();
+	    		sprite = fabrica.getSuperMario();
+    			
 	    		break;
     		
     		default:
@@ -291,6 +300,12 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 
 	@Override
 	public void moverBloqueGolpeable(BloqueGolpeable b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void colisionSuperChampi() {
 		// TODO Auto-generated method stub
 		
 	}

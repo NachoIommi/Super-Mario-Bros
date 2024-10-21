@@ -128,13 +128,13 @@ public class Nivel {
 				        break;
 
 				    case 31:
-				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getMoneda(), posX, posY));
+				    	juego.agregarPowerUp(fabricaMoneda.crearPowerUp(fabricaSprite.getMoneda(), posX, posY));
 				        break;
 				    case 32:
 				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getEstrella(), posX, posY));
 				        break;
 				    case 33:
-				    	juego.agregarPowerUp(fabricaEstrella.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY));
+				    	juego.agregarPowerUp(fabricaSuperChampi.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY));
 				        break;
 				    case 34:
 				    	juego.agregarPowerUp(fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY));

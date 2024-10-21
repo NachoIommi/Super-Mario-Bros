@@ -32,7 +32,9 @@ public class SuperChampi extends PowerUps{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.getEstado().setPuntuacionSuperChampi();
+		p.colisionSuperChampi();		
+		//p.setEstado(null);
+		//p.getEstado().setPuntuacionSuperChampi();
 	}
 
 	public Sprite getSprite() {

@@ -40,4 +40,9 @@ public abstract class EstadoDePersonaje {
 	public abstract int getMin() ;
 	public abstract void actualizarMin();
 	public abstract int getVelX();
+	public abstract void colisionSuperChampi();
+	public abstract int getAlto();
+	
+		
+	
 }
