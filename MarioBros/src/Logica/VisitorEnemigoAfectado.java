@@ -8,6 +8,11 @@ import PowerUps.*;
 
 public class VisitorEnemigoAfectado implements Visitor{
 	protected Personaje personaje;
+	
+	public VisitorEnemigoAfectado(Personaje personaje) {
+        this.personaje = personaje;
+    }
+	
 	public void visitarBolaDeFuego(BolaDeFuego b) {
 	}
 

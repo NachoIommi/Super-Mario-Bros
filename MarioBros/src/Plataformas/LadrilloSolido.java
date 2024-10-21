@@ -10,10 +10,10 @@ public class LadrilloSolido extends BloqueSolido{
 		super(sprite, x, y);
 	}
 	public void aceptarVisita(Visitor v){
-		
+		v.visitarLadrilloSolido(this);
 	}
-	public void recibirGolpe() {
-		
+	public void recibirGolpe(Personaje p) {
+		p.getEstado().romperLadrilloSolido(this);
 	}
 	
 

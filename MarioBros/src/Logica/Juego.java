@@ -103,6 +103,9 @@ public class Juego {
 	public List<PowerUps> getPowerUp() {
 		return powerUps;
 	}
+	public void setHiloPersonaje(HiloPersonaje hiloPersonaje) {
+		hilo = hiloPersonaje;
+	}
 	public HiloPersonaje getHiloPersonaje() {
 		return hilo;
 	}

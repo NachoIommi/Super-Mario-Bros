@@ -21,8 +21,7 @@ public abstract class EstadoDePersonaje {
 	public abstract void setPuntuacionFlorDeFuego();
 	public abstract void setPuntuacionSuperChampi();
 	public abstract int getFactorVelocidad();
-	public abstract void romperBloque(LadrilloSolido l);
-	public abstract void moverLadrilloSolido(LadrilloSolido l);
+	public abstract void romperLadrilloSolido(LadrilloSolido l);
 	public abstract void moverBloqueGolpeable(BloqueGolpeable b);
 	
 	

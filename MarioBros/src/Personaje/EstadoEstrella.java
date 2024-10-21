@@ -78,13 +78,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 
 	@Override
-	public void romperBloque(LadrilloSolido l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void moverLadrilloSolido(LadrilloSolido l) {
+	public void romperLadrilloSolido(LadrilloSolido l) {
 		// TODO Auto-generated method stub
 		
 	}

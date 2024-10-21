@@ -171,6 +171,7 @@ public class Nivel {
 				}
 				contenido = lectura.readLine(); //Leo prox renglon del txt
 				cargarSprite(fabricaSprite.getNivel(nivelActual));
+				
 			}
 			//setReloj();
 			//setNivelActual(i);			

@@ -61,13 +61,24 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaJuego() {
-	   ventana.setContentPane(pantallaJuego);
-	   ventana.revalidate();
+		ventana.setContentPane(pantallaJuego);
+	    ventana.revalidate();
 	    pantallaJuego.requestFocus();
 	    
-	    // Iniciar el hilo del personaje
-	    if (!juego.getHiloPersonaje().isAlive()) {
-	        juego.getHiloPersonaje().start();
+	    // Verificar si el personaje está inicializado antes de iniciar el hilo
+	    if (juego.getPersonaje() == null) {
+	        System.out.println("Error: El personaje no ha sido inicializado.");
+	        return; // Salir si el personaje no está inicializado
+	    }
+
+	    // Iniciar el hilo del personaje solo si no está en ejecución
+	    HiloPersonaje hiloPersonaje = juego.getHiloPersonaje();
+	    if (hiloPersonaje == null || !hiloPersonaje.isAlive()) {
+	        hiloPersonaje = new HiloPersonaje(juego); // Crear un nuevo hilo
+	        hiloPersonaje.start(); // Iniciar el hilo del personaje
+	        juego.setHiloPersonaje(hiloPersonaje); // Actualizar el hilo en el juego
+	    } else {
+	        System.out.println("El hilo del personaje ya está en ejecución.");
 	    }
 	}
 	

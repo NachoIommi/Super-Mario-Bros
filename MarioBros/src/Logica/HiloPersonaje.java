@@ -13,6 +13,9 @@ public class HiloPersonaje extends Thread {
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
     boolean b;
+    protected VisitorEnemigo visitorEnemigo;
+    protected VisitorEnemigoAfectado visitorEnemigoAfectado;
+    protected VisitorEntidad visitorEntidad;
 
     public HiloPersonaje(Juego juego) {
         this.juego = juego;
@@ -20,6 +23,9 @@ public class HiloPersonaje extends Thread {
         plataforma = juego.getPlataforma();
         enemigo = juego.getEnemigo();
         b = true;       
+        visitorEnemigo = new VisitorEnemigo(personaje);
+        visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
+        visitorEntidad = new VisitorEntidad(personaje);
     }
     // si chocan de costado
     // juego.getEnemigo().aceptarVisita(VisitorEnemigo) llama al metodo afectar personaje(), resta puntos y lo mata
@@ -28,6 +34,14 @@ public class HiloPersonaje extends Thread {
     public void run() {
         while (true) {
             try {
+            	 // Si el personaje aún no está inicializado, obtenerlo de juego
+                if (personaje == null) {
+                    personaje = juego.getPersonaje();
+                    if (personaje == null) {
+                        System.out.println("Error: Personaje no inicializado.");
+                        continue;  // Esperar hasta que el personaje se inicialice
+                    }
+                }
                 for(Plataforma p : plataforma) {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {  // Colisión general con cualquier plataforma
                         personaje.setTocandoBloque(true);
@@ -75,7 +89,30 @@ public class HiloPersonaje extends Thread {
                 for(Enemigo e : enemigo) {
                 	if(personaje.getHitbox().intersects(e.getHitbox())) {
                 		System.out.println("Colisión");
-                		
+                		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
+                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
+                            personaje.getHitbox().getX() < e.getHitbox().getX()) {
+                        		e.aceptarVisita(visitorEnemigo);
+                        }
+                        // Colisión desde la izquierda (jugador a la derecha del enemigo)
+                        else if (personaje.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
+                                 personaje.getHitbox().getX() > e.getHitbox().getX())
+                        {
+                            e.aceptarVisita(visitorEnemigo);
+                        }
+                        // (personaje arriba del enemigo)
+                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
+                            personaje.getHitbox().getY() < e.getHitbox().getY()) 
+                        {
+                           e.aceptarVisita(visitorEnemigoAfectado);
+                        }
+                        // Colisión desde arriba (tocando el techo)
+                        else if (personaje.getHitbox().getY() < e.getHitbox().getY() + e.getHitbox().getHeight() &&
+                                 personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY()) 
+                        {
+                            e.aceptarVisita(visitorEnemigoAfectado);
+                        }
+                        	
                 	}
                 }
 

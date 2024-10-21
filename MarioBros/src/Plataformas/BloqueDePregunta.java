@@ -2,6 +2,7 @@ package Plataformas;
 
 import Fabricas.Sprite;
 import Logica.Visitor;
+import Personaje.Personaje;
 import PowerUps.PowerUps;
 
 public class BloqueDePregunta extends BloqueSolido {
@@ -22,19 +23,14 @@ public class BloqueDePregunta extends BloqueSolido {
 	}
 	
 	public void aceptarVisita(Visitor v){
-		
+		v.visitarBloqueDePregunta(this);
 	}
-	
+	public void recibirGolpe(Personaje p) {
+		// sin importar el estado va a activar un gif por medio segundo y darle un power up o moneda a mario
+	}
 	public EstadoDeBloque getEstado() {
 		return estado;
 	}
-	
-	/*
-	public void setEstado(EstadoDeBloque e) {
-		estado = e;
-	} 
-	no estaba en diagrama, lo dejo comentado por si lo usamos 
-	*/
 	
 	public PowerUps getContenido() {
 		return contenido;

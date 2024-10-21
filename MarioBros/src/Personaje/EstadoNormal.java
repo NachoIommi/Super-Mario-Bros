@@ -67,21 +67,13 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 
 
-	public void romperBloque(LadrilloSolido l) {
-		// TODO Auto-generated method stub
-		
+	public void romperLadrilloSolido(LadrilloSolido l) {
+		// Mario en estado normal simplemente hace que se le mueva el gif si lo colisiona de abajo
+		// por medio segundo 
 	}
-
-
-	public void moverLadrilloSolido(LadrilloSolido l) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	public void moverBloqueGolpeable(BloqueGolpeable b) {
-		// TODO Auto-generated method stub
-		
+		// en ambos estados le cambia el gif por medio segundo y el bloque me da una moneda o algun power up
 	}
 	
  

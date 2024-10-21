@@ -44,12 +44,13 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.setPuntuacion(-30);
-		p.morir();
+		System.out.println("Colision con goomba de costado exitosa");
+		//p.setPuntuacion(-30);
+		//p.morir();
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {
-		p.setPuntuacion(60);
-		morir();
+		//p.setPuntuacion(60);
+		//morir();
 	}
 	public void morir() {
 		

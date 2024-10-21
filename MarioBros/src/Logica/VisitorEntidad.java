@@ -8,6 +8,11 @@ import PowerUps.*;
 
 public class VisitorEntidad implements Visitor{
 	protected Personaje personaje;
+	
+	public VisitorEntidad(Personaje personaje) {
+        this.personaje = personaje;
+    }
+	
 	public void visitarBolaDeFuego(BolaDeFuego b) {
     	
     } 
@@ -27,10 +32,10 @@ public class VisitorEntidad implements Visitor{
     	c.afectarPersonaje(personaje);
     }
     public void visitarBloqueDePregunta(BloqueDePregunta p) {
-    	
+    	p.recibirGolpe();
     }
     public void visitarLadrilloSolido(LadrilloSolido l) {
-    	
+    	l.recibirGolpe(personaje);
     }
     public void visitarVacio(Vacio v) {
     	v.afectarPersonaje(personaje);

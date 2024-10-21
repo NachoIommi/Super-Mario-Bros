@@ -1,32 +1,31 @@
 package Logica;
 
 
-import Enemigos.*; 
+import Enemigos.*;  
 import Fabricas.Sprite;
 import Personaje.*;
 import Plataformas.*;
 import PowerUps.*;
 
 public class VisitorEnemigo implements Visitor {
-	protected Personaje personaje;
+	protected Personaje  personaje;
+	
+	public VisitorEnemigo(Personaje personaje) {
+        this.personaje = personaje;
+    }
    
     public void visitarBolaDeFuego(BolaDeFuego b) {
     	
     }
-    public void visitarMoneda(Moneda m) {
-    	m.afectarPersonaje(personaje);
+    public void visitarMoneda(Moneda m) {
     }
-    public void visitarFlorDeFuego(FlorDeFuego f) {
-    	f.afectarPersonaje(personaje);
+    public void visitarFlorDeFuego(FlorDeFuego f) {
     }
-    public void visitarSuperChampi(SuperChampi s) {
-    	s.afectarPersonaje(personaje);
+    public void visitarSuperChampi(SuperChampi s) {
     }
-    public void visitarEstrella(Estrella e) {
-    	e.afectarPersonaje(personaje);
+    public void visitarEstrella(Estrella e) {
     }
-    public void visitarChampiVerde(ChampiVerde c) {
-    	c.afectarPersonaje(personaje);
+    public void visitarChampiVerde(ChampiVerde c) {
     }
     public void visitarBloqueDePregunta(BloqueDePregunta p) {
     	

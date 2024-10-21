@@ -24,13 +24,13 @@ public class BloqueSolido extends Plataforma{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		
+		// no acepta nunca visita
 	}
 	public void afectarPersonaje(Personaje p) {
-		
+		// tampoco afecta al personaje
 	}
 	public void cargarSprite(Sprite s) {
-		
+		sprite = s;
 	}
 
 	public Sprite getSprite() {

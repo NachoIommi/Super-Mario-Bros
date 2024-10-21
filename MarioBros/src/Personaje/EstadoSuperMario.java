@@ -1,5 +1,8 @@
 package Personaje;
 
+import Fabricas.GenerarLadrilloSolido;
+import Fabricas.GenerarPlataformas;
+import Fabricas.Sprite;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
@@ -62,15 +65,13 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public int getFactorVelocidad() {
 		return 1;
 	}
-	public void romperBloque(LadrilloSolido l) {
-		//l.cargarSprite(null);
+	public void romperLadrilloSolido(LadrilloSolido l) {
+		Sprite s = new Sprite("/spritesOriginales/bloqueSolido1");
+		l.cargarSprite(s);
 		//l. tiene que haber un metodo que lo setee nulo al ladrillo
 	}
-	public void moverLadrilloSolido(LadrilloSolido l) {
-		
-	}
 	public void moverBloqueGolpeable(BloqueGolpeable b) {
-		
+		// en ambos estados le cambia el gif por medio segundo y el bloque me da una moneda o algun power up
 	}
 	
 }
