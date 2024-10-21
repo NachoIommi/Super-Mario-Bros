@@ -207,11 +207,11 @@ public class Personaje extends Entidad{
 	}
 	
 	public void actualizarMin() {
-		estado.actualizarMin();
+		min+=estado.getVelX();
 	}
 	
 	public int getMin() {
-		return estado.getMin();
+		return min;
 	}
 
 	public void setPosX(int x) {

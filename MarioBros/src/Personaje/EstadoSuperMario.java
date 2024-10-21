@@ -22,7 +22,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected int posY;
 	protected int direccionDelPersonaje;
 	
-	protected int min = 10;
+	//protected int min = 10;
 	
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
@@ -80,7 +80,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 						break;
 						
 					case(3):
-						if(posX > min && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
+						if(posX > getMin() && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
 							if (velX<11)
 								velX=(velX+1* factorVelocidad);
 							posX = posX - velX;
@@ -243,11 +243,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 
 	public void actualizarMin() {
-		   min += velX;
+		   personaje.actualizarMin();
 	}
 	
 	public int getMin() {
-		return min;
+		return personaje.getMin();
 	}
 	
 	@Override

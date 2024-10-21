@@ -105,11 +105,7 @@ public class PantallaJuego extends JPanel {
         personaje.setIcon(verificarExtension(ruta));  // Cargar el sprite correcto
         refrescar();
         
-    }
-    	
-    	
-    	
-      
+    }      
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
