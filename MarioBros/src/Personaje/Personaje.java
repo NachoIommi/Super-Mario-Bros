@@ -76,7 +76,10 @@ public class Personaje extends Entidad{
 				   			if(velX<11)
 				   				velX=(velX+1 * factorVelocidad);
 				   			posX = posX+ velX;
-				   			hitb.actualizar(posX, posY);}		
+				   			hitb.actualizar(posX, posY);
+				   			correr();
+				   			}		
+				   			
 						break;
 						
 					case(3):
@@ -84,7 +87,10 @@ public class Personaje extends Entidad{
 							if (velX<11)
 								velX=(velX+1* factorVelocidad);
 							posX = posX - velX;
-							hitb.actualizar(posX, posY);}
+							hitb.actualizar(posX, posY);
+							correr();
+							}
+							
 						break;
 						
 					case (2): // Saltar
@@ -99,10 +105,15 @@ public class Personaje extends Entidad{
 				default: // Si la dirección es 0, no se mueve
 		            break;
 			   }
+			   
 		   }
 		   
-		   else //DIRECCION 0
+		   else { //DIRECCION 0
 			   velX=0;	//REINICIO VELOCIDAD
+			   GenerarSprite fabrica = new GenerarSpriteOriginal();
+		       sprite = fabrica.getPersonaje();
+		       cargarSprite(sprite);
+		   }	
 		   
 		   if (saltando) {
 			    // Aplicar la gravedad y la velocidad inicial

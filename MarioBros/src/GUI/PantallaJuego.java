@@ -43,9 +43,7 @@ public class PantallaJuego extends JPanel {
         setLayout(null);
         
         agregarPanelNivel();
-        agregarImagenNivel();
-        mostrarPowerUps();
-        mostrarEnemigos();
+       
        
         eventosTeclado();
         setFocusable(true);
@@ -57,6 +55,7 @@ public class PantallaJuego extends JPanel {
         // Iniciar un Timer que actualice la pantalla cada 50 ms
         refrescarPantalla = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	actualizarImagenPersonaje();
                 actualizarPosicionPersonaje();  // Refrescar posición de Mario
                 actualizarFondo();  // Actualizar la posición del fondo
             }
@@ -96,10 +95,20 @@ public class PantallaJuego extends JPanel {
         ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
         imagenFondo.setIcon(iconoEscalado);
         imagenFondo.setBounds(posicionInicialX, 0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
-        //panelNivel.add(imagenFondo);
+        panelNivel.add(imagenFondo);
     }
  
-  
+    public void actualizarImagenPersonaje() {
+        Personaje personaje = controladorVistas.obtenerPersonaje();
+        String ruta = personaje.getSprite().getRutaImagen();
+        personaje.setIcon(verificarExtension(ruta));  // Cargar el sprite correcto
+        refrescar();
+        System.out.println("Sprite actualizado.");
+    }
+    	
+    	
+    	
+      
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
@@ -141,24 +150,33 @@ public class PantallaJuego extends JPanel {
                 
                 	case(KeyEvent.VK_D):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(1);
+                	actualizarImagenPersonaje();
                 		break;
                 	case(KeyEvent.VK_A):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(3);
+                	actualizarImagenPersonaje();
                 		break;		
                 	case(KeyEvent.VK_W):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(2); //o llamar a saltar
-                		//controladorVistas.obtenerPersonaje().saltar();	
+                		//controladorVistas.obtenerPersonaje().saltar();
+                		
                 		break;
                 }
                 actualizarPosicionPersonaje();
         		actualizarFondo();
+        		
+        		
                 
             }
             public void keyReleased(KeyEvent k) {
             	controladorVistas.obtenerPersonaje().establecerDireccion(0);
+            	actualizarImagenPersonaje();
+            	refrescar();
             }
         });
     }
+    
+  
     
     public void mostrarPersonaje() {	
         Personaje personaje = controladorVistas.obtenerPersonaje();

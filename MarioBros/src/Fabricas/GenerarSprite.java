@@ -20,6 +20,10 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite(rutaImagen + "/quietoNormal.png");
 	}
 	
+	public Sprite getPersonajeNormalCorriendo() {
+		return new Sprite (rutaImagen + "/corriendo.gif");
+	}
+	
 	public Sprite getBolaDeFuego() {
 		return new Sprite(rutaImagen + "/bolaDeFuegoViajando.gif");
 	}

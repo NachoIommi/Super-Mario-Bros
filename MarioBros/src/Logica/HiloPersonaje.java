@@ -34,6 +34,8 @@ public class HiloPersonaje extends Thread {
     public void run() {
         while (true) {
             try {
+            	//System.out.println("estado: "+personaje.getDireccion());
+            	//System.out.println("ruta: "+personaje.getSprite().getRutaImagen());
             	 // Si el personaje aún no está inicializado, obtenerlo de juego
                 if (personaje == null) {
                     personaje = juego.getPersonaje();

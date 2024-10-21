@@ -1,12 +1,16 @@
 package Personaje;
 
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
+import Fabricas.Sprite;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
 public class EstadoNormal extends EstadoDePersonaje {
 	
-	protected Personaje personaje;
+	//protected Personaje personaje;
+	protected Sprite sprite;
 	
 	public EstadoNormal(Personaje personaje) {
 		super(personaje);
@@ -14,7 +18,9 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 
     public void correr() {
-        
+        GenerarSprite fabrica = new GenerarSpriteOriginal();
+        sprite = fabrica.getPersonajeNormalCorriendo();
+        personaje.cargarSprite(sprite);
     }
 
     public void saltar() {
