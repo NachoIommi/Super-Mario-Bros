@@ -103,7 +103,7 @@ public class PantallaJuego extends JPanel {
         String ruta = personaje.getSprite().getRutaImagen();
         personaje.setIcon(verificarExtension(ruta));  // Cargar el sprite correcto
         refrescar();
-        System.out.println("Sprite actualizado.");
+        
     }
     	
     	
@@ -185,8 +185,9 @@ public class PantallaJuego extends JPanel {
         String ruta = personaje.getSprite().getRutaImagen();
         personaje.setIcon(verificarExtension(ruta));
         personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
-  
+        
         panelNivel.add(personaje);
+        System.out.println(personaje.getSprite().getRutaImagen()+personaje.getPosX()+" pos Y "+personaje.getPosY());
         refrescar();
     }
     

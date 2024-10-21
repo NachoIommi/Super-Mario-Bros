@@ -77,7 +77,7 @@ public class HiloPersonaje extends Thread {
                             personaje.getHitbox().getY() < p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueAbajo(true);
-                           // System.out.println("Colisión tocando piso");
+                            System.out.println("Colisión tocando piso");
                         }
                         // Colisión desde arriba (tocando el techo)
                         else if (personaje.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
@@ -119,7 +119,8 @@ public class HiloPersonaje extends Thread {
                 }
 
                 // Mover el personaje
-                personaje.moverPersonaje();          
+                personaje.moverPersonaje();        
+               // System.out.println("pos x"+personaje.getPosX());
 
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);

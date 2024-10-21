@@ -29,7 +29,8 @@ public class Juego {
 		powerUps = new ArrayList<PowerUps>();
 		nivel.cargarNivel(1);
 		hilo = new HiloPersonaje(this); //prueba
-		hilo.start();
+		
+		
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {
@@ -38,13 +39,17 @@ public class Juego {
 	
 	public ControladorVistas getControladorVistas() {
 		return controladorVistas;
+		
 	}
 	
 	public void iniciarJuego() {
 		controladorVistas.mostrarPantallaJuego();
+		hilo.start();
+		
 	}
 	public void perderJuego() {
 		controladorVistas.mostrarPantallaPerder();
+		
 	}
 	
 	public void seleccionarMundo(Mundo m) {
