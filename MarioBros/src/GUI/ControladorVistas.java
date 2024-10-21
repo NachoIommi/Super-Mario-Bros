@@ -1,12 +1,14 @@
 package GUI;
 
-import java.awt.event.WindowEvent; 
+import java.awt.event.WindowEvent;  
 import java.awt.event.WindowAdapter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.URISyntaxException;
 import java.util.List; 
+import java.io.File;
+
 
 import javax.swing.JFrame;
 import Enemigos.Enemigo;
@@ -98,12 +100,18 @@ public class ControladorVistas {
 	    }
 	}
 	public void cierreDeJuego() {
-	    try (FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/juans/git/p-comision-16/MarioBros/resources/score.tdp");
-	         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+	    try {
+	        // Obtener la ruta relativa del archivo dentro del paquete
+	        String relativePath = "score.tdp";
+	        FileOutputStream fileOutputStream = new FileOutputStream(new File(getClass().getClassLoader().getResource(relativePath).toURI()));
+	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 	        objectOutputStream.writeObject(this.ranking);
+	        objectOutputStream.flush();
+	        objectOutputStream.close();
 	        System.out.println("Ranking guardado correctamente.");
-	    } catch (IOException e) {
+	    } catch (IOException | URISyntaxException e) {
 	        e.printStackTrace();
-	    } 
+	    }
 	}
+
 }
