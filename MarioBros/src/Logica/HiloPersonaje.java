@@ -53,7 +53,7 @@ public class HiloPersonaje extends Thread {
                         //System.out.println("Colisión");
 
                         // Definir un rango de tolerancia para la altura
-                        double toleranciaAltura = 20.0; // Ajusta esto según el tamaño de tu personaje
+                        double toleranciaAltura = 34.0; // Ajusta esto según el tamaño de tu personaje
 
                         // Colisión desde la derecha (jugador a la izquierda del bloque)
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&
@@ -130,7 +130,9 @@ public class HiloPersonaje extends Thread {
                 // Mover el personaje
                 personaje.moverPersonaje();        
                 //System.out.println("pos x"+personaje.getPosX());
-                System.out.println("pos y"+personaje.getPosY());
+                //System.out.println("pos y"+personaje.getPosY());
+                System.out.println("Ancho hitbox "+personaje.getHitbox().getWidth());               
+                System.out.println("Alto hitbox "+personaje.getHitbox().getHeight());
 
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);

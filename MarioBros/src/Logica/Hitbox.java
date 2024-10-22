@@ -22,6 +22,7 @@ public class Hitbox extends Rectangle{
 	 public boolean colisionaCon(Hitbox otraHitbox) {
 	        return this.intersects(otraHitbox);
 	    }
+
 	
 	 public void drawHitbox(Graphics g) {
 		    g.setColor(Color.RED);  // Color para la hitbox, puedes cambiarlo
