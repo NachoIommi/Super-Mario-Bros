@@ -25,6 +25,7 @@ public class Personaje extends Entidad{
 	protected int direccionDelPersonaje;
 
 	protected int min = 10;
+	public int max = 2700;
 	protected int alto;
 	
 	protected boolean tocandoBloque;

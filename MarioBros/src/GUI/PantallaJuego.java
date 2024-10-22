@@ -1,25 +1,23 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import Enemigos.Enemigo;
-import Logica.Entidad;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -31,6 +29,9 @@ public class PantallaJuego extends JPanel {
     protected JPanel panelNivel;
     protected JPanel panelEntidades;
     protected JLabel imagenFondo;
+    protected JLabel reloj;
+    protected JLabel puntuacion;
+    protected JLabel monedas;
     protected int posicionInicialX = 0;  
     protected int velocidadDesplazamiento = 10; 
     protected Timer refrescarPantalla;
@@ -54,7 +55,10 @@ public class PantallaJuego extends JPanel {
             public void actionPerformed(ActionEvent e) {
             	actualizarImagenPersonaje();
                 actualizarPosicionPersonaje();  
-                actualizarFondo();  
+                actualizarFondo(); 
+                reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
+                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
+                llegoAlFinal();
             }
         });
         refrescarPantalla.start();
@@ -66,7 +70,10 @@ public class PantallaJuego extends JPanel {
     	mostrarPlataformas();
     	mostrarEnemigos();
     	mostrarPowerUps();
+    	agregarReloj();
+    	mostrarMonedas();
     	agregarImagenNivel();
+    	
     	panelNivel.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), ConstantesVistas.PANEL_ALTO));
     	
     	panelScrollNivel = new JScrollPane(panelNivel);
@@ -78,7 +85,61 @@ public class PantallaJuego extends JPanel {
 		panelScrollNivel.requestFocusInWindow();
 		
 		add(panelScrollNivel);
+		
+		System.out.println("fondo mide: "+imagenFondo.getIcon().getIconWidth());
 		refrescar();
+    }
+    
+    public void actualizarPosicionMonedas(int x) {
+    	monedas.setBounds(monedas.getX()+x, 10, 90, 20);
+    }
+    
+    public void mostrarMonedas() {
+    	monedas = new JLabel();
+    	
+    	String ruta = "/spritesOriginales/monedaQuieta.gif";
+    	monedas.setIcon(verificarExtension(ruta));
+    	
+    	monedas.setBounds(10, 10, 90, 20);
+    	monedas.setVisible(true);
+    	try {
+	        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
+	        monedas.setFont(marioFuente);
+	        monedas.setForeground(Color.WHITE);
+	    } catch (FontFormatException | IOException e) {
+	        e.printStackTrace();
+	    }
+    	panelNivel.add(monedas);
+    	refrescar();
+    	
+    }
+    
+    public void mostrarPuntuacion() {
+    	
+    }
+    
+    public void llegoAlFinal() {
+    	Personaje personaje = controladorVistas.juego.getPersonaje();
+    	if(personaje.getPosX() >= imagenFondo.getIcon().getIconWidth()-320) {
+    		controladorVistas.juego.getNivel().cargarNivel(controladorVistas.juego.getNivel().getNivelActual()+1);
+    		System.out.print("hola");
+    	}
+    }
+    
+    public void agregarReloj() {
+    	reloj = new JLabel();
+    	reloj.setText("TIEMPO \n"+controladorVistas.juego.getReloj().getSegundos());
+    	reloj.setBounds(500, 10, 90, 20);
+		reloj.setVisible(true);
+		try {
+		        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
+		        reloj.setFont(marioFuente);
+		        reloj.setForeground(Color.WHITE);
+		    } catch (FontFormatException | IOException e) {
+		        e.printStackTrace();
+		    }
+      panelNivel.add(reloj);
+      refrescar();
     }
     
     public void agregarImagenNivel() {
@@ -102,31 +163,53 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
-        if(personaje.getPosX() < 3350) {
+        if(personaje.getPosX() < 3700) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             refrescar();
         }
     }
 
+    public void actualizarPosicionReloj(int x) {
+    	reloj.setBounds(reloj.getX()+x, 10, 90, 20);
+    }
+    
     public void moverFondo(int posicionX) {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
         posicionInicialX += posicionX;
+        //Verificar si el fondo ha llegado a su límite izquierdo
         if (posicionInicialX < -imagenFondo.getIcon().getIconWidth()) {
         	posicionInicialX = -imagenFondo.getIcon().getIconWidth();
         }
-        panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getVelX());
+        // Desplazar el fondo solo si no ha alcanzado el límite
+        if (maximoDerecha != (imagenFondo.getIcon().getIconWidth() - 320)) {
+            panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getVelX());
+            actualizarPosicionReloj(personaje.getVelX());
+            actualizarPosicionMonedas(personaje.getVelX());
+        }
+        
         maximoDerecha += personaje.getVelX();
+        
         if(controladorVistas.obtenerPersonaje().getMin() < 2780) { //Cuando el scroll esta en el final, el minimo mas alto al q llega es 2780
         	controladorVistas.obtenerPersonaje().actualizarMin();
         }
+        
+        
+        
         repaint();
     }
    
     public void actualizarFondo() {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	if(personaje.getPosX() >= maximoDerecha) {
+    	
+    	if(personaje.getPosX() >= maximoDerecha ) {
     		moverFondo(-personaje.getVelX());
     	}
+    }
+    
+    public void detenerMovimientoEtiquetas() {
+    	actualizarPosicionPersonaje();
+    	actualizarPosicionReloj(0);
+    	actualizarPosicionMonedas(0);
     }
     
     public void eventosTeclado() {
@@ -208,6 +291,8 @@ public class PantallaJuego extends JPanel {
             refrescar();
     	}   	
     }  
+    
+  
     
     public void mostrarPowerUps() {
     	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();

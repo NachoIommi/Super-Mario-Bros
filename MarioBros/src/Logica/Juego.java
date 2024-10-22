@@ -11,6 +11,7 @@ import PowerUps.PowerUps;
 public class Juego {
 	
 	//protected Ranking ranking;
+	protected Reloj reloj;
 	protected Mundo mundos;
 	protected Nivel nivel;
 	protected int modoDeJuego;
@@ -22,12 +23,13 @@ public class Juego {
 	protected ControladorVistas controladorVistas;
 	
 	public Juego() {
+		reloj = new Reloj();
 		nivel = new Nivel(300,this);
 		personaje = null;
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		nivel.cargarNivel(1);
+		nivel.cargarNivel(0);
 		hilo = new HiloPersonaje(this);
 	}
 	
@@ -40,9 +42,16 @@ public class Juego {
 		
 	}
 	
+	public Reloj getReloj() {
+		return reloj;
+	}
+	
 	public void iniciarJuego() {
 		if(!hilo.isAlive()) {
 			hilo.start();
+		}
+		if(!reloj.isAlive()) {
+			reloj.start();
 		}
 	}
 	
