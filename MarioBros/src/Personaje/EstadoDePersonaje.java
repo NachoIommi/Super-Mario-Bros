@@ -42,6 +42,7 @@ public abstract class EstadoDePersonaje {
 	public abstract int getVelX();
 	public abstract void colisionSuperChampi();
 	public abstract int getAlto();
+	public abstract void colisionLateralGoomba();
 	
 		
 	

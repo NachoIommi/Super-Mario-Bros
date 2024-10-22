@@ -311,6 +311,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return alto;
 	}
 
+	@Override
+	public void colisionLateralGoomba() {
+		System.out.println("MORIR");
+		
+	}
+
 	
  
 }

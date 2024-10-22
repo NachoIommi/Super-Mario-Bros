@@ -43,9 +43,8 @@ public class Goomba extends Enemigo{
 		sprite = s;
 	}
 	
-	public void afectarPersonaje(Personaje p) {
-		System.out.println("Colision con goomba de costado exitosa");
-		//p.setPuntuacion(-30);
+	public void afectarPersonaje(Personaje p) {	
+		p.colisionLateralGoomba();
 		//p.morir();
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {

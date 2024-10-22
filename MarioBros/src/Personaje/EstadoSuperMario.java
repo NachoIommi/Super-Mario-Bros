@@ -133,10 +133,21 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		    hitb.actualizar(posX, posY);
 		   
 	   }
+	
+	public void colisionLateralGoomba() {
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonaje(),posX,posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Goomba");
+    	System.out.println(personaje.getSprite().getRutaImagen());
+    }
+	
 	public int getAlto() {
 		return alto;
 	}
 
+	
+	
     public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	switch(direccionDelPersonaje){

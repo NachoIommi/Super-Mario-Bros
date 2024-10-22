@@ -65,6 +65,9 @@ public class Personaje extends Entidad{
     }
 	
 	//D 4
+	public void colisionLateralGoomba() {
+		estado.colisionLateralGoomba();
+	}
 	
 	public void colisionSuperChampi() {
 		estado.colisionSuperChampi();
