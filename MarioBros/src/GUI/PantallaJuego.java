@@ -136,15 +136,16 @@ public class PantallaJuego extends JPanel {
                 switch(keyCode) {
                 
                 	case(KeyEvent.VK_D):
-                		controladorVistas.obtenerPersonaje().establecerDireccion(1);
+                		controladorVistas.obtenerPersonaje().setRight(true);
                 	actualizarImagenPersonaje();
                 		break;
                 	case(KeyEvent.VK_A):
-                		controladorVistas.obtenerPersonaje().establecerDireccion(3);
+                		controladorVistas.obtenerPersonaje().setLeft(true);
                 	actualizarImagenPersonaje();
                 		break;		
                 	case(KeyEvent.VK_W):
-                		controladorVistas.obtenerPersonaje().establecerDireccion(2); //o llamar a saltar
+                		controladorVistas.obtenerPersonaje().setJump(true); //o llamar a saltar
+                		actualizarImagenPersonaje();
                 		//controladorVistas.obtenerPersonaje().saltar();
                 		break;
                 }
@@ -152,7 +153,22 @@ public class PantallaJuego extends JPanel {
         		actualizarFondo();	
             }
             public void keyReleased(KeyEvent k) {
-            	controladorVistas.obtenerPersonaje().establecerDireccion(0);
+            	int keyCode = k.getKeyCode(); 
+                switch(keyCode) {
+                
+            	case(KeyEvent.VK_D):
+            		controladorVistas.obtenerPersonaje().setRight(false);
+            	actualizarImagenPersonaje();
+            		break;
+            	case(KeyEvent.VK_A):
+            		controladorVistas.obtenerPersonaje().setLeft(false);
+            	actualizarImagenPersonaje();
+            		break;		
+            	case(KeyEvent.VK_W):
+            		controladorVistas.obtenerPersonaje().setJump(false); //o llamar a saltar
+            		//controladorVistas.obtenerPersonaje().saltar();
+            		break;
+            }     	
             	actualizarImagenPersonaje();
             	refrescar();
             }

@@ -13,6 +13,7 @@ import Fabricas.*;
 
 public class Personaje extends Entidad{
 	
+	public double toleranciaAltura;
 	private EstadoDePersonaje estado;
 	protected Sprite sprite;
 	protected Hitbox hitb;
@@ -58,6 +59,21 @@ public class Personaje extends Entidad{
         alto=30;
         
     }
+	public void setRight(boolean b){
+		estado.setRight(b);
+	}
+	
+	public void setLeft(boolean b){
+		estado.setLeft(b);
+	}
+	
+	public void setJump(boolean b){
+		estado.setJump(b);
+	}
+	
+	public double getToleranciaAltura() {
+		return estado.getToleranciaAltura();
+	}
 	
 	public void colisionLateralGoomba() {
 		estado.colisionLateralGoomba();

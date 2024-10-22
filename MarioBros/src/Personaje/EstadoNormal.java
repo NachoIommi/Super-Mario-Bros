@@ -9,7 +9,12 @@ import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
 public class EstadoNormal extends EstadoDePersonaje {
-	
+
+	public double toleranciaAltura=10;
+	protected float fuerzaSalto= -10f;
+	protected boolean right;
+	protected boolean left;
+	protected boolean jump;
 	protected Sprite sprite;
 	protected Hitbox hitb;
 
@@ -30,7 +35,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected int velX;
 	protected int gravedad=1;
 	protected int velY;
-	protected int velSalto = -50;
+	protected int velSalto = -100;
 	protected int alto;
 	protected int tiempoSaltando=0;
 	protected final int maxTiempoSalto=20;
@@ -48,85 +53,88 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    tocandoBloqueArriba=false;
 	    saltando=false;  
 	    alto=30;
+	    jump=false;
+	    right=false;
+	    left=false;
 	}
 	
-	public void moverPersonaje(){	
-		int factorVelocidad = 1; 
-		
-		if (direccionDelPersonaje != 0) {
-			if(direccionDelPersonaje==1)
-			   {
-				   	if(posX < 3300 && tocandoBloqueDerecha==false) {
-				   			if(velX<11)
-				   				velX=(velX+1 * factorVelocidad);
-				   			posX = posX+ velX;
-				   			hitb.actualizar(posX, posY);
-				   			actualizarSprite();}
-			   }		
-				   	
-			if(direccionDelPersonaje==3){
-						if(posX > personaje.getMin() && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
-							if (velX>-11)
-								velX=(velX-1* factorVelocidad);
-							posX = posX + velX;
-							hitb.actualizar(posX, posY);
-							actualizarSprite();}
-					}
-			
-			if(direccionDelPersonaje==2)
-		                if (tocandoBloqueAbajo && !saltando) { // Solo si está en el suelo
-		                    saltando = true;
-		                    velY = velSalto;  // Aplicar la velocidad de salto
-		                    tiempoSaltando = 0;  // Reiniciar tiempo de salto
-		                }
-		                				}
-		   
-		   else { 
-			   velX=0;
-			   actualizarSprite();
-		   }	
-		   
-		   if (saltando) {
-			    velY = velY + gravedad;
-			    if(!tocandoBloqueArriba)
-			    	posY = posY + velY;
-			    
-			    if (tocandoBloqueAbajo==true) { // Verificar si el personaje ha tocado el suelo
-			        saltando = false;
-			        velY = 0;
-			    }
-			}
-		   else 
-			   if (!tocandoBloqueAbajo) { //NO HAY BLOQUE ABAJO -> CAIDA LIBRE
-				   velY=velY+gravedad;					   
-				   posY = posY+ velY; // Actualizar la posición Y del personaje con la velocidad de caída
-		        	} 
-			   else 
-				   velY = 0; // Si toca un bloque debajo, detener la caída
-		    
-		    // Actualizar la hitbox del personaje
-		    hitb.actualizar(posX, posY);
-		   
-	   }
-	
-    public void actualizarSprite(){
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	switch(direccionDelPersonaje){
-    		case(1):
-	    		sprite = fabrica.getPersonajeNormalCorriendo();
-	    		break;
-    		case(3):
-	    		sprite = fabrica.getPersonajeNormalCorriendo();
-	    		break;
-    		case(0):
-	    		sprite = fabrica.getPersonaje();
-	    		break;
-    		
-    		default:
-    			break;
-    	}
+	public void moverPersonaje() {
+	    // Movimiento a la derecha
+	    if (right) {
+	        if (posX < 3300 && !tocandoBloqueDerecha) {
+	            if (velX < 11)
+	                velX += 1;
+	        } else {
+	            velX = 0;  // Detener el movimiento horizontal al colisionar
+	        }
+	    }
 
-        personaje.cargarSprite(sprite);
+	    // Movimiento a la izquierda
+	    if (left) {
+	        if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
+	            if (velX > -11)
+	                velX -= 1;
+	        } else {
+	            velX = 0;  // Detener el movimiento horizontal al colisionar
+	        }
+	    }
+	    
+	    if(velX>0 &&!right) 
+	    	velX--;
+	    if(velX<0 &&!left) 
+	    	velX++;
+	    
+
+	    // Aplicar movimiento horizontal
+	    posX += velX;
+
+	    // Saltar
+	    if (jump && tocandoBloqueAbajo && !tocandoBloqueArriba) {
+	        saltando = true;
+	        velY = (int) fuerzaSalto;  // Aplicar fuerza de salto
+	        tocandoBloqueAbajo = false;
+	    }
+
+	    // Caída libre o gravedad
+	    if (!tocandoBloqueAbajo) {
+	        velY += gravedad;  // Incrementar velocidad de caída con la gravedad
+	    } else {
+	        velY = 0;  // Detener la caída si toca un bloque debajo
+	        saltando = false;  // Resetear estado de salto
+	    }
+
+	    // Aplicar movimiento vertical
+	    posY += velY;
+
+	    // Actualizar hitbox y sprite después de todos los movimientos
+	    hitb.actualizar(posX, posY);
+	    actualizarSprite();
+	}
+	public void setRight(boolean b){
+		right=b;
+	}
+	
+	public void setLeft(boolean b){
+		left=b;
+	}
+	
+	public void setJump(boolean b){
+		jump=b;
+	}
+	public double getToleranciaAltura() {
+		return toleranciaAltura;
+	}
+	public void actualizarSprite(){
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	if(right) {
+    		sprite = fabrica.getSuperMarioCorriendoDerecha();
+    		personaje.cargarSprite(sprite);}
+	    if(left) {
+	    	sprite = fabrica.getPersonajeNormalCorriendoIzquierda();
+	    	personaje.cargarSprite(sprite);}
+	    if(!left&& !right) {
+	    	sprite = fabrica.getPersonajeNormalQuietoDerecha();
+	    	personaje.cargarSprite(sprite);}
     }
 
     public void colisionSuperChampi() {
@@ -269,5 +277,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void colisionLateralGoomba() {
 		System.out.println("MORIR");
 	}
+
+	
 
 }
