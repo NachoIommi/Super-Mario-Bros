@@ -36,7 +36,7 @@ public class HiloPersonaje extends Thread {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {
                         personaje.setTocandoBloque(true);
 
-                        double toleranciaAltura = 34.0; 
+                        double toleranciaAltura = personaje.getToleranciaAltura(); 
 
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&
                             personaje.getHitbox().getX() < p.getHitbox().getX() &&
@@ -106,7 +106,8 @@ public class HiloPersonaje extends Thread {
                 	
                 }
 
-                personaje.moverPersonaje();        
+                personaje.moverPersonaje(); 
+                
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);
                 personaje.setTocandoBloqueDerecha(false);

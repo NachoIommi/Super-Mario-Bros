@@ -42,5 +42,10 @@ public abstract class EstadoDePersonaje {
 	public abstract void colisionSuperChampi();
 	public abstract int getAlto();
 	public abstract void colisionLateralGoomba();
+	public abstract void setRight(boolean b);
+	public abstract void setLeft(boolean b);
+	public abstract void setJump(boolean b);
+	public abstract double getToleranciaAltura();
+
 	
 }
