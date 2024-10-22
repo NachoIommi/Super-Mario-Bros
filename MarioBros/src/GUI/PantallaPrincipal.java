@@ -26,7 +26,6 @@ public class PantallaPrincipal extends JPanel{
 		agregarBotonIngresarNombre();
 		agregarModosDeJuego();
 		agregarImagen();
-		
 	}
 	
 	public void agregarImagen() {
@@ -43,7 +42,7 @@ public class PantallaPrincipal extends JPanel{
 	public void agregarBotonIngresarNombre() {
 		botonIngresarNombre = new JButton();
 		botonIngresarNombre.setText("Ingresar Nombre");
-		botonIngresarNombre.setBounds(250, 370, 300, 20);
+		botonIngresarNombre.setBounds(150, 300, 300, 20);
 		botonIngresarNombre.setOpaque(false);
 		botonIngresarNombre.setContentAreaFilled(false);
 		botonIngresarNombre.setBorderPainted(false);
@@ -53,7 +52,7 @@ public class PantallaPrincipal extends JPanel{
 	
 	public void agregarNombre() {
 	    ingresarNombre = new JTextField();
-	    ingresarNombre.setBounds(250, 350, 300, 20);
+	    ingresarNombre.setBounds(150, 280, 300, 20);
 	    ingresarNombre.setBorder(null);
 	    ingresarNombre.setBackground(Color.WHITE);
 
