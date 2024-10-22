@@ -66,47 +66,39 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		int factorVelocidad = 1; //en estado estrella mueve mas rapido, en el resto es = 1
 		
 		if (direccionDelPersonaje != 0) {
-			   switch(direccionDelPersonaje){
-				   	case(1):
-				   		if(posX < 3300 && tocandoBloqueDerecha==false) {
+			if(direccionDelPersonaje==1)
+			   {
+				   	if(posX < 3300 && tocandoBloqueDerecha==false) {
 				   			if(velX<11)
 				   				velX=(velX+1 * factorVelocidad);
 				   			posX = posX+ velX;
 				   			hitb.actualizar(posX, posY);
-				   			actualizarSprite();
-				   			
-				   			}		
-				   			
-						break;
-						
-					case(3):
-						if(posX > getMin() && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
-							if (velX<11)
-								velX=(velX+1* factorVelocidad);
-							posX = posX - velX;
+				   			actualizarSprite();				   			}}		
+				   	
+					if(direccionDelPersonaje==3)
+					{
+						if(posX > personaje.getMin() && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
+							if (velX>-11)
+								velX=(velX-1* factorVelocidad);
+							posX = posX + velX;
 							hitb.actualizar(posX, posY);
-							actualizarSprite();
+							actualizarSprite();}
 							}
 							
-						break;
 						
-					case (2): // Saltar
+						
+					if(direccionDelPersonaje==2)
 		                if (tocandoBloqueAbajo && !saltando) { // Solo si está en el suelo
 		                    saltando = true;
 		                    velY = velSalto;  // Aplicar la velocidad de salto
 		                    tiempoSaltando = 0;  // Reiniciar tiempo de salto
 		                }
-		                break;					
-				
-				default: // Si la dirección es 0, no se mueve
-		            break;
-			   }
-			   
-		   }
+		                				}
 		   
 		   else { //DIRECCION 0
 			   velX=0;	//REINICIO VELOCIDAD
-			   actualizarSprite();
+			   
+				   actualizarSprite();
 		   }	
 		   
 		   if (saltando) {

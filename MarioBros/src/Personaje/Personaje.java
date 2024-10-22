@@ -210,7 +210,9 @@ public class Personaje extends Entidad{
 	}
 	
 	public void actualizarMin() {
-		min+=estado.getVelX();
+		if(estado.getVelX()>0)
+			
+			min+=estado.getVelX();
 	}
 	
 	public int getMin() {
