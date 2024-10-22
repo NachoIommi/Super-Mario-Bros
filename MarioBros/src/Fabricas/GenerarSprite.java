@@ -96,9 +96,11 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	public Sprite getSuperMario() {
 		return new Sprite(rutaImagen + "/superMarioQuietoDerecha.png");
 	}
+	
 	public Sprite getSuperMarioCorriendoIzquierda() {
 		return new Sprite(rutaImagen + "/superMarioCorriendoIzquierda.gif");
 	}
+	
 	public Sprite getSuperMarioCorriendoDerecha() {
 		return new Sprite(rutaImagen + "/superMarioCorriendoDerecha.gif");
 	}

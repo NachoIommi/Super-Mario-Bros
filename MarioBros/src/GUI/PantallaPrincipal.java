@@ -15,17 +15,13 @@ public class PantallaPrincipal extends JPanel{
 	protected JTextField ingresarNombre;
 	protected JButton botonIngresarNombre;
 	protected Ranking ranking;
-	/*
-	 * Creo el panel
-	 */
+
 	public PantallaPrincipal(ControladorVistas controladorVistas, Ranking ranking) {
 		this.controladorVistas = controladorVistas;
 		this.ranking = ranking;
 		this.setSize(800,600);
 		this.setLayout(null);
 		this.setVisible(true);
-		//agregarPanelBotones();
-		//agregarBotonComenzar();
 		agregarNombre();
 		agregarBotonIngresarNombre();
 		agregarModosDeJuego();
@@ -42,10 +38,8 @@ public class PantallaPrincipal extends JPanel{
 		Icon iconoEscalado = new ImageIcon(imagenEscalada);
 		imagenInicio.setIcon(iconoEscalado);
 		this.add(imagenInicio);
-		
 	}
 	
-
 	public void agregarBotonIngresarNombre() {
 		botonIngresarNombre = new JButton();
 		botonIngresarNombre.setText("Ingresar Nombre");
@@ -56,6 +50,7 @@ public class PantallaPrincipal extends JPanel{
 		registrarOyenteBotonNombre();
 		this.add(botonIngresarNombre);
 	}
+	
 	public void agregarNombre() {
 	    ingresarNombre = new JTextField();
 	    ingresarNombre.setBounds(250, 350, 300, 20);
@@ -64,7 +59,6 @@ public class PantallaPrincipal extends JPanel{
 
 	    // Agregar ActionListener para detectar cuando se presiona "Enter"
 	    ingresarNombre.addActionListener(new ActionListener() {
-	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            // Verificar que el nombre no esté vacío antes de cambiar de pantalla
 	            if (!ingresarNombre.getText().trim().isEmpty()) {
@@ -73,12 +67,12 @@ public class PantallaPrincipal extends JPanel{
 	            }
 	        }
 	    });
-
 	    this.add(ingresarNombre);
 	}
+	
 	public void guardarJugadorEnRanking(Jugador j) {
 	    ranking.addJugador(j);
-	    controladorVistas.cierreDeJuego(); // Asegúrate de que el ranking se guarde en el archivo
+	    controladorVistas.cierreDeJuego();
 	}
 	
 	public void registrarOyenteBotonNombre() {
@@ -95,4 +89,5 @@ public class PantallaPrincipal extends JPanel{
 	public void agregarModosDeJuego() {
 		
 	}
+	
 }

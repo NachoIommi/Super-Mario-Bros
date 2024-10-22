@@ -16,16 +16,18 @@ public class Vacio extends Plataforma {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x, y, 30, 30);
 	}
 
 	public void aceptarVisita(Visitor v) {
 		v.visitarVacio(this);
 	}
+	
 	public void afectarPersonaje(Personaje p) {
 		p.morir();
 		p.setPuntuacion(-15);
 	}
+	
 	public void cargarSprite(Sprite s) {
 		
 	}
@@ -42,7 +44,6 @@ public class Vacio extends Plataforma {
 		return y;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
 		return hitb;
 	}

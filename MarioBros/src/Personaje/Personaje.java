@@ -14,15 +14,15 @@ import Fabricas.*;
 public class Personaje extends Entidad{
 	
 	private EstadoDePersonaje estado;
-	
 	protected Sprite sprite;
+	protected Hitbox hitb;
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion;
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
-	protected Hitbox hitb;
+
 	protected int min = 10;
 	protected int alto;
 	
@@ -41,19 +41,14 @@ public class Personaje extends Entidad{
 	protected int tiempoSaltando=0;
 	protected final int maxTiempoSalto=20;
 	
-	
-	
-	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;   
         estado = new EstadoNormal(this ,sprite, x ,y); 
-        direccionDelPersonaje = 0; // direccion 0 -> Quieto
+        direccionDelPersonaje = 0;
         posX = x;
         posY = y;
-        //this.sprite = sprite;  
-       // hitb = new Hitbox(x ,y,30 ,40);
         tocandoBloque=false;
         tocandoBloqueDerecha=false;
         tocandoBloqueIzquierda=false;
@@ -64,7 +59,6 @@ public class Personaje extends Entidad{
         
     }
 	
-	//D 4
 	public void colisionLateralGoomba() {
 		estado.colisionLateralGoomba();
 	}
@@ -72,62 +66,61 @@ public class Personaje extends Entidad{
 	public void colisionSuperChampi() {
 		estado.colisionSuperChampi();
 	}
+	
 	public int getAlto() {
 		return estado.getAlto();
 	}
+	
 	public void moverPersonaje(){	
 		estado.moverPersonaje();
 	}
 	
 	public void saltar() {
-		/*
-		
-        if (tocandoBloqueAbajo && !saltando) { // Solo saltar si está tocando el suelo
-        	saltando=true;
-        	velY = velSalto;
-        	tiempoSaltando=0;
-        	System.out.println("Saltando");
-        }NNO TERMINADOOOO
-        */
+
     }
 	
-	 public void actualizarSprite() {
-	        estado.actualizarSprite();
-	    }
-
+	public void actualizarSprite() {
+		estado.actualizarSprite();
+	}
 
 	public boolean getSaltando() {
 		return saltando;
 	}
-	public void setSaltando(boolean b){
-		saltando=b;
+	
+	public void setSaltando(boolean saltando){
+		this.saltando=saltando;
 	}
+	
 	public int getVelX() {
 		return estado.getVelX();
 	}
 	
-	public void setTocandoBloque(boolean b) {
-		tocandoBloque=b;
+	public void setTocandoBloque(boolean tocando) {
+		tocandoBloque=tocando;
 	}
 	
 	public void setTocandoBloqueDerecha(boolean b) {
 		estado.setTocandoBloqueDerecha(b);
 	}
+	
 	public void setTocandoBloqueIzquierda(boolean b) {
 		estado.setTocandoBloqueIzquierda(b);
 	}
+	
 	public void setTocandoBloqueAbajo(boolean b) {
 		estado.setTocandoBloqueAbajo(b);
 	}
+	
 	public void setTocandoBloqueArriba(boolean b) {
 		tocandoBloqueArriba=b;
 	}
+	
 	public Hitbox getHitbox() {
     	return estado.getHitbox();
     }
  
     public void morir() {
-        this.estado.morir();
+        estado.morir();
         this.vidas -= 1;
         if (this.vidas == 0) {
         	System.out.println("Game Over");
@@ -220,9 +213,11 @@ public class Personaje extends Entidad{
 	}
 
 	public void setPosX(int x) {
-	    estado.setPosX(x); // Actualizar la hitbox después de ajustar la posición
+	    estado.setPosX(x);
 	}
+	
 	public void setPosY(int y) {
 		estado.setPosY(y);
 	}
+	
 }

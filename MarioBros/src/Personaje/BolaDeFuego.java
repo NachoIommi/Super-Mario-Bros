@@ -30,9 +30,7 @@ public class BolaDeFuego extends Entidad{
 		return sprite;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 }

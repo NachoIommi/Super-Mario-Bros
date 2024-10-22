@@ -10,19 +10,15 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoNormal extends EstadoDePersonaje {
 	
-	//protected Personaje personaje;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	
-	
+
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion;
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
-	
-	//protected int min = 10;
 	
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
@@ -39,11 +35,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected int tiempoSaltando=0;
 	protected final int maxTiempoSalto=20;
 	
-
-
-	
 	public EstadoNormal(Personaje personaje,Sprite s,int x,int y) {
-		
 		super(personaje);
 		hitb = new Hitbox(x ,y,30 ,40);
 		setPosX(x);
@@ -56,11 +48,10 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    tocandoBloqueArriba=false;
 	    saltando=false;  
 	    alto=30;
-		
 	}
 	
 	public void moverPersonaje(){	
-		int factorVelocidad = 1; //en estado estrella mueve mas rapido, en el resto es = 1
+		int factorVelocidad = 1; 
 		
 		if (direccionDelPersonaje != 0) {
 			if(direccionDelPersonaje==1)
@@ -73,8 +64,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 				   			actualizarSprite();}
 			   }		
 				   	
-			if(direccionDelPersonaje==3)
-					{
+			if(direccionDelPersonaje==3){
 						if(posX > personaje.getMin() && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
 							if (velX>-11)
 								velX=(velX-1* factorVelocidad);
@@ -82,9 +72,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 							hitb.actualizar(posX, posY);
 							actualizarSprite();}
 					}
-							
-						
-						
+			
 			if(direccionDelPersonaje==2)
 		                if (tocandoBloqueAbajo && !saltando) { // Solo si está en el suelo
 		                    saltando = true;
@@ -93,18 +81,16 @@ public class EstadoNormal extends EstadoDePersonaje {
 		                }
 		                				}
 		   
-		   else { //DIRECCION 0
-			   velX=0;	//REINICIO VELOCIDAD
+		   else { 
+			   velX=0;
 			   actualizarSprite();
 		   }	
 		   
 		   if (saltando) {
-			    // Aplicar la gravedad y la velocidad inicial
-			   
 			    velY = velY + gravedad;
 			    if(!tocandoBloqueArriba)
 			    	posY = posY + velY;
-			   
+			    
 			    if (tocandoBloqueAbajo==true) { // Verificar si el personaje ha tocado el suelo
 			        saltando = false;
 			        velY = 0;
@@ -122,9 +108,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 		    hitb.actualizar(posX, posY);
 		   
 	   }
-	
-	
-
 	
     public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
@@ -151,7 +134,6 @@ public class EstadoNormal extends EstadoDePersonaje {
     	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),posX,posY);
     	personaje.cambiarEstado(e);
     	System.out.println("Colision hecha");
-    	System.out.println(personaje.getSprite().getRutaImagen());
     }
     
     public void saltar() {
@@ -159,15 +141,17 @@ public class EstadoNormal extends EstadoDePersonaje {
 
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
-    	//personaje.cargarSprite("spritesOriginales\marioNormalMuerto.png"); 
+    	personaje.actualizarSprite();
     }
     
     public boolean getSaltando() {
 		return saltando;
 	}
+    
 	public void setSaltando(boolean b){
 		saltando=b;
 	}
+	
 	public int getVelX() {
 		return velX;
 	}
@@ -175,33 +159,34 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void setTocandoBloque(boolean b) {
 		tocandoBloque=b;
 	}
+	
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha=b;
 	}
+	
 	public void setTocandoBloqueIzquierda(boolean b) {
 		tocandoBloqueIzquierda=b;
 	}
+	
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo=b;
 	}
+	
 	public void setTocandoBloqueArriba(boolean b) {
 		tocandoBloqueArriba=b;
 	}
+	
 	public Hitbox getHitbox() {
     	return hitb;
     }
 
-    
     public void recibirDano() {
-    	;
+    	
     }
-
 
     public void sumarPuntos(int puntos) {
         this.puntuacion += puntos;
     }
-  
-   
     
     public void establecerDireccion(int d) {
 	    direccionDelPersonaje = d;
@@ -214,16 +199,18 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
+	
 	public int getPosX() {
 		return posX;
 	}
+	
 	public int getPosY() {
 		return posY;
 	}
-
 
 	public void setPosX(int x) {
 	    this.posX = x;
@@ -235,7 +222,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    hitb.actualizar(posX, posY);  // Actualizar la hitbox después de ajustar la posición
 	}
 	
-
 	public void actualizarMin() {
 		personaje.actualizarMin();
 	}
@@ -244,70 +230,44 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return personaje.getMin();
 	}
 	
-	@Override
 	public void sumarVida() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacion(int n) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionChampiVerde() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionEstrella() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionFlorDeFuego() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionSuperChampi() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public int getFactorVelocidad() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void romperLadrilloSolido(LadrilloSolido l) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void moverBloqueGolpeable(BloqueGolpeable b) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public int getAlto() {
 		return alto;
 	}
 
-	@Override
 	public void colisionLateralGoomba() {
 		System.out.println("MORIR");
 	}
 
-	
- 
 }

@@ -12,8 +12,6 @@ import Personaje.Personaje;
 
 public class Nivel {
 	
-	protected int reloj;
-	protected int nivelActual;
 	protected Juego juego;
 	protected Sprite spriteNivel;
 	protected GenerarPersonaje fabricaPersonaje;
@@ -35,6 +33,8 @@ public class Nivel {
 	protected GenerarPowerUps fabricaFlorDeFuego;
 	protected GenerarPowerUps fabricaChampiVerde;
 	protected GenerarSprite fabricaSprite;
+	protected int reloj;
+	protected int nivelActual;
 	
 	public Nivel(int tiempo, Juego juego) {
 		

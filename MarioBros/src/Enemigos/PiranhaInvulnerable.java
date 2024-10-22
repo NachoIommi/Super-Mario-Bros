@@ -9,18 +9,16 @@ public class PiranhaInvulnerable implements EstadosDePiranhaPlant {
         this.piranha = piranha;
     }
 
-   
     public void moverse() {
        
     }
 
-    
     public void morir() {
       
     }
 
-    
     public void aceptarVisita(Visitor v) {
        
     }
+
 }

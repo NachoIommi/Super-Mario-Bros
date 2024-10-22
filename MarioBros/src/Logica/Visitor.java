@@ -8,7 +8,6 @@ import Plataformas.*;
 import PowerUps.*;
 public interface Visitor {
 	
-	
 	public void visitarBolaDeFuego(BolaDeFuego b);
 	public void visitarMoneda(Moneda m);
 	public void visitarFlorDeFuego(FlorDeFuego f);
@@ -26,7 +25,7 @@ public interface Visitor {
 	public void visitarGoomba(Goomba g);
 	public void visitarKoopaTroopa(KoopaTroopa k);
 	public void visitarMusica(Musica m);
-	public void visitarPantalla(Juego j);//Visitaba a la pantalla
+	public void visitarPantalla(Juego j);
 	public void visitarSprite(Sprite s);
 	public void visitarAnimador(Animador a);
 	

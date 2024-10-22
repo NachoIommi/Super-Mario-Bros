@@ -6,6 +6,4 @@ public class GenerarSpriteOriginal extends GenerarSprite{
 		super("/spritesOriginales");
 	}
 	
-
-	
 }

@@ -14,7 +14,7 @@ public class Moneda extends PowerUps{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x , y, 30, 30);
 	}
 	
 	public void moverse() {
@@ -33,6 +33,7 @@ public class Moneda extends PowerUps{
 		p.setPuntuacion(5);
     	p.setMonedas(1);
 	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
@@ -45,7 +46,6 @@ public class Moneda extends PowerUps{
 		return y;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
 		return hitb;
 	}

@@ -24,4 +24,6 @@ public class BloqueGolpeable implements EstadoDeBloque{
 	public int getGolpesRestantes() {
 		return golpesRestantes;
 	}
+	
+	
 }

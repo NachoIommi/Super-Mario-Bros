@@ -14,15 +14,12 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected Sprite sprite;
 	protected Hitbox hitb;
 	
-	
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion;
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
-	
-	//protected int min = 10;
 	
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
@@ -295,12 +292,6 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	public void setPuntuacionSuperChampi() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public int getFactorVelocidad() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

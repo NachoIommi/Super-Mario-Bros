@@ -10,10 +10,8 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoSuperMario extends EstadoDePersonaje {
 	
-	//protected Personaje personaje;
 	protected Sprite sprite;
-	protected Hitbox hitb;
-	
+	protected Hitbox hitb;	
 	
 	protected int vidas;
 	protected int monedas;
@@ -21,8 +19,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
-	
-	//protected int min = 10;
 	
 	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
@@ -41,10 +37,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected int ancho;
 	protected int alto;
 
-
-	
 	public EstadoSuperMario(Personaje personaje,Sprite s,int x,int y) {
-		
 		super(personaje);
 		hitb = new Hitbox(x ,y,30 ,62);
 		setPosX(x);
@@ -57,13 +50,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    tocandoBloqueArriba=false;
 	    saltando=false;  
 	    ancho=30;
-	    alto=60;
-	    
-		
+	    alto=60;	
 	}
 	
 	public void moverPersonaje(){	
-		int factorVelocidad = 1; //en estado estrella mueve mas rapido, en el resto es = 1
+		int factorVelocidad = 1; 
 		
 		if (direccionDelPersonaje != 0) {
 			if(direccionDelPersonaje==1)
@@ -73,17 +64,20 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 				   				velX=(velX+1 * factorVelocidad);
 				   			posX = posX+ velX;
 				   			hitb.actualizar(posX, posY);
-				   			actualizarSprite();				   			}}		
+				   			actualizarSprite();				   			
+				   	}
 				   	
-					if(direccionDelPersonaje==3)
-					{
+				}		
+				   	
+					if(direccionDelPersonaje==3){
 						if(posX > personaje.getMin() && tocandoBloqueIzquierda==false) { //El personaje solo llega al inicio de la pantalla
 							if (velX>-11)
 								velX=(velX-1* factorVelocidad);
 							posX = posX + velX;
 							hitb.actualizar(posX, posY);
-							actualizarSprite();}
-							}
+							actualizarSprite();
+						}
+					}
 							
 						
 						
@@ -93,12 +87,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		                    velY = velSalto;  // Aplicar la velocidad de salto
 		                    tiempoSaltando = 0;  // Reiniciar tiempo de salto
 		                }
-		                				}
+		}
 		   
-		   else { //DIRECCION 0
-			   velX=0;	//REINICIO VELOCIDAD
-			   
-				   actualizarSprite();
+		   else {
+			   velX=0;
+			   actualizarSprite();
 		   }	
 		   
 		   if (saltando) {
@@ -123,7 +116,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		    
 		    // Actualizar la hitbox del personaje
 		    hitb.actualizar(posX, posY);
-		   
 	   }
 	
 	public void colisionLateralGoomba() {
@@ -131,14 +123,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonaje(),posX,posY);
     	personaje.cambiarEstado(e);
     	System.out.println("Colision Goomba");
-    	System.out.println(personaje.getSprite().getRutaImagen());
     }
 	
 	public int getAlto() {
 		return alto;
 	}
-
-	
 	
     public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
@@ -148,17 +137,13 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    		break;
     		case(3):
 	    		sprite = fabrica.getSuperMarioCorriendoIzquierda();
-    			System.out.println("GOGOGOOG ");
 	    		break;
     		case(0):
-	    		sprite = fabrica.getSuperMario();
-    			
+	    		sprite = fabrica.getSuperMario();	
 	    		break;
-    		
     		default:
     			break;
     	}
-
         personaje.cargarSprite(sprite);
     }
 
@@ -168,15 +153,17 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
-    	//personaje.cargarSprite("spritesOriginales\marioNormalMuerto.png"); 
+    	personaje.actualizarSprite();
     }
     
     public boolean getSaltando() {
 		return saltando;
 	}
+    
 	public void setSaltando(boolean b){
 		saltando=b;
 	}
+	
 	public int getVelX() {
 		return velX;
 	}
@@ -184,33 +171,34 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public void setTocandoBloque(boolean b) {
 		tocandoBloque=b;
 	}
+	
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha=b;
 	}
+	
 	public void setTocandoBloqueIzquierda(boolean b) {
 		tocandoBloqueIzquierda=b;
 	}
+	
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo=b;
 	}
+	
 	public void setTocandoBloqueArriba(boolean b) {
 		tocandoBloqueArriba=b;
 	}
+	
 	public Hitbox getHitbox() {
     	return hitb;
     }
 
-    
     public void recibirDano() {
-    	;
+   
     }
-
 
     public void sumarPuntos(int puntos) {
         this.puntuacion += puntos;
-    }
-  
-   
+    }   
     
     public void establecerDireccion(int d) {
 	    direccionDelPersonaje = d;
@@ -223,16 +211,18 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
+	
 	public int getPosX() {
 		return posX;
 	}
+	
 	public int getPosY() {
 		return posY;
 	}
-
 
 	public void setPosX(int x) {
 	    this.posX = x;
@@ -243,7 +233,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    this.posY = y;
 	    hitb.actualizar(posX, posY);  // Actualizar la hitbox después de ajustar la posición
 	}
-	
 
 	public void actualizarMin() {
 		   personaje.actualizarMin();
@@ -253,66 +242,40 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		return personaje.getMin();
 	}
 	
-	@Override
 	public void sumarVida() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacion(int n) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionChampiVerde() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionEstrella() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionFlorDeFuego() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setPuntuacionSuperChampi() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public int getFactorVelocidad() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void romperLadrilloSolido(LadrilloSolido l) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void moverBloqueGolpeable(BloqueGolpeable b) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void colisionSuperChampi() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	
- 
 }

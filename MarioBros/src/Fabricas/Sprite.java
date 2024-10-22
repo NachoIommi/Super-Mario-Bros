@@ -15,4 +15,5 @@ public class Sprite {
 	public void setRutaImagen(String nuevaRuta) {
 		rutaImagen = nuevaRuta;
 	}
+	
 }

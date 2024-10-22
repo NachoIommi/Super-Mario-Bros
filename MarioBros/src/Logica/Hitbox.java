@@ -10,7 +10,7 @@ public class Hitbox extends Rectangle{
 	
 	
 	 public Hitbox(int x, int y, int width, int height) {
-	        super(x, y, width, height);  // Inicializa el rectángulo (hitbox) con las dimensiones
+	        super(x, y, width, height); 
 	        this.width = width;
 	        this.height = height;
 	    }
@@ -25,8 +25,8 @@ public class Hitbox extends Rectangle{
 
 	
 	 public void drawHitbox(Graphics g) {
-		    g.setColor(Color.RED);  // Color para la hitbox, puedes cambiarlo
-		    g.drawRect(x,y,width,height);  // Dibuja el rectángulo (hitbox)
+		    g.setColor(Color.RED);  
+		    g.drawRect(x,y,width,height);  
 		}
 	
 	public Hitbox getHitbox() {

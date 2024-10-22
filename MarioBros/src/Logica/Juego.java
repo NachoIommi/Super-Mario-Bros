@@ -28,9 +28,7 @@ public class Juego {
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
 		nivel.cargarNivel(1);
-		hilo = new HiloPersonaje(this); //prueba
-		
-		
+		hilo = new HiloPersonaje(this);
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {
@@ -43,12 +41,12 @@ public class Juego {
 	}
 	
 	public void iniciarJuego() {
-		controladorVistas.mostrarPantallaJuego();
-		hilo.start();
-		
+		if(!hilo.isAlive()) {
+			hilo.start();
+		}
 	}
+	
 	public void perderJuego() {
-		controladorVistas.mostrarPantallaPerder();
 		
 	}
 	
@@ -83,6 +81,7 @@ public class Juego {
 	public void agregarPersonaje(Personaje p) {
 		personaje = p;
 	}
+	
 	public Personaje getPersonaje() {
 		return personaje;
 	}
@@ -90,6 +89,7 @@ public class Juego {
 	public void agregarEnemigo(Enemigo e) {
 		enemigos.addLast(e);
 	}
+	
 	public List<Enemigo> getEnemigo() {
 		return enemigos;
 	}
@@ -97,6 +97,7 @@ public class Juego {
 	public void agregarPlataforma(Plataforma e) {
 		plataformas.addLast(e);
 	}
+	
 	public List<Plataforma> getPlataforma() {
 		return plataformas;
 	}
@@ -108,9 +109,11 @@ public class Juego {
 	public List<PowerUps> getPowerUp() {
 		return powerUps;
 	}
+	
 	public void setHiloPersonaje(HiloPersonaje hiloPersonaje) {
 		hilo = hiloPersonaje;
 	}
+	
 	public HiloPersonaje getHiloPersonaje() {
 		return hilo;
 	}

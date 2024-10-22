@@ -17,15 +17,15 @@ public class Tuberia extends Plataforma{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x, y, 30,30);
 	}
+	
 	public Tuberia(Sprite sprite, int x,int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x , y, 30,30);
 	}
-
 
 	public Sprite getSprite() {
 		return sprite;
@@ -64,7 +64,9 @@ public class Tuberia extends Plataforma{
 	public Hitbox getHitbox() {
 		return hitb;
 	}
+	
 	public void afectarPersonaje(Personaje p) {
 		
 	}
+	
 }

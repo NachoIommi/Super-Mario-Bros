@@ -42,13 +42,9 @@ public class PantallaJuego extends JPanel {
         this.controladorVistas = controladorVistas;
         this.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ANCHO));
         setLayout(null);
-        
-        agregarPanelNivel();
-       
-       
+        agregarPanelNivel();  
         eventosTeclado();
         setFocusable(true);
-        
         iniciarTimerRefresco();
     }
     
@@ -57,15 +53,13 @@ public class PantallaJuego extends JPanel {
         refrescarPantalla = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	actualizarImagenPersonaje();
-                actualizarPosicionPersonaje();  // Refrescar posición de Mario
-                actualizarFondo();  // Actualizar la posición del fondo
+                actualizarPosicionPersonaje();  
+                actualizarFondo();  
             }
         });
         refrescarPantalla.start();
     }
-
- 
-    
+  
     public void agregarPanelNivel() {
     	panelNivel = new JPanel(null);
     	mostrarPersonaje();
@@ -102,22 +96,18 @@ public class PantallaJuego extends JPanel {
     public void actualizarImagenPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
         String ruta = personaje.getSprite().getRutaImagen();
-        personaje.setIcon(verificarExtension(ruta));  // Cargar el sprite correcto
+        personaje.setIcon(verificarExtension(ruta)); 
         refrescar();
-        
     }      
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
         if(personaje.getPosX() < 3350) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
-            //System.out.println("la pos dell pj es:"+personaje.getPosX()+" y "+personaje.getPosY());
             refrescar();
         }
-
     }
 
-    // Método para mover la imagen de fondo solo en X (hacia la derecha)
     public void moverFondo(int posicionX) {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
         posicionInicialX += posicionX;
@@ -156,14 +146,10 @@ public class PantallaJuego extends JPanel {
                 	case(KeyEvent.VK_W):
                 		controladorVistas.obtenerPersonaje().establecerDireccion(2); //o llamar a saltar
                 		//controladorVistas.obtenerPersonaje().saltar();
-                		
                 		break;
                 }
                 actualizarPosicionPersonaje();
-        		actualizarFondo();
-        		
-        		
-                
+        		actualizarFondo();	
             }
             public void keyReleased(KeyEvent k) {
             	controladorVistas.obtenerPersonaje().establecerDireccion(0);
@@ -172,22 +158,16 @@ public class PantallaJuego extends JPanel {
             }
         });
     }
-    
-  
-    
+
     public void mostrarPersonaje() {	
         Personaje personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
-        //Cargar la imagen desde los SPRITES
         String ruta = personaje.getSprite().getRutaImagen();
         personaje.setIcon(verificarExtension(ruta));
         personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
-        
         panelNivel.add(personaje);
-        System.out.println(personaje.getSprite().getRutaImagen()+personaje.getPosX()+" pos Y "+personaje.getPosY());
         refrescar();
     }
-    
     
     public void mostrarEnemigos() {
     	List<Enemigo> listaEnemigos = controladorVistas.obtenerEnemigo();
@@ -227,10 +207,9 @@ public class PantallaJuego extends JPanel {
     
     public ImageIcon verificarExtension(String ruta) {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	
         ImageIcon iconoEscalado;
+        
         if(ruta.toLowerCase().endsWith(".gif")) {
-        	
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image gifImage = icono.getImage();
             Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto(), Image.SCALE_DEFAULT);
@@ -240,6 +219,7 @@ public class PantallaJuego extends JPanel {
             Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto(), Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(imagenEscalada);
         }
+        
         return iconoEscalado;
     }
     
@@ -247,5 +227,6 @@ public class PantallaJuego extends JPanel {
     	   revalidate();
            repaint();
     }
+    
 }
 

@@ -25,9 +25,11 @@ public class BloqueDePregunta extends BloqueSolido {
 	public void aceptarVisita(Visitor v){
 		v.visitarBloqueDePregunta(this);
 	}
+	
 	public void recibirGolpe(Personaje p) {
 		// sin importar el estado va a activar un gif por medio segundo y darle un power up o moneda a mario
 	}
+	
 	public EstadoDeBloque getEstado() {
 		return estado;
 	}

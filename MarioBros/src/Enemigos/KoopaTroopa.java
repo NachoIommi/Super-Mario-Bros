@@ -8,15 +8,16 @@ public class KoopaTroopa extends Enemigo{
 	
 	private EstadoDeKoopa estadoActual;
 	protected Sprite sprite;
+	protected Hitbox hitb;
 	protected int x;
 	protected int y;
-	protected Hitbox hitb;
+	
 	
 	public KoopaTroopa(Sprite sprite, int x,int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x, y, 30, 30);
 		
 	}
 	
@@ -51,19 +52,21 @@ public class KoopaTroopa extends Enemigo{
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
+	
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(-45);
 		p.morir();
 	}
+	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(90);
 		morir();
 	}
+	
 	public void morir() {
 		
 	}
 
-	@Override
 	public Hitbox getHitbox() {
 		return hitb;
 	}

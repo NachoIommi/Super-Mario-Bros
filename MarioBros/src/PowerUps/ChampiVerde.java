@@ -47,8 +47,8 @@ public class ChampiVerde extends PowerUps{
 		return y;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
 		return hitb;
 	}
+	
 }

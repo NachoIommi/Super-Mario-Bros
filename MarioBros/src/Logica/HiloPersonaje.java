@@ -14,7 +14,6 @@ public class HiloPersonaje extends Thread {
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
     List<PowerUps> powerUp;
-    boolean b;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
@@ -24,38 +23,21 @@ public class HiloPersonaje extends Thread {
         personaje = juego.getPersonaje();
         plataforma = juego.getPlataforma();
         enemigo = juego.getEnemigo();
-        powerUp = juego.getPowerUp();
-        b = true;       
+        powerUp = juego.getPowerUp();    
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
         visitorEntidad = new VisitorEntidad(personaje);
     }
-    // si chocan de costado
-    // juego.getEnemigo().aceptarVisita(VisitorEnemigo) llama al metodo afectar personaje(), resta puntos y lo mata
-    // si chocan verticalmente
-    // juego.getEnemigo().aceptarVisita(VisitorEnemigoAfectado) llama al metodo serAfectadoPorPersonaje(), suma puntos y muere el enemigo
+  
     public void run() {
         while (true) {
             try {
-            	//System.out.println("estado: "+personaje.getDireccion());
-            	//System.out.println("ruta: "+personaje.getSprite().getRutaImagen());
-            	 // Si el personaje aún no está inicializado, obtenerlo de juego
-                if (personaje == null) {
-                    personaje = juego.getPersonaje();
-                    if (personaje == null) {
-                        System.out.println("Error: Personaje no inicializado.");
-                        continue;  // Esperar hasta que el personaje se inicialice
-                    }
-                }
                 for(Plataforma p : plataforma) {
-                    if (personaje.getHitbox().intersects(p.getHitbox())) {  // Colisión general con cualquier plataforma
+                    if (personaje.getHitbox().intersects(p.getHitbox())) {
                         personaje.setTocandoBloque(true);
-                        //System.out.println("Colisión");
 
-                        // Definir un rango de tolerancia para la altura
-                        double toleranciaAltura = 34.0; // Ajusta esto según el tamaño de tu personaje
+                        double toleranciaAltura = 34.0; 
 
-                        // Colisión desde la derecha (jugador a la izquierda del bloque)
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&
                             personaje.getHitbox().getX() < p.getHitbox().getX() &&
                             Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
@@ -65,7 +47,6 @@ public class HiloPersonaje extends Thread {
                             System.out.println("Colisión Der");
                         }  
 
-                        // Colisión desde la izquierda (jugador a la derecha del bloque)
                         else if (personaje.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
                                  personaje.getHitbox().getX() > p.getHitbox().getX() &&
                                  Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
@@ -75,14 +56,12 @@ public class HiloPersonaje extends Thread {
                             System.out.println("Colisión Izq");
                         }
 
-                        // Colisión desde abajo (tocando el piso)
                         if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY() &&
                             personaje.getHitbox().getY() < p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueAbajo(true);
-           //                 System.out.println("Colisión tocando piso");
                         }
-                        // Colisión desde arriba (tocando el techo)
+                        
                         else if (personaje.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
                                  personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY()) 
                         {
@@ -127,24 +106,19 @@ public class HiloPersonaje extends Thread {
                 	
                 }
 
-                // Mover el personaje
                 personaje.moverPersonaje();        
-                //System.out.println("pos x"+personaje.getPosX());
-                //System.out.println("pos y"+personaje.getPosY());
-                System.out.println("Ancho hitbox "+personaje.getHitbox().getWidth());               
-                System.out.println("Alto hitbox "+personaje.getHitbox().getHeight());
-
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);
                 personaje.setTocandoBloqueDerecha(false);
                 personaje.setTocandoBloqueIzquierda(false);
                 personaje.setTocandoBloqueAbajo(false);
                 personaje.setTocandoBloqueArriba(false);
-
+                
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
+    
 }

@@ -26,7 +26,6 @@ public class ControladorVistas {
 	protected Juego juego;
 	protected Ranking ranking;
 	
-	
 	public ControladorVistas(Juego juego, Ranking ranking) {
 		this.juego = juego;
 		this.ranking = ranking;
@@ -36,9 +35,6 @@ public class ControladorVistas {
 		pantallaPerder = new PantallaPerder(this);
 	}
 	
-	/*
-	 * Creo el JFrame que contendra los paneles
-	 */
 	public void iniciar() {
 		ventana = new JFrame();
 		ventana.setTitle("Super Mario Bros");
@@ -48,7 +44,7 @@ public class ControladorVistas {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
 		
-		 // Agregar un listener para manejar el cierre de la ventana
+		// Agregar un listener para manejar el cierre de la ventana
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 cierreDeJuego(); // Llamar al método para guardar el ranking
@@ -61,25 +57,10 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaJuego() {
+		juego.iniciarJuego();
 		ventana.setContentPane(pantallaJuego);
 	    ventana.revalidate();
 	    pantallaJuego.requestFocus();
-	    
-	    // Verificar si el personaje está inicializado antes de iniciar el hilo
-	    if (juego.getPersonaje() == null) {
-	        System.out.println("Error: El personaje no ha sido inicializado.");
-	        return; // Salir si el personaje no está inicializado
-	    }
-
-	    // Iniciar el hilo del personaje solo si no está en ejecución
-	    HiloPersonaje hiloPersonaje = juego.getHiloPersonaje();
-	    if (hiloPersonaje == null || !hiloPersonaje.isAlive()) {
-	        hiloPersonaje = new HiloPersonaje(juego); // Crear un nuevo hilo
-	        hiloPersonaje.start(); // Iniciar el hilo del personaje
-	        juego.setHiloPersonaje(hiloPersonaje); // Actualizar el hilo en el juego
-	    } else {
-	        System.out.println("El hilo del personaje ya está en ejecución.");
-	    }
 	}
 	
 	public void mostrarPantallaPerder() {
@@ -104,12 +85,13 @@ public class ControladorVistas {
 	
 	public void guardarJugadorEnRanking(Jugador j) {
 	    ranking.addJugador(j);
-	    cierreDeJuego(); // Asegúrate de que el ranking se guarde en el archivo
+	    cierreDeJuego(); 
 	    System.out.println("Ranking actualizado:");
-	    for (Jugador jugador : ranking.getJugadores()) { // Asegúrate de tener un método para obtener la lista de jugadores
+	    for (Jugador jugador : ranking.getJugadores()) { 
 	        System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
 	    }
 	}
+	
 	public void cierreDeJuego() {
 	    try {
 	        // Obtener la ruta relativa del archivo dentro del paquete

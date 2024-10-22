@@ -22,7 +22,6 @@ public abstract class EstadoDePersonaje {
 	public abstract void setPuntuacionEstrella();
 	public abstract void setPuntuacionFlorDeFuego();
 	public abstract void setPuntuacionSuperChampi();
-	public abstract int getFactorVelocidad();
 	public abstract void romperLadrilloSolido(LadrilloSolido l);
 	public abstract void moverBloqueGolpeable(BloqueGolpeable b);
 	public abstract void establecerDireccion(int d);
@@ -43,7 +42,5 @@ public abstract class EstadoDePersonaje {
 	public abstract void colisionSuperChampi();
 	public abstract int getAlto();
 	public abstract void colisionLateralGoomba();
-	
-		
 	
 }

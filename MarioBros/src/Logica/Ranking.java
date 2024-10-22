@@ -12,9 +12,11 @@ public class Ranking implements Serializable{
 	public Ranking() {
 		jugadores = new ArrayList<Jugador>();
 	}
+	
 	public void addJugador(Jugador j) {
 		jugadores.add(j);
 	}
+	
 	public void imprimirJugadores() {
 		Collections.sort(this.jugadores, Collections.reverseOrder());
 		System.out.println("\n Mejores Jugadores");
@@ -26,6 +28,7 @@ public class Ranking implements Serializable{
 			i++;
 		}
 	}
+	
 	public List<Jugador> getJugadores(){
 		return jugadores;
 	}

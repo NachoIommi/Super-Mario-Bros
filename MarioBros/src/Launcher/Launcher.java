@@ -34,6 +34,7 @@ public class Launcher {
 			}
 		});	
 	}
+	
 	public static Ranking cargarRanking() {
 	    Ranking ranking = new Ranking(); 
 	    try {
@@ -62,6 +63,7 @@ public class Launcher {
 	    }
 	    return ranking; 
 	}
+	
 	private static void loadConfiguration() {
 	    try (InputStream input = Launcher.class.getClassLoader().getResourceAsStream("configuration.properties")) {
 	        if (input == null) {
@@ -74,6 +76,5 @@ public class Launcher {
 	        ex.printStackTrace();
 	    }
 	}
-
 
 }

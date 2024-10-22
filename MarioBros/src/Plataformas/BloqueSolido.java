@@ -16,7 +16,7 @@ public class BloqueSolido extends Plataforma{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x, y, 30, 30);
 	}
 	
 	public void recibirGolpe() {
@@ -26,9 +26,11 @@ public class BloqueSolido extends Plataforma{
 	public void aceptarVisita(Visitor v) {
 		// no acepta nunca visita
 	}
+	
 	public void afectarPersonaje(Personaje p) {
 		// tampoco afecta al personaje
 	}
+	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}

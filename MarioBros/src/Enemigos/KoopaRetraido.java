@@ -14,4 +14,5 @@ public class KoopaRetraido implements EstadoDeKoopa{
 	public void moverse() {
 		
 	}
+	
 }

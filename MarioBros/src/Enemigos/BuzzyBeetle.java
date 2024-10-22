@@ -16,7 +16,7 @@ public class BuzzyBeetle extends Enemigo{
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitb = new Hitbox(x, y, 30, 30);
 	}
 
 	public Sprite getSprite() {
@@ -42,19 +42,21 @@ public class BuzzyBeetle extends Enemigo{
 	public void cargarSprite(Sprite s) {
 		
 	}
+	
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(-15);
 		p.morir();
 	}
+	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(30);
 		morir();
 	}
+	
 	public void morir() {
 		
 	}
 
-	@Override
 	public Hitbox getHitbox() {
 		return hitb;
 	}

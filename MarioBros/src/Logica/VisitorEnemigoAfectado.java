@@ -14,24 +14,25 @@ public class VisitorEnemigoAfectado implements Visitor{
     }
 	
 	public void visitarBolaDeFuego(BolaDeFuego b) {
+		
 	}
 
 	public void visitarMoneda(Moneda m) {
 		
 	}
-
+
 	public void visitarFlorDeFuego(FlorDeFuego f) {
 		
 	}
-
+
 	public void visitarSuperChampi(SuperChampi s) {
 	
 	}
-
+
 	public void visitarEstrella(Estrella e) {
 		
 	}
-
+
 	public void visitarChampiVerde(ChampiVerde c) {
 	
 	}
@@ -45,37 +46,30 @@ public class VisitorEnemigoAfectado implements Visitor{
 		
 	}
 
-	
 	public void visitarVacio(Vacio v) {
 	}
 
-	
 	public void visitarTuberia(Tuberia t) {	
 	}
 		
 	public void visitarPiranhaPlant(PiranhaPlant p) {		
 	}
 
-	
 	public void visitarLakitu(Lakitu l) {		l.serAfectadoPorPersonaje(personaje);
 	}
 
-	
 	public void visitarSpiny(Spiny s) {
 		s.serAfectadoPorPersonaje(personaje);
 	}
 
-	
 	public void visitarBuzzyBeetle(BuzzyBeetle b) {
 		b.serAfectadoPorPersonaje(personaje);
 	}
 
-	
 	public void visitarGoomba(Goomba g) {
 		g.serAfectadoPorPersonaje(personaje);
 	}
 
-	
 	public void visitarKoopaTroopa(KoopaTroopa k) {
 		k.serAfectadoPorPersonaje(personaje);
 	}
@@ -84,17 +78,14 @@ public class VisitorEnemigoAfectado implements Visitor{
 		
 	}
 
-	
 	public void visitarPantalla(Juego j) {
 		
 	}
 
-	
 	public void visitarSprite(Sprite s) {
 		
 	}
 
-	
 	public void visitarAnimador(Animador a) {
 		
 	}

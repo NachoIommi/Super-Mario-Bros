@@ -297,15 +297,10 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		
 	}
 
-	@Override
-	public int getFactorVelocidad() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public void romperLadrilloSolido(LadrilloSolido l) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
