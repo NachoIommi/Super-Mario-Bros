@@ -56,65 +56,88 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public void moverPersonaje() {
-	    // Movimiento a la derecha
-		// Ajuste del incremento de velocidad a la derecha
-		// Movimiento a la derecha
-		if (right) {
-		    if (posX < 3300 && !tocandoBloqueDerecha) {
-		        if (velX < 5)
-		            velX += 0.1f;  // Incremento pequeño
-		    } else {
-		        velX = 0;
-		    }
-		}
+	    
+	    if (right) {
+	        ocultarRight();
+	    }
+	    
+	    if (left) {
+	        ocultarLeft();
+	    }
 
-		// Movimiento a la izquierda
-		if (left) {
-		    if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-		        if (velX > -5)
-		            velX -= 0.1f;  // Decremento pequeño
-		    } else {
-		        velX = 0;
-		    }
-		}
-		
-		if(!right && !left && velX!=0)
-			if(tocandoBloqueDerecha || tocandoBloqueIzquierda)			
-				velX = 0;
-			
-	    // Aplicar movimiento horizontal
+	    
+	    if (!right && !left && velX != 0) {
+	        if (tocandoBloqueDerecha || tocandoBloqueIzquierda) {	//COLISION DESLIZANDO
+	            velX = 0;
+	        }
+	    }
+
+	    
+	    if (velX > 0 && !right) 
+	        velX -= 0.1f;  
+	    						//FRENA A MARIO FRICCIONADO
+	    if (velX < 0 && !left) 
+	        velX += 0.1f;  
+	    	    
 	    posX += velX;
 
-	    // Saltar
-	 // Ajustar fuerza de salto
-	    if (jump && tocandoBloqueAbajo && !tocandoBloqueArriba) {
+	    
+	    //JUMP
+	    if (jump && tocandoBloqueAbajo && !saltando && !tocandoBloqueArriba) {
 	        saltando = true;
-	        velY = -10;  // Reducir la fuerza de salto
 	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
 	    }
 
-	    // Ajustar gravedad
+	    // MIENTRAS W ESTA APRETADO
+	    if (saltando) {
+	        if (jump && velY > -7 && !tocandoBloqueArriba) {
+	            velY -= 0.9f;  // ALTURA DEL SALTO
+	            if(tocandoBloqueArriba)
+	            	velY=0;
+	        } else {
+	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
+	        }
+	    }
+
 	    if (!tocandoBloqueAbajo) {
-	        velY += 0.5;  // gravedad
-	        if (tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda )
-	        	saltando = false;
-	    }
-	    else {
-	        velY = 0;
-	        saltando = false;
+	        velY += 0.6;  // Gravedad
+	    } else {
+	        velY = 0;  
+	        saltando = false; 
 	    }
 
+	    // Detener el salto si colisiona con un bloque por encima
+	    if (tocandoBloqueArriba) {
+	        velY = 0;  // Detiene el movimiento hacia arriba
+	        saltando = false;  // Evita que siga intentando saltar
+	    }
 
-	    // Aplicar movimiento vertical
+	    
 	    posY += velY;
-
-	    if (velX > 0 && !right)
-		    velX -= 0.1f;  // Ajuste de fricción
-		if (velX < 0 && !left)
-		    velX += 0.1f;
 
 	    hitb.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
+	}
+
+	
+	public void ocultarLeft() {
+		if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
+	        if (velX > -5)
+	            velX -= 0.1f;  // Decremento pequeño
+	    } else {
+	        velX = 0;
+	    }
+	}
+	
+	public void ocultarRight() {
+		if (posX < 3300 && !tocandoBloqueDerecha) {
+	        if (velX < 5)
+	            velX += 0.1f;  // Incremento pequeño
+	    } 
+			else {
+				velX = 0;
+	    }
 	}
 	
 	public void setRight(boolean b){

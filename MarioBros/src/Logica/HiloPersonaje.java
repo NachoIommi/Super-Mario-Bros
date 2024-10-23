@@ -107,7 +107,7 @@ public class HiloPersonaje extends Thread {
                 }
 
                 personaje.moverPersonaje();
-               // System.out.println("Pos x"+personaje.getPosX());
+               System.out.println("Pos y"+personaje.getPosY());
                 
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);
