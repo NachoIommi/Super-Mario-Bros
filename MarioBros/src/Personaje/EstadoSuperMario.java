@@ -108,6 +108,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    // Ajustar gravedad
 	    if (!tocandoBloqueAbajo) {
 	        velY += 0.5;  // Reducir la gravedad
+	        if (tocandoBloqueArriba)
+	        	saltando = false;
 	    } else {
 	        velY = 0;
 	        saltando = false;
@@ -138,6 +140,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 	
 	public void colisionLateralGoomba() {
+		velX=0;
     	GenerarSprite fabrica = new GenerarSpriteOriginal();	
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);

@@ -10,8 +10,7 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoNormal extends EstadoDePersonaje {
 
-	public double toleranciaAltura=10;
-	protected float fuerzaSalto= -10f;
+	public double toleranciaAltura=30;
 	protected boolean right;
 	protected boolean left;
 	protected boolean jump;
@@ -33,12 +32,10 @@ public class EstadoNormal extends EstadoDePersonaje {
     protected boolean saltando;
 	
 	protected float velX;
-	protected int gravedad=1;
 	protected float velY;
 	protected int velSalto = -100;
 	protected int alto;
-	protected int tiempoSaltando=0;
-	protected final int maxTiempoSalto=20;
+
 	
 	public EstadoNormal(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
@@ -80,20 +77,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 		        velX = 0;
 		    }
 		}
-
-		// Ajuste para detener el movimiento suavemente
-		if (velX > 0 && !right)
-		    velX -= 0.1f;  // Ajuste de fricción
-		if (velX < 0 && !left)
-		    velX += 0.1f;
-
-
-		// Ajuste de la desaceleración cuando no se pulsa ninguna tecla
-		if(velX > 0 && !right) 
-		    velX -= 0.5;  // Reducido a 0.5
-		if(velX < 0 && !left) 
-		    velX += 0.5;  // Reducido a 0.5
-
+		
+		if(!right && !left && velX!=0)
+			if(tocandoBloqueDerecha || tocandoBloqueIzquierda)			
+				velX = 0;
+			
 	    // Aplicar movimiento horizontal
 	    posX += velX;
 
@@ -101,14 +89,17 @@ public class EstadoNormal extends EstadoDePersonaje {
 	 // Ajustar fuerza de salto
 	    if (jump && tocandoBloqueAbajo && !tocandoBloqueArriba) {
 	        saltando = true;
-	        velY = -5;  // Reducir la fuerza de salto
+	        velY = -10;  // Reducir la fuerza de salto
 	        tocandoBloqueAbajo = false;
 	    }
 
 	    // Ajustar gravedad
 	    if (!tocandoBloqueAbajo) {
-	        velY += 0.5;  // Reducir la gravedad
-	    } else {
+	        velY += 0.5;  // gravedad
+	        if (tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda )
+	        	saltando = false;
+	    }
+	    else {
 	        velY = 0;
 	        saltando = false;
 	    }
@@ -117,10 +108,15 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    // Aplicar movimiento vertical
 	    posY += velY;
 
-	    // Actualizar hitbox y sprite después de todos los movimientos
+	    if (velX > 0 && !right)
+		    velX -= 0.1f;  // Ajuste de fricción
+		if (velX < 0 && !left)
+		    velX += 0.1f;
+
 	    hitb.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
+	
 	public void setRight(boolean b){
 		right=b;
 	}
