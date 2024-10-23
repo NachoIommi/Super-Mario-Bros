@@ -21,8 +21,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion;
-	protected int posX;
-	protected int posY;
+	protected float posX;
+	protected float posY;
 	protected int direccionDelPersonaje;
 	
 	protected boolean tocandoBloque;
@@ -32,9 +32,9 @@ public class EstadoNormal extends EstadoDePersonaje {
     protected boolean tocandoBloqueArriba;
     protected boolean saltando;
 	
-	protected int velX;
+	protected float velX;
 	protected int gravedad=1;
-	protected int velY;
+	protected float velY;
 	protected int velSalto = -100;
 	protected int alto;
 	protected int tiempoSaltando=0;
@@ -60,54 +60,65 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public void moverPersonaje() {
 	    // Movimiento a la derecha
-	    if (right) {
-	        if (posX < 3300 && !tocandoBloqueDerecha) {
-	            if (velX < 11)
-	                velX += 1;
-	        } else {
-	            velX = 0;  // Detener el movimiento horizontal al colisionar
-	        }
-	    }
+		// Ajuste del incremento de velocidad a la derecha
+		// Movimiento a la derecha
+		if (right) {
+		    if (posX < 3300 && !tocandoBloqueDerecha) {
+		        if (velX < 5)
+		            velX += 0.1f;  // Incremento pequeño
+		    } else {
+		        velX = 0;
+		    }
+		}
 
-	    // Movimiento a la izquierda
-	    if (left) {
-	        if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-	            if (velX > -11)
-	                velX -= 1;
-	        } else {
-	            velX = 0;  // Detener el movimiento horizontal al colisionar
-	        }
-	    }
-	    
-	    if(velX>0 &&!right) 
-	    	velX--;
-	    if(velX<0 &&!left) 
-	    	velX++;
-	    
+		// Movimiento a la izquierda
+		if (left) {
+		    if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
+		        if (velX > -5)
+		            velX -= 0.1f;  // Decremento pequeño
+		    } else {
+		        velX = 0;
+		    }
+		}
+
+		// Ajuste para detener el movimiento suavemente
+		if (velX > 0 && !right)
+		    velX -= 0.1f;  // Ajuste de fricción
+		if (velX < 0 && !left)
+		    velX += 0.1f;
+
+
+		// Ajuste de la desaceleración cuando no se pulsa ninguna tecla
+		if(velX > 0 && !right) 
+		    velX -= 0.5;  // Reducido a 0.5
+		if(velX < 0 && !left) 
+		    velX += 0.5;  // Reducido a 0.5
 
 	    // Aplicar movimiento horizontal
 	    posX += velX;
 
 	    // Saltar
+	 // Ajustar fuerza de salto
 	    if (jump && tocandoBloqueAbajo && !tocandoBloqueArriba) {
 	        saltando = true;
-	        velY = (int) fuerzaSalto;  // Aplicar fuerza de salto
+	        velY = -5;  // Reducir la fuerza de salto
 	        tocandoBloqueAbajo = false;
 	    }
 
-	    // Caída libre o gravedad
+	    // Ajustar gravedad
 	    if (!tocandoBloqueAbajo) {
-	        velY += gravedad;  // Incrementar velocidad de caída con la gravedad
+	        velY += 0.5;  // Reducir la gravedad
 	    } else {
-	        velY = 0;  // Detener la caída si toca un bloque debajo
-	        saltando = false;  // Resetear estado de salto
+	        velY = 0;
+	        saltando = false;
 	    }
+
 
 	    // Aplicar movimiento vertical
 	    posY += velY;
 
 	    // Actualizar hitbox y sprite después de todos los movimientos
-	    hitb.actualizar(posX, posY);
+	    hitb.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
 	public void setRight(boolean b){
@@ -139,7 +150,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 
     public void colisionSuperChampi() {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),posX,posY);
+    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
     	System.out.println("Colision hecha");
     }
@@ -161,7 +172,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public int getVelX() {
-		return velX;
+		return (int)velX;
 	}
 	
 	public void setTocandoBloque(boolean b) {
@@ -213,21 +224,21 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public int getPosX() {
-		return posX;
+		return (int)posX;
 	}
 	
 	public int getPosY() {
-		return posY;
+		return (int)posY;
 	}
 
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitb.actualizar(posX, posY);  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar((int) posX, (int) posY);  // Actualizar la hitbox después de ajustar la posición
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitb.actualizar(posX, posY);  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar((int) posX, (int) posY);  // Actualizar la hitbox después de ajustar la posición
 	}
 	
 	public void actualizarMin() {

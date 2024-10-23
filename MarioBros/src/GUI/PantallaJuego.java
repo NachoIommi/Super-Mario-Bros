@@ -51,7 +51,7 @@ public class PantallaJuego extends JPanel {
     
     public void iniciarTimerRefresco() {
         // Iniciar un Timer que actualice la pantalla cada 50 ms
-        refrescarPantalla = new Timer(50, new ActionListener() {
+        refrescarPantalla = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	actualizarImagenPersonaje();
                 actualizarPosicionPersonaje();  
@@ -232,7 +232,7 @@ public class PantallaJuego extends JPanel {
                 		//controladorVistas.obtenerPersonaje().saltar();
                 		break;
                 }
-                actualizarPosicionPersonaje();
+                //actualizarPosicionPersonaje();
         		actualizarFondo();	
             }
             public void keyReleased(KeyEvent k) {
@@ -252,7 +252,7 @@ public class PantallaJuego extends JPanel {
             		//controladorVistas.obtenerPersonaje().saltar();
             		break;
             }     	
-            	actualizarImagenPersonaje();
+            	//actualizarImagenPersonaje();
             	refrescar();
             }
         });

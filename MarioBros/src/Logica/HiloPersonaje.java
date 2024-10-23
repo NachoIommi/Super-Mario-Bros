@@ -115,7 +115,7 @@ public class HiloPersonaje extends Thread {
                 personaje.setTocandoBloqueAbajo(false);
                 personaje.setTocandoBloqueArriba(false);
                 
-                Thread.sleep(50);
+                Thread.sleep(16);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

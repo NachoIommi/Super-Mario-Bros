@@ -29,7 +29,7 @@ public class Juego {
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		nivel.cargarNivel(0);
+		nivel.cargarNivel(1);
 		hilo = new HiloPersonaje(this);
 	}
 	
