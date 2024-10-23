@@ -69,10 +69,9 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    if (!right && !left && velX != 0) {
 	        if (tocandoBloqueDerecha || tocandoBloqueIzquierda) {	//COLISION DESLIZANDO
 	            velX = 0;
+	            
 	        }
 	    }
-
-	    
 	    if (velX > 0 && !right) 
 	        velX -= 0.1f;  
 	    						//FRENA A MARIO FRICCIONADO
@@ -80,9 +79,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	        velX += 0.1f;  
 	    	    
 	    posX += velX;
-
 	    
-	    //JUMP
+	    //JUMP//
 	    if (jump && tocandoBloqueAbajo && !saltando && !tocandoBloqueArriba) {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
@@ -91,28 +89,44 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	    // MIENTRAS W ESTA APRETADO
 	    if (saltando) {
-	        if (jump && velY > -7 && !tocandoBloqueArriba) {
-	            velY -= 0.9f;  // ALTURA DEL SALTO
-	            if(tocandoBloqueArriba)
+	        if (jump && velY > -5 && !tocandoBloqueArriba) {
+	            velY -= 0.4f;  // ALTURA DEL SALTO
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
 	            	velY=0;
-	        } else {
+	            
+	        } 
+	        else {
 	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
 	        }
 	    }
 
-	    if (!tocandoBloqueAbajo) {
-	        velY += 0.6;  // Gravedad
-	    } else {
-	        velY = 0;  
-	        saltando = false; 
-	    }
+	    
 
 	    // Detener el salto si colisiona con un bloque por encima
 	    if (tocandoBloqueArriba) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
+	        setPosY(getPosY()+1);
 	    }
-
+	    
+	    if(tocandoBloqueIzquierda) {
+	    	setPosX(getPosX()+1);
+	    	velY += 0.3;
+	    }
+	    if(tocandoBloqueDerecha) {
+	    	setPosX(getPosX()-1);
+	    	velY += 0.3;
+	    }
+	    
+	    if (!tocandoBloqueAbajo) {
+	        velY += 0.3;  // Gravedad
+	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) {
+	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire
+	        }
+	    } else {
+	        velY = 0;  
+	        saltando = false; 
+	    }
 	    
 	    posY += velY;
 
@@ -127,6 +141,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	            velX -= 0.1f;  // Decremento pequeño
 	    } else {
 	        velX = 0;
+	        
 	    }
 	}
 	
@@ -137,6 +152,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    } 
 			else {
 				velX = 0;
+				
 	    }
 	}
 	

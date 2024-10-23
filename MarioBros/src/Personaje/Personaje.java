@@ -129,7 +129,7 @@ public class Personaje extends Entidad{
 	}
 	
 	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
+		estado.setTocandoBloqueArriba(b);
 	}
 	
 	public Hitbox getHitbox() {
