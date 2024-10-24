@@ -92,6 +92,8 @@ public class Nivel {
 			 FileReader lector = new FileReader(ruta);
 			 BufferedReader lectura = new BufferedReader(lector);
 			 String contenido = lectura.readLine();
+			 String rutaCancionNivel = "Sonido/Canciones/soundtrackNivel-"+getNivelActual()+".wav";
+			 Musica.getInstancia().reproducirMusica(rutaCancionNivel);
 			 while(contenido != null) {
 				
 				String [] partes = contenido.split("\\s+"); //Guardo en el array cada cadena separada

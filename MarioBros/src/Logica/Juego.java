@@ -32,6 +32,7 @@ public class Juego {
 		powerUps = new ArrayList<PowerUps>();
 		nivel.cargarNivel(1);
 		hilo = new HiloPersonaje(this);
+		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {

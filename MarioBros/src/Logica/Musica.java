@@ -3,6 +3,8 @@ package Logica;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+
 import java.io.File;
 
 public class Musica { //Actua como la clase singleton, musica = singleton aca
@@ -11,7 +13,11 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
     private Clip clip;
 
     private Musica() { // es privado para evitar instanciación externa
-        //aca se puede inicializar cancion x defecto
+    	 try {
+             clip = AudioSystem.getClip();
+         } catch (LineUnavailableException e) {
+             e.printStackTrace();
+         }
     }
 
     // Método estático para obtener la única instancia
