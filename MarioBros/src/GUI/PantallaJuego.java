@@ -59,10 +59,8 @@ public class PantallaJuego extends JPanel {
                 actualizarFondo(); 
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
-                System.out.println("maximoDerecha: "+maximoDerecha);
-                System.out.println("minimo: "+controladorVistas.juego.getPersonaje().getMin());
                
-               // System.out.println("diferencia: "+ (maximoDerecha - controladorVistas.juego.getPersonaje().getMin()));
+
               // llegoAlFinal();
             }
         });
@@ -207,7 +205,6 @@ public class PantallaJuego extends JPanel {
             actualizarPosicionMonedas(velocidad);
             maximoDerecha += personaje.getVelX();
             controladorVistas.obtenerPersonaje().actualizarMin();
-            System.out.println("Vel x: "+ personaje.getVelX());
         }
         
         

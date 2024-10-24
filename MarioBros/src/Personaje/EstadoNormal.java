@@ -22,9 +22,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected int puntuacion;
 	protected float posX;
 	protected float posY;
-	protected int direccionDelPersonaje;
 	
-	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
 	protected boolean tocandoBloqueIzquierda;
 	protected boolean tocandoBloqueAbajo;
@@ -33,9 +31,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	protected float velX;
 	protected float velY;
-	protected int velSalto = -100;
 	protected int alto;
-
+	
 	
 	public EstadoNormal(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
@@ -43,7 +40,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 		setPosX(x);
 		setPosY(y);
 		sprite =s;
-		tocandoBloque=false;
 	    tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
@@ -55,81 +51,58 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    left=false;
 	}
 	
-	public void moverPersonaje() {
-	    
-	    if (right) {
-	        ocultarRight();
-	    }
-	    
-	    if (left) {
-	        ocultarLeft();
-	    }
-
-	    
-	    if (!right && !left && velX != 0) { //lo voy a ocultar con un metodo Deslizando
-	        if (tocandoBloqueDerecha || tocandoBloqueIzquierda) {	//COLISION DESLIZANDO
-	            velX = 0;
-	            
-	        }
-	    }
-	    if (velX > 0 && !right) 
-	        velX -= 0.1f;  
-	    						//FRENA A MARIO FRICCIONADO
-	    if (velX < 0 && !left) 
-	        velX += 0.1f;  
-	    	  
-	    
+	public void moverPersonaje() {	  
+		moverDerecha();	    
+	    moverIzquierda(); 	    	    	
+	    colisionDesliz(); 
+	    detenerFriccion();    
 	    posX += velX;
-	    
-	    //JUMP//
-	    if (jump && tocandoBloqueAbajo && !saltando ) {
-	        saltando = true;
-	        tocandoBloqueAbajo = false;
-	        velY = -4;  // IMPULSO INICIAL
-	    }
+	    saltar();
+	    gravedadSaltando();
+	    corregirPosEnColision();
+	    gravedad();
+	    detenerSalto();	    
+	    posY += velY;
+	    hitb.actualizar((int) posX, (int) posY);
+	    actualizarSprite();
+	}
 
-	    // MIENTRAS W ESTA APRETADO
-	    if (saltando) {
-	        if (jump && velY > -5 && !tocandoBloqueArriba) {
-	            velY -= 0.4f;  // ALTURA DEL SALTO
-	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
-	            	velY=0;
-	            
-	        } 
-	        else {
-	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
-	        }
-	    }
+	public void moverDerecha() {
+		if (right) {
+			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
+		        if (velX < 5)
+		            velX += 0.1f;
+		    } 			
+			else 
+				velX = 0;				
+			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
+				setPosX(getPosX()+3);
+		}		
+	}
+	
+	public void moverIzquierda() {
+		if (left) {
+			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
+		        if (velX > -5)
+		            velX -= 0.1f; 
+		    } 
+			else 
+		        velX = 0;       	    
+			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
+				setPosX(getPosX()-3);
+			}
+		
+	}
 
-	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()+1);
-	    	saltando = true;
-	        tocandoBloqueAbajo = false;
-	        tocandoBloqueIzquierda=false;
-	        velY = -4;
-	     
-	    }
-	    
-	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()-11);
-	    	saltando = true;
-	        tocandoBloqueAbajo = false;
-	        tocandoBloqueDerecha=false;
-	        velY = -4;
-	 
-	    }
-	    
-	    
-
-	    // Detener el salto si colisiona con un bloque por encima
-	    if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
-	        velY = 0;  // Detiene el movimiento hacia arriba
-	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
-	    }
-	    
-	    
-	    
+	public void corregirPosEnColision() {
+		if(tocandoBloqueIzquierda)  
+	    	setPosX(getPosX()+1);	    		
+	    if(tocandoBloqueDerecha) 
+	    	setPosX(getPosX()-1);
+	    if(tocandoBloqueIzquierda &&tocandoBloqueArriba) 
+	    	setPosX(getPosX()+1);    	    
+	    if(tocandoBloqueDerecha &&tocandoBloqueArriba) 
+	    	setPosX(getPosX()-1);	     
 	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
 	    	setPosX(getPosX()+1);
 	    	velY += 0.3;
@@ -138,50 +111,72 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    	setPosX(getPosX()-1);
 	    	velY += 0.3;
 	    }
-	    
-	    if (!tocandoBloqueAbajo) {
+	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
+	    	setPosX(getPosX()+1);
+	    	saltando = true;
+	        tocandoBloqueAbajo = false;
+	        tocandoBloqueIzquierda=false;
+	        velY = -4; 
+	    }
+	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
+	    	setPosX(getPosX()-1);
+	    	saltando = true;
+	        tocandoBloqueAbajo = false;
+	        tocandoBloqueDerecha=false;
+	        velY = -4;
+	    }
+	    if(posX <= personaje.getMin()) {
+            setPosX(getPosX()+1);
+            velX = 0;
+        }
+	}
+	
+	public void gravedad() {
+		if (!tocandoBloqueAbajo) {
 	        velY += 0.3;  // Gravedad
 	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire
-	        
+	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire        
 	    } 
 	    else {
 	        velY = 0;  
-	        saltando = false; 
-	    }
-	    
-	    if(posX <= personaje.getMin()) {
-	    	setPosX(getPosX()+1);
-	    	velX = 0;
-	    }
-	    
-	    posY += velY;
-	    
-	    hitb.actualizar((int) posX, (int) posY);
-	    actualizarSprite();
+	        saltando = false;}
 	}
-
 	
-	public void ocultarLeft() {
-		if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-	        if (velX > -5)
-	            velX -= 0.1f;  // Decremento pequeño
-	    } else {
-	        velX = 0;
-	        
+	public void gravedadSaltando() {
+		if (saltando) {
+	        if (jump && velY > -5 && !tocandoBloqueArriba) {
+	            velY -= 0.4f;  // ALTURA DEL SALTO
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
+	            	velY=0;	            
+	        } 
+	        else {
+	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
+	        }
 	    }
 	}
 	
-	public void ocultarRight() {
-		if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-	        if (velX < 5)
-	            velX += 0.1f;  // Incremento pequeño
-	    } 
-			else {
-				velX = 0;
-				
+	public void detenerSalto() {
+		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
+	        velY = 0;  // Detiene el movimiento hacia arriba
+	        saltando = false;  // Evita que siga intentando saltar
+	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
 	    }
-		
+	}
+	
+	public void detenerFriccion() {
+		if (velX > 0 && !right) 
+	        velX -= 0.1f;  
+	    						//FRENA A MARIO FRICCIONADO
+	    if (velX < 0 && !left) 
+	        velX += 0.1f;  
+	}
+	
+	public void colisionDesliz() {
+		if (!right && !left && velX != 0) { 
+	        if (tocandoBloqueDerecha || tocandoBloqueIzquierda) {
+	            velX = 0;	            
+	        }
+	    }
 	}
 	
 	public void setRight(boolean b){
@@ -195,9 +190,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void setJump(boolean b){
 		jump=b;
 	}
+	
 	public double getToleranciaAltura() {
 		return toleranciaAltura;
 	}
+	
 	public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	if(right) {
@@ -219,6 +216,11 @@ public class EstadoNormal extends EstadoDePersonaje {
     }
     
     public void saltar() {
+    	if (jump && tocandoBloqueAbajo && !saltando ) {
+	        saltando = true;
+	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
+	    }
     }
 
     public void morir() {
@@ -236,10 +238,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public float getVelX() {
 		return velX;
-	}
-	
-	public void setTocandoBloque(boolean b) {
-		tocandoBloque=b;
 	}
 	
 	public void setTocandoBloqueDerecha(boolean b) {
@@ -268,14 +266,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 
     public void sumarPuntos(int puntos) {
         this.puntuacion += puntos;
-    }
-    
-    public void establecerDireccion(int d) {
-	    direccionDelPersonaje = d;
-    }
-    
-    public int getDireccion() {
-    	return direccionDelPersonaje;
     }
     
 	public void cargarSprite(Sprite s) {
@@ -309,7 +299,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 		personaje.actualizarMin();
 	}
 	
-	public int getMin() {
+	public float getMin() {
 		return personaje.getMin();
 	}
 	

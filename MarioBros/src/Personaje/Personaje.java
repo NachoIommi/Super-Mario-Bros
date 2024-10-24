@@ -24,7 +24,7 @@ public class Personaje extends Entidad{
 	protected int posY;
 	protected int direccionDelPersonaje;
 
-	protected int min = 10;
+	protected float min = 10.0f;
 	public int max = 2700;
 	protected int alto;
 	
@@ -200,14 +200,7 @@ public class Personaje extends Entidad{
     public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }
-       
-    public void establecerDireccion(int d) {
-	    estado.establecerDireccion(d);
-	    
-    }
-    public int getDireccion() {
-    	return estado.getDireccion();
-    }
+
     
 	public void cargarSprite(Sprite s) {
 		estado.cargarSprite(s);
@@ -228,7 +221,7 @@ public class Personaje extends Entidad{
 			min+=estado.getVelX();
 	}
 	
-	public int getMin() {
+	public float getMin() {
 		return min;
 	}
 
