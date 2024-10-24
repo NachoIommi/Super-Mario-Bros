@@ -16,6 +16,14 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite("/img/nivel-1.png");
 	}
 	
+	public Sprite getPersonajeNormalDerrapandoDerecha() {
+		return new Sprite(rutaImagen + "/marioNormalDerrapandoDerecha.png");
+	}
+	
+	public Sprite getPersonajeNormalDerrapandoIzquierda() {
+		return new Sprite(rutaImagen + "/marioNormalDerrapandoIzquierda.png");
+	}
+	
 	public Sprite getPersonajeNormalQuietoDerecha() {
 		return new Sprite(rutaImagen + "/marioNormalQuietoDerecha.png");
 	}

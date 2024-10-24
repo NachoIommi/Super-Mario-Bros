@@ -64,11 +64,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    detenerSalto();	    
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
-	    actualizarSprite();
+	   // actualizarSprite();
 	}
 
 	public void moverDerecha() {
 		if (right) {
+			actualizarSprite();
 			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
 		        if (velX < 5)
 		            velX += 0.1f;
@@ -78,10 +79,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
 				setPosX(getPosX()+3);
 		}		
+		 
 	}
 	
 	public void moverIzquierda() {
 		if (left) {
+			actualizarSprite();
 			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
 		        if (velX > -5)
 		            velX -= 0.1f; 
@@ -197,8 +200,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right) {
-    		sprite = fabrica.getSuperMarioCorriendoDerecha();
+    	if(right && getVelX() >0 ) {
+    		sprite = fabrica.getPersonajeNormalCorriendoDerecha();
     		personaje.cargarSprite(sprite);}
 	    if(left) {
 	    	sprite = fabrica.getPersonajeNormalCorriendoIzquierda();
@@ -206,6 +209,14 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    if(!left&& !right) {
 	    	sprite = fabrica.getPersonajeNormalQuietoDerecha();
 	    	personaje.cargarSprite(sprite);}
+	    if(left && getVelX() > 0) {
+	    	sprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
+	    	personaje.cargarSprite(sprite);
+	    }
+	    if(right && getVelX() < 0) {
+	    	sprite = fabrica.getPersonajeNormalDerrapandoDerecha();
+	    	personaje.cargarSprite(sprite);
+	    }
     }
 
     public void colisionSuperChampi() {
