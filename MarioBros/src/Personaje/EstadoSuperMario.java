@@ -10,36 +10,27 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoSuperMario extends EstadoDePersonaje {
 	
-	protected float fuerzaSalto= -10f;
+	public double toleranciaAltura=34;
 	protected boolean right;
 	protected boolean left;
 	protected boolean jump;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected double toleranciaAltura=34; 
 
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion;
-	protected int posX;
-	protected int posY;
-	protected int direccionDelPersonaje;
+	protected float posX;
+	protected float posY;
 	
-	protected boolean tocandoBloque;
 	protected boolean tocandoBloqueDerecha;
 	protected boolean tocandoBloqueIzquierda;
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
     protected boolean saltando;
 	
-    protected float velX;
-	protected int gravedad=1;
+	protected float velX;
 	protected float velY;
-	protected int velSalto = -100;
-	
-	protected int tiempoSaltando=0;
-	protected final int maxTiempoSalto=20;
-	protected int ancho;
 	protected int alto;
 
 	public EstadoSuperMario(Personaje personaje,Sprite s,int x,int y) {
@@ -48,84 +39,142 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		setPosX(x);
 		setPosY(y-30);
 		sprite =s;
-		tocandoBloque=false;
 	    tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 	    saltando=false;  
-	    ancho=30;
-	    alto=60;	
+	    jump=false;
+	    right=false;
+	    left=false;	
+	    alto=60;
 	}
 	
-	public void moverPersonaje() {
-	    // Movimiento a la derecha
-		// Ajuste del incremento de velocidad a la derecha
-		// Movimiento a la derecha
-		if (right) {
-		    if (posX < 3300 && !tocandoBloqueDerecha) {
-		        if (velX < 5)
-		            velX += 0.1f;  // Incremento pequeño
-		    } else {
-		        velX = 0;
-		    }
-		}
-
-		// Movimiento a la izquierda
-		if (left) {
-		    if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-		        if (velX > -5)
-		            velX -= 0.1f;  // Decremento pequeño
-		    } else {
-		        velX = 0;
-		    }
-		}
-
-		// Ajuste para detener el movimiento suavemente
-		if (velX > 0 && !right)
-		    velX -= 0.1f;  // Ajuste de fricción
-		if (velX < 0 && !left)
-		    velX += 0.1f;
-
-
-		// Ajuste de la desaceleración cuando no se pulsa ninguna tecla
-		if(velX > 0 && !right) 
-		    velX -= 0.5;  // Reducido a 0.5
-		if(velX < 0 && !left) 
-		    velX += 0.5;  // Reducido a 0.5
-
-	    // Aplicar movimiento horizontal
+	public void moverPersonaje() {	  
+		moverDerecha();	    
+	    moverIzquierda(); 	    	    	
+	    colisionDesliz(); 
+	    detenerFriccion();    
 	    posX += velX;
-
-	    // Saltar
-	 // Ajustar fuerza de salto
-	    if (jump && tocandoBloqueAbajo && !tocandoBloqueArriba) {
-	        saltando = true;
-	        velY = -5;  // Reducir la fuerza de salto
-	        tocandoBloqueAbajo = false;
-	    }
-
-	    // Ajustar gravedad
-	    if (!tocandoBloqueAbajo) {
-	        velY += 0.5;  // Reducir la gravedad
-	        if (tocandoBloqueArriba)
-	        	saltando = false;
-	    } else {
-	        velY = 0;
-	        saltando = false;
-	    }
-
-
-	    // Aplicar movimiento vertical
+	    saltar();
+	    gravedadSaltando();
+	    corregirPosEnColision();
+	    gravedad();
+	    detenerSalto();	    
 	    posY += velY;
-
-	    // Actualizar hitbox y sprite después de todos los movimientos
 	    hitb.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
+
+	public void moverDerecha() {
+		if (right) {
+			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
+		        if (velX < 5)
+		            velX += 0.1f;
+		    } 			
+			else 
+				velX = 0;				
+			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
+				setPosX(getPosX()+3);
+		}		
+	}
 	
-	public float getVelY() {
-		return velY;
+	public void moverIzquierda() {
+		if (left) {
+			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
+		        if (velX > -5)
+		            velX -= 0.1f; 
+		    } 
+			else 
+		        velX = 0;       	    
+			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
+				setPosX(getPosX()-3);
+			}
+	}
+	
+	public void corregirPosEnColision() {
+		if(tocandoBloqueIzquierda)  
+	    	setPosX(getPosX()+1);	    		
+	    if(tocandoBloqueDerecha) 
+	    	setPosX(getPosX()-1);
+	    if(tocandoBloqueIzquierda &&tocandoBloqueArriba) 
+	    	setPosX(getPosX()+1);    	    
+	    if(tocandoBloqueDerecha &&tocandoBloqueArriba) 
+	    	setPosX(getPosX()-1);	     
+	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
+	    	setPosX(getPosX()+1);
+	    	velY += 0.3;
+	    }
+	    if(tocandoBloqueDerecha && !tocandoBloqueAbajo) {
+	    	setPosX(getPosX()-1);
+	    	velY += 0.3;
+	    }
+	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
+	    	setPosX(getPosX()+1);
+	    	saltando = true;
+	        tocandoBloqueAbajo = false;
+	        tocandoBloqueIzquierda=false;
+	        velY = -4; 
+	    }
+	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
+	    	setPosX(getPosX()-1);
+	    	saltando = true;
+	        tocandoBloqueAbajo = false;
+	        tocandoBloqueDerecha=false;
+	        velY = -4;
+	    }
+	    if(posX <= personaje.getMin()) {
+            setPosX(getPosX()+1);
+            velX = 0;
+        }
+	}
+	
+	public void gravedad() {
+		if (!tocandoBloqueAbajo) {
+	        velY += 0.3;  // Gravedad
+	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
+	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire        
+	    } 
+	    else {
+	        velY = 0;  
+	        saltando = false;}
+	}
+	
+	public void gravedadSaltando() {
+		if (saltando) {
+	        if (jump && velY > -5 && !tocandoBloqueArriba) {
+	            velY -= 0.4f;  // ALTURA DEL SALTO
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
+	            	velY=0;	            
+	        } 
+	        else {
+	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
+	        }
+	    }
+	}
+	
+	public void detenerSalto() {
+		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
+	        velY = 0;  // Detiene el movimiento hacia arriba
+	        saltando = false;  // Evita que siga intentando saltar
+	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
+	    }
+	}
+
+	public void detenerFriccion() {
+		if (velX > 0 && !right) 
+	        velX -= 0.1f;  
+	    						//FRENA A MARIO FRICCIONADO
+	    if (velX < 0 && !left) 
+	        velX += 0.1f;  
+	}
+	
+	public void colisionDesliz() {
+		if (!right && !left && velX != 0) { 
+	        if (tocandoBloqueDerecha || tocandoBloqueIzquierda) {
+	            velX = 0;	            
+	        }
+	    }
 	}
 	
 	public void setRight(boolean b){
@@ -169,10 +218,14 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    	personaje.cargarSprite(sprite);}
     }
 
-    public void saltar() {
-    	
+	public void saltar() {
+    	if (jump && tocandoBloqueAbajo && !saltando ) {
+	        saltando = true;
+	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
+	    }
     }
-
+    
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
     	personaje.actualizarSprite();
@@ -186,12 +239,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		saltando=b;
 	}
 	
-	public int getVelX() {
-		return (int)velX;
-	}
-	
-	public void setTocandoBloque(boolean b) {
-		tocandoBloque=b;
+	public float getVelX() {
+		return velX;
 	}
 	
 	public void setTocandoBloqueDerecha(boolean b) {
@@ -215,19 +264,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     }
 
     public void recibirDano() {
-   
+    	
     }
 
     public void sumarPuntos(int puntos) {
         this.puntuacion += puntos;
-    }   
-    
-    public void establecerDireccion(int d) {
-	    direccionDelPersonaje = d;
-    }
-    
-    public int getDireccion() {
-    	return direccionDelPersonaje;
     }
     
 	public void cargarSprite(Sprite s) {
@@ -239,28 +280,29 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 	
 	public int getPosX() {
-		return (int)posX;
+		return Math.round(posX);
 	}
 	
 	public int getPosY() {
-		return (int)posY;
+		return Math.round(posY);
+		
 	}
 
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitb.actualizar((int)posX, (int)posY);  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitb.actualizar((int)posX, (int)posY);  // Actualizar la hitbox después de ajustar la posición
-	}
-
-	public void actualizarMin() {
-		   personaje.actualizarMin();
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
 	}
 	
-	public int getMin() {
+	public void actualizarMin() {
+		personaje.actualizarMin();
+	}
+	
+	public float getMin() {
 		return personaje.getMin();
 	}
 	
@@ -298,6 +340,12 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 
 	public void colisionSuperChampi() {
 		
+	}
+
+	@Override
+	public float getVelY() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
