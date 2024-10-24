@@ -38,7 +38,7 @@ public abstract class EstadoDePersonaje {
 	public abstract void setTocandoBloqueIzquierda(boolean b);
 	public abstract int getMin() ;
 	public abstract void actualizarMin();
-	public abstract int getVelX();
+	public abstract float getVelX();
 	public abstract void colisionSuperChampi();
 	public abstract int getAlto();
 	public abstract void colisionLateralGoomba();

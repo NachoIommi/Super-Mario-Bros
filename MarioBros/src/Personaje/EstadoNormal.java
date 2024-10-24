@@ -150,8 +150,13 @@ public class EstadoNormal extends EstadoDePersonaje {
 	        saltando = false; 
 	    }
 	    
+	    if(posX <= personaje.getMin()) {
+	    	setPosX(getPosX()+1);
+	    	velX = 0;
+	    }
+	    
 	    posY += velY;
-
+	    
 	    hitb.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
@@ -168,7 +173,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public void ocultarRight() {
-		if (posX < 3300 && !tocandoBloqueDerecha) {
+		if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
 	        if (velX < 5)
 	            velX += 0.1f;  // Incremento pequeño
 	    } 
@@ -176,6 +181,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 				velX = 0;
 				
 	    }
+		
 	}
 	
 	public void setRight(boolean b){
@@ -228,8 +234,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 		saltando=b;
 	}
 	
-	public int getVelX() {
-		return (int)velX;
+	public float getVelX() {
+		return velX;
 	}
 	
 	public void setTocandoBloque(boolean b) {
@@ -281,21 +287,22 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public int getPosX() {
-		return (int)posX;
+		return Math.round(posX);
 	}
 	
 	public int getPosY() {
-		return (int)posY;
+		return Math.round(posY);
+		
 	}
 
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitb.actualizar((int) posX, (int) posY);  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitb.actualizar((int) posX, (int) posY);  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
 	}
 	
 	public void actualizarMin() {

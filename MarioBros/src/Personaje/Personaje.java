@@ -108,7 +108,7 @@ public class Personaje extends Entidad{
 		this.saltando=saltando;
 	}
 	
-	public int getVelX() {
+	public float getVelX() {
 		return estado.getVelX();
 	}
 	
@@ -225,7 +225,6 @@ public class Personaje extends Entidad{
 	
 	public void actualizarMin() {
 		if(estado.getVelX()>0)
-			
 			min+=estado.getVelX();
 	}
 	

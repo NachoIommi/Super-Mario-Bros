@@ -32,10 +32,11 @@ public class PantallaJuego extends JPanel {
     protected JLabel reloj;
     protected JLabel puntuacion;
     protected JLabel monedas;
+    protected Personaje personaje;
     protected int posicionInicialX = 0;  
     protected int velocidadDesplazamiento = 10; 
     protected Timer refrescarPantalla;
-    protected int maximoDerecha = 280;//ES PERFECTO
+    protected float maximoDerecha = 280.0f;//ES PERFECTO
     protected int maximoIzquierda = 10;
     
 
@@ -58,7 +59,11 @@ public class PantallaJuego extends JPanel {
                 actualizarFondo(); 
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
-                llegoAlFinal();
+                System.out.println("maximoDerecha: "+maximoDerecha);
+                System.out.println("minimo: "+controladorVistas.juego.getPersonaje().getMin());
+               
+               // System.out.println("diferencia: "+ (maximoDerecha - controladorVistas.juego.getPersonaje().getMin()));
+              // llegoAlFinal();
             }
         });
         refrescarPantalla.start();
@@ -163,7 +168,7 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
-        if(personaje.getPosX() < 3700) {
+        if(personaje.getPosX() < 3300) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             refrescar();
         }
@@ -173,6 +178,20 @@ public class PantallaJuego extends JPanel {
     	reloj.setBounds(reloj.getX()+x, 10, 90, 20);
     }
     
+    public void moverFondo2(int posicionX) {
+    	personaje = controladorVistas.obtenerPersonaje();
+    	
+    	if (maximoDerecha != (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
+              panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getPosX());
+              actualizarPosicionReloj(personaje.getPosX());
+              actualizarPosicionMonedas(personaje.getPosX());
+              maximoDerecha += personaje.getPosX();
+              controladorVistas.obtenerPersonaje().actualizarMin();
+    	 
+    }
+    
+}  
+    
     public void moverFondo(int posicionX) {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
         posicionInicialX += posicionX;
@@ -181,17 +200,18 @@ public class PantallaJuego extends JPanel {
         	posicionInicialX = -imagenFondo.getIcon().getIconWidth();
         }
         // Desplazar el fondo solo si no ha alcanzado el límite
-        if (maximoDerecha != (imagenFondo.getIcon().getIconWidth() - 320)) {
-            panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getVelX());
-            actualizarPosicionReloj(personaje.getVelX());
-            actualizarPosicionMonedas(personaje.getVelX());
+        int velocidad = Math.round(personaje.getVelX());
+        if (maximoDerecha != (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
+            panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+velocidad);
+            actualizarPosicionReloj(velocidad);
+            actualizarPosicionMonedas(velocidad);
+            maximoDerecha += personaje.getVelX();
+            controladorVistas.obtenerPersonaje().actualizarMin();
+            System.out.println("Vel x: "+ personaje.getVelX());
         }
         
-        maximoDerecha += personaje.getVelX();
         
-        if(controladorVistas.obtenerPersonaje().getMin() < 2780) { //Cuando el scroll esta en el final, el minimo mas alto al q llega es 2780
-        	controladorVistas.obtenerPersonaje().actualizarMin();
-        }
+       
         
         
         
@@ -200,16 +220,10 @@ public class PantallaJuego extends JPanel {
    
     public void actualizarFondo() {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
-    	
+    	int velocidad = Math.round(personaje.getVelX());
     	if(personaje.getPosX() >= maximoDerecha ) {
-    		moverFondo(-personaje.getVelX());
+    		moverFondo(-velocidad);
     	}
-    }
-    
-    public void detenerMovimientoEtiquetas() {
-    	actualizarPosicionPersonaje();
-    	actualizarPosicionReloj(0);
-    	actualizarPosicionMonedas(0);
     }
     
     public void eventosTeclado() {
