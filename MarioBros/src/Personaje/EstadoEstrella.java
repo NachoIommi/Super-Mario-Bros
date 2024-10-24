@@ -142,7 +142,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public void gravedadSaltando() {
 		if (saltando) {
-	        if (jump && velY > -5 && !tocandoBloqueArriba) {
+	        if (jump && velY > -5.5 && !tocandoBloqueArriba) {
 	            velY -= 0.4f;  // ALTURA DEL SALTO
 	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
 	            	velY=0;	            
