@@ -112,6 +112,10 @@ public class Personaje extends Entidad{
 		return estado.getVelX();
 	}
 	
+	public float getVelY() {
+		return estado.getVelY();
+	}
+	
 	public void setTocandoBloque(boolean tocando) {
 		tocandoBloque=tocando;
 	}

@@ -1,4 +1,5 @@
 /Logica/
+<<<<<<< HEAD
 /img/
 /spritesOriginales/
 /nivel-0.txt
@@ -13,3 +14,7 @@
 /configuration.properties
 /nivel-1.txt
 /score.tdp
+=======
+/Sonidos/
+/Launcher/
+>>>>>>> 039072f1aeb5fc927b16f399e517687639c382a0

@@ -47,6 +47,7 @@ public abstract class EstadoDePersonaje {
 	public abstract void setJump(boolean b);
 	public abstract double getToleranciaAltura();
 	public abstract void setTocandoBloqueArriba(boolean b);
+	public abstract float getVelY();
 
 	
 }

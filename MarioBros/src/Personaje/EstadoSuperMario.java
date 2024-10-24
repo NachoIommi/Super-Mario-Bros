@@ -123,6 +123,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    hitb.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
+	
+	public float getVelY() {
+		return velY;
+	}
+	
 	public void setRight(boolean b){
 		right=b;
 	}
