@@ -66,7 +66,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    }
 
 	    
-	    if (!right && !left && velX != 0) {
+	    if (!right && !left && velX != 0) { //lo voy a ocultar con un metodo Deslizando
 	        if (tocandoBloqueDerecha || tocandoBloqueIzquierda) {	//COLISION DESLIZANDO
 	            velX = 0;
 	            
@@ -77,11 +77,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    						//FRENA A MARIO FRICCIONADO
 	    if (velX < 0 && !left) 
 	        velX += 0.1f;  
-	    	    
+	    	  
+	    
 	    posX += velX;
 	    
 	    //JUMP//
-	    if (jump && tocandoBloqueAbajo && !saltando && !tocandoBloqueArriba) {
+	    if (jump && tocandoBloqueAbajo && !saltando ) {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
 	        velY = -4;  // IMPULSO INICIAL
@@ -100,30 +101,51 @@ public class EstadoNormal extends EstadoDePersonaje {
 	        }
 	    }
 
+	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
+	    	setPosX(getPosX()+1);
+	    	saltando = true;
+	        tocandoBloqueAbajo = false;
+	        tocandoBloqueIzquierda=false;
+	        velY = -4;
+	     
+	    }
+	    
+	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
+	    	setPosX(getPosX()-11);
+	    	saltando = true;
+	        tocandoBloqueAbajo = false;
+	        tocandoBloqueDerecha=false;
+	        velY = -4;
+	 
+	    }
+	    
 	    
 
 	    // Detener el salto si colisiona con un bloque por encima
-	    if (tocandoBloqueArriba) {
+	    if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+1);
+	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	    
-	    if(tocandoBloqueIzquierda) {
+	    
+	    
+	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
 	    	setPosX(getPosX()+1);
 	    	velY += 0.3;
 	    }
-	    if(tocandoBloqueDerecha) {
+	    if(tocandoBloqueDerecha && !tocandoBloqueAbajo) {
 	    	setPosX(getPosX()-1);
 	    	velY += 0.3;
 	    }
 	    
 	    if (!tocandoBloqueAbajo) {
 	        velY += 0.3;  // Gravedad
-	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) {
+	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
 	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire
-	        }
-	    } else {
+	        
+	    } 
+	    else {
 	        velY = 0;  
 	        saltando = false; 
 	    }
@@ -322,6 +344,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	public void colisionLateralGoomba() {
 		System.out.println("MORIR");
+	}
+
+	@Override
+	public float getVelY() {
+		// TODO Auto-generated method stub
+		return velY;
 	}
 
 	
