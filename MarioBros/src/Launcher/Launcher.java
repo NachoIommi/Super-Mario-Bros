@@ -28,6 +28,7 @@ public class Launcher {
 					juego.setControladorVistas(controladorVistas);
 					controladorVistas.ventana.setVisible(true);
 					controladorVistas.mostrarPantallaPrincipal();
+					Musica.getInstancia().reproducirMusica("Ruta del .wav(toadvia no la cargue)");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

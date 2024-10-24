@@ -21,6 +21,7 @@ public class Juego {
 	protected List<PowerUps> powerUps;
 	protected HiloPersonaje hilo;
 	protected ControladorVistas controladorVistas;
+	//protected Musica musica; ver si va aca, no toy seguro
 	
 	public Juego() {
 		reloj = new Reloj();
