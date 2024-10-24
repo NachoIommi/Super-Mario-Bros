@@ -13,7 +13,6 @@ public class PiranhaPlant extends Enemigo{
 	protected int x;
 	protected int y;
 	
-	
 	public PiranhaPlant(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -39,6 +38,15 @@ public class PiranhaPlant extends Enemigo{
 	
 	public void moverse() {
 		
+	}
+	public void setPosX(int x) {
+	    this.x = x;
+	    hitb.actualizar((int) x, (int) y);  // Actualizar la hitbox después de ajustar la posición
+	}
+
+	public void setPosY(int y) {
+	    this.y = y;
+	    hitb.actualizar((int) x, (int) y);  // Actualizar la hitbox después de ajustar la posición
 	}
 	
 	public void aceptarVisita(Visitor v) {

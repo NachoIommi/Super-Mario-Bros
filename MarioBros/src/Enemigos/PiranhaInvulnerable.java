@@ -1,24 +1,28 @@
 package Enemigos;
 
+import Logica.Hitbox;
 import Logica.Visitor;
 
-public class PiranhaInvulnerable implements EstadosDePiranhaPlant {
+public class PiranhaInvulnerable extends EstadosDePiranhaPlant {
     private PiranhaPlant piranha;
 
-    public PiranhaInvulnerable(PiranhaPlant piranha) {
-        this.piranha = piranha;
+    public PiranhaInvulnerable(PiranhaPlant p) {
+        super(p);
     }
-
-    public void moverse() {
-       
-    }
-
-    public void morir() {
-      
-    }
-
-    public void aceptarVisita(Visitor v) {
-       
-    }
+    public PiranhaPlant getPiranhaPlant() {
+		return piranha;
+	}
+	public void setPiranhaPlant(PiranhaPlant p) {
+		piranha = p;
+	}
+	public Hitbox getHitbox() {
+		return null;
+	}
+	public void actualizarSprite() {		
+	}
+	public void setPosX(int x) {
+	}
+	public void setPosy(int y) {
+	}
 
 }
