@@ -209,13 +209,16 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	if(right) {
     		sprite = fabrica.getSuperMarioCorriendoDerecha();
-    		personaje.cargarSprite(sprite);}
+    		personaje.cargarSprite(sprite);
+    	}
 	    if(left) {
 	    	sprite = fabrica.getSuperMarioCorriendoIzquierda();
-	    	personaje.cargarSprite(sprite);}
+	    	personaje.cargarSprite(sprite);
+	    }
 	    if(!left&& !right) {
 	    	sprite = fabrica.getSuperMario();
-	    	personaje.cargarSprite(sprite);}
+	    	personaje.cargarSprite(sprite);
+	    }
     }
 
 	public void saltar() {

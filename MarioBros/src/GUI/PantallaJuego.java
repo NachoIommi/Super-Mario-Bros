@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -54,7 +53,7 @@ public class PantallaJuego extends JPanel {
         // Iniciar un Timer que actualice la pantalla cada 50 ms
         refrescarPantalla = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	actualizarImagenPersonaje();
+            	
                 actualizarPosicionPersonaje();  
                 actualizarFondo(); 
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
@@ -166,7 +165,7 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
-        if(personaje.getPosX() < 3300) {
+        if(personaje.getPosX() < imagenFondo.getIcon().getIconWidth()-320) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             refrescar();
         }
