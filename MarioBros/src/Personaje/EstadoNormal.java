@@ -225,12 +225,10 @@ public class EstadoNormal extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
-<<<<<<< HEAD
     	personaje.setPuntuacion(20);
     	System.out.println("Colision hecha");
-=======
     	System.out.println("Colision con superchampi hecha");
->>>>>>> b49baaff9d51f0742b70bb085903a518500ae065
+
     }
     
     public void colisionFlorDeFuego() {

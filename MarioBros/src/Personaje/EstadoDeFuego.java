@@ -353,4 +353,28 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		return 0;
 	}
 
+	@Override
+	public void colisionEstrella() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void colisionFlorDeFuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void colisionChampiVerde() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void colisionMoneda() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

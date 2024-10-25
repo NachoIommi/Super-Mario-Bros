@@ -61,16 +61,15 @@ public class PantallaJuego extends JPanel {
                 actualizarFondo(); 
                 actualizarImagenPlataformas();
                 actualizarImagenPowerUps();
-<<<<<<< HEAD
+
                 reloj.setText("<html><div style='text-align: center;'>Reloj<br>" + controladorVistas.juego.getReloj().getSegundos() + "</div></html>");
                 monedas.setText("" + controladorVistas.juego.getPersonaje().getMonedas() );    
                 puntuacion.setText("<html><div style='text-align: center;'>Puntuacion<br>" + controladorVistas.juego.getPersonaje().getPuntuacion() + "</div></html>");
                 vidas.setText("<html><div style='text-align: center;'>Vidas<br>" + controladorVistas.juego.getPersonaje().getVidas()+ "</div></html>");
                 llegoAlFinal();
-=======
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());               
->>>>>>> b49baaff9d51f0742b70bb085903a518500ae065
+
             }
         });
         refrescarPantalla.start();
