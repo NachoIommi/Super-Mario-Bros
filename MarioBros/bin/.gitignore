@@ -1,3 +1,8 @@
+/Logica/
+<<<<<<< HEAD
+/img/
+/spritesOriginales/
+/nivel-0.txt
 /Enemigos/
 /Fabricas/
 /GUI/
@@ -7,16 +12,10 @@
 /PowerUps/
 /SuperMarioBros.2.ttf
 /configuration.properties
-/nivel-0.txt
 /nivel-1.txt
 /score.tdp
-<<<<<<< Updated upstream
 =======
 /Sonidos/
 /Launcher/
 >>>>>>> 039072f1aeb5fc927b16f399e517687639c382a0
 /Canciones/
-=======
-/spritesOriginales/
-/Logica/
->>>>>>> Stashed changes

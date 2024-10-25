@@ -56,7 +56,6 @@ public class PantallaJuego extends JPanel {
             	
                 actualizarPosicionPersonaje();  
                 actualizarFondo(); 
-                actualizarPosicionEnemigos();
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
                
@@ -338,14 +337,6 @@ public class PantallaJuego extends JPanel {
     public void refrescar() {
     	   revalidate();
            repaint();
-    }
-    
-    public void actualizarPosicionEnemigos() {
-    	List<Enemigo> lista = controladorVistas.obtenerEnemigo();
-    	for(Enemigo e : lista) {
-    		e.setVisible(true);
-    		e.setBounds(e.getPosX(),e.getPosY(),ConstantesVistas.ENTIDAD_TAMANO_ANCHO,ConstantesVistas.ENTIDAD_TAMANO_ALTO);
-    	}
     }
     
 }

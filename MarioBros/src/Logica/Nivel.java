@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import Fabricas.*;
 import Personaje.Personaje;
-import Plataformas.Tuberia;
 
 public class Nivel {
 	
@@ -117,12 +116,12 @@ public class Nivel {
 				        break;
 				    case 3:
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));
-				        break; 
-				    
+				        break;
+				     /*   
 				    case 4:
-						juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY,fabricaPiranhaPlant.crearPiranha(fabricaSprite.getPiranhaPlantSpawneando(), posX, posY))); //Tuberia sin Piranha
-				        break;	
-				      
+				    	fabricaTuberia.crearPlataforma(posX, posY, tipoPUp); //Tuberia con Piranha 
+				        break;
+				       */ 
 				    case 5:
 				    	juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY)); //Tuberia sin Piranha
 				        break;
@@ -200,7 +199,6 @@ public class Nivel {
 		//hay que ver caso nivel final
 		cargarNivel(getNivelActual()+1);
 	}
-	
 
 	public void perderJuego(){
 		//pantalla especial

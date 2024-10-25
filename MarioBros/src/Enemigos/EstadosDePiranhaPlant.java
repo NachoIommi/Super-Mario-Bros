@@ -13,10 +13,8 @@ public abstract class EstadosDePiranhaPlant {
 	public abstract void setPiranhaPlant(PiranhaPlant p);
 	public abstract Hitbox getHitbox();
 	public abstract void setPosX(int x);
-	public abstract void setPosY(int y);
+	public abstract void setPosy(int y);
 	public abstract void actualizarSprite();
-    public abstract void cambiarEstado();
-
 	
 	
 }

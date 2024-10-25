@@ -8,10 +8,4 @@ public class GenerarSpiny implements GenerarEnemigos {
 		return new Spiny(sprite, x, y);
 	}
 
-	@Override
-	public PiranhaPlant crearPiranha(Sprite sprite, int x, int y) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
