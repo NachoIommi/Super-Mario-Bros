@@ -20,7 +20,7 @@ public class BloqueSolido extends Plataforma{
 	}
 	
 	public void recibirGolpe() {
-
+		
 	}
 	
 	public void aceptarVisita(Visitor v) {

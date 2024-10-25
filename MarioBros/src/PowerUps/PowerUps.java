@@ -11,6 +11,5 @@ public abstract class PowerUps extends Entidad{
 	public abstract int getPosX();
 	public abstract int getPosY();
 	public abstract Sprite getSprite();
-	public abstract void activarPowerUp();
 	
 }

@@ -38,7 +38,7 @@ public class VisitorEnemigo implements Visitor {
     }
     
     public void visitarLadrilloSolido(LadrilloSolido l) {
-    	l.recibirGolpe(personaje);
+    	
     }
     
     public void visitarVacio(Vacio v) {

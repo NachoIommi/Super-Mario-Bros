@@ -38,7 +38,7 @@ public class VisitorEntidad implements Visitor{
     }
     
     public void visitarBloqueDePregunta(BloqueDePregunta p) {
-    	p.soltarContenido();
+    	p.recibirGolpe();
     }
     
     public void visitarLadrilloSolido(LadrilloSolido l) {

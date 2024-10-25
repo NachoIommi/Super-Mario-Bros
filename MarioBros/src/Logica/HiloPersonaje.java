@@ -67,7 +67,6 @@ public class HiloPersonaje extends Thread {
                         {
                             personaje.setTocandoBloqueArriba(true);
                             System.out.println("Colisión tocando techo");
-                            p.aceptarVisita(visitorEntidad);
                         }
                     }
                 }
