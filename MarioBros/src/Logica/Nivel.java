@@ -95,7 +95,7 @@ public class Nivel {
 			 BufferedReader lectura = new BufferedReader(lector);
 			 String contenido = lectura.readLine();
 			 String rutaCancionNivel = "Sonido/Canciones/soundtrackNivel-"+getNivelActual()+".wav";
-			 Musica.getInstancia().reproducirMusica(rutaCancionNivel);
+			 //Musica.getInstancia().reproducirMusica(rutaCancionNivel);
 			 while(contenido != null) {
 				
 				String [] partes = contenido.split("\\s+"); //Guardo en el array cada cadena separada
@@ -129,7 +129,6 @@ public class Nivel {
 				    			
 				    	}
 
-				    	
 				        break;
 				    case 3:
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));
@@ -145,7 +144,6 @@ public class Nivel {
 				    case 6:
 				    	juego.agregarPlataforma(fabricaVacio.crearPlataforma(fabricaSprite.getVacio(), posX, posY));
 				        break;
-
 				    case 31:
 				    	juego.agregarPowerUp(fabricaMoneda.crearPowerUp(fabricaSprite.getMoneda(), posX, posY));
 				        break;

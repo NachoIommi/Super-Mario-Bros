@@ -231,7 +231,9 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
-    	personaje.actualizarSprite();
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getSuperMarioMuerto();
+    	personaje.cargarSprite(sprite);
     }
     
     public boolean getSaltando() {
@@ -318,19 +320,22 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 
 	public void setPuntuacionChampiVerde() {
-		
+		personaje.setPuntuacion(100);
 	}
 
 	public void setPuntuacionEstrella() {
-		
+		personaje.setPuntuacion(30);
 	}
 
 	public void setPuntuacionFlorDeFuego() {
-		
+		personaje.setPuntuacion(30);
 	}
 
 	public void setPuntuacionSuperChampi() {
-		
+		personaje.setPuntuacion(50);
+	}
+	public void setPuntuacionMoneda(){
+		personaje.setPuntuacion(5);
 	}
 
 	public void romperLadrilloSolido(LadrilloSolido l) {
@@ -343,7 +348,27 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 
 	public void colisionSuperChampi() {
-		
+    }
+    
+    public void colisionFlorDeFuego() {
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision con flor de fuego hecha");
+    }
+    
+    public void colisionEstrella() {
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision con estrella hecha");
+    }
+    
+	public void colisionChampiVerde() {
+		personaje.setVidas(personaje.getVidas()+1);
+	}
+
+	public void colisionMoneda() {
 	}
 
 	@Override
