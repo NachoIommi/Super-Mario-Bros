@@ -23,6 +23,9 @@ public class PiranhaPlant extends Enemigo{
 	public EstadosDePiranhaPlant getEstadoActual() {
 		return estadoActual;
 	}
+	public void cambiarEstado() {
+        estadoActual.cambiarEstado();  // Llamar al mÃ©todo cambiarEstado en el estado actual
+    }
 	
 	public Sprite getSprite() {
 		return sprite;
@@ -40,13 +43,9 @@ public class PiranhaPlant extends Enemigo{
 		
 	}
 	public void setPosX(int x) {
-	    this.x = x;
-	    hitb.actualizar((int) x, (int) y);  // Actualizar la hitbox después de ajustar la posición
 	}
 
-	public void setPosY(int y) {
-	    this.y = y;
-	    hitb.actualizar((int) x, (int) y);  // Actualizar la hitbox después de ajustar la posición
+	public void setPosY(int y) {  
 	}
 	
 	public void aceptarVisita(Visitor v) {

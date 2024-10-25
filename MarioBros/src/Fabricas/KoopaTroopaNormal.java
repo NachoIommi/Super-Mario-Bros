@@ -1,29 +1,36 @@
-package Enemigos;
+package Fabricas;
 
-import Fabricas.Sprite;
+import Enemigos.EstadoDeKoopa;
+import Enemigos.KoopaRetraido;
+import Enemigos.KoopaTroopa;
+import Enemigos.PiranhaExtendida;
 import Logica.Hitbox;
 
-public class KoopaRetraido extends EstadoDeKoopa{
-	
-	private KoopaTroopa kt;
+public class KoopaTroopaNormal extends EstadoDeKoopa{
+
+	protected KoopaTroopa kt;
 	protected int x;
 	protected int y;
-	protected Sprite s;
 	protected Hitbox hitb;
+	protected Sprite s;
 	
-	public KoopaRetraido(Sprite s,int x,int y,KoopaTroopa kt) {
+	public KoopaTroopaNormal(KoopaTroopa kt) {
 		super(kt);
 		this.x = x;
 		this.y = y;
 		this.kt	= kt;
 		this.s = s;
 	}
-	
-	public void moverse() {
-		
+
+	public void cambiarEstado() {
+		this.actualizarSprite();
+        kt.cambiarEstado(new KoopaRetraido(s,this.x,this.y,kt));  // Cambiar al estado extendido	
 	}
 
-	@Override
+	
+	
+	
+	
 	public KoopaTroopa getKoopaTroopa() {
 		// TODO Auto-generated method stub
 		return null;
@@ -59,10 +66,5 @@ public class KoopaRetraido extends EstadoDeKoopa{
 		
 	}
 
-	@Override
-	public void cambiarEstado() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+
 }
