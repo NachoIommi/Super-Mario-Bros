@@ -178,7 +178,7 @@ public class PantallaJuego extends JPanel {
     public void moverFondo2(int posicionX) {
     	personaje = controladorVistas.obtenerPersonaje();
     	
-    	if (maximoDerecha != (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
+    	if (maximoDerecha <= (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
               panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getPosX());
               actualizarPosicionReloj(personaje.getPosX());
               actualizarPosicionMonedas(personaje.getPosX());
@@ -198,7 +198,7 @@ public class PantallaJuego extends JPanel {
         }
         // Desplazar el fondo solo si no ha alcanzado el límite
         int velocidad = Math.round(personaje.getVelX());
-        if (maximoDerecha != (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
+        if (maximoDerecha <= (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
             panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+velocidad);
             actualizarPosicionReloj(velocidad);
             actualizarPosicionMonedas(velocidad);
