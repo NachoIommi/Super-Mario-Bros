@@ -1,6 +1,7 @@
 package Plataformas;
 
 import Fabricas.Sprite;
+import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -16,6 +17,10 @@ public class LadrilloSolido extends BloqueSolido{
 	
 	public void recibirGolpe(Personaje p) {
 		p.getEstado().romperLadrilloSolido(this);
+	}
+	public void destruir() {
+		this.hitb = new Hitbox(0, 0, 0, 0);
+		this.sprite=null;
 	}
 
 }

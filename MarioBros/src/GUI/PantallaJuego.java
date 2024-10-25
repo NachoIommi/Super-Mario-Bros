@@ -55,7 +55,9 @@ public class PantallaJuego extends JPanel {
             public void actionPerformed(ActionEvent e) {
             	
                 actualizarPosicionPersonaje();  
+                
                 actualizarFondo(); 
+                actualizarImagenPlataformas();
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
                
@@ -171,6 +173,27 @@ public class PantallaJuego extends JPanel {
         }
     }
 
+    public void actualizarImagenPlataformas() {
+    	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
+    	for (Plataforma p : listaPlataformas) {
+    		if(p.getSprite()==null) {
+    			p.setVisible(false);
+    		}
+    	}
+    }
+
+    public void mostrarPlataformas() {
+    	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
+    	for (Plataforma p : listaPlataformas) {
+    		p.setVisible(true);
+    		String ruta = p.getSprite().getRutaImagen();
+    		p.setIcon(verificarExtension(ruta));
+	        p.setBounds(p.getPosX(), p.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
+            panelNivel.add(p);
+            refrescar();
+    	}   	
+    }  
+    
     public void actualizarPosicionReloj(int x) {
     	reloj.setBounds(reloj.getX()+x, 10, 90, 20);
     }
@@ -278,6 +301,8 @@ public class PantallaJuego extends JPanel {
         refrescar();
     }
     
+    
+    
     public void mostrarEnemigos() {
     	List<Enemigo> listaEnemigos = controladorVistas.obtenerEnemigo();
     	for(Enemigo e : listaEnemigos) {
@@ -290,17 +315,7 @@ public class PantallaJuego extends JPanel {
     	}
     }
     
-    public void mostrarPlataformas() {
-    	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
-    	for (Plataforma p : listaPlataformas) {
-    		p.setVisible(true);
-    		String ruta = p.getSprite().getRutaImagen();
-    		p.setIcon(verificarExtension(ruta));
-	        p.setBounds(p.getPosX(), p.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
-            panelNivel.add(p);
-            refrescar();
-    	}   	
-    }  
+    
     
   
     

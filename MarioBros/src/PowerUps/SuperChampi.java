@@ -52,5 +52,11 @@ public class SuperChampi extends PowerUps{
 	public Hitbox getHitbox() {
 		return hitb;
 	}
+
+	@Override
+	public void activarPowerUp() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
