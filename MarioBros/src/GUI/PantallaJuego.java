@@ -37,6 +37,9 @@ public class PantallaJuego extends JPanel {
     protected Timer refrescarPantalla;
     protected float maximoDerecha = 280.0f;//ES PERFECTO
     protected int maximoIzquierda = 10;
+    protected JLabel bandera;
+    protected Timer timer;
+    private boolean banderaActualizada = false;
     
 
     public PantallaJuego(ControladorVistas controladorVistas) {
@@ -74,7 +77,9 @@ public class PantallaJuego extends JPanel {
     	mostrarPowerUps();
     	agregarReloj();
     	mostrarMonedas();
+    	agregarBandera();
     	agregarImagenNivel();
+    	
     	
     	panelNivel.setPreferredSize(new Dimension(imagenFondo.getIcon().getIconWidth(), ConstantesVistas.PANEL_ALTO));
     	
@@ -96,37 +101,53 @@ public class PantallaJuego extends JPanel {
     	monedas.setBounds(monedas.getX()+x, 10, 90, 20);
     }
     
-    public void mostrarMonedas() {
-    	monedas = new JLabel();
-    	
-    	String ruta = "/spritesOriginales/monedaQuieta.gif";
-    	monedas.setIcon(verificarExtension(ruta));
-    	
-    	monedas.setBounds(10, 10, 90, 20);
-    	monedas.setVisible(true);
-    	try {
-	        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
-	        monedas.setFont(marioFuente);
-	        monedas.setForeground(Color.WHITE);
-	    } catch (FontFormatException | IOException e) {
-	        e.printStackTrace();
-	    }
-    	panelNivel.add(monedas);
-    	refrescar();
-    	
-    }
+    
     
     public void mostrarPuntuacion() {
     	
     }
     
-    public void llegoAlFinal() {
-    	Personaje personaje = controladorVistas.juego.getPersonaje();
-    	if(personaje.getPosX() >= imagenFondo.getIcon().getIconWidth()-320) {
-    		controladorVistas.mostrarPantallaPerder();
-    	}
+    public void actualizarBandera() {
+    	System.out.println("se actualizo bandera");
+    	String ruta = "/spritesOriginales/banderaBajando.gif";
+    	ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+        Image gifImage = icono.getImage();
+        Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, 300, Image.SCALE_DEFAULT);
+        ImageIcon iconoEscalado = new ImageIcon(gifAgrandado);
+        bandera.setIcon(iconoEscalado);
+  
     }
     
+    public void llegoAlFinal() {
+        Personaje personaje = controladorVistas.juego.getPersonaje();
+        if (personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 320) {
+            
+            // Cambiar la imagen de la bandera
+        	if(!banderaActualizada) {
+        		actualizarBandera();
+                banderaActualizada = true;
+        	}
+            
+
+            // Verifica si el timer ya está creado y corriendo
+            if (timer != null && timer.isRunning()) {
+                return; // Si ya está corriendo, no hacemos nada
+            }
+            
+            // Iniciar un Timer para esperar 3 segundos y luego ejecutar el siguiente nivel
+            timer = new Timer(1050, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    timer.stop(); // Detener el Timer
+                    controladorVistas.iniciarSiguienteNivel(); // Iniciar el siguiente nivel
+                }
+            });
+            timer.setRepeats(false); // Asegúrate de que el Timer no repita
+            timer.start(); // Iniciar el Timer
+        }
+    }
+
+   
     public void agregarReloj() {
     	reloj = new JLabel();
     	reloj.setText("TIEMPO \n"+controladorVistas.juego.getReloj().getSegundos());
@@ -167,6 +188,8 @@ public class PantallaJuego extends JPanel {
         if(personaje.getPosX() < imagenFondo.getIcon().getIconWidth()-320) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             refrescar();
+            System.out.println(personaje.getPosX());
+            System.out.println("maximo dercha: " + maximoDerecha);
         }
     }
 
@@ -174,19 +197,6 @@ public class PantallaJuego extends JPanel {
     	reloj.setBounds(reloj.getX()+x, 10, 90, 20);
     }
     
-    public void moverFondo2(int posicionX) {
-    	personaje = controladorVistas.obtenerPersonaje();
-    	
-    	if (maximoDerecha <= (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
-              panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+personaje.getPosX());
-              actualizarPosicionReloj(personaje.getPosX());
-              actualizarPosicionMonedas(personaje.getPosX());
-              maximoDerecha += personaje.getPosX();
-              controladorVistas.obtenerPersonaje().actualizarMin();
-    	 
-    }
-    
-}  
     
     public void moverFondo(int posicionX) {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
@@ -315,6 +325,19 @@ public class PantallaJuego extends JPanel {
     	}
     }
     
+    public void agregarBandera() {
+    	bandera = new JLabel();
+    	String ruta = "/spritesOriginales/banderaBajando1.png";
+    	
+    	ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+    	Image imagenEscalada = icono.getImage().getScaledInstance(30, 300, Image.SCALE_DEFAULT);
+    	ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
+    	bandera.setIcon(iconoEscalado);
+    	bandera.setBounds(3376-320, 30, 30, 500);
+    	panelNivel.add(bandera);
+    	refrescar();
+    }
+    
     public ImageIcon verificarExtension(String ruta) {
     	Personaje personaje = controladorVistas.obtenerPersonaje();
         ImageIcon iconoEscalado;
@@ -332,6 +355,27 @@ public class PantallaJuego extends JPanel {
         
         return iconoEscalado;
     }
+    public void mostrarMonedas() {
+    	monedas = new JLabel();
+    	
+    	String ruta = "/spritesOriginales/monedaQuieta.gif";
+    	monedas.setIcon(verificarExtension(ruta));
+    	
+    	monedas.setBounds(10, 10, 90, 20);
+    	monedas.setVisible(true);
+    	try {
+	        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
+	        monedas.setFont(marioFuente);
+	        monedas.setForeground(Color.WHITE);
+	    } catch (FontFormatException | IOException e) {
+	        e.printStackTrace();
+	    }
+    	panelNivel.add(monedas);
+    	refrescar();
+    	
+    }
+    
+   
     
     public void refrescar() {
     	   revalidate();

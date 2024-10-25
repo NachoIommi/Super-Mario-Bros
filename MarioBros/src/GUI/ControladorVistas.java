@@ -69,9 +69,8 @@ public class ControladorVistas {
 	    pantallaJuego.requestFocus();
 	}
 	
-	public void mostrarPantallaPerder() {
-		ventana.setContentPane(pantallaPerder);
-		ventana.revalidate();
+	public void iniciarSiguienteNivel() {
+		
 		if (juego.getHiloPersonaje().isAlive()) {
             juego.getHiloPersonaje().detener();
         }
@@ -82,9 +81,12 @@ public class ControladorVistas {
         juego.iniciarSiguienteNivel();
 		
         if(pantallaJuego!=null) {
+        	pantallaJuego = null;
         	pantallaJuego = new PantallaJuego(this);
         	mostrarPantallaJuego();
         }
+	
+        
 		
 	}
 	
