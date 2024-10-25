@@ -17,7 +17,7 @@ public class HiloPersonaje extends Thread {
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
-
+    private volatile boolean enEjecucion;
     public HiloPersonaje(Juego juego) {
         this.juego = juego;
         personaje = juego.getPersonaje();
@@ -29,8 +29,12 @@ public class HiloPersonaje extends Thread {
         visitorEntidad = new VisitorEntidad(personaje);
     }
   
+    public void detener() {
+    	enEjecucion = false;
+    }
     public void run() {
-        while (true) {
+    	enEjecucion = true;
+        while (enEjecucion) {
             try {
                 for(Plataforma p : plataforma) {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {

@@ -1,5 +1,6 @@
 package Logica;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import Enemigos.Enemigo;
@@ -30,7 +31,7 @@ public class Juego {
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		nivel.cargarNivel(1);
+		cargarPrimerNivel();
 		hilo = new HiloPersonaje(this);
 		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
@@ -38,7 +39,25 @@ public class Juego {
 	public void setControladorVistas(ControladorVistas controladorVistas) {
 		this.controladorVistas = controladorVistas;
 	}
+	public void cargarPrimerNivel() {
+		nivel.cargarNivel(0);
+	}
 	
+	public void iniciarSiguienteNivel() {
+		//reinicio todo, entidades e hilos
+		hilo.detener();
+		reloj.detener();
+		powerUps.clear();
+		enemigos.clear();
+		plataformas.clear();
+		
+		System.out.println(enemigos.toString());
+		
+		nivel.cargarNivel(nivel.getNivelActual()+1);
+		System.out.println();
+		
+		iniciarJuego();
+	}
 	public ControladorVistas getControladorVistas() {
 		return controladorVistas;
 		
@@ -49,12 +68,17 @@ public class Juego {
 	}
 	
 	public void iniciarJuego() {
-		if(!hilo.isAlive()) {
-			hilo.start();
-		}
-		if(!reloj.isAlive()) {
-			reloj.start();
-		}
+	    if (hilo != null && hilo.isAlive()) {
+	        hilo.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
+	    }
+	    hilo = new HiloPersonaje(this); // Crear un nuevo hilo
+	    hilo.start();
+
+	    if (reloj != null && reloj.isAlive()) {
+	        reloj.detener();
+	    }
+	    reloj = new Reloj(); // Crear un nuevo reloj
+	    reloj.start();
 	}
 	
 	public void perderJuego() {

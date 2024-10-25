@@ -1,6 +1,8 @@
 package GUI;
 
-import java.awt.event.WindowEvent;  
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import java.io.File;
 
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
+
 import Enemigos.Enemigo;
 import Logica.*;
 import Personaje.Personaje;
@@ -54,6 +58,8 @@ public class ControladorVistas {
 	
 	public void mostrarPantallaPrincipal() {
 		ventana.setContentPane(pantallaPrincipal);
+		
+		
 	}
 	
 	public void mostrarPantallaJuego() {
@@ -65,6 +71,21 @@ public class ControladorVistas {
 	
 	public void mostrarPantallaPerder() {
 		ventana.setContentPane(pantallaPerder);
+		ventana.revalidate();
+		if (juego.getHiloPersonaje().isAlive()) {
+            juego.getHiloPersonaje().detener();
+        }
+        if (juego.getReloj().isAlive()) {
+            juego.getReloj().detener();
+        }
+        
+        juego.iniciarSiguienteNivel();
+		
+        if(pantallaJuego!=null) {
+        	pantallaJuego = new PantallaJuego(this);
+        	mostrarPantallaJuego();
+        }
+		
 	}
 	
 	public Personaje obtenerPersonaje() {

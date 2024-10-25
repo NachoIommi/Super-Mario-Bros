@@ -3,13 +3,20 @@ package Logica;
 public class Reloj extends Thread{
 	
 	protected int segundos;
+	private volatile boolean enEjecucion;
 	
 	public Reloj() {
 		segundos = 300;
 	}
 	
+	public void detener() {
+    	enEjecucion = false;
+    }
+	
 	public void run() {
-		while(segundos > 0) {
+		enEjecucion = true;
+		segundos = 300;
+		while(enEjecucion) {
 			try {
 				segundos--;
 				Thread.sleep(1000);

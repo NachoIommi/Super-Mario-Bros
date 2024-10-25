@@ -60,7 +60,7 @@ public class PantallaJuego extends JPanel {
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
                
 
-              // llegoAlFinal();
+               llegoAlFinal();
             }
         });
         refrescarPantalla.start();
@@ -123,8 +123,7 @@ public class PantallaJuego extends JPanel {
     public void llegoAlFinal() {
     	Personaje personaje = controladorVistas.juego.getPersonaje();
     	if(personaje.getPosX() >= imagenFondo.getIcon().getIconWidth()-320) {
-    		controladorVistas.juego.getNivel().cargarNivel(controladorVistas.juego.getNivel().getNivelActual()+1);
-    		System.out.print("hola");
+    		controladorVistas.mostrarPantallaPerder();
     	}
     }
     
