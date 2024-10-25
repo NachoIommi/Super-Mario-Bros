@@ -1,5 +1,8 @@
 package Enemigos;
 
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
+import Fabricas.KoopaNormal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 
@@ -18,51 +21,38 @@ public class KoopaRetraido extends EstadoDeKoopa{
 		this.kt	= kt;
 		this.s = s;
 	}
+	public void cambiarEstado() {
+		this.actualizarSprite();
+        kt.setEstadoActual(new KoopaNormal(s,this.x,this.y,kt));  // Cambiar al estado extendido
+    }
 	
 	public void moverse() {
 		
 	}
 
-	@Override
 	public KoopaTroopa getKoopaTroopa() {
-		// TODO Auto-generated method stub
-		return null;
+		return kt;
 	}
 
-	@Override
 	public void setKoopaTroopa(KoopaTroopa kt) {
-		// TODO Auto-generated method stub
-		
+		this.kt = kt;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 
-	@Override
 	public void setPosX(int x) {
-		// TODO Auto-generated method stub
-		
+		this.x = x;
 	}
 
-	@Override
 	public void setPosY(int y) {
-		// TODO Auto-generated method stub
-		
+		this.y = y;
 	}
 
-	@Override
 	public void actualizarSprite() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void cambiarEstado() {
-		// TODO Auto-generated method stub
-		
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		this.s = fabrica.getKoopaTroopa();		
 	}
 	
 }

@@ -6,7 +6,7 @@ import Enemigos.KoopaTroopa;
 import Enemigos.PiranhaExtendida;
 import Logica.Hitbox;
 
-public class KoopaTroopaNormal extends EstadoDeKoopa{
+public class KoopaNormal extends EstadoDeKoopa{
 
 	protected KoopaTroopa kt;
 	protected int x;
@@ -14,7 +14,7 @@ public class KoopaTroopaNormal extends EstadoDeKoopa{
 	protected Hitbox hitb;
 	protected Sprite s;
 	
-	public KoopaTroopaNormal(KoopaTroopa kt) {
+	public KoopaNormal(Sprite s,int x,int y,KoopaTroopa kt) {
 		super(kt);
 		this.x = x;
 		this.y = y;
@@ -24,46 +24,32 @@ public class KoopaTroopaNormal extends EstadoDeKoopa{
 
 	public void cambiarEstado() {
 		this.actualizarSprite();
-        kt.cambiarEstado(new KoopaRetraido(s,this.x,this.y,kt));  // Cambiar al estado extendido	
+        kt.setEstadoActual(new KoopaRetraido(s,this.x,this.y,kt));  // Cambiar al estado extendido	
 	}
 
-	
-	
-	
-	
 	public KoopaTroopa getKoopaTroopa() {
-		// TODO Auto-generated method stub
-		return null;
+		return kt;
 	}
 
-	@Override
 	public void setKoopaTroopa(KoopaTroopa kt) {
-		// TODO Auto-generated method stub
-		
+		this.kt = kt;
 	}
 
-	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitb;
 	}
 
-	@Override
 	public void setPosX(int x) {
-		// TODO Auto-generated method stub
-		
+		this.x = x;
 	}
 
-	@Override
-	public void setPosY(int y) {
-		// TODO Auto-generated method stub
-		
+	public void setPosY(int y) {	
+		this.y = y;
 	}
 
-	@Override
 	public void actualizarSprite() {
-		// TODO Auto-generated method stub
-		
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		this.s = fabrica.getKoopaTroopaRetraido();			
 	}
 
 

@@ -41,7 +41,7 @@ public class KoopaTroopa extends Enemigo{
 		return y;
 	}
 	
-	public void cambiarEstado(EstadoDeKoopa e) {
+	public void setEstadoActual(EstadoDeKoopa e) {
 		estadoActual = e;
 	}
 	
