@@ -2,6 +2,7 @@ package Plataformas;
 
 import Fabricas.Sprite;
 import Logica.Visitor;
+import Personaje.EstadoDePersonaje;
 import Personaje.Personaje;
 import PowerUps.PowerUps;
 
@@ -10,24 +11,23 @@ public class BloqueDePregunta extends BloqueSolido {
 	protected EstadoDeBloque estado;
 	protected PowerUps contenido;
 	protected boolean mostrable;
+	protected int golpesRestantes;
+	protected boolean cambio;
 	
-	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUps p) {
+	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUps p , int golpes) {
 		super(sprite, x, y);
 		contenido = p;
+		golpesRestantes=golpes;
+		estado= new BloqueGolpeable(this,sprite,x,y,p,golpes);
+		cambio=false;
 	}
 	
-	public void cambiarEstado(EstadoDeBloque e) {
-		estado = e;
+	public void setSprite(Sprite s) {
+		sprite=s;
 	}
-	
-	
 	
 	public void soltarContenido() {
-		contenido.setPosX(x);
-		contenido.setPosY(y-30);	
-		contenido.getHitbox().actualizar(x, y-30);
-		System.out.println("visitado soltar contenido");
-		contenido.setMostrable(true);
+		estado.soltarContenido();
 	}
 	
 	public void aceptarVisita(Visitor v){
@@ -39,8 +39,7 @@ public class BloqueDePregunta extends BloqueSolido {
 	}
 	
 	public void recibirGolpe(Personaje p) {
-		soltarContenido();
-		System.out.println("visitado");
+		estado.recibirGolpe(p);
 	}
 	
 	public EstadoDeBloque getEstado() {
@@ -54,5 +53,13 @@ public class BloqueDePregunta extends BloqueSolido {
 	public void setContenido(PowerUps p) {
 		contenido = p;
 	}
+	public boolean cambioEstado() {
+		return cambio;
+	}
+	
+	public void cambiarEstado(EstadoDeBloque nuevoEstado) {
+		this.estado = nuevoEstado;        
+        cambio=true;
+    }
 
 }

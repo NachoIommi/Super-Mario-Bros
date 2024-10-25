@@ -22,6 +22,9 @@ public class BloqueSolido extends Plataforma{
 	public void recibirGolpe() {
 		
 	}
+	public boolean cambioEstado() {
+		return false;
+	}
 	
 	public void aceptarVisita(Visitor v) {
 		// no acepta nunca visita

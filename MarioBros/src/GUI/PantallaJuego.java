@@ -62,7 +62,6 @@ public class PantallaJuego extends JPanel {
                 actualizarImagenPowerUps();
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
                 monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());               
-               //llegoAlFinal();
             }
         });
         refrescarPantalla.start();
@@ -180,6 +179,12 @@ public class PantallaJuego extends JPanel {
     		if(p.getSprite()==null) {
     			p.setVisible(false);
     		}
+    		if(p.cambioEstado()) {
+    			String ruta = p.getSprite().getRutaImagen();
+    			p.setIcon(verificarExtension(ruta)); 
+    	        refrescar();
+    		}
+    	
     	}
     }
  
@@ -360,11 +365,11 @@ public class PantallaJuego extends JPanel {
         if(ruta.toLowerCase().endsWith(".gif")) {
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image gifImage = icono.getImage();
-            Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto(), Image.SCALE_DEFAULT);
+            Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, 30, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(gifAgrandado);
         }else{
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-            Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto(), Image.SCALE_DEFAULT);
+            Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, 30, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(imagenEscalada);
         }
         

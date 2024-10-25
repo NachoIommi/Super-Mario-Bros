@@ -1,23 +1,91 @@
 package Plataformas;
 
-public class BloqueGolpeado implements EstadoDeBloque{
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
+import Fabricas.Sprite;
+import Logica.Hitbox;
+import Logica.Visitor;
+import Personaje.EstadoSuperMario;
+import Personaje.Personaje;
+import PowerUps.PowerUps;
+
+public class BloqueGolpeado extends EstadoDeBloque{
 	
 	protected BloqueDePregunta bloque;
+	protected Sprite sprite;
+	protected int posX;
+	protected int posY;
+	protected Hitbox hitb;
+	protected PowerUps contenido;
+	protected boolean mostrable;
+	protected int golpesRestantes;
 	
-	public BloqueGolpeado() {
+	public BloqueGolpeado(BloqueDePregunta b, Sprite sprite, int x, int y,int g) {
+		super(b);
+		this.sprite=sprite;
+		posX=x;
+		posY=y;
+		hitb = new Hitbox(x ,y,30 ,40);
+		golpesRestantes=g;	
 		
 	}
 	
 	public void recibirGolpe() {
-		
-	}
-	
-	public void soltarContenido() {
-		
 	}
 	
 	public BloqueDePregunta getBloque() {
 		return bloque;
 	}
+	
+	public int getGolpesRestantes() {
+		return golpesRestantes;
+	}
 
+	public boolean cambioEstado() {
+		return false;
+	}
+
+	@Override
+	public void soltarContenido() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aceptarVisita(Visitor v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean mostrable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void recibirGolpe(Personaje p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public EstadoDeBloque getEstado() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PowerUps getContenido() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setContenido(PowerUps p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
