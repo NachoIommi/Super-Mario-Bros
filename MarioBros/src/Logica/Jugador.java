@@ -11,6 +11,8 @@ public class Jugador implements Comparable<Jugador>, Serializable{
 		this.nombre = nombre;
 		this.puntaje = puntos;
 	}
+
+	
 	
 	public String getNombre() {
 		return this.nombre;

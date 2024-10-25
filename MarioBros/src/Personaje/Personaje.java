@@ -46,7 +46,7 @@ public class Personaje extends Entidad{
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
         monedas = 0;      
-        puntuacion = 0;   
+        puntuacion = 10;   
         estado = new EstadoNormal(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
@@ -190,7 +190,7 @@ public class Personaje extends Entidad{
     }
     
     public void setPuntuacion(int n){
-        this.puntuacion = n;
+        this.puntuacion = puntuacion+n;
     }
     
     public EstadoDePersonaje getEstado(){

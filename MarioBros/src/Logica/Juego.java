@@ -41,7 +41,7 @@ public class Juego {
 		this.controladorVistas = controladorVistas;
 	}
 	public void cargarPrimerNivel() {
-		nivel.cargarNivel(1);
+		nivel.cargarNivel(0);
 	}
 	
 	public void iniciarSiguienteNivel() {
