@@ -50,5 +50,6 @@ public class BloqueSolido extends Plataforma{
 	public Hitbox getHitbox() {
 		return hitb;
 	}
+
 	
 }

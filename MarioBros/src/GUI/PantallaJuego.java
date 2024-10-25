@@ -55,15 +55,14 @@ public class PantallaJuego extends JPanel {
     public void iniciarTimerRefresco() {
         // Iniciar un Timer que actualice la pantalla cada 50 ms
         refrescarPantalla = new Timer(16, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	
+            public void actionPerformed(ActionEvent e) {          	
                 actualizarPosicionPersonaje();  
                 actualizarFondo(); 
+                actualizarImagenPlataformas();
+                actualizarImagenPowerUps();
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
-                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());
-               
-
-               llegoAlFinal();
+                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());               
+               //llegoAlFinal();
             }
         });
         refrescarPantalla.start();
@@ -175,6 +174,14 @@ public class PantallaJuego extends JPanel {
         imagenFondo.setBounds(posicionInicialX, 0, imagenFondo.getIcon().getIconWidth(), imagenFondo.getIcon().getIconHeight());
         panelNivel.add(imagenFondo);
     }
+    public void actualizarImagenPlataformas() {
+    	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
+    	for (Plataforma p : listaPlataformas) {
+    		if(p.getSprite()==null) {
+    			p.setVisible(false);
+    		}
+    	}
+    }
  
     public void actualizarImagenPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
@@ -183,13 +190,13 @@ public class PantallaJuego extends JPanel {
         refrescar();
     }      
     
+    
+    
     public void actualizarPosicionPersonaje() {
         Personaje personaje = controladorVistas.obtenerPersonaje();
         if(personaje.getPosX() < imagenFondo.getIcon().getIconWidth()-320) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             refrescar();
-            System.out.println(personaje.getPosX());
-            System.out.println("maximo dercha: " + maximoDerecha);
         }
     }
 
@@ -213,13 +220,7 @@ public class PantallaJuego extends JPanel {
             actualizarPosicionMonedas(velocidad);
             maximoDerecha += personaje.getVelX();
             controladorVistas.obtenerPersonaje().actualizarMin();
-        }
-        
-        
-       
-        
-        
-        
+        }      
         repaint();
     }
    
@@ -311,17 +312,31 @@ public class PantallaJuego extends JPanel {
     	}   	
     }  
     
-  
-    
     public void mostrarPowerUps() {
     	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();
     	for(PowerUps p : listaPowerUps) {
-    		p.setVisible(true);
-    		String ruta = p.getSprite().getRutaImagen();
-    		p.setIcon(verificarExtension(ruta));
-    		p.setBounds(p.getPosX(), p.getPosY(), 50, 50);
+    		//p.setVisible(true);
+    		//String ruta = p.getSprite().getRutaImagen();
+    		//p.setIcon(verificarExtension(ruta));
+    		p.setBounds(p.getPosX(), p.getPosY(), 30, 30);
     		panelNivel.add(p);
             refrescar();
+    	}
+    }
+    
+    
+    public void actualizarImagenPowerUps() {
+    	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();
+    	for(PowerUps p : listaPowerUps) {
+    		if(p.mostrable()) {   			
+	    		p.setVisible(true);
+	    		String ruta = p.getSprite().getRutaImagen();
+	    		p.setIcon(verificarExtension(ruta));
+	    		p.setBounds(p.getPosX(), p.getPosY(), 30, 30);
+	            refrescar();
+    		}
+    		else 
+    			p.setVisible(false);
     	}
     }
     

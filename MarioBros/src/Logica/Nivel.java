@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import Fabricas.*;
 import Personaje.Personaje;
+import PowerUps.PowerUps;
 
 public class Nivel {
 	
@@ -112,7 +113,17 @@ public class Nivel {
 				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY));
 				        break;
 				    case 2:
-				    	juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY));
+				    	switch(tipoPUp) {
+				    		case 33:
+				    			PowerUps  s = fabricaSuperChampi.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY-30) ;
+				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,s ));
+				    			juego.agregarPowerUp(s);
+				    	
+				    	
+				    	
+				    	}
+
+				    	
 				        break;
 				    case 3:
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));

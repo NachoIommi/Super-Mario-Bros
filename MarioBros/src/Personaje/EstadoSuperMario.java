@@ -334,7 +334,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 
 	public void romperLadrilloSolido(LadrilloSolido l) {
-		
+		l.getHitbox().actualizar(0, 0);
+		l.cargarSprite(null);
 	}
 
 	public void moverBloqueGolpeable(BloqueGolpeable b) {

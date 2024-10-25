@@ -32,6 +32,7 @@ public class Juego {
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
 		cargarPrimerNivel();
+	
 		hilo = new HiloPersonaje(this);
 		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
@@ -40,7 +41,7 @@ public class Juego {
 		this.controladorVistas = controladorVistas;
 	}
 	public void cargarPrimerNivel() {
-		nivel.cargarNivel(0);
+		nivel.cargarNivel(1);
 	}
 	
 	public void iniciarSiguienteNivel() {

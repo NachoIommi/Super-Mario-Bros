@@ -11,16 +11,25 @@ public class SuperChampi extends PowerUps{
 	protected int y;
 	protected Sprite sprite;
 	protected Hitbox hitb;
+	protected boolean mostrable;
 	
 	public SuperChampi(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x , y, 30, 30);
+		hitb = new Hitbox(0 , 0, 30, 30);
+		mostrable=false;
 	}
 	
-	public void moverse() {
-		
+	public void moverse() {		
+	}
+
+	public boolean mostrable() {
+		return mostrable;
+	}
+	
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -32,7 +41,9 @@ public class SuperChampi extends PowerUps{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.colisionSuperChampi();		
+		p.colisionSuperChampi();	
+		setMostrable(false);
+		hitb.actualizar(0, 0);
 		//p.setEstado(null);
 		//p.getEstado().setPuntuacionSuperChampi();
 	}
@@ -49,8 +60,21 @@ public class SuperChampi extends PowerUps{
 		return y;
 	}
 
+	public void setPosX(int x) {
+		this.x=x;
+	}
+	
+	public void setPosY(int y) {
+		this.y=y;
+	}
+	
 	public Hitbox getHitbox() {
 		return hitb;
 	}
+
+
+
+	
+
 	
 }

@@ -6,10 +6,17 @@ import Personaje.Personaje;
 
 public abstract class PowerUps extends Entidad{
 	
+	
 	public abstract void afectarPersonaje(Personaje p);
 	public abstract void aceptarVisita(Visitor r);
 	public abstract int getPosX();
 	public abstract int getPosY();
 	public abstract Sprite getSprite();
+	public abstract void setPosX(int x);
+	public abstract void setPosY(int x);
+	public abstract boolean mostrable();
+	public abstract void setMostrable(boolean b);
+	
+	
 	
 }

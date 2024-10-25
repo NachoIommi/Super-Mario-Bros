@@ -48,7 +48,7 @@ public class HiloPersonaje extends Thread {
                         {
                             personaje.setTocandoBloqueDerecha(true);
                             personaje.setTocandoBloqueIzquierda(false);
-                            System.out.println("Colisión Der");
+                     //       System.out.println("Colisión Der");
                         }  
 
                         else if (personaje.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
@@ -57,7 +57,7 @@ public class HiloPersonaje extends Thread {
                         {
                             personaje.setTocandoBloqueIzquierda(true);
                             personaje.setTocandoBloqueDerecha(false);
-                            System.out.println("Colisión Izq");
+                       //     System.out.println("Colisión Izq");
                         }
 
                         if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY() &&
@@ -70,6 +70,7 @@ public class HiloPersonaje extends Thread {
                                  personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueArriba(true);
+                            p.aceptarVisita(visitorEntidad);
                             System.out.println("Colisión tocando techo");
                         }
                     }
