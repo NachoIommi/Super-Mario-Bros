@@ -11,12 +11,14 @@ public class BuzzyBeetle extends Enemigo{
 	protected int x;
 	protected int y;
 	protected Hitbox hitb;
+	protected boolean mostrable;
 	
 	public BuzzyBeetle(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
+		mostrable = true;
 	}
 
 	public Sprite getSprite() {
@@ -89,6 +91,14 @@ public class BuzzyBeetle extends Enemigo{
 	public int getToleranciaAltura() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public boolean mostrable() {
+		return mostrable;
+	}
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 
 }

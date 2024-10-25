@@ -12,12 +12,14 @@ public class PiranhaPlant extends Enemigo{
 	protected Hitbox hitb;
 	protected int x;
 	protected int y;
+	protected boolean mostrable;
 	
 	public PiranhaPlant(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
+		mostrable = true;
 	}
 	
 	public EstadosDePiranhaPlant getEstadoActual() {
@@ -105,6 +107,14 @@ public class PiranhaPlant extends Enemigo{
 	public int getToleranciaAltura() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public boolean mostrable() {
+		return mostrable;
+	}
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 	
 }

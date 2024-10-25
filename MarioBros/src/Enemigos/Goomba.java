@@ -1,5 +1,7 @@
 package Enemigos;
 
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
@@ -11,12 +13,14 @@ public class Goomba extends Enemigo{
 	protected int posX;
 	protected int posY;
 	protected Hitbox hitb;
+	protected boolean mostrable;
 
 	public Goomba(Sprite sprite,int x,int y) {
 		posX = x;
         posY = y;
         this.sprite = sprite;
         hitb = new Hitbox(x ,y,30 ,30);
+        mostrable=true;
 	}
 	
 	public Sprite getSprite() {
@@ -45,16 +49,21 @@ public class Goomba extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {	
 		p.colisionLateralGoomba();
-		//p.morir();
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {
 		//p.setPuntuacion(60);
-		//morir();
+		morir();
 	}
 	public void morir() {
-		
+		actualizarSprite();
+		hitb.actualizar(0, 0);
+		System.out.println("goomba muerto");
 	}
-
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getGoombaMuerto();
+    	cargarSprite(sprite);
+	}
 	public Hitbox getHitbox() {
     	return hitb;
     }
@@ -87,6 +96,15 @@ public class Goomba extends Enemigo{
 	public int getToleranciaAltura() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	public boolean mostrable() {
+		return mostrable;
+	}
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 	
 }

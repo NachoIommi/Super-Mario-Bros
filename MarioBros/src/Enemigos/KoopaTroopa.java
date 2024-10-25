@@ -11,6 +11,7 @@ public class KoopaTroopa extends Enemigo{
 	protected Hitbox hitb;
 	protected int x;
 	protected int y;
+	protected boolean mostrable;
 	
 	
 	public KoopaTroopa(Sprite sprite, int x,int y) {
@@ -18,7 +19,7 @@ public class KoopaTroopa extends Enemigo{
 		this.y = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
-		
+		mostrable = true;
 	}
 	
 	public void cambiarEstado() {
@@ -103,6 +104,14 @@ public class KoopaTroopa extends Enemigo{
 	public int getToleranciaAltura() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public boolean mostrable() {
+		return mostrable;
+	}
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 
 }	
