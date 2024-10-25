@@ -25,6 +25,7 @@ public abstract class EstadoDePersonaje {
 	public abstract void setPuntuacionEstrella();
 	public abstract void setPuntuacionFlorDeFuego();
 	public abstract void setPuntuacionSuperChampi();
+	public abstract void setPuntuacionMoneda();
 	public abstract void romperLadrilloSolido(LadrilloSolido l);
 	public abstract void moverBloqueGolpeable(BloqueGolpeable b);
 	public abstract void cargarSprite(Sprite s);
@@ -39,6 +40,10 @@ public abstract class EstadoDePersonaje {
 	public abstract void actualizarMin();
 	public abstract float getVelX();
 	public abstract void colisionSuperChampi();
+	public abstract void colisionEstrella();
+	public abstract void colisionFlorDeFuego();
+	public abstract void colisionChampiVerde();
+	public abstract void colisionMoneda();
 	public abstract int getAlto();
 	public abstract void colisionLateralGoomba();
 	public abstract void setRight(boolean b);

@@ -228,7 +228,9 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
-    	personaje.actualizarSprite();
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getMarioFlorDeFuegoMuerto();
+    	personaje.cargarSprite(sprite);
     }
     
     public boolean getSaltando() {
@@ -315,19 +317,22 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 
 	public void setPuntuacionChampiVerde() {
-		
+		personaje.setPuntuacion(100);
 	}
 
 	public void setPuntuacionEstrella() {
-		
+		personaje.setPuntuacion(30);
 	}
 
 	public void setPuntuacionFlorDeFuego() {
-		
+		personaje.setPuntuacion(50);
 	}
 
 	public void setPuntuacionSuperChampi() {
-		
+		personaje.setPuntuacion(50);
+	}
+	public void setPuntuacionMoneda(){
+		personaje.setPuntuacion(5);
 	}
 
 	public void romperLadrilloSolido(LadrilloSolido l) {

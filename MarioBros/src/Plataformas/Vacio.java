@@ -31,6 +31,9 @@ public class Vacio extends Plataforma {
 	public void cargarSprite(Sprite s) {
 		
 	}
+	public boolean cambioEstado() {
+		return false;
+	}
 	
 	public Sprite getSprite() {
 		return sprite;

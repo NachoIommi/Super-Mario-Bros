@@ -17,5 +17,8 @@ public class LadrilloSolido extends BloqueSolido{
 	public void recibirGolpe(Personaje p) {
 		p.getEstado().romperLadrilloSolido(this);
 	}
+	public boolean cambioEstado() {
+		return false;
+	}
 
 }

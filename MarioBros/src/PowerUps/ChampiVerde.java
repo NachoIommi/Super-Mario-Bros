@@ -11,12 +11,14 @@ public class ChampiVerde extends PowerUps{
 	protected int y;
 	protected Sprite sprite;
 	protected Hitbox hitb;
+	protected boolean mostrable;
 	
 	public ChampiVerde(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x ,y,30 ,30);
+		mostrable=false;
 	}
 	
 	public void moverse() {
@@ -49,6 +51,28 @@ public class ChampiVerde extends PowerUps{
 
 	public Hitbox getHitbox() {
 		return hitb;
+	}
+
+	@Override
+	public void setPosX(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPosY(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean mostrable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 	
 }

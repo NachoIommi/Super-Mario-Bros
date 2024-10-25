@@ -6,8 +6,8 @@ import PowerUps.PowerUps;
 
 public class GenerarBloqueDePreguntas implements GenerarPlataformas{
 	
-	public BloqueDePregunta crearPlataforma(Sprite sprite, int x, int y , PowerUps p){
-		return new BloqueDePregunta(sprite, x, y,p);
+	public BloqueDePregunta crearPlataforma(Sprite sprite, int x, int y , PowerUps p,int i){
+		return new BloqueDePregunta(sprite, x, y,p,i);
 	}
 
 	@Override

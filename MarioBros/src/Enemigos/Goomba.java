@@ -58,6 +58,36 @@ public class Goomba extends Enemigo{
 	public Hitbox getHitbox() {
     	return hitb;
     }
+
+	@Override
+	public boolean setTocandoBloqueDerecha(boolean b) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setTocandoBloqueIzquierda(boolean b) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setTocandoBloqueArriba(boolean b) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setTocandoBloqueAbajo(boolean b) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getToleranciaAltura() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
 

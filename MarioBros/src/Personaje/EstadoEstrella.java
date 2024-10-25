@@ -228,7 +228,9 @@ public class EstadoEstrella extends EstadoDePersonaje {
     
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
-    	personaje.actualizarSprite();
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getMarioEstrellaMuerto();
+    	personaje.cargarSprite(sprite);
     }
     
     public boolean getSaltando() {
@@ -315,19 +317,22 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 
 	public void setPuntuacionChampiVerde() {
-		
+		personaje.setPuntuacion(100);
 	}
 
 	public void setPuntuacionEstrella() {
-		
+		personaje.setPuntuacion(35);
 	}
 
 	public void setPuntuacionFlorDeFuego() {
-		
+		personaje.setPuntuacion(30); //varia segun el estado anterior?
 	}
 
 	public void setPuntuacionSuperChampi() {
-		
+		personaje.setPuntuacion(50); //varia segun el estado anterior?
+	}
+	public void setPuntuacionMoneda(){
+		personaje.setPuntuacion(5);
 	}
 
 	public void romperLadrilloSolido(LadrilloSolido l) {
@@ -339,7 +344,18 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 
 	public void colisionSuperChampi() {
-		
+    }
+    
+    public void colisionFlorDeFuego() {
+    }
+    
+    public void colisionEstrella() {
+    }
+    
+	public void colisionChampiVerde() {
+	}
+
+	public void colisionMoneda() {
 	}
 
 	@Override

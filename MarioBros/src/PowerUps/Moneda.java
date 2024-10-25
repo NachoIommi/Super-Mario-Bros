@@ -49,5 +49,29 @@ public class Moneda extends PowerUps{
 	public Hitbox getHitbox() {
 		return hitb;
 	}
+
+	@Override
+	public void setPosX(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPosY(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean mostrable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMostrable(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

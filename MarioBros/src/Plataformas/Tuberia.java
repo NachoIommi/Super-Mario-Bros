@@ -27,6 +27,9 @@ public class Tuberia extends Plataforma{
 		hitb = new Hitbox(x , y, 30,30);
 	}
 
+	public boolean cambioEstado() {
+		return false;
+	}
 	public Sprite getSprite() {
 		return sprite;
 	}

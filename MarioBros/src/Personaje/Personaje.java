@@ -83,6 +83,14 @@ public class Personaje extends Entidad{
 	public void colisionSuperChampi() {
 		estado.colisionSuperChampi();
 	}
+    
+    public void colisionFlorDeFuego() {
+    	estado.colisionFlorDeFuego();
+    }
+    
+    public void colisionEstrella() {
+    	estado.colisionEstrella();
+    }
 	
 	public int getAlto() {
 		return estado.getAlto();
@@ -190,7 +198,11 @@ public class Personaje extends Entidad{
     }
     
     public void setPuntuacion(int n){
+<<<<<<< HEAD
         this.puntuacion = puntuacion+n;
+=======
+        this.puntuacion += n;
+>>>>>>> b49baaff9d51f0742b70bb085903a518500ae065
     }
     
     public EstadoDePersonaje getEstado(){
