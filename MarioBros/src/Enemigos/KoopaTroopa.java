@@ -21,6 +21,10 @@ public class KoopaTroopa extends Enemigo{
 		
 	}
 	
+	public void cambiarEstado() {
+        estadoActual.cambiarEstado();  // Llamar al método cambiarEstado en el estado actual
+    }
+	
 	public EstadoDeKoopa getEstadoActual() {
 		return estadoActual;
 	}

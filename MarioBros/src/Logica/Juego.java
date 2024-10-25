@@ -20,6 +20,7 @@ public class Juego {
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
 	protected HiloPersonaje hilo;
+	protected HiloEnemigo hiloEnemigo;
 	protected ControladorVistas controladorVistas;
 	//protected Musica musica; ver si va aca, no toy seguro
 	
@@ -32,7 +33,9 @@ public class Juego {
 		powerUps = new ArrayList<PowerUps>();
 		nivel.cargarNivel(1);
 		hilo = new HiloPersonaje(this);
-		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
+		hiloEnemigo = new HiloEnemigo(reloj,this);
+		hiloEnemigo.start();
+
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {

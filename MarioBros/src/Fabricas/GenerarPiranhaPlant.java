@@ -9,4 +9,10 @@ public class GenerarPiranhaPlant implements GenerarEnemigos{
 		return new PiranhaPlant(sprite, x, y);
 	}
 
+	@Override
+	public PiranhaPlant crearPiranha(Sprite sprite, int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
