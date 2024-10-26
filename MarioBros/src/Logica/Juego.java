@@ -21,6 +21,7 @@ public class Juego {
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
 	protected HiloPersonaje hilo;
+	protected HiloRestoMundo hiloRM;
 	protected ControladorVistas controladorVistas;
 	//protected Musica musica; ver si va aca, no toy seguro
 	
@@ -34,6 +35,7 @@ public class Juego {
 		cargarPrimerNivel();
 	
 		hilo = new HiloPersonaje(this);
+		hiloRM = new HiloRestoMundo(this);
 		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
 	
@@ -72,8 +74,14 @@ public class Juego {
 	    if (hilo != null && hilo.isAlive()) {
 	        hilo.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
 	    }
+	    if (hiloRM != null && hiloRM.isAlive()) {
+	        hiloRM.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
+	    }
+	    
+	    hiloRM = new HiloRestoMundo(this);
 	    hilo = new HiloPersonaje(this); // Crear un nuevo hilo
 	    hilo.start();
+	    hiloRM.start();
 
 	    if (reloj != null && reloj.isAlive()) {
 	        reloj.detener();

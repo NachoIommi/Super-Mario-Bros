@@ -408,7 +408,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	public void colisionLateralGoomba() {
 		//morir();
-		System.out.println("MORIR");
+		System.out.println("MORIR PERSONAJE");
 	}
 
 	public float getVelY() {

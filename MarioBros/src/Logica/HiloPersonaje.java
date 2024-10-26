@@ -18,6 +18,13 @@ public class HiloPersonaje extends Thread {
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
     private volatile boolean enEjecucion;
+    
+    //probando Juanse
+    protected boolean tocoDerecha;
+    protected boolean tocoIzquierda;
+    protected boolean tocoArriba;
+    protected boolean tocoAbajo;
+    
     public HiloPersonaje(Juego juego) {
         this.juego = juego;
         personaje = juego.getPersonaje();
@@ -70,6 +77,7 @@ public class HiloPersonaje extends Thread {
                                  personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueArriba(true);
+                            
                             p.aceptarVisita(visitorEntidad);
                             System.out.println("Colisión tocando techo");
                         }
@@ -77,31 +85,38 @@ public class HiloPersonaje extends Thread {
                 }
                 for(Enemigo e : enemigo) {
                 	if(personaje.getHitbox().intersects(e.getHitbox())) {
-                		System.out.println("Colisión");
+                		
+                		
+                		if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
+                                personaje.getHitbox().getY() < e.getHitbox().getY()) 
+                            {
+                            	if(!tocoDerecha && !tocoIzquierda)
+                            		e.aceptarVisita(visitorEnemigoAfectado);
+                            		System.out.println("Saltan sobre goomba");
+                            		personaje.setTocandoBloqueAbajo(true);
+                            }
+                           
                 		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
                             personaje.getHitbox().getX() < e.getHitbox().getX()) {
+                        		tocoDerecha=true;
                         		e.aceptarVisita(visitorEnemigo);
+                        		System.out.println("Goomba lo tocan desde izquierda");
                         }
                         // Colisión desde la izquierda (jugador a la derecha del enemigo)
                         else if (personaje.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
                                  personaje.getHitbox().getX() > e.getHitbox().getX())
                         {
+                        	tocoIzquierda=true;
                             e.aceptarVisita(visitorEnemigo);
+                            System.out.println("Goomba lo tocan desde derecha");
                         }
                         // (personaje arriba del enemigo)
-                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
-                            personaje.getHitbox().getY() < e.getHitbox().getY()) 
-                        {
-                           e.aceptarVisita(visitorEnemigoAfectado);
-                        }
-                        // Colisión desde arriba (tocando el techo)
-                        else if (personaje.getHitbox().getY() < e.getHitbox().getY() + e.getHitbox().getHeight() &&
-                                 personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY()) 
-                        {
-                            e.aceptarVisita(visitorEnemigoAfectado);
-                        }
-                        	
+                        
+                        
+                        tocoDerecha=false;
+                        tocoIzquierda=false;
+                        
                 	}
                 }
                 

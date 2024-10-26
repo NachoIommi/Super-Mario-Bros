@@ -16,6 +16,7 @@ public class HiloRestoMundo extends Thread {
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
+    private volatile boolean enEjecucion;
 
     public HiloRestoMundo(Juego juego) {
         this.juego = juego;   
@@ -24,7 +25,9 @@ public class HiloRestoMundo extends Thread {
         powerUp = juego.getPowerUp();    
 
     }
-  
+    public void detener() {
+    	enEjecucion = false;
+    }
     public void run() {
         while (true) {
             try {
@@ -47,7 +50,7 @@ public class HiloRestoMundo extends Thread {
 		                        {
 		                            e.setTocandoBloqueIzquierda(true);
 		                            e.setTocandoBloqueDerecha(false);
-		                            System.out.println("Colisión Izq");
+		                            //System.out.println("Colisión Izq");
 		                        }
 		            			if (e.getHitbox().getY() + e.getHitbox().getHeight() > p.getHitbox().getY() &&
 		                                e.getHitbox().getY() < p.getHitbox().getY()) 

@@ -14,9 +14,9 @@ public abstract class Enemigo extends Entidad{
 	public abstract Sprite getSprite();
 	public abstract boolean mostrable();
 	public abstract void setMostrable(boolean b);
-	public abstract boolean setTocandoBloqueDerecha(boolean b);
-	public abstract boolean setTocandoBloqueIzquierda(boolean b);
-	public abstract boolean setTocandoBloqueArriba(boolean b);
-	public abstract boolean setTocandoBloqueAbajo(boolean b);
+	public abstract void setTocandoBloqueDerecha(boolean b);
+	public abstract void setTocandoBloqueIzquierda(boolean b);
+	public abstract void setTocandoBloqueArriba(boolean b);
+	public abstract void setTocandoBloqueAbajo(boolean b);
 	public abstract int getToleranciaAltura();
 }
