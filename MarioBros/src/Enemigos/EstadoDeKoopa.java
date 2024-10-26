@@ -1,13 +1,15 @@
 package Enemigos;
 
+import Fabricas.Sprite;
 import Logica.Hitbox;
+import Personaje.Personaje;
 
 public abstract class EstadoDeKoopa {
 		
-	protected KoopaTroopa kt;
+	protected KoopaTroopa koopa;
 	
 	public EstadoDeKoopa(KoopaTroopa kt) {
-		this.kt = kt;
+		koopa = kt;
 	}
 	public abstract KoopaTroopa getKoopaTroopa();
 	public abstract void setKoopaTroopa(KoopaTroopa kt);
@@ -16,6 +18,18 @@ public abstract class EstadoDeKoopa {
 	public abstract void setPosY(int y);
 	public abstract void actualizarSprite();
     public abstract void cambiarEstado();
+	public abstract int getPosX();
+	public abstract int getPosY();
+	public abstract void moverse();
+	public abstract void setMostrable(boolean b);
+	public abstract Sprite getSprite();
+	public abstract void setTocandoBloqueAbajo(boolean b);
+	public abstract void setTocandoBloqueArriba(boolean b);
+	public abstract void setTocandoBloqueIzquierda(boolean b);
+	protected abstract void setTocandoBloqueDerecha(boolean b);
+	public abstract boolean mostrable();
+	public abstract void cargarSprite(Sprite s);
+	public abstract void serAfectadoPorPersonaje(Personaje p);
 }
 
 

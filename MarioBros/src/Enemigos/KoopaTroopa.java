@@ -2,15 +2,16 @@ package Enemigos;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
+import Personaje.EstadoNormal;
 import Personaje.Personaje;
 
 public class KoopaTroopa extends Enemigo{
 	
-	private EstadoDeKoopa estadoActual;
+	private EstadoDeKoopa estado;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected int x;
-	protected int y;
+	protected int posX;
+	protected int posY;
 	protected boolean mostrable;
 
 	protected boolean tocandoBloqueDerecha;
@@ -20,41 +21,40 @@ public class KoopaTroopa extends Enemigo{
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
 	
-	
-	public KoopaTroopa(Sprite sprite, int x,int y) {
-		this.x = x;
-		this.y = y;
-		this.sprite = sprite;
+	public KoopaTroopa(Sprite s, int x,int y) {
+		estado = new EstadoKoopaNormal(this ,s, x ,y); 
+		posX = x;
+		posY = y;
 		hitb = new Hitbox(x, y, 30, 30);
-		mostrable = true;
+		mostrable = true; //?	
 	}
 	
 	public void cambiarEstado() {
-        estadoActual.cambiarEstado();  // Llamar al mÃ©todo cambiarEstado en el estado actual
+        estado.cambiarEstado();  
     }
 	
 	public EstadoDeKoopa getEstadoActual() {
-		return estadoActual;
+		return estado;
 	}
 	
 	public Sprite getSprite() {
-		return sprite;
+		return estado.getSprite();
 	}
 
 	public int getPosX() {
-		return x;
+		return estado.getPosX();
 	}
 
 	public int getPosY() {
-		return y;
+		return estado.getPosY();
 	}
 	
-	public void setEstadoActual(EstadoDeKoopa e) {
-		estadoActual = e;
+	public void setEstadoActual(EstadoDeKoopa nuevoEstado) {
+		this.estado = nuevoEstado;
 	}
 	
 	public void moverse() {
-		
+		estado.moverse();
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -62,7 +62,7 @@ public class KoopaTroopa extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		sprite = s;
+		estado.cargarSprite(s);
 	}
 	
 	public void afectarPersonaje(Personaje p) {
@@ -72,7 +72,7 @@ public class KoopaTroopa extends Enemigo{
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(90);
-		morir();
+		estado.serAfectadoPorPersonaje(p);
 	}
 	
 	public void morir() {
@@ -80,22 +80,51 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public Hitbox getHitbox() {
-		return hitb;
+		return estado.getHitbox();
 	}
-
-
-
-	public int getToleranciaAltura() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	@Override
 	public boolean mostrable() {
-		return mostrable;
+		return estado.mostrable();
 	}
 
+<<<<<<< Updated upstream
+
+
+=======
+	@Override
 	public void setMostrable(boolean b) {
-		mostrable=b;
+		estado.setMostrable(b);
+		
+	}
+
+	@Override
+	public void setTocandoBloqueDerecha(boolean b) {
+		estado.setTocandoBloqueDerecha(b);
+		
+	}
+
+	@Override
+	public void setTocandoBloqueIzquierda(boolean b) {
+		estado.setTocandoBloqueIzquierda(b);
+		
+	}
+
+	@Override
+	public void setTocandoBloqueArriba(boolean b) {
+		// TODO Auto-generated method stub
+		estado.setTocandoBloqueArriba(b);
+	}
+
+	@Override
+	public void setTocandoBloqueAbajo(boolean b) {
+		estado.setTocandoBloqueAbajo(b);
+		
+	}
+
+	@Override
+>>>>>>> Stashed changes
+	public int getToleranciaAltura() {
+		return 20;
 	}
 
 	public void setTocandoBloqueDerecha(boolean b) {

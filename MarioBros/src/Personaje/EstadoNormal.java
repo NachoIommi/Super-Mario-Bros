@@ -29,7 +29,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
     protected boolean saltando;
-    protected boolean saltandoSobreGoomba;
+    protected boolean saltandoSobreEnemigo;
 	
 	protected float velX;
 	protected float velY;
@@ -46,7 +46,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
-	    saltandoSobreGoomba=false;
+	    saltandoSobreEnemigo=false;
 	    saltando=false;  
 	    alto=30;
 	    jump=false;
@@ -66,14 +66,14 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    corregirPosEnColision();
 	    gravedad();
 	    detenerSalto();
-	    saltarSobreGoomba();
+	    saltarSobreEnemigo();
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
 	   // actualizarSprite();
 	}
 
-	public void saltarSobreGoomba() {
-		if (saltandoSobreGoomba ) {
+	public void saltarSobreEnemigo() {
+		if (saltandoSobreEnemigo ) {
 			velY = -3;
 			saltando=true;
 			System.out.println("pase por aca");
@@ -88,8 +88,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    }
     }
 	
-	public void setSaltandoSobreGoomba(boolean b) {
-		saltandoSobreGoomba=b;
+	public void setSaltandoSobreEnemigo(boolean b) {
+		saltandoSobreEnemigo=b;
 	}
 	
 	public void moverDerecha() {
@@ -429,6 +429,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public float getVelY() {
 		return velY;
 	}
+
 
 
 	

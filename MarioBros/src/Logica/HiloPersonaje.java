@@ -113,7 +113,7 @@ public class HiloPersonaje extends Thread {
                             		e.aceptarVisita(visitorEnemigoAfectado);
                             		System.out.println("Saltan sobre goomba");
                             		personaje.setTocandoBloqueAbajo(true);
-                            		personaje.setSaltandoSobreGoomba(true);}
+                            		personaje.setSaltandoSobreEnemigo(true);}
                             }
                         
                         tocoGoombaDerecha=false;
@@ -138,7 +138,7 @@ public class HiloPersonaje extends Thread {
                 personaje.setTocandoBloqueIzquierda(false);
                 personaje.setTocandoBloqueAbajo(false);
                 personaje.setTocandoBloqueArriba(false);
-                personaje.setSaltandoSobreGoomba(false);
+                personaje.setSaltandoSobreEnemigo(false);
                 
                 Thread.sleep(16);
             } catch (InterruptedException e) {

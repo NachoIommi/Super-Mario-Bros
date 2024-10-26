@@ -53,7 +53,7 @@ public abstract class EstadoDePersonaje {
 	public abstract void setTocandoBloqueArriba(boolean b);
 	public abstract float getVelY();
 
-	public abstract void saltarSobreGoomba();
+	public abstract void saltarSobreEnemigo();
 
-	public abstract void setSaltandoSobreGoomba(boolean b);
+	public abstract void setSaltandoSobreEnemigo(boolean b);
 }

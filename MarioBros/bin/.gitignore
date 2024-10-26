@@ -1,6 +1,8 @@
-/GUI/
-/Logica/
-/Personaje/
 /Enemigos/
 /Fabricas/
+<<<<<<< Updated upstream
 /nivel-2.txt
+=======
+/Personaje/
+/Logica/
+>>>>>>> Stashed changes

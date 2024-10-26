@@ -4,19 +4,17 @@ import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
-import Logica.Visitor;
+import Personaje.EstadoSuperMario;
 import Personaje.Personaje;
 
-public class Goomba extends Enemigo{
+public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
-	
-	public double toleranciaAltura=20;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-
-	protected int posX;
-	protected int posY;
+	public double toleranciaAltura=20;
 	
+	protected int posX;
+	protected int posY;	
 	protected boolean tocandoBloqueDerecha;
 	protected boolean tocandoBloqueIzquierda;
 	protected boolean tocandoBloqueAbajo;
@@ -24,50 +22,51 @@ public class Goomba extends Enemigo{
 	protected boolean mostrable;
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
-
-	public Goomba(Sprite sprite,int x,int y) {
+    
+    protected boolean mori;
+	
+	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
+		super(kt);
 		posX = x;
-        posY = y;
-        this.sprite = sprite;
-        hitb = new Hitbox(x ,y,30 ,30);
+		posY = y;
+		sprite = s;
+		hitb = new Hitbox(x ,y,30 ,30);
         tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
-	    mostrable=true;
+	    mostrable=true;	
+	    mori=false;
 	}
 	
 	public void moverse() {
 		
+		
+		if(!mori) {
+		
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
-		
+			
 		if(!tocoParedIzquierda) {
 			moverIzq();			
 			hitb.actualizar (posX, posY);
-			
-		} else {
+		}
+		else
+			 {
 			tocoParedIzquierda=true;
 			moverDer();
-			hitb.actualizar (posX, posY);
-		}
-						
+			hitb.actualizar (posX, posY);}				
+				
 		if (tocandoBloqueDerecha) {
 			tocoParedDerecha=true;
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-		}
+				}
 
-<<<<<<< Updated upstream
-			hitb.actualizar (posX, posY);		
-	}
-=======
 		if (!tocandoBloqueAbajo) 
 	        posY=posY+1;
 		
-			hitb.actualizar (posX, posY);	
-			
-		}
->>>>>>> Stashed changes
+			hitb.actualizar (posX, posY);	}			
+	}
 	
 	public void moverIzq() {
 		posX=posX-2;
@@ -75,53 +74,65 @@ public class Goomba extends Enemigo{
 	public void moverDer() {
 		posX=posX+2;
 	}
-
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
 	
-	public int getPosY() {
-		return posY;
-	}
-
-	public void aceptarVisita(Visitor v) {
-		v.visitarGoomba(this);
+	public void serAfectadoPorPersonaje(Personaje p) {
+		mori=true;
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getKoopaTroopaRetraido();
+		EstadoKoopaRetraido e = new EstadoKoopaRetraido(koopa,sprite,posX,posY);
+		
 	}
 	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
 	
-	public void afectarPersonaje(Personaje p) {	
-		p.colisionLateralGoomba();
+	public Sprite getSprite() {
+		return sprite;
 	}
 	
-	public void serAfectadoPorPersonaje(Personaje p) {
-		//p.setPuntuacion(60);
-		morir();
+	@Override
+	public KoopaTroopa getKoopaTroopa() {
+		return koopa;
 	}
-	
-	public void morir() {
-		actualizarSprite();
-		hitb.actualizar(0, 0);
-		System.out.println("goomba muerto");
-		posX=0;
-		posY=-300;
+
+	@Override
+	public void setKoopaTroopa(KoopaTroopa kt) {
+		koopa=kt;		
 	}
-	
-	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getGoombaMuerto();
-    	cargarSprite(sprite);
-	}
-	
+
+	@Override
 	public Hitbox getHitbox() {
-    	return hitb;
-    }
+		return hitb;
+	}
+
+	@Override
+	public void setPosX(int x) {
+		posX=x;		
+	}
+
+	@Override
+	public void setPosY(int y) {
+		posY=y;		
+	}
+
+	@Override
+	public void actualizarSprite() {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void cambiarEstado() {		
+		
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
 
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha=b;
@@ -135,14 +146,10 @@ public class Goomba extends Enemigo{
 		tocandoBloqueArriba=b;
 	}
 
+
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo=b;
 	}
-
-	public int getToleranciaAltura() {
-		return (int)toleranciaAltura;
-	}
-
 	public boolean mostrable() {
 		return mostrable;
 	}
@@ -152,4 +159,3 @@ public class Goomba extends Enemigo{
 	}
 	
 }
-

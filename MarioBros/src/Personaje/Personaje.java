@@ -15,7 +15,6 @@ public class Personaje extends Entidad{
 	
 	public double toleranciaAltura;
 	private EstadoDePersonaje estado;
-	protected Sprite sprite;
 	protected Hitbox hitb;
 	protected int vidas;
 	protected int monedas;
@@ -34,7 +33,7 @@ public class Personaje extends Entidad{
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
     protected boolean saltando;
-    protected boolean saltandoSobreGoomba;
+    protected boolean saltandoSobreEnemigo;
 	
 	protected int velX;
 	protected int gravedad=1;
@@ -57,7 +56,7 @@ public class Personaje extends Entidad{
         tocandoBloqueIzquierda=false;
         tocandoBloqueAbajo=false;
         tocandoBloqueArriba=false;
-        saltandoSobreGoomba=false;
+        saltandoSobreEnemigo=false;
         saltando=false;  
         alto=30;
         
@@ -209,12 +208,12 @@ public class Personaje extends Entidad{
     public EstadoDePersonaje getEstado(){
         return this.estado;
     }
-    public void saltarSobreGoomba() {
-    	estado.saltarSobreGoomba();
+    public void saltarSobreEnemigo() {
+    	estado.saltarSobreEnemigo();
     }
     
-    public void setSaltandoSobreGoomba(boolean b) {
-    	estado.setSaltandoSobreGoomba(b);
+    public void setSaltandoSobreEnemigo(boolean b) {
+    	estado.setSaltandoSobreEnemigo(b);
     }
     
     public void setEstado(EstadoDePersonaje nuevoEstado){
