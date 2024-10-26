@@ -52,4 +52,8 @@ public abstract class EstadoDePersonaje {
 	public abstract double getToleranciaAltura();
 	public abstract void setTocandoBloqueArriba(boolean b);
 	public abstract float getVelY();
+
+	public abstract void saltarSobreGoomba();
+
+	public abstract void setSaltandoSobreGoomba(boolean b);
 }

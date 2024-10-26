@@ -28,6 +28,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
     protected boolean saltando;
+    protected boolean saltandoSobreGoomba;
 	
 	protected float velX;
 	protected float velY;
@@ -43,6 +44,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
+	    saltandoSobreGoomba=false;
 	    saltando=false;  
 	    jump=false;
 	    right=false;
@@ -57,13 +59,23 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    detenerFriccion();    
 	    posX += velX;
 	    saltar();
+	    
 	    gravedadSaltando();
 	    corregirPosEnColision();
 	    gravedad();
-	    detenerSalto();	    
+	    detenerSalto();
+	    saltarSobreGoomba();
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
-	    actualizarSprite();
+	   // actualizarSprite();
+	}
+
+	public void saltarSobreGoomba() {
+		if (saltandoSobreGoomba ) {
+			velY = -3;
+			saltando=true;
+			System.out.println("pase por aca");
+		}
 	}
 
 	public void moverDerecha() {
@@ -375,6 +387,12 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public float getVelY() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void setSaltandoSobreGoomba(boolean b) {
+		saltandoSobreGoomba=b;
+		
 	}
 
 }

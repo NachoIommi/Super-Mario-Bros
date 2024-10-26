@@ -29,6 +29,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
     protected boolean saltando;
+    protected boolean saltandoSobreGoomba;
 	
 	protected float velX;
 	protected float velY;
@@ -45,6 +46,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
+	    saltandoSobreGoomba=false;
 	    saltando=false;  
 	    alto=30;
 	    jump=false;
@@ -59,15 +61,37 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    detenerFriccion();    
 	    posX += velX;
 	    saltar();
+	    
 	    gravedadSaltando();
 	    corregirPosEnColision();
 	    gravedad();
-	    detenerSalto();	    
+	    detenerSalto();
+	    saltarSobreGoomba();
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
 	   // actualizarSprite();
 	}
 
+	public void saltarSobreGoomba() {
+		if (saltandoSobreGoomba ) {
+			velY = -3;
+			saltando=true;
+			System.out.println("pase por aca");
+		}
+	}
+	
+	public void saltar() {
+    	if (jump && tocandoBloqueAbajo && !saltando ) {
+	        saltando = true;
+	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
+	    }
+    }
+	
+	public void setSaltandoSobreGoomba(boolean b) {
+		saltandoSobreGoomba=b;
+	}
+	
 	public void moverDerecha() {
 		if (right) {
 			actualizarSprite();
@@ -254,15 +278,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 		personaje.setPuntuacion(personaje.getPuntuacion()+5);
 	}
     
-    
-    
-    public void saltar() {
-    	if (jump && tocandoBloqueAbajo && !saltando ) {
-	        saltando = true;
-	        tocandoBloqueAbajo = false;
-	        velY = -4;  // IMPULSO INICIAL
-	    }
-    }
 
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
