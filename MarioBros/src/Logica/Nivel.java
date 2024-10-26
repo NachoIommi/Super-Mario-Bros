@@ -144,6 +144,9 @@ public class Nivel {
 				    case 6:
 				    	juego.agregarPlataforma(fabricaVacio.crearPlataforma(fabricaSprite.getVacio(), posX, posY));
 				        break;
+				    case 7:
+				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido2(), posX, posY));
+				        break;
 				    case 31:
 				    	juego.agregarPowerUp(fabricaMoneda.crearPowerUp(fabricaSprite.getMoneda(), posX, posY));
 				        break;
