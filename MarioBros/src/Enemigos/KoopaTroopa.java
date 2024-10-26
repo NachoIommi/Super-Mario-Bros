@@ -13,13 +13,6 @@ public class KoopaTroopa extends Enemigo{
 	protected int posX;
 	protected int posY;
 	protected boolean mostrable;
-
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean tocoParedIzquierda;
-    protected boolean tocoParedDerecha;
 	
 	public KoopaTroopa(Sprite s, int x,int y) {
 		estado = new EstadoKoopaNormal(this ,s, x ,y); 
@@ -87,10 +80,6 @@ public class KoopaTroopa extends Enemigo{
 		return estado.mostrable();
 	}
 
-<<<<<<< Updated upstream
-
-
-=======
 	@Override
 	public void setMostrable(boolean b) {
 		estado.setMostrable(b);
@@ -122,26 +111,8 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	@Override
->>>>>>> Stashed changes
 	public int getToleranciaAltura() {
 		return 20;
-	}
-
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
 	}
 
 }	

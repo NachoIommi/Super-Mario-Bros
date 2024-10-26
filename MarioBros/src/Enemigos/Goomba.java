@@ -9,7 +9,6 @@ import Personaje.Personaje;
 
 public class Goomba extends Enemigo{
 	
-	
 	public double toleranciaAltura=20;
 	protected Sprite sprite;
 	protected Hitbox hitb;
@@ -57,17 +56,17 @@ public class Goomba extends Enemigo{
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
 		}
 
-<<<<<<< Updated upstream
+
 			hitb.actualizar (posX, posY);		
-	}
-=======
+	
+
 		if (!tocandoBloqueAbajo) 
 	        posY=posY+1;
 		
 			hitb.actualizar (posX, posY);	
 			
-		}
->>>>>>> Stashed changes
+}
+
 	
 	public void moverIzq() {
 		posX=posX-2;
