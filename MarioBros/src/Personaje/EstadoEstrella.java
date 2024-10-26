@@ -357,11 +357,16 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	public void colisionMoneda() {
 	}
-
-	@Override
 	public float getVelY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return velY;
+	}
+
+	public void saltarSobreGoomba() {
+		
+	}
+
+	public void setSaltandoSobreGoomba(boolean b) {
+
 	}
 
 }

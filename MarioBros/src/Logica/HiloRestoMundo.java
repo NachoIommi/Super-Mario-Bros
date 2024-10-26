@@ -29,6 +29,7 @@ public class HiloRestoMundo extends Thread {
     	enEjecucion = false;
     }
     public void run() {
+    	enEjecucion = true;
         while (true) {
             try {
             	for(Enemigo e : enemigo) {

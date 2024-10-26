@@ -48,25 +48,23 @@ public class Goomba extends Enemigo{
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
 		
-	
 		if(!tocoParedIzquierda) {
 			moverIzq();			
 			hitb.actualizar (posX, posY);
-		}
-		else
-			 {
+			
+		} else {
 			tocoParedIzquierda=true;
 			moverDer();
-			hitb.actualizar (posX, posY);}
-				
-				
+			hitb.actualizar (posX, posY);
+		}
+						
 		if (tocandoBloqueDerecha) {
 			tocoParedDerecha=true;
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-				}
+		}
 
 			hitb.actualizar (posX, posY);		
-		}
+	}
 	
 	public void moverIzq() {
 		posX=posX-2;
@@ -75,7 +73,6 @@ public class Goomba extends Enemigo{
 		posX=posX+2;
 	}
 
-	
 	public Sprite getSprite() {
 		return sprite;
 	}
@@ -88,7 +85,6 @@ public class Goomba extends Enemigo{
 		return posY;
 	}
 
-	
 	public void aceptarVisita(Visitor v) {
 		v.visitarGoomba(this);
 	}
@@ -100,10 +96,12 @@ public class Goomba extends Enemigo{
 	public void afectarPersonaje(Personaje p) {	
 		p.colisionLateralGoomba();
 	}
+	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		//p.setPuntuacion(60);
 		morir();
 	}
+	
 	public void morir() {
 		actualizarSprite();
 		hitb.actualizar(0, 0);
@@ -111,11 +109,13 @@ public class Goomba extends Enemigo{
 		posX=0;
 		posY=-300;
 	}
+	
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getGoombaMuerto();
     	cargarSprite(sprite);
 	}
+	
 	public Hitbox getHitbox() {
     	return hitb;
     }
@@ -132,7 +132,6 @@ public class Goomba extends Enemigo{
 		tocandoBloqueArriba=b;
 	}
 
-
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo=b;
 	}
@@ -140,7 +139,6 @@ public class Goomba extends Enemigo{
 	public int getToleranciaAltura() {
 		return (int)toleranciaAltura;
 	}
-
 
 	public boolean mostrable() {
 		return mostrable;

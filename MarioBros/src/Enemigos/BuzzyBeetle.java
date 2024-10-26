@@ -1,5 +1,7 @@
 package Enemigos;
 
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
@@ -8,17 +10,30 @@ import Personaje.Personaje;
 public class BuzzyBeetle extends Enemigo{
 	
 	protected Sprite sprite;
-	protected int x;
-	protected int y;
+	protected int posX;
+	protected int posY;
 	protected Hitbox hitb;
 	protected boolean mostrable;
+	public double toleranciaAltura=20;
+	
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
 	
 	public BuzzyBeetle(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
+		tocandoBloqueDerecha=false;
+	    tocandoBloqueIzquierda=false;
+	    tocandoBloqueAbajo=false;
+	    tocandoBloqueArriba=false;
 		mostrable = true;
+		
 	}
 
 	public Sprite getSprite() {
@@ -26,15 +41,43 @@ public class BuzzyBeetle extends Enemigo{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 	
-	public void moverse() {
+public void moverse() {
 		
+		if(tocandoBloqueIzquierda) 
+			tocoParedIzquierda=true;
+		
+	
+		if(!tocoParedIzquierda) {
+			moverIzq();			
+			hitb.actualizar (posX, posY);
+		}
+		else
+			 {
+			tocoParedIzquierda=true;
+			moverDer();
+			hitb.actualizar (posX, posY);}
+				
+				
+		if (tocandoBloqueDerecha) {
+			tocoParedDerecha=true;
+			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+				}
+
+			hitb.actualizar (posX, posY);		
+		}
+	
+	public void moverIzq() {
+		posX=posX-2;
+	}
+	public void moverDer() {
+		posX=posX+2;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -42,10 +85,11 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
+		sprite = s;
 	}
 	
 	public void afectarPersonaje(Personaje p) {
+		p.colisionLateralGoomba();
 		p.setPuntuacion(-15);
 		p.morir();
 	}
@@ -56,41 +100,40 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void morir() {
+		actualizarSprite();
+		hitb.actualizar(0, 0);
+		System.out.println("buzzy muerto");
 		
 	}
-
+	
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getBuzzyBeetleRetraido();
+    	cargarSprite(sprite);
+	}
 	public Hitbox getHitbox() {
 		return hitb;
 	}
 
-	@Override
-	public boolean setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
 	}
 
-	@Override
-	public boolean setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda=b;
 	}
 
-	@Override
-	public boolean setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
 	}
 
-	@Override
-	public boolean setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
 	}
 
-	@Override
 	public int getToleranciaAltura() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int)toleranciaAltura;
 	}
 
 	public boolean mostrable() {

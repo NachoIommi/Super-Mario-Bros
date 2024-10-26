@@ -12,6 +12,13 @@ public class KoopaTroopa extends Enemigo{
 	protected int x;
 	protected int y;
 	protected boolean mostrable;
+
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
 	
 	
 	public KoopaTroopa(Sprite sprite, int x,int y) {
@@ -76,31 +83,8 @@ public class KoopaTroopa extends Enemigo{
 		return hitb;
 	}
 
-	@Override
-	public boolean setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public int getToleranciaAltura() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -112,6 +96,23 @@ public class KoopaTroopa extends Enemigo{
 
 	public void setMostrable(boolean b) {
 		mostrable=b;
+	}
+
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
+	}
+
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda=b;
+	}
+
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
+	}
+
+
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
 	}
 
 }	

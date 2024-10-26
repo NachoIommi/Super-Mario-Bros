@@ -32,7 +32,8 @@ public class Juego {
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		cargarPrimerNivel();
+		//cargarPrimerNivel();
+		nivel.cargarNivel(2);
 	
 		hilo = new HiloPersonaje(this);
 		hiloRM = new HiloRestoMundo(this);
