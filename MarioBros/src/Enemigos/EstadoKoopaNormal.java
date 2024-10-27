@@ -76,9 +76,19 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		posX=posX+1;
 	}
 	
+	public void afectarPersonaje(Personaje p) {
+		p.colisionLateralKoopa(this);
+	}
+	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		mori=true;
 		cambiarEstado();
+	}
+	public void morir() {
+		//actualizarSprite();
+		hitb.actualizar(0, 0);
+		posX=0;
+		posY=-300;
 	}
 	
 	public void actualizarSprite() {

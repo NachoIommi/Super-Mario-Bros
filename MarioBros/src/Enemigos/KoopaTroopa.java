@@ -1,4 +1,6 @@
 package Enemigos;
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
@@ -61,7 +63,7 @@ public class KoopaTroopa extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(-45);
-		p.colisionLateralKoopa();
+		estado.afectarPersonaje(p);
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
@@ -69,8 +71,11 @@ public class KoopaTroopa extends Enemigo{
 		estado.serAfectadoPorPersonaje(p);
 	}
 	
-	public void morir() {
-		
+	public void actualizarSprite() {
+		//GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	//sprite = fabrica.getKoopaDadoVuelta();
+    	//cargarSprite(sprite);
+    	//setSpriteActualizado(true);
 	}
 
 	public Hitbox getHitbox() {

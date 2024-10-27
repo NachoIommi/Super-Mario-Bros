@@ -1,5 +1,7 @@
 package Personaje;
 
+import Enemigos.EstadoDeKoopa;
+import Enemigos.KoopaTroopa;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
@@ -200,7 +202,9 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     	personaje.cambiarEstado(e);
     	System.out.println("Colision Goomba");
     }
-	
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+		
+	}
 	public int getAlto() {
 		return alto;
 	}

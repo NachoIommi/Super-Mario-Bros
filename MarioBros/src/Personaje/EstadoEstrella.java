@@ -1,12 +1,13 @@
 package Personaje;
 
-import Fabricas.GenerarSprite;
+import Fabricas.GenerarSprite; 
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
+import Enemigos.EstadoDeKoopa;
 
 public class EstadoEstrella extends EstadoDePersonaje {
 	
@@ -194,13 +195,17 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 	
 	public void colisionLateralGoomba() {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Goomba");
+    	System.out.println("Colision Goomba en Estado Estrella");
     }
-	
+
+	public void colisionPiranhaPlant() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+		kt.morir();
+	}
 	public int getAlto() {
 		return alto;
 	}
@@ -381,10 +386,6 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		
 	}
 
-	@Override
-	public void colisionPiranhaPlant() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

@@ -1,5 +1,6 @@
 package Personaje;
 
+import Enemigos.EstadoDeKoopa; 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
@@ -425,9 +426,9 @@ public class EstadoNormal extends EstadoDePersonaje {
 		morir();
 		System.out.println("MORIR PERSONAJE");
 	}
-	public void colisionLateralKoopa() {
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
 		morir();
-		System.out.println("MORIR PERSONAJE");
+		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
 	}
 
 	public float getVelY() {

@@ -143,9 +143,17 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		
 	}
 	
-	public void serAfectadoPorPersonaje(Personaje p) {
-		saltoArriba=true;
-		
+	public void afectarPersonaje(Personaje p) {
+		p.colisionLateralKoopa(this);
 	}
 	
+	public void serAfectadoPorPersonaje(Personaje p) {
+		saltoArriba=true;
+	}
+	public void morir() {
+		//actualizarSprite();
+		hitb.actualizar(0, 0);
+		posX=0;
+		posY=-300;
+	}
 }

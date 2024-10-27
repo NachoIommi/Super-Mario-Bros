@@ -1,6 +1,6 @@
 package Personaje;
 
-import Logica.Entidad;
+import Logica.Entidad; 
 import Logica.Hitbox;
 import Logica.Visitor;
 
@@ -9,6 +9,7 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+import Enemigos.EstadoDeKoopa;
 import Fabricas.*;
 
 public class Personaje extends Entidad{
@@ -47,7 +48,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 10;   
-        estado = new EstadoNormal(this ,sprite, x ,y); 
+        estado = new EstadoEstrella(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -85,8 +86,8 @@ public class Personaje extends Entidad{
 		estado.colisionLateralGoomba();
 	}
 	
-	public void colisionLateralKoopa() {
-		estado.colisionLateralKoopa();
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+		estado.colisionLateralKoopa(kt);
 	}
 	
 	public void colisionSuperChampi() {

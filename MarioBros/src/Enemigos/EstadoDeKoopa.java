@@ -29,7 +29,9 @@ public abstract class EstadoDeKoopa {
 	protected abstract void setTocandoBloqueDerecha(boolean b);
 	public abstract boolean mostrable();
 	public abstract void cargarSprite(Sprite s);
+	public abstract void afectarPersonaje(Personaje p);
 	public abstract void serAfectadoPorPersonaje(Personaje p);
+	public abstract void morir();
 }
 
 

@@ -54,27 +54,27 @@ public class VisitorEntidad implements Visitor{
     }
     
     public void visitarPiranhaPlant(PiranhaPlant p) {
-    	p.moverse();
+    
     }
     
     public void visitarLakitu(Lakitu l) {
-    	l.moverse();
+    
     }
     
     public void visitarSpiny(Spiny s) {
-    	s.moverse();
+    
     }
     
     public void visitarBuzzyBeetle(BuzzyBeetle b) {
-    	b.moverse();
+    
     }
     
     public void visitarGoomba(Goomba g) {
-    	g.moverse();
+    
     }
     
     public void visitarKoopaTroopa(KoopaTroopa k) {
-    	k.moverse();
+    	
     }
     
     public void visitarSprite(Sprite s) {

@@ -438,7 +438,6 @@ public class PantallaJuego extends JPanel {
 	    		String ruta = p.getSprite().getRutaImagen();
 	    		p.setIcon(verificarExtension(ruta));
 	    		p.setBounds(p.getPosX(), p.getPosY(), 30, 30);
-	    		System.out.println("se actualizo sprite de "+p.getClass());
 	            refrescar();
     		}
     		else 
