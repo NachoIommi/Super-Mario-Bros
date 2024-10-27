@@ -1,6 +1,8 @@
 package Enemigos;
 
-import Fabricas.Sprite;
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
+import Fabricas.Sprite ;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
@@ -9,13 +11,18 @@ public class Lakitu extends Enemigo{
 	
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected int x;
-	protected int y;
-	protected boolean mostrable;
+	protected int posX;
+	protected int posY;
+	
+	protected boolean tocandoBloqueDerecha=false;
+	protected boolean tocandoBloqueIzquierda=false;
+	protected boolean tocandoBloqueAbajo=false;
+	protected boolean tocandoBloqueArriba=false;
+	protected boolean mostrable=true;
 	
 	public Lakitu(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
 		mostrable = true;
@@ -26,11 +33,11 @@ public class Lakitu extends Enemigo{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 	
 	public void moverse() {
@@ -42,7 +49,7 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
+		sprite = s;
 	}
 	
 	public void afectarPersonaje(Personaje p) {
@@ -55,40 +62,36 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void morir() {
-		
+		actualizarSprite();
+		hitb.actualizar(0, 0);
+		posX=0;
+		posY=-300;
 	}
-
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getLakituPorDisparar();
+    	cargarSprite(sprite);
+	}
 	public Hitbox getHitbox() {
 		return hitb;
 	}
 
 	@Override
-	public boolean setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha = b;
+	}
+
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda = b;
 	}
 
-	@Override
-	public boolean setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba = b;
+	}
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo = b;
+	}
 	public int getToleranciaAltura() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -1,5 +1,7 @@
 package Enemigos;
 
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
@@ -9,8 +11,8 @@ public class Spiny extends Enemigo{
 	
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected int x;
-	protected int y;
+	protected int posX;
+	protected int posY;
 	protected boolean mostrable;
 	
 	protected boolean tocandoBloqueDerecha;
@@ -22,8 +24,8 @@ public class Spiny extends Enemigo{
 	
 	
 	public Spiny(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
 		mostrable = true;
@@ -34,23 +36,53 @@ public class Spiny extends Enemigo{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 	
 	public void moverse() {
+		if(tocandoBloqueIzquierda) 
+			tocoParedIzquierda=true;
 		
+		if(!tocoParedIzquierda) {
+			moverIzq();			
+			hitb.actualizar (posX, posY);
+			
+		} else {
+			tocoParedIzquierda=true;
+			moverDer();
+			hitb.actualizar (posX, posY);
+		}
+						
+		if (tocandoBloqueDerecha) {
+			tocoParedDerecha=true;
+			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+		}
+
+		hitb.actualizar (posX, posY);		
+	
+
+		if (!tocandoBloqueAbajo) 
+	        posY=posY+1;
+		
+		hitb.actualizar (posX, posY);		
 	}
 	
+	public void moverIzq() {
+		posX=posX-2;
+	}
+	public void moverDer() {
+		posX=posX+2;
+	}
 	public void aceptarVisita(Visitor v) {
 		v.visitarSpiny(this);
 	}
 
 	public void cargarSprite(Sprite s) {
-		
+		sprite = s;
 	}
 	
 	public void afectarPersonaje(Personaje p) {
@@ -64,25 +96,22 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void morir() {
-		
+		actualizarSprite();
+		hitb.actualizar(0, 0);
+		System.out.println("Spiny Muerto");
+		posX=0;
+		posY=-300;
 	}
-
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	//sprite = fabrica.getSpinyDadoVuelta(); no esta todavia el sprite
+    	//cargarSprite(sprite);
+	}
 	public Hitbox getHitbox() {
 		return hitb;
 	}
-
-	
 	public int getToleranciaAltura() {
-		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	public boolean mostrable() {
-		return mostrable;
-	}
-
-	public void setMostrable(boolean b) {
-		mostrable=b;
 	}
 
 	public void setTocandoBloqueDerecha(boolean b) {
@@ -100,6 +129,14 @@ public class Spiny extends Enemigo{
 
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo=b;
+	}
+	
+	public boolean mostrable() {
+		return mostrable;
+	}
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 	
 }

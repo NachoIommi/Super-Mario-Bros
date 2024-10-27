@@ -60,7 +60,7 @@ public class KoopaTroopa extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(-45);
-		p.morir();
+		p.recibirDano();
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
@@ -75,42 +75,36 @@ public class KoopaTroopa extends Enemigo{
 	public Hitbox getHitbox() {
 		return estado.getHitbox();
 	}
-	@Override
+	
 	public boolean mostrable() {
 		return estado.mostrable();
 	}
 
-	@Override
+	
 	public void setMostrable(boolean b) {
 		estado.setMostrable(b);
-		
 	}
 
-	@Override
+	
 	public void setTocandoBloqueDerecha(boolean b) {
 		estado.setTocandoBloqueDerecha(b);
-		
 	}
 
-	@Override
+	
 	public void setTocandoBloqueIzquierda(boolean b) {
-		estado.setTocandoBloqueIzquierda(b);
-		
+		estado.setTocandoBloqueIzquierda(b);	
 	}
 
-	@Override
+	
 	public void setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
 		estado.setTocandoBloqueArriba(b);
 	}
 
-	@Override
 	public void setTocandoBloqueAbajo(boolean b) {
 		estado.setTocandoBloqueAbajo(b);
 		
 	}
 
-	@Override
 	public int getToleranciaAltura() {
 		return 20;
 	}
