@@ -60,7 +60,7 @@ public class KoopaTroopa extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(-45);
-		p.morir();
+		p.recibirDano();
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {

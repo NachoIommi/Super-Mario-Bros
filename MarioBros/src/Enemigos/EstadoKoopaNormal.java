@@ -78,17 +78,17 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		mori=true;
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getKoopaTroopaRetraido();
-		EstadoKoopaRetraido e = new EstadoKoopaRetraido(koopa,sprite,posX,posY);
-		//koopa.setEstadoActual(e); se rompe pero hay que setearselo
+		cambiarEstado();
 	}
 	
 	public void actualizarSprite() {
-		
-	
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getKoopaTroopaRetraido();
 	}
-	
+	public void cambiarEstado() {
+		this.actualizarSprite();
+        koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  // Cambiar al estado extendido
+    }
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
@@ -122,9 +122,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		posY=y;		
 	}
 	
-	public void cambiarEstado() {		
-		
-	}
+	
 
 	public int getPosX() {
 		return posX;

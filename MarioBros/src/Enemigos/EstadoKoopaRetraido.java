@@ -26,7 +26,13 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		posX = x;
 		posY = y;
 		this.kt	= kt;
-		this.sprite = s;
+		sprite = s;
+		hitb = new Hitbox(x, y, 30, 30);
+		tocandoBloqueDerecha=false;
+	    tocandoBloqueIzquierda=false;
+	    tocandoBloqueAbajo=false;
+	    tocandoBloqueArriba=false;
+	    mostrable=true;	
 	}
 	public void cambiarEstado() {
 		this.actualizarSprite();
@@ -63,18 +69,15 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	}
 	
 	public int getPosX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return posX;
 	}
 	
 	public int getPosY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return posY;
 	}
 	
 	public Sprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 	
 	public void setTocandoBloqueDerecha(boolean b) {
@@ -103,7 +106,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		// TODO Auto-generated method stub
+		sprite = s;
 		
 	}
 	
