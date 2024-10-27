@@ -20,6 +20,7 @@ public class PiranhaPlant extends Enemigo{
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
 		mostrable = true;
+		setSpriteActualizado(false);
 	}
 	
 	public EstadosDePiranhaPlant getEstadoActual() {
@@ -112,6 +113,15 @@ public class PiranhaPlant extends Enemigo{
 
 	public void setMostrable(boolean b) {
 		mostrable=b;
+	}
+
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+		
 	}
 	
 }

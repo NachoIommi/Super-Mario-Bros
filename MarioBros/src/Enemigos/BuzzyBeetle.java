@@ -33,7 +33,7 @@ public class BuzzyBeetle extends Enemigo{
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 		mostrable = true;
-		
+		setSpriteActualizado(false);
 	}
 
 	public Sprite getSprite() {
@@ -144,6 +144,16 @@ public class BuzzyBeetle extends Enemigo{
 
 	public void setMostrable(boolean b) {
 		mostrable=b;
+	}
+
+	
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+		
 	}
 
 }

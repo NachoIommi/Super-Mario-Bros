@@ -34,6 +34,7 @@ public class Goomba extends Enemigo{
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 	    mostrable=true;
+	    setSpriteActualizado(false);
 	}
 	
 	public void moverse() {
@@ -112,6 +113,7 @@ public class Goomba extends Enemigo{
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getGoombaMuerto();
     	cargarSprite(sprite);
+    	setSpriteActualizado(true);
 	}
 	
 	public Hitbox getHitbox() {
@@ -144,6 +146,15 @@ public class Goomba extends Enemigo{
 
 	public void setMostrable(boolean b) {
 		mostrable=b;
+	}
+
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+		
 	}
 	
 }

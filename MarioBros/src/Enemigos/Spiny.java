@@ -29,6 +29,7 @@ public class Spiny extends Enemigo{
 		this.sprite = sprite;
 		hitb = new Hitbox(x, y, 30, 30);
 		mostrable = true;
+		setSpriteActualizado(false);
 	}
 
 	public Sprite getSprite() {
@@ -137,6 +138,15 @@ public class Spiny extends Enemigo{
 
 	public void setMostrable(boolean b) {
 		mostrable=b;
+	}
+
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+		
 	}
 	
 }

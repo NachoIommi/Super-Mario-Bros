@@ -129,7 +129,7 @@ public class HiloPersonaje extends Thread {
                 }
 
                 personaje.moverPersonaje();
-                System.out.println("pos personaje: "+personaje.getPosX());
+                
                 
                 
                 // Reiniciar estado de colisiones

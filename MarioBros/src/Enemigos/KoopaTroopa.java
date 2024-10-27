@@ -20,6 +20,7 @@ public class KoopaTroopa extends Enemigo{
 		posY = y;
 		hitb = new Hitbox(x, y, 30, 30);
 		mostrable = true; //?	
+		setSpriteActualizado(false);
 	}
 	
 	public void cambiarEstado() {
@@ -107,6 +108,15 @@ public class KoopaTroopa extends Enemigo{
 
 	public int getToleranciaAltura() {
 		return 20;
+	}
+	
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+		
 	}
 
 }	

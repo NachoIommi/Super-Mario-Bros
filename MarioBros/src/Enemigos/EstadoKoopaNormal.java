@@ -11,7 +11,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
 	public double toleranciaAltura=20;
 	
-	private KoopaTroopa koopa;
+	//private KoopaTroopa koopa;
 	
 	protected int posX;
 	protected int posY;	
@@ -29,7 +29,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
 	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
 		super(kt);
-		koopa = kt;
+		//koopa = kt;
 		posX = x;
 		posY = y;
 		sprite = s;
@@ -84,6 +84,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getKoopaTroopaRetraido();
+		koopa.setSpriteActualizado(true);
 	}
 	public void cambiarEstado() {
 		this.actualizarSprite();

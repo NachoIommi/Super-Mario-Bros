@@ -59,9 +59,6 @@ public class PantallaJuego extends JPanel {
         refrescarPantalla = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent e) {          	
                 actualizarPosicionPersonaje();
-                if(personaje!=null) {
-                	 System.out.println("label personaje: "+personaje.getLocation());
-                }
                 actualizarFondo(); 
                 actualizarImagenPlataformas();
                 actualizarImagenPowerUps();
@@ -405,9 +402,6 @@ public class PantallaJuego extends JPanel {
     public void mostrarPowerUps() {
     	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();
     	for(PowerUps p : listaPowerUps) {
-    		//p.setVisible(true);
-    		//String ruta = p.getSprite().getRutaImagen();
-    		//p.setIcon(verificarExtension(ruta));
     		p.setBounds(p.getPosX(), p.getPosY(), 30, 30);
     		panelNivel.add(p);
             refrescar();
@@ -415,22 +409,23 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenPersonaje() {
-    	//personaje = controladorVistas.obtenerPersonaje();
         String ruta = personaje.getSprite().getRutaImagen();
-        personaje.setIcon(verificarExtension(ruta)); 
+        personaje.setIcon(verificarExtensionPersonaje(ruta)); 
         refrescar();
     }      
     
     public void actualizarImagenEnemigos(){
     	List<Enemigo> listaEnemigos = controladorVistas.obtenerEnemigo();
     	for(Enemigo e : listaEnemigos) {
-    		if(e.mostrable()) {   			
-	    		e.setVisible(true);
+    		if(e.mostrable() && e.necesitaActualizarSprite()) {   			
+	    		//e.setVisible(true);
 	    		String ruta = e.getSprite().getRutaImagen();
 	    		e.setIcon(verificarExtension(ruta));
 	    		e.setBounds(e.getPosX(), e.getPosY(), 30, 30);
+	    		
+	    		e.setSpriteActualizado(false);
 	            refrescar();
-    		} else {
+    		} else if (!e.mostrable()){
     			e.setVisible(false);
     		}	
     	}
@@ -444,6 +439,7 @@ public class PantallaJuego extends JPanel {
 	    		String ruta = p.getSprite().getRutaImagen();
 	    		p.setIcon(verificarExtension(ruta));
 	    		p.setBounds(p.getPosX(), p.getPosY(), 30, 30);
+	    		System.out.println("se actualizo sprite de "+p.getClass());
 	            refrescar();
     		}
     		else 
@@ -464,18 +460,49 @@ public class PantallaJuego extends JPanel {
     	refrescar();
     }
     
+    public ImageIcon verificarExtensionPersonaje(String ruta) {
+    	 ImageIcon iconoEscalado;
+         
+    	 if(personaje.getHitbox().getHeight()>50) {
+    		 if(ruta.toLowerCase().endsWith(".gif")) {
+                 ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+                 Image gifImage = icono.getImage();
+                 Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.PERSONAJE_SUPER_TAMANO_ALTO, Image.SCALE_DEFAULT);
+                 iconoEscalado = new ImageIcon(gifAgrandado);
+             }else{
+                 ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+                 Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.PERSONAJE_SUPER_TAMANO_ALTO, Image.SCALE_DEFAULT);
+                 iconoEscalado = new ImageIcon(imagenEscalada);
+             }
+    	 }else {
+    		 if(ruta.toLowerCase().endsWith(".gif")) {
+                 ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+                 Image gifImage = icono.getImage();
+                 Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO, Image.SCALE_DEFAULT);
+                 iconoEscalado = new ImageIcon(gifAgrandado);
+             }else{
+                 ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
+                 Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO, Image.SCALE_DEFAULT);
+                 iconoEscalado = new ImageIcon(imagenEscalada);
+             }
+    	 }
+    	 
+         
+         
+         return iconoEscalado;
+     }
+    
     public ImageIcon verificarExtension(String ruta) {
-    	//personaje = controladorVistas.obtenerPersonaje();
         ImageIcon iconoEscalado;
         
         if(ruta.toLowerCase().endsWith(".gif")) {
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image gifImage = icono.getImage();
-            Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, 30, Image.SCALE_DEFAULT);
+            Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(gifAgrandado);
         }else{
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-            Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, 30, Image.SCALE_DEFAULT);
+            Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(imagenEscalada);
         }
         
