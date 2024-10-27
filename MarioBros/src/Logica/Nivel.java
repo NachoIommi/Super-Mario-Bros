@@ -7,8 +7,10 @@ import Personaje.*;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Enemigos.Enemigo;
 import Fabricas.*;
 import Personaje.Personaje;
+import Plataformas.Plataforma;
 import PowerUps.Moneda;
 import PowerUps.PowerUps;
 
@@ -133,11 +135,13 @@ public class Nivel {
 				    case 3:
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));
 				        break;
-				     /*   
+				      
 				    case 4:
-				    	fabricaTuberia.crearPlataforma(posX, posY, tipoPUp); //Tuberia con Piranha 
+				    	Enemigo e = fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY);
+				    	Plataforma p = fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY, e,reloj);
+				    	juego.agregarPlataforma(p); //Tuberia con Piranha 
+				    	juego.agregarEnemigo(e);
 				        break;
-				       */ 
 				    case 5:
 				    	juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY)); //Tuberia sin Piranha
 				        break;

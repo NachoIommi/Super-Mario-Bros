@@ -60,8 +60,8 @@ public class HiloRestoMundo extends Thread {
 		                            }
 		                            
 		                            
-		                            }
-		                        }
+		                }
+            		}
             		e.moverse();
             		e.setTocandoBloqueDerecha(false);
                     e.setTocandoBloqueIzquierda(false);
@@ -70,7 +70,7 @@ public class HiloRestoMundo extends Thread {
             		}
             		
             	
-
+            	
                
                 
                 Thread.sleep(16);

@@ -1,5 +1,6 @@
 package Fabricas;
 
+import Enemigos.Enemigo;
 import Plataformas.BloqueSolido;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -12,6 +13,12 @@ public class GenerarBloqueSolido implements GenerarPlataformas {
 
 	@Override
 	public Plataforma crearPlataforma(Sprite s, int x, int y, PowerUps p, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Plataforma crearPlataforma(Sprite s, int x, int y, Enemigo e,int relojs) {
 		// TODO Auto-generated method stub
 		return null;
 	}

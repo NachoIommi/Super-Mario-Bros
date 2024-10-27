@@ -12,5 +12,6 @@ public abstract class Plataforma extends Entidad{
 	public abstract void aceptarVisita(Visitor v);
 	public abstract void afectarPersonaje(Personaje p);
 	public abstract boolean cambioEstado();
+	public abstract void verificarCambioEstado();
 	
 }

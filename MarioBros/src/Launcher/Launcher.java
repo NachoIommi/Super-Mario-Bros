@@ -21,7 +21,7 @@ public class Launcher {
 		loadConfiguration();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try { 
 					Juego juego = new Juego();
 					Ranking ranking = cargarRanking();
 					ControladorVistas controladorVistas = new ControladorVistas(juego,ranking);

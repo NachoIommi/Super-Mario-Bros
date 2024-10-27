@@ -6,4 +6,5 @@ public interface GenerarEnemigos extends GeneradorDeEntidades{
 	
 	public Enemigo crearEnemigo(Sprite sprite, int x, int y);
 	
+	
 }
