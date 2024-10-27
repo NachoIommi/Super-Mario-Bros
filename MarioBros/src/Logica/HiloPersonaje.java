@@ -47,8 +47,6 @@ public class HiloPersonaje extends Thread {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {
                         personaje.setTocandoBloque(true);
 
-                         
-
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&
                             personaje.getHitbox().getX() < p.getHitbox().getX() &&
                             Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
@@ -72,13 +70,14 @@ public class HiloPersonaje extends Thread {
                             personaje.getHitbox().getY() < p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueAbajo(true);
+                            p.aceptarVisita(visitorEnemigoAfectado); //CASO VACIO
+                            
                         }
                         
                         else if (personaje.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
                                  personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY()) 
                         {
                             personaje.setTocandoBloqueArriba(true);
-                            
                             p.aceptarVisita(visitorEntidad);
                             System.out.println("Colisión tocando techo");
                         }
@@ -86,9 +85,6 @@ public class HiloPersonaje extends Thread {
                 }
                 for(Enemigo e : enemigo) {
                 	if(personaje.getHitbox().intersects(e.getHitbox())) {
-                		
-                		
-                		
                            
                 		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
@@ -114,8 +110,7 @@ public class HiloPersonaje extends Thread {
                             		System.out.println("Saltan sobre goomba");
                             		personaje.setTocandoBloqueAbajo(true);
                             		personaje.setSaltandoSobreEnemigo(true);}
-                            }
-                        
+                            }                       
                         tocoGoombaDerecha=false;
                         tocoGoombaIzquierda=false;
                         

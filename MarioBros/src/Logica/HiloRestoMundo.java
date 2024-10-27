@@ -17,12 +17,14 @@ public class HiloRestoMundo extends Thread {
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
     private volatile boolean enEjecucion;
+    Personaje personaje;
 
     public HiloRestoMundo(Juego juego) {
         this.juego = juego;   
         plataforma = juego.getPlataforma();
         enemigo = juego.getEnemigo();
-        powerUp = juego.getPowerUp();    
+        powerUp = juego.getPowerUp();
+        personaje = juego.getPersonaje();
 
     }
     public void detener() {
@@ -62,7 +64,9 @@ public class HiloRestoMundo extends Thread {
 		                            
 		                }
             		}
-            		e.moverse();
+            		if(Math.abs(personaje.getPosX()-e.getPosX() )<600)
+            			e.moverse();
+            		
             		e.setTocandoBloqueDerecha(false);
                     e.setTocandoBloqueIzquierda(false);
                     e.setTocandoBloqueAbajo(false);

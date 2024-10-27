@@ -46,13 +46,13 @@ public class VisitorEnemigoAfectado implements Visitor{
 		
 	}
 
-	public void visitarVacio(Vacio v) {
+	public void visitarVacio(Vacio v) {		v.afectarPersonaje(personaje);
 	}
 
 	public void visitarTuberia(Tuberia t) {	
 	}
 		
-	public void visitarPiranhaPlant(PiranhaPlant p) {		
+	public void visitarPiranhaPlant(PiranhaPlant p) {		p.afectarPersonaje(personaje);
 	}
 
 	public void visitarLakitu(Lakitu l) {		l.serAfectadoPorPersonaje(personaje);

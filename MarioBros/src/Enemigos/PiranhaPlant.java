@@ -25,7 +25,7 @@ public class PiranhaPlant extends Enemigo{
 		this.y = y;
 		this.sprite = sprite;
 		estadoActual = new PiranhaInvulnerable(sprite, x, y, this);
-		hitb = new Hitbox(x+5, y, 20, 30);
+		hitb = new Hitbox(x+5, y, 20, 20);
 		mostrable = true;
 		setSpriteActualizado(false);
 		subiendo = true;
@@ -99,6 +99,7 @@ public class PiranhaPlant extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.colisionPiranhaPlant();
+		p.setSaltandoSobreEnemigo(false);
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(30);
