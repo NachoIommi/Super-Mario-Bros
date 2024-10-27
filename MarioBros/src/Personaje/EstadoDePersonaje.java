@@ -56,4 +56,6 @@ public abstract class EstadoDePersonaje {
 	public abstract void saltarSobreEnemigo();
 
 	public abstract void setSaltandoSobreEnemigo(boolean b);
+
+	public abstract void colisionLateralKoopa();
 }

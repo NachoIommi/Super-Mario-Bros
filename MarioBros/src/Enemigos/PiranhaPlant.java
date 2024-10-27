@@ -70,7 +70,6 @@ public class PiranhaPlant extends Enemigo{
 			estadoActual.cambiarEstado();
 		}
 		
-		System.out.println("posY piranha: "+getPosY());
 	}
 	
 	public void iniciarMovimiento() {

@@ -425,6 +425,10 @@ public class EstadoNormal extends EstadoDePersonaje {
 		morir();
 		System.out.println("MORIR PERSONAJE");
 	}
+	public void colisionLateralKoopa() {
+		morir();
+		System.out.println("MORIR PERSONAJE");
+	}
 
 	public float getVelY() {
 		return velY;

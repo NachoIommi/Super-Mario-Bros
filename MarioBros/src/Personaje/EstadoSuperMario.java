@@ -213,6 +213,15 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	System.out.println("Colision Goomba");
     }
 	
+	public void colisionLateralKoopa() {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision koopa cambiando a mini mario");
+    	//PROGRAMAR INVULNERABILIDAD
+	}
+	
 	public int getAlto() {
 		return alto;
 	}
