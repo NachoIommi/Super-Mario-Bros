@@ -225,22 +225,32 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	//PROGRAMAR INVULNERABILIDAD
 	}
 	
+	public void colisionVacio() {
+		morir();
+		System.out.println("MORIR X VACIO SUPERMARIO");
+	}
+	
 	public int getAlto() {
 		return alto;
 	}
 	
 	public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right) {
+    	if(right && getVelX() >0 ) {
     		sprite = fabrica.getSuperMarioCorriendoDerecha();
-    		personaje.cargarSprite(sprite);
-    	}
+    		personaje.cargarSprite(sprite);}
 	    if(left) {
 	    	sprite = fabrica.getSuperMarioCorriendoIzquierda();
-	    	personaje.cargarSprite(sprite);
-	    }
+	    	personaje.cargarSprite(sprite);}
 	    if(!left&& !right) {
 	    	sprite = fabrica.getSuperMario();
+	    	personaje.cargarSprite(sprite);}
+	    if(left && getVelX() > 0) {
+	    	sprite = fabrica.getSuperMarioDerrapandoIzquierda();
+	    	personaje.cargarSprite(sprite);
+	    }
+	    if(right && getVelX() < 0) {
+	    	sprite = fabrica.getSuperMarioDerrapandoDerecha();
 	    	personaje.cargarSprite(sprite);
 	    }
     }
@@ -251,6 +261,13 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	        tocandoBloqueAbajo = false;
 	        velY = -4;  // IMPULSO INICIAL
 	    }
+    }
+	
+	public void recibirDano() {
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("SuperMario recibio daño y cambio de estado a normal");
     }
     
     public void morir() {
@@ -310,10 +327,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 	public Hitbox getHitbox() {
     	return hitb;
-    }
-
-    public void recibirDano() {
-    	
     }
 
     public void sumarPuntos(int puntos) {

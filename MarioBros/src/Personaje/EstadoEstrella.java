@@ -3,6 +3,7 @@ package Personaje;
 import Fabricas.GenerarSprite; 
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
+import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
@@ -212,15 +213,23 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right) {
-    		sprite = fabrica.getSuperMarioCorriendoDerecha();
+    	if(right && getVelX() >0 ) {
+    		sprite = fabrica.getMarioEstrellaCorriendoDerecha();
     		personaje.cargarSprite(sprite);}
 	    if(left) {
-	    	sprite = fabrica.getSuperMarioCorriendoIzquierda();
+	    	sprite = fabrica.getMarioEstrellaCorriendoIzquierda();
 	    	personaje.cargarSprite(sprite);}
 	    if(!left&& !right) {
-	    	sprite = fabrica.getSuperMario();
+	    	sprite = fabrica.getMarioEstrellaQuietoDerecha();
 	    	personaje.cargarSprite(sprite);}
+	    if(left && getVelX() > 0) {
+	    	sprite = fabrica.getMarioEstrellaDerrapandoIzquierda();
+	    	personaje.cargarSprite(sprite);
+	    }
+	    if(right && getVelX() < 0) {
+	    	sprite = fabrica.getMarioEstrellaDerrapandoDerecha();
+	    	personaje.cargarSprite(sprite);
+	    }
     }
 
 	public void saltar() {
@@ -231,11 +240,36 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	    }
     }
     
-    public void morir() {
+	public void recibirDano() {
+    	//Mario estrella nunca va a recibir daño JAJAJAJ!!
+    }
+    
+    public void morir() {                              //si puede morir: cuando toca vacio
+    	System.out.println("llamamos al morir de estrella jaja");
     	personaje.setVidas(personaje.getVidas()-1);
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getMarioEstrellaMuerto();
     	personaje.cargarSprite(sprite);
+    	
+    	int posY = personaje.getPosY();
+
+        for (int i = 0; i < 50; i++) {
+            personaje.setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            personaje.setPosY(personaje.getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     public boolean getSaltando() {
@@ -268,10 +302,6 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public Hitbox getHitbox() {
     	return hitb;
-    }
-
-    public void recibirDano() {
-    	
     }
 
     public void sumarPuntos(int puntos) {
@@ -374,16 +404,16 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	}
 
-	@Override
 	public void saltarSobreEnemigo() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setSaltandoSobreEnemigo(boolean b) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	public void colisionVacio() {
+		morir();
 	}
 
 	

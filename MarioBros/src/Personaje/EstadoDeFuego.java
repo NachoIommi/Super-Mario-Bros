@@ -5,6 +5,7 @@ import Enemigos.KoopaTroopa;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
+import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
@@ -211,15 +212,23 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	public void actualizarSprite(){
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right) {
-    		sprite = fabrica.getSuperMarioCorriendoDerecha();
+    	if(right && getVelX() >0 ) {
+    		sprite = fabrica.getMarioFlorDeFuegoCorriendoDerecha();
     		personaje.cargarSprite(sprite);}
 	    if(left) {
-	    	sprite = fabrica.getSuperMarioCorriendoIzquierda();
+	    	sprite = fabrica.getMarioFlorDeFuegoCorriendoIzquierda();
 	    	personaje.cargarSprite(sprite);}
 	    if(!left&& !right) {
-	    	sprite = fabrica.getSuperMario();
+	    	sprite = fabrica.getMarioFlorDeFuegoQuietoDerecha();
 	    	personaje.cargarSprite(sprite);}
+	    if(left && getVelX() > 0) {
+	    	sprite = fabrica.getMarioFlorDeFuegoDerrapandoIzquierda();
+	    	personaje.cargarSprite(sprite);
+	    }
+	    if(right && getVelX() < 0) {
+	    	sprite = fabrica.getMarioFlorDeFuegoDerrapandoDerecha();
+	    	personaje.cargarSprite(sprite);
+	    }
     }
 
 	public void saltar() {
@@ -230,11 +239,38 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    }
     }
     
+	public void recibirDano() {
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Mario fuego recibio daño y bajo a estado super ");
+    }
+    
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getMarioFlorDeFuegoMuerto();
     	personaje.cargarSprite(sprite);
+    	
+    	int posY = personaje.getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            personaje.setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            personaje.setPosY(personaje.getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     public boolean getSaltando() {
@@ -268,11 +304,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	public Hitbox getHitbox() {
     	return hitb;
     }
-
-    public void recibirDano() {
-    	
-    }
-
+	
     public void sumarPuntos(int puntos) {
         this.puntuacion += puntos;
     }
@@ -397,6 +429,10 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	public void colisionPiranhaPlant() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void colisionVacio() {
+		morir();
 	}
 
 }

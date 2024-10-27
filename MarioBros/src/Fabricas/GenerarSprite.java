@@ -52,6 +52,14 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite (rutaImagen + "/marioNormalCorriendoIzquierda.gif");
 	}
 	
+	public Sprite getSuperMarioDerrapandoDerecha() {
+		return new Sprite(rutaImagen + "/superMarioDerrapandoDerecha.png");
+	}
+	
+	public Sprite getSuperMarioDerrapandoIzquierda() {
+		return new Sprite(rutaImagen + "/superMarioDerrapandoIzquierda.png");
+	}
+	
 	public Sprite getSuperMario() {
 		return new Sprite(rutaImagen + "/superMarioQuietoDerecha.png");
 	}
@@ -86,6 +94,14 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	
 	public Sprite getSuperMarioAgachadoDerecha() {
 		return new Sprite(rutaImagen + "/superMarioAgachadoDerecha.png");
+	}
+	
+	public Sprite getMarioEstrellaDerrapandoDerecha() {
+		return new Sprite(rutaImagen + "/marioEstrellaDerrapandoDerecha.gif");
+	}
+	
+	public Sprite getMarioEstrellaDerrapandoIzquierda() {
+		return new Sprite(rutaImagen + "/marioEstrellaDerrapandoIzquierda.gif");
 	}
 	
 	public Sprite getMarioEstrellaQuietoDerecha() {
@@ -126,6 +142,14 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	
 	public Sprite getMarioFlorDeFuegoQuietoDerecha() {
 		return new Sprite(rutaImagen + "/marioFlorDeFuegoQuietoDerecha.png");
+	}
+	
+	public Sprite getMarioFlorDeFuegoDerrapandoDerecha() {
+		return new Sprite(rutaImagen + "/marioFlorDeFuegoDerrapandoDerecha.png");
+	}
+	
+	public Sprite getMarioFlorDeFuegoDerrapandoIzquierda() {
+		return new Sprite(rutaImagen + "/marioFlorDeFuegoDerrapandoIzquierda.png");
 	}
 	
 	public Sprite getMarioFlorDeFuegoQuietoIzquierda() {

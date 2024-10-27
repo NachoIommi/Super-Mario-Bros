@@ -70,7 +70,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    saltarSobreEnemigo();
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
-	   // actualizarSprite();
+	    //actualizarSprite();
 	}
 
 	public void saltarSobreEnemigo() {
@@ -251,7 +251,6 @@ public class EstadoNormal extends EstadoDePersonaje {
     	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
     	personaje.setPuntuacion(20);
-    	System.out.println("Colision hecha");
     	System.out.println("Colision con superchampi hecha");
 
     }
@@ -279,14 +278,17 @@ public class EstadoNormal extends EstadoDePersonaje {
 		personaje.setPuntuacion(personaje.getPuntuacion()+5);
 	}
     
-
+	public void recibirDano() {
+    	morir();
+    }
+    
     public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getPersonajeNormalMuerto();
     	personaje.cargarSprite(sprite);
     	
-        int posY = personaje.getPosY();
+    	int posY = personaje.getPosY();
 
         for (int i = 0; i < 30; i++) {
             personaje.setPosY(posY - (i * 2));
@@ -305,7 +307,6 @@ public class EstadoNormal extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
-
     }
     
     public boolean getSaltando() {
@@ -338,10 +339,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public Hitbox getHitbox() {
     	return hitb;
-    }
-
-    public void recibirDano() {
-    	
     }
 
     public void sumarPuntos(int puntos) {
@@ -429,6 +426,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void colisionLateralKoopa(EstadoDeKoopa kt) {
 		morir();
 		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
+	}
+	
+	public void colisionVacio() {
+		morir();
+		System.out.println("MORIR X VACIO");
 	}
 
 	public float getVelY() {

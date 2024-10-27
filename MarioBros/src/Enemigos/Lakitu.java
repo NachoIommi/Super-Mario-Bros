@@ -13,12 +13,24 @@ public class Lakitu extends Enemigo{
 	protected Hitbox hitb;
 	protected int posX;
 	protected int posY;
+	protected Personaje personaje;
+	protected int maxX;
 	
 	protected boolean tocandoBloqueDerecha=false;
 	protected boolean tocandoBloqueIzquierda=false;
 	protected boolean tocandoBloqueAbajo=false;
 	protected boolean tocandoBloqueArriba=false;
 	protected boolean mostrable=true;
+	
+	public Lakitu(Sprite sprite, int x, int y, Personaje p) {
+		posX = x;
+		posY = y;
+		this.sprite = sprite;
+		hitb = new Hitbox(x, y, 30, 30);
+		mostrable = true;
+		setSpriteActualizado(false);
+		personaje = p;
+	}
 	
 	public Lakitu(Sprite sprite, int x, int y) {
 		posX = x;
@@ -42,8 +54,22 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void moverse() {
-		
+		actualizarPosicionConScroll();
 	}
+	
+	public void actualizarPosicionConScroll() {
+	    int marioX = personaje.getPosX();  // Obtén la posición X actual de Mario
+
+	    if (marioX > maxX) {
+	        maxX = marioX;
+	        posX = marioX + 150;
+	    } else {
+	        posX = maxX;
+	    }
+
+	    hitb.actualizar(posX, posY);
+	}
+
 	
 	public void aceptarVisita(Visitor v) {
 		v.visitarLakitu(this);
@@ -81,17 +107,17 @@ public class Lakitu extends Enemigo{
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha = b;
 	}
-
+
 	public void setTocandoBloqueIzquierda(boolean b) {
 		tocandoBloqueIzquierda = b;
 	}
 
 	public void setTocandoBloqueArriba(boolean b) {
 		tocandoBloqueArriba = b;
-	}
+	}
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo = b;
-	}
+	}
 	public int getToleranciaAltura() {
 		return 0;
 	}
