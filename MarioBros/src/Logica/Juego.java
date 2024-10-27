@@ -32,8 +32,8 @@ public class Juego {
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		//cargarPrimerNivel();
-		nivel.cargarNivel(2);
+		cargarPrimerNivel();
+		
 	
 		hilo = new HiloPersonaje(this);
 		hiloRM = new HiloRestoMundo(this);
@@ -44,20 +44,33 @@ public class Juego {
 		this.controladorVistas = controladorVistas;
 	}
 	public void cargarPrimerNivel() {
-		nivel.cargarNivel(1);
+		nivel.cargarNivel(0);
 	}
 	
 	public void iniciarSiguienteNivel() {
 		//reinicio todo, entidades e hilos
-		hilo.detener();
-		reloj.detener();
+		if(hilo.isAlive()) {
+			hilo.detener();
+			
+		}
+		if(hiloRM.isAlive()) {
+			hiloRM.detener();
+		}
+		
+		if(reloj.isAlive()) {
+			reloj.detener();
+		}
+		
+		
 		powerUps.clear();
 		enemigos.clear();
 		plataformas.clear();
+	
 		
 		System.out.println(enemigos.toString());
 		
-		nivel.cargarNivel(nivel.getNivelActual()+1);
+		nivel.ganarJuego();
+		System.out.print("cargando nivel: " + getNivel().getNivelActual());
 		System.out.println();
 		
 		iniciarJuego();
@@ -75,13 +88,14 @@ public class Juego {
 	    if (hilo != null && hilo.isAlive()) {
 	        hilo.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
 	    }
+	    hilo = new HiloPersonaje(this); // Crear un nuevo hilo
+	    hilo.start();
+	    
 	    if (hiloRM != null && hiloRM.isAlive()) {
 	        hiloRM.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
 	    }
 	    
 	    hiloRM = new HiloRestoMundo(this);
-	    hilo = new HiloPersonaje(this); // Crear un nuevo hilo
-	    hilo.start();
 	    hiloRM.start();
 
 	    if (reloj != null && reloj.isAlive()) {
@@ -161,6 +175,10 @@ public class Juego {
 	
 	public HiloPersonaje getHiloPersonaje() {
 		return hilo;
+	}
+	
+	public HiloRestoMundo getHiloRM() {
+		return hiloRM;
 	}
 	
 }

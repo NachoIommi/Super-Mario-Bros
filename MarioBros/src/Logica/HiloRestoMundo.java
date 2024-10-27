@@ -30,7 +30,7 @@ public class HiloRestoMundo extends Thread {
     }
     public void run() {
     	enEjecucion = true;
-        while (true) {
+        while (enEjecucion) {
             try {
             	for(Enemigo e : enemigo) {
             		for(Plataforma p : plataforma) {

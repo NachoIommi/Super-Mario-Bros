@@ -30,6 +30,7 @@ public class PantallaJuego extends JPanel {
     protected JLabel imagenFondo;
     protected JLabel reloj;
     protected JLabel puntuacion;
+    protected JLabel vidas;
     protected JLabel monedas;
     protected Personaje personaje;
     protected int posicionInicialX = 0;  
@@ -40,6 +41,7 @@ public class PantallaJuego extends JPanel {
     protected JLabel bandera;
     protected Timer timer;
     private boolean banderaActualizada = false;
+    private boolean nivelGanado = false;
     
 
     public PantallaJuego(ControladorVistas controladorVistas) {
@@ -56,14 +58,22 @@ public class PantallaJuego extends JPanel {
         // Iniciar un Timer que actualice la pantalla cada 50 ms
         refrescarPantalla = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent e) {          	
-                actualizarPosicionPersonaje();  
+                actualizarPosicionPersonaje();
+                if(personaje!=null) {
+                	 System.out.println("label personaje: "+personaje.getLocation());
+                }
                 actualizarFondo(); 
                 actualizarImagenPlataformas();
                 actualizarImagenPowerUps();
                 actualizarImagenEnemigos();
                 actualizarPosicionEnemigos();
+                reloj.setText("<html><div style='text-align: center;'>Reloj<br>" + controladorVistas.juego.getReloj().getSegundos() + "</div></html>");
+                monedas.setText("" + controladorVistas.juego.getPersonaje().getMonedas() );    
+                puntuacion.setText("<html><div style='text-align: center;'>Puntuacion<br>" + controladorVistas.juego.getPersonaje().getPuntuacion() + "</div></html>");
+                vidas.setText("<html><div style='text-align: center;'>Vidas<br>" + controladorVistas.juego.getPersonaje().getVidas()+ "</div></html>");
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
-                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());               
+                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());    
+                llegoAlFinal();
             }
         });
         refrescarPantalla.start();
@@ -78,6 +88,8 @@ public class PantallaJuego extends JPanel {
     	agregarReloj();
     	mostrarMonedas();
     	agregarBandera();
+    	mostrarPuntuacion();
+    	mostrarVidas();
     	agregarImagenNivel();
     	
     	
@@ -98,14 +110,75 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarPosicionMonedas(int x) {
-    	monedas.setBounds(monedas.getX()+x, 10, 90, 20);
+    	monedas.setBounds(monedas.getX()+x, 10, 150, 50);
     }
     
-    
-    
-    public void mostrarPuntuacion() {
+    public void mostrarMonedas() {
+    	monedas = new JLabel();
+    	
+    	String ruta = "/spritesOriginales/monedaQuieta.gif";
+    	monedas.setIcon(verificarExtension(ruta));
+    	
+    	monedas.setBounds(10, 10, 150, 50);
+    	monedas.setVisible(true);
+    	try {
+	        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
+	        monedas.setFont(marioFuente);
+	        monedas.setForeground(Color.WHITE);
+	    } catch (FontFormatException | IOException e) {
+	        e.printStackTrace();
+	    }
+    	panelNivel.add(monedas);
+    	refrescar();
     	
     }
+    
+    public void actualizarPosicionVidas(int x) {
+    	vidas.setBounds(vidas.getX()+x, 10, 150, 50);
+    }
+    
+    public void mostrarVidas() {
+    	vidas = new JLabel();
+    	
+    	vidas.setBounds(350, 10, 150, 50);
+    	vidas.setVisible(true);
+		try {
+		        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(14f);
+		        vidas.setFont(marioFuente);
+		        vidas.setForeground(Color.WHITE);
+		    } catch (FontFormatException | IOException e) {
+		        e.printStackTrace();
+		    }
+      panelNivel.add(vidas);
+      refrescar();
+    }
+    
+    
+    
+    public void actualizarPosicionPuntuacion(int x) {
+    	puntuacion.setBounds(puntuacion.getX()+x, 10, 150, 50);
+    	
+    }
+    
+    public void mostrarPuntuacion() {
+    	puntuacion = new JLabel();
+    
+
+    	puntuacion.setBounds(150, 10, 150, 50);
+    	puntuacion.setVisible(true);
+		try {
+		        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(14f);
+		        puntuacion.setFont(marioFuente);
+		        puntuacion.setForeground(Color.WHITE);
+		    } catch (FontFormatException | IOException e) {
+		        e.printStackTrace();
+		    }
+      panelNivel.add(puntuacion);
+      refrescar();
+    }
+    
+   
+    
     
     public void actualizarBandera() {
     	System.out.println("se actualizo bandera");
@@ -119,14 +192,19 @@ public class PantallaJuego extends JPanel {
     }
     
     public void llegoAlFinal() {
-        Personaje personaje = controladorVistas.juego.getPersonaje();
-        if (personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 320) {
+        personaje = controladorVistas.juego.getPersonaje();
+        if (personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 320 && !nivelGanado) {
             
+        	nivelGanado = true;
+        	
+        	
             // Cambiar la imagen de la bandera
         	if(!banderaActualizada) {
         		actualizarBandera();
                 banderaActualizada = true;
         	}
+        	
+        	
             
 
             // Verifica si el timer ya está creado y corriendo
@@ -151,7 +229,7 @@ public class PantallaJuego extends JPanel {
     public void agregarReloj() {
     	reloj = new JLabel();
     	reloj.setText("TIEMPO \n"+controladorVistas.juego.getReloj().getSegundos());
-    	reloj.setBounds(500, 10, 90, 20);
+    	reloj.setBounds(500, 10, 150, 50);
 		reloj.setVisible(true);
 		try {
 		        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
@@ -189,6 +267,12 @@ public class PantallaJuego extends JPanel {
     	
     	}
     }
+    
+    
+    
+    public void actualizarPosicionReloj(int x) {
+    	reloj.setBounds(reloj.getX()+x, 10, 150, 50);
+    }
  
     
     public void actualizarPosicionEnemigos() {
@@ -199,20 +283,17 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarPosicionPersonaje() {
-        Personaje personaje = controladorVistas.obtenerPersonaje();
+       // personaje = controladorVistas.obtenerPersonaje();
         if(personaje.getPosX() < imagenFondo.getIcon().getIconWidth()-320) {
         	personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, personaje.getAlto());
             refrescar();
         }
     }
 
-    public void actualizarPosicionReloj(int x) {
-    	reloj.setBounds(reloj.getX()+x, 10, 90, 20);
-    }
     
     
     public void moverFondo(int posicionX) {
-    	Personaje personaje = controladorVistas.obtenerPersonaje();
+    	//personaje = controladorVistas.obtenerPersonaje();
         posicionInicialX += posicionX;
         //Verificar si el fondo ha llegado a su límite izquierdo
         if (posicionInicialX < -imagenFondo.getIcon().getIconWidth()) {
@@ -224,6 +305,8 @@ public class PantallaJuego extends JPanel {
             panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+velocidad);
             actualizarPosicionReloj(velocidad);
             actualizarPosicionMonedas(velocidad);
+            actualizarPosicionPuntuacion(velocidad);
+            actualizarPosicionVidas(velocidad);
             maximoDerecha += personaje.getVelX();
             controladorVistas.obtenerPersonaje().actualizarMin();
         }      
@@ -231,9 +314,9 @@ public class PantallaJuego extends JPanel {
     }
    
     public void actualizarFondo() {
-    	Personaje personaje = controladorVistas.obtenerPersonaje();
+    	//personaje = controladorVistas.obtenerPersonaje();
     	int velocidad = Math.round(personaje.getVelX());
-    	if(personaje.getPosX() >= maximoDerecha ) {
+    	if(personaje.getPosX() > maximoDerecha ) {
     		moverFondo(-velocidad);
     	}
     }
@@ -253,13 +336,12 @@ public class PantallaJuego extends JPanel {
                 	actualizarImagenPersonaje();
                 		break;		
                 	case(KeyEvent.VK_W):
-                		controladorVistas.obtenerPersonaje().setJump(true); //o llamar a saltar
+                		controladorVistas.obtenerPersonaje().setJump(true);
                 		actualizarImagenPersonaje();
-                		//controladorVistas.obtenerPersonaje().saltar();
+         
                 		break;
                 }
-                //actualizarPosicionPersonaje();
-        		actualizarFondo();	
+          	
             }
             public void keyReleased(KeyEvent k) {
             	int keyCode = k.getKeyCode(); 
@@ -285,7 +367,7 @@ public class PantallaJuego extends JPanel {
     }
 
     public void mostrarPersonaje() {	
-        Personaje personaje = controladorVistas.obtenerPersonaje();
+        personaje = controladorVistas.obtenerPersonaje();
         personaje.setVisible(true);
         String ruta = personaje.getSprite().getRutaImagen();
         personaje.setIcon(verificarExtension(ruta));
@@ -333,7 +415,7 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenPersonaje() {
-        Personaje personaje = controladorVistas.obtenerPersonaje();
+    	//personaje = controladorVistas.obtenerPersonaje();
         String ruta = personaje.getSprite().getRutaImagen();
         personaje.setIcon(verificarExtension(ruta)); 
         refrescar();
@@ -383,7 +465,7 @@ public class PantallaJuego extends JPanel {
     }
     
     public ImageIcon verificarExtension(String ruta) {
-    	Personaje personaje = controladorVistas.obtenerPersonaje();
+    	//personaje = controladorVistas.obtenerPersonaje();
         ImageIcon iconoEscalado;
         
         if(ruta.toLowerCase().endsWith(".gif")) {
@@ -399,25 +481,7 @@ public class PantallaJuego extends JPanel {
         
         return iconoEscalado;
     }
-    public void mostrarMonedas() {
-    	monedas = new JLabel();
-    	
-    	String ruta = "/spritesOriginales/monedaQuieta.gif";
-    	monedas.setIcon(verificarExtension(ruta));
-    	
-    	monedas.setBounds(10, 10, 90, 20);
-    	monedas.setVisible(true);
-    	try {
-	        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(24f);
-	        monedas.setFont(marioFuente);
-	        monedas.setForeground(Color.WHITE);
-	    } catch (FontFormatException | IOException e) {
-	        e.printStackTrace();
-	    }
-    	panelNivel.add(monedas);
-    	refrescar();
-    	
-    }
+    
     
    
     

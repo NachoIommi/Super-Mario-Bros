@@ -63,6 +63,7 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaJuego() {
+		
 		juego.iniciarJuego();
 		ventana.setContentPane(pantallaJuego);
 	    ventana.revalidate();
@@ -76,6 +77,9 @@ public class ControladorVistas {
         }
         if (juego.getReloj().isAlive()) {
             juego.getReloj().detener();
+        }
+        if(juego.getHiloRM().isAlive()) {
+        	juego.getHiloRM().detener();
         }
         
         juego.iniciarSiguienteNivel();
