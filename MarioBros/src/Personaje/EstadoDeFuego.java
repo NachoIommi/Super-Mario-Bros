@@ -377,4 +377,16 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		
 	}
 
+	@Override
+	public void saltarSobreEnemigo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSaltandoSobreEnemigo(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

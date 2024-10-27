@@ -79,31 +79,28 @@ public class PiranhaPlant extends Enemigo{
 		return hitb;
 	}
 
-	@Override
-	public boolean setTocandoBloqueDerecha(boolean b) {
+
+	public void setTocandoBloqueDerecha(boolean b) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
-	@Override
-	public boolean setTocandoBloqueIzquierda(boolean b) {
+
+	public void setTocandoBloqueIzquierda(boolean b) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
-	@Override
-	public boolean setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+
+	public void setTocandoBloqueArriba(boolean b) {
+		
 	}
 
-	@Override
-	public boolean setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setTocandoBloqueAbajo(boolean b) {
+		
 	}
 
-	@Override
+	
 	public int getToleranciaAltura() {
 		// TODO Auto-generated method stub
 		return 0;
