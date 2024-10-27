@@ -37,7 +37,6 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void moverse() {
-		
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
 		
@@ -56,15 +55,13 @@ public class Goomba extends Enemigo{
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
 		}
 
-
-			hitb.actualizar (posX, posY);		
+		hitb.actualizar (posX, posY);		
 	
 
 		if (!tocandoBloqueAbajo) 
 	        posY=posY+1;
 		
-			hitb.actualizar (posX, posY);	
-			
+		hitb.actualizar (posX, posY);		
 }
 
 	
@@ -107,7 +104,6 @@ public class Goomba extends Enemigo{
 	public void morir() {
 		actualizarSprite();
 		hitb.actualizar(0, 0);
-		System.out.println("goomba muerto");
 		posX=0;
 		posY=-300;
 	}

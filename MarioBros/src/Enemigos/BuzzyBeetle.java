@@ -48,8 +48,7 @@ public class BuzzyBeetle extends Enemigo{
 		return posY;
 	}
 	
-public void moverse() {
-		
+	public void moverse() {
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
 		
@@ -57,21 +56,24 @@ public void moverse() {
 		if(!tocoParedIzquierda) {
 			moverIzq();			
 			hitb.actualizar (posX, posY);
-		}
-		else
-			 {
+		} else {
 			tocoParedIzquierda=true;
 			moverDer();
-			hitb.actualizar (posX, posY);}
+			hitb.actualizar (posX, posY);
+		}
 				
 				
 		if (tocandoBloqueDerecha) {
 			tocoParedDerecha=true;
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-				}
-
-			hitb.actualizar (posX, posY);		
 		}
+		hitb.actualizar (posX, posY);	
+		
+		if (!tocandoBloqueAbajo) 
+	        posY=posY+1;
+		
+		hitb.actualizar (posX, posY);	
+	}
 	
 	public void moverIzq() {
 		posX=posX-2;

@@ -9,9 +9,9 @@ import Personaje.Personaje;
 
 public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
-	protected Sprite sprite;
-	protected Hitbox hitb;
 	public double toleranciaAltura=20;
+	
+	private KoopaTroopa koopa;
 	
 	protected int posX;
 	protected int posY;	
@@ -23,10 +23,13 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
     
+    protected Sprite sprite;
+    protected Hitbox hitb;
     protected boolean mori;
 	
 	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
 		super(kt);
+		koopa = kt;
 		posX = x;
 		posY = y;
 		sprite = s;
@@ -40,8 +43,6 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	public void moverse() {
-		
-		
 		if(!mori) {
 		
 		if(tocandoBloqueIzquierda) 
@@ -80,7 +81,12 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getKoopaTroopaRetraido();
 		EstadoKoopaRetraido e = new EstadoKoopaRetraido(koopa,sprite,posX,posY);
+		//koopa.setEstadoActual(e); se rompe pero hay que setearselo
+	}
+	
+	public void actualizarSprite() {
 		
+	
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -91,37 +97,31 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		return sprite;
 	}
 	
-	@Override
+	
 	public KoopaTroopa getKoopaTroopa() {
 		return koopa;
 	}
 
-	@Override
+	
 	public void setKoopaTroopa(KoopaTroopa kt) {
 		koopa=kt;		
 	}
 
-	@Override
+	
 	public Hitbox getHitbox() {
 		return hitb;
 	}
 
-	@Override
+	
 	public void setPosX(int x) {
 		posX=x;		
 	}
 
-	@Override
+	
 	public void setPosY(int y) {
 		posY=y;		
 	}
-
-	@Override
-	public void actualizarSprite() {
-		// TODO Auto-generated method stub		
-	}
-
-	@Override
+	
 	public void cambiarEstado() {		
 		
 	}

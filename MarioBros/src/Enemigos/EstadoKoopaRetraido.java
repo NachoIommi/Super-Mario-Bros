@@ -11,7 +11,14 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	private KoopaTroopa kt;
 	protected int posX;
 	protected int posY;
-	protected Sprite s;
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
+	protected boolean mostrable;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
+	protected Sprite sprite;
 	protected Hitbox hitb;
 	
 	public EstadoKoopaRetraido(KoopaTroopa kt, Sprite s,int x,int y) {
@@ -19,11 +26,11 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		posX = x;
 		posY = y;
 		this.kt	= kt;
-		this.s = s;
+		this.sprite = s;
 	}
 	public void cambiarEstado() {
 		this.actualizarSprite();
-        kt.setEstadoActual(new EstadoKoopaNormal(kt,s,posX,posY));  // Cambiar al estado extendido
+        kt.setEstadoActual(new EstadoKoopaNormal(kt,sprite,posX,posY));  // Cambiar al estado extendido
     }
 	
 	public void moverse() {
@@ -52,59 +59,54 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		this.s = fabrica.getKoopaTroopaRetraido();		
+		this.sprite = fabrica.getKoopaTroopaRetraido();		
 	}
-	@Override
+	
 	public int getPosX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	@Override
+	
 	public int getPosY() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	@Override
-	public void setMostrable(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
+	
 	public Sprite getSprite() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public void setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		
+	
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
 	}
-	@Override
-	public void setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
+
 	public void setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
-		
+		tocandoBloqueIzquierda=b;
 	}
-	@Override
-	protected void setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		
+
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
 	}
-	@Override
+
+
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
+	}
+	
 	public boolean mostrable() {
-		// TODO Auto-generated method stub
-		return false;
+		return mostrable;
 	}
-	@Override
+
+	public void setMostrable(boolean b) {
+		mostrable=b;
+	}
+	
 	public void cargarSprite(Sprite s) {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		// TODO Auto-generated method stub
 		
