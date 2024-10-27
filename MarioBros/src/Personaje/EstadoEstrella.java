@@ -381,4 +381,10 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		
 	}
 
+	@Override
+	public void colisionPiranhaPlant() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -52,7 +52,7 @@ public abstract class EstadoDePersonaje {
 	public abstract double getToleranciaAltura();
 	public abstract void setTocandoBloqueArriba(boolean b);
 	public abstract float getVelY();
-
+	public abstract void colisionPiranhaPlant();
 	public abstract void saltarSobreEnemigo();
 
 	public abstract void setSaltandoSobreEnemigo(boolean b);

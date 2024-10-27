@@ -45,6 +45,7 @@ public class Juego {
 	}
 	public void cargarPrimerNivel() {
 		nivel.cargarNivel(0);
+		System.out.println(enemigos.toString());
 	}
 	
 	public void iniciarSiguienteNivel() {

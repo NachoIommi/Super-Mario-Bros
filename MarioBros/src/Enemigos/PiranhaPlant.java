@@ -1,5 +1,7 @@
 package Enemigos;
 
+import javax.swing.Timer;
+
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
@@ -14,20 +16,28 @@ public class PiranhaPlant extends Enemigo{
 	protected int y;
 	protected boolean mostrable;
 	
+	private boolean subiendo;
+	private Timer timer;
+	private int pixelesMovidos = 0;
+	
 	public PiranhaPlant(Sprite sprite, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30, 30);
+		estadoActual = new PiranhaInvulnerable(sprite, x, y, this);
+		hitb = new Hitbox(x+5, y, 20, 30);
 		mostrable = true;
 		setSpriteActualizado(false);
+		subiendo = true;
+		iniciarMovimiento();
+		
 	}
 	
 	public EstadosDePiranhaPlant getEstadoActual() {
 		return estadoActual;
 	}
-	public void cambiarEstado() {
-        estadoActual.cambiarEstado();  // Llamar al mÃ©todo cambiarEstado en el estado actual
+	public void cambiarEstado(EstadosDePiranhaPlant nuevoEstado) {
+        estadoActual = nuevoEstado;
     }
 	
 	public Sprite getSprite() {
@@ -44,11 +54,40 @@ public class PiranhaPlant extends Enemigo{
 	
 	public void moverse() {
 		
+		if(subiendo && pixelesMovidos < 30) {
+			setPosY(getPosY()-1);
+			hitb.actualizar(x+5, y);
+			estadoActual.cambiarEstado();
+			pixelesMovidos++;
+		}else if(!subiendo && pixelesMovidos > 0){
+				setPosY(getPosY()+1);
+				hitb.actualizar(x+5, y);
+				estadoActual.cambiarEstado();
+				pixelesMovidos--;
+		}
+		
+		if(pixelesMovidos == 30 || pixelesMovidos == 0) {
+			estadoActual.cambiarEstado();
+		}
+		
+		System.out.println("posY piranha: "+getPosY());
+	}
+	
+	public void iniciarMovimiento() {
+		
+		timer = new Timer(5000, e -> {
+			subiendo = !subiendo;
+		});
+		timer.start();
+		
+	
 	}
 	public void setPosX(int x) {
+		this.x = x;
 	}
 
 	public void setPosY(int y) {  
+		this.y = y;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -60,8 +99,7 @@ public class PiranhaPlant extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.setPuntuacion(-30);
-		p.morir();
+		p.colisionPiranhaPlant();
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(30);

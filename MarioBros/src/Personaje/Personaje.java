@@ -77,6 +77,10 @@ public class Personaje extends Entidad{
 		return estado.getToleranciaAltura();
 	}
 	
+	public void colisionPiranhaPlant() {
+		estado.colisionPiranhaPlant();
+	}
+	
 	public void colisionLateralGoomba() {
 		estado.colisionLateralGoomba();
 	}
@@ -151,7 +155,6 @@ public class Personaje extends Entidad{
  
     public void morir() {
         estado.morir();
-        this.vidas -= 1;
         if (this.vidas == 0) {
         	System.out.println("Game Over");
         }

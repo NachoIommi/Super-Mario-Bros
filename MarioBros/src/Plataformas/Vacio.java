@@ -51,4 +51,10 @@ public class Vacio extends Plataforma {
 		return hitb;
 	}
 
+	@Override
+	public void verificarCambioEstado() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -54,5 +54,11 @@ public class BloqueSolido extends Plataforma{
 		return hitb;
 	}
 
+	@Override
+	public void verificarCambioEstado() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

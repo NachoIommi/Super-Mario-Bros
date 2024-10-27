@@ -395,4 +395,9 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		
 	}
 
+	@Override
+	public void colisionPiranhaPlant() {
+		morir();
+	}
+
 }

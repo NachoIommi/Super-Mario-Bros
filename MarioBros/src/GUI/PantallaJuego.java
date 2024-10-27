@@ -189,7 +189,6 @@ public class PantallaJuego extends JPanel {
     }
     
     public void llegoAlFinal() {
-        personaje = controladorVistas.juego.getPersonaje();
         if (personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 320 && !nivelGanado) {
             
         	nivelGanado = true;

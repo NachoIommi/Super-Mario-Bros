@@ -16,6 +16,6 @@ public abstract class EstadosDePiranhaPlant {
 	public abstract void setPosY(int y);
 	public abstract void actualizarSprite();
 	public abstract void cambiarEstado() ;
-	
+	public abstract void moverse();
 	
 }
