@@ -3,6 +3,7 @@ package Personaje;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
+import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
@@ -73,8 +74,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
+			posY=posY-5;
 			saltando=true;
-			System.out.println("pase por aca");
 		}
 	}
 
@@ -255,6 +256,26 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getSuperMarioMuerto();
     	personaje.cargarSprite(sprite);
+    	
+    	int posY = personaje.getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            personaje.setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            personaje.setPosY(personaje.getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     public boolean getSaltando() {

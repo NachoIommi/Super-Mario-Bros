@@ -23,6 +23,7 @@ public class HiloPersonaje extends Thread {
     protected boolean tocoGoombaDerecha;
     protected boolean tocoGoombaIzquierda;
     double toleranciaAltura;
+    protected boolean tocoEnemigoAbajo;
     
     public HiloPersonaje(Juego juego) {
         this.juego = juego;
@@ -105,14 +106,18 @@ public class HiloPersonaje extends Thread {
                         if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
                                 personaje.getHitbox().getY() < e.getHitbox().getY() ) 
                             {
-                            	if(!tocoGoombaDerecha && !tocoGoombaIzquierda) {
+                            	if(!tocoGoombaDerecha && !tocoGoombaIzquierda  ) {
+                            		
                             		e.aceptarVisita(visitorEnemigoAfectado);
-                            		System.out.println("Saltan sobre goomba");
+                            		System.out.println("Saltan sobre enemigo");
                             		personaje.setTocandoBloqueAbajo(true);
-                            		personaje.setSaltandoSobreEnemigo(true);}
+                            		personaje.setSaltandoSobreEnemigo(true);
+                            		
+                            		}
                             }                       
                         tocoGoombaDerecha=false;
                         tocoGoombaIzquierda=false;
+                        tocoEnemigoAbajo=false;
                         
                 	}
                 }

@@ -70,10 +70,10 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	public void moverIzq() {
-		posX=posX-2;
+		posX=posX-1;
 	}
 	public void moverDer() {
-		posX=posX+2;
+		posX=posX+1;
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {

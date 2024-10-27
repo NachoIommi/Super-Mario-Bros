@@ -75,8 +75,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
+			posY=posY-5;
 			saltando=true;
-			System.out.println("pase por aca");
 		}
 	}
 	

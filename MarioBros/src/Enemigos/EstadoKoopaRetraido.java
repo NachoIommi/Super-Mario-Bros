@@ -20,6 +20,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
     protected boolean tocoParedDerecha;
 	protected Sprite sprite;
 	protected Hitbox hitb;
+	protected boolean saltoArriba;
 	
 	public EstadoKoopaRetraido(KoopaTroopa kt, Sprite s,int x,int y) {
 		super(kt);
@@ -33,6 +34,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 	    mostrable=true;	
+	    saltoArriba=false;
 	}
 	public void cambiarEstado() {
 		this.actualizarSprite();
@@ -40,9 +42,40 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
     }
 	
 	public void moverse() {
-		posX=posX;
+		if(saltoArriba) {
+			
+			if(tocandoBloqueIzquierda) 
+				tocoParedIzquierda=true;
+				
+			if(!tocoParedIzquierda) {
+				moverIzq();			
+				hitb.actualizar (posX, posY);
+			}
+			else
+				 {
+				tocoParedIzquierda=true;
+				moverDer();
+				hitb.actualizar (posX, posY);}				
+					
+			if (tocandoBloqueDerecha) {
+				tocoParedDerecha=true;
+				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+					}
+	
+			if (!tocandoBloqueAbajo) 
+		        posY=posY+1;
+		}
+		
 	}
-
+	
+	public void moverIzq() {
+		posX=posX-4;
+	}
+	public void moverDer() {
+		posX=posX+4;
+	}
+	
+	
 	public KoopaTroopa getKoopaTroopa() {
 		return kt;
 	}
@@ -111,7 +144,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		// TODO Auto-generated method stub
+		saltoArriba=true;
 		
 	}
 	
