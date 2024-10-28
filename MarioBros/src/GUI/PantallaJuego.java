@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -72,10 +73,10 @@ public class PantallaJuego extends JPanel {
                 actualizarPosicionEnemigos();
                 reloj.setText("<html><div style='text-align: center;'>Reloj<br>" + controladorVistas.juego.getReloj().getSegundos() + "</div></html>");
                 monedas.setText("" + controladorVistas.juego.getPersonaje().getMonedas() );    
-                puntuacion.setText("<html><div style='text-align: center;'>Puntuacion<br>" + controladorVistas.juego.getPersonaje().getPuntuacion() + "</div></html>");
+                puntuacion.setText("<html><div style='text-align: center;'>Puntuación<br> " + controladorVistas.juego.getPersonaje().getPuntuacion() + "</div></html>");
                 vidas.setText("<html><div style='text-align: center;'>Vidas<br>" + controladorVistas.juego.getPersonaje().getVidas()+ "</div></html>");
                 reloj.setText(""+controladorVistas.juego.getReloj().getSegundos());
-                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());    
+                monedas.setText(""+controladorVistas.juego.getPersonaje().getMonedas());   
                 llegoAlFinal();
             }
         });
@@ -141,19 +142,23 @@ public class PantallaJuego extends JPanel {
     }
     
     public void mostrarVidas() {
-    	vidas = new JLabel();
-    	
-    	vidas.setBounds(350, 10, 150, 50);
-    	vidas.setVisible(true);
-		try {
-		        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(14f);
-		        vidas.setFont(marioFuente);
-		        vidas.setForeground(Color.WHITE);
-		    } catch (FontFormatException | IOException e) {
-		        e.printStackTrace();
-		    }
-      panelNivel.add(vidas);
-      refrescar();
+        vidas = new JLabel("Vidas: " + controladorVistas.juego.getPersonaje().getVidas());
+        vidas.setBounds(350, 10, 150, 50); // Asegúrate de que estas dimensiones sean adecuadas
+        vidas.setVisible(true);
+        
+        try {
+            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(14f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(marioFuente);
+            vidas.setFont(marioFuente);
+            vidas.setForeground(Color.WHITE);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        
+        panelNivel.add(vidas);
+        panelNivel.revalidate();
+        panelNivel.repaint(); 
     }
     
     
@@ -165,8 +170,7 @@ public class PantallaJuego extends JPanel {
     
     public void mostrarPuntuacion() {
     	puntuacion = new JLabel();
-    
-
+    	puntuacion.setText("PUNTUACION \n"+controladorVistas.juego.getPersonaje().getPuntuacion());
     	puntuacion.setBounds(150, 10, 150, 50);
     	puntuacion.setVisible(true);
 		try {
@@ -177,6 +181,8 @@ public class PantallaJuego extends JPanel {
 		        e.printStackTrace();
 		    }
       panelNivel.add(puntuacion);
+      puntuacion.revalidate(); // Forzar la validación del componente
+      puntuacion.repaint(); // Forzar el repintado del componente
       refrescar();
     }
     
