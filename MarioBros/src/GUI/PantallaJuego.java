@@ -175,6 +175,8 @@ public class PantallaJuego extends JPanel {
     	puntuacion.setVisible(true);
 		try {
 		        Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(14f);
+		        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	            ge.registerFont(marioFuente);
 		        puntuacion.setFont(marioFuente);
 		        puntuacion.setForeground(Color.WHITE);
 		    } catch (FontFormatException | IOException e) {

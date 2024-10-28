@@ -13,7 +13,7 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoSuperMario extends EstadoDePersonaje {
 	
-	public double toleranciaAltura=34;
+	public double toleranciaAltura=5;
 	protected boolean right;
 	protected boolean left;
 	protected boolean jump;
@@ -39,9 +39,9 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 
 	public EstadoSuperMario(Personaje p,Sprite s,int x,int y) {
 		super(p);
-		hitb = new Hitbox(x ,y,30 ,62);
+		hitb = new Hitbox(x ,y,30 ,60);
 		setPosX(x);
-		setPosY(y-30);
+		setPosY(y);
 		sprite =s;
 	    tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
@@ -55,14 +55,13 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    alto=60;
 	}
 	
-	public void moverPersonaje() {	  
+	public void moverPersonaje() {	
 		moverDerecha();	    
 	    moverIzquierda(); 	    	    	
 	    colisionDesliz(); 
 	    detenerFriccion();    
 	    posX += velX;
-	    saltar();
-	    
+	    saltar();	    
 	    gravedadSaltando();
 	    corregirPosEnColision();
 	    gravedad();
@@ -70,7 +69,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    saltarSobreEnemigo();
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
-	   // actualizarSprite();
+	    actualizarSprite();
 	}
 
 	public void saltarSobreEnemigo() {
@@ -80,9 +79,22 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 			saltando=true;
 		}
 	}
-
+	
+	public void saltar() {
+    	if (jump && tocandoBloqueAbajo && !saltando ) {
+	        saltando = true;
+	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
+	    }
+    }
+	
+	public void setSaltandoSobreEnemigo(boolean b) {
+		saltandoSobreEnemigo=b;
+	}
+	
 	public void moverDerecha() {
 		if (right) {
+			actualizarSprite();
 			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
 		        if (velX < 5)
 		            velX += 0.1f;
@@ -92,10 +104,12 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
 				setPosX(getPosX()+3);
 		}		
+		 
 	}
 	
 	public void moverIzquierda() {
 		if (left) {
+			actualizarSprite();
 			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
 		        if (velX > -5)
 		            velX -= 0.1f; 
@@ -105,8 +119,9 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
 				setPosX(getPosX()-3);
 			}
+		
 	}
-	
+
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
 	    	setPosX(getPosX()+1);	    		
@@ -175,13 +190,17 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
-
+	
 	public void detenerFriccion() {
 		if (velX > 0 && !right) 
 	        velX -= 0.1f;  
 	    						//FRENA A MARIO FRICCIONADO
 	    if (velX < 0 && !left) 
-	        velX += 0.1f;  
+	        velX += 0.1f; 
+	    
+	    if (Math.abs(velX) < 0.1f) {
+	        velX = 0;
+	    }
 	}
 	
 	public void colisionDesliz() {
@@ -271,34 +290,34 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		return alto;
 	}
 	
-	public void actualizarSprite(){
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right && getVelX() >0 ) {
-    		sprite = fabrica.getSuperMarioCorriendoDerecha();
-    		personaje.cargarSprite(sprite);}
-	    if(left) {
-	    	sprite = fabrica.getSuperMarioCorriendoIzquierda();
-	    	personaje.cargarSprite(sprite);}
-	    if(!left&& !right) {
-	    	sprite = fabrica.getSuperMario();
-	    	personaje.cargarSprite(sprite);}
-	    if(left && getVelX() > 0) {
-	    	sprite = fabrica.getSuperMarioDerrapandoIzquierda();
-	    	personaje.cargarSprite(sprite);
+	public void actualizarSprite() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+	    Sprite nuevoSprite = sprite;
+	    
+	    if (right && velX > 0) {
+	    	nuevoSprite = fabrica.getSuperMarioCorriendoDerecha();
+	    	
+	    } else if (left && velX > 0) {	
+	    	nuevoSprite = fabrica.getSuperMarioDerrapandoIzquierda();
+	    	 	        
+	    } else if (left && velX < 0) {
+	    	nuevoSprite = fabrica.getSuperMarioCorriendoIzquierda();
+	        
+	    } else if (right && velX < 0) {
+	    	nuevoSprite = fabrica.getSuperMarioDerrapandoDerecha();
+     
+	    } else if (!left && !right) {
+	    	nuevoSprite = fabrica.getSuperMario();
+	        
+	    }else if(velX==0) {
+	    	nuevoSprite = fabrica.getSuperMarioQuietoIzquierda();		    
+	    }	    
+	   
+	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	personaje.cargarSprite(nuevoSprite);
+	    	personaje.setSpriteActualizado(true);
 	    }
-	    if(right && getVelX() < 0) {
-	    	sprite = fabrica.getSuperMarioDerrapandoDerecha();
-	    	personaje.cargarSprite(sprite);
-	    }
-    }
-
-	public void saltar() {
-    	if (jump && tocandoBloqueAbajo && !saltando ) {
-	        saltando = true;
-	        tocandoBloqueAbajo = false;
-	        velY = -4;  // IMPULSO INICIAL
-	    }
-    }
+	}
 	
 	public void recibirDano() {
 		if (!personaje.esInvulnerable()) {
@@ -474,11 +493,5 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		return 0;
 	}
 
-	@Override
-	public void setSaltandoSobreEnemigo(boolean b) {
-		saltandoSobreEnemigo=b;
-		
-	}
-	
 	
 }

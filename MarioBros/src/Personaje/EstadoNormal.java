@@ -56,14 +56,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public void moverPersonaje() {	
-		actualizarSprite();
 		moverDerecha();	    
 	    moverIzquierda(); 	    	    	
 	    colisionDesliz(); 
 	    detenerFriccion();    
 	    posX += velX;
-	    saltar();
-	    
+	    saltar();	    
 	    gravedadSaltando();
 	    corregirPosEnColision();
 	    gravedad();
@@ -232,44 +230,31 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void actualizarSprite() {
 	    GenerarSprite fabrica = new GenerarSpriteOriginal();
 	    Sprite nuevoSprite = sprite;
-	   
-	    
-	    
-	    
-	    
 	    
 	    if (right && velX > 0) {
 	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoDerecha();
 	    	
-
 	    } else if (left && velX > 0) {	
-	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoDerecha();
-	    	 
-	        
+	    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
+	    	 	        
 	    } else if (left && velX < 0) {
 	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoIzquierda();
 	        
 	    } else if (right && velX < 0) {
 	    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoDerecha();
-	        
+     
 	    } else if (!left && !right) {
 	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
 	        
 	    }else if(velX==0) {
-	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
-		    
-	    }
-	    
+	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();		    
+	    }	    
 	   
 	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
 	    	personaje.cargarSprite(nuevoSprite);
 	    	personaje.setSpriteActualizado(true);
 	    }
-	    
-	    
-	    
 	}
-
 
     public void colisionSuperChampi() {
     	setPuntuacionSuperChampi();
@@ -278,7 +263,6 @@ public class EstadoNormal extends EstadoDePersonaje {
     	personaje.cambiarEstado(e);
     	personaje.setPuntuacion(20);
     	System.out.println("Colision con superchampi hecha");
-
     }
     
     public void colisionFlorDeFuego() {
@@ -489,9 +473,5 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public float getVelY() {
 		return velY;
 	}
-
-
-
-	
 
 }
