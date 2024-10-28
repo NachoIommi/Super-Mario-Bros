@@ -19,6 +19,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected boolean jump;
 	protected Sprite sprite;
 	protected Hitbox hitb;
+	protected Personaje p;
 
 	protected int vidas;
 	protected int monedas;
@@ -38,6 +39,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 
 	public EstadoDeFuego(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
+		this.p = personaje;
 		hitb = new Hitbox(x ,y,30 ,62);
 		setPosX(x);
 		setPosY(y-30);

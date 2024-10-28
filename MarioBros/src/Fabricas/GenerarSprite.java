@@ -331,7 +331,12 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite(rutaImagen + "/tuberiaGrande.png");
 	}
 	
+	public Sprite getMarioInvulnerableIzq() {
+		return new Sprite(rutaImagen + "/marioNormalInvulnerableIzquierda.gif");
+	}
 	
-	
+	public Sprite getMarioInvulnerableDer() {
+		return new Sprite(rutaImagen + "/marioNormalInvulnerableDerecha.gif");
+	}
 	
 }

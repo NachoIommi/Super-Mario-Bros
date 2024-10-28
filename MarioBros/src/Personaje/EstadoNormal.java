@@ -279,7 +279,10 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
     
 	public void recibirDano() {
-    	morir();
+		if (!personaje.esInvulnerable()) {
+            personaje.morir();
+            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
+        }
     }
     
     public void morir() {

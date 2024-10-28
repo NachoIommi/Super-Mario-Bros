@@ -5,6 +5,8 @@ import Logica.Hitbox;
 import Logica.Visitor;
 
 import java.awt.Image;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -23,6 +25,7 @@ public class Personaje extends Entidad{
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
+	protected Sprite s;
 
 	protected float min = 10.0f;
 	public int max = 2700;
@@ -43,6 +46,10 @@ public class Personaje extends Entidad{
 	
 	protected int tiempoSaltando=0;
 	protected final int maxTiempoSalto=20;
+	
+	private boolean invulnerable;
+    protected int tiempoInvulnerable;
+    protected static final int TIEMPO_INVULNERABILIDAD = 3000;
 	
 	public Personaje(Sprite sprite, int x, int y) {
         vidas = 3;        
@@ -168,10 +175,32 @@ public class Personaje extends Entidad{
         	System.out.println("Game Over");
         }
     }
+    public void activarInvulnerabilidad() {
+        if (!invulnerable) {
+            invulnerable = true; // Activa la invulnerabilidad
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    invulnerable = false; // Desactiva invulnerabilidad después de 3 segundos
+                    timer.cancel();
+                }
+            }, 3000); // Tiempo de invulnerabilidad en milisegundos (3 segundos)
+        }
+    }
+
+    public boolean esInvulnerable() {
+        return invulnerable;
+    }
     
     public void recibirDano() {
-    	estado.recibirDano();
-    }
+    	this.estado.recibirDano();
+     }
+
+    
+    
+    		
+  
 
     public void sumarVida() {
         this.vidas += 1;
@@ -182,7 +211,7 @@ public class Personaje extends Entidad{
     }
 
     public void cambiarEstado(EstadoDePersonaje nuevoEstado) {
-        this.estado = nuevoEstado;
+    	this.estado = nuevoEstado;
     }
 
     public void aceptarVisita(Visitor v) {

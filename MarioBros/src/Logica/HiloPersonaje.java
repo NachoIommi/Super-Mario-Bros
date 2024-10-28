@@ -85,7 +85,7 @@ public class HiloPersonaje extends Thread {
                     }
                 }
                 for(Enemigo e : enemigo) {
-                	if(personaje.getHitbox().intersects(e.getHitbox())) {
+                	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
                            
                 		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
                         if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
