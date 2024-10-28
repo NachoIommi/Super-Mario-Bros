@@ -1,11 +1,6 @@
 package Personaje;
 
-<<<<<<< Updated upstream
-import Enemigos.EstadoDeKoopa;
-=======
-
-import Enemigos.KoopaTroopa;
->>>>>>> Stashed changes
+import Enemigos.*;
 import Fabricas.GenerarSprite; 
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
@@ -24,9 +19,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected boolean jump;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected Personaje p;
-	
-
 
 	protected int vidas;
 	protected int monedas;
@@ -45,9 +37,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected float velY;
 	protected int alto;
 
-	public EstadoSuperMario(Personaje personaje,Sprite s,int x,int y) {
-		super(personaje);
-		this.p = personaje;
+	public EstadoSuperMario(Personaje p,Sprite s,int x,int y) {
+		super(p);
 		hitb = new Hitbox(x ,y,30 ,62);
 		setPosX(x);
 		setPosY(y-30);
@@ -225,7 +216,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	System.out.println("Colision Goomba");
     }
 	
-	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		velX=0;
     	GenerarSprite fabrica = new GenerarSpriteOriginal();	
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
@@ -273,7 +264,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     }
 	
 	public void recibirDano() {
-		 if (!p.esInvulnerable()) {
+		if (!personaje.esInvulnerable()) {
 			 personaje.cambiarEstado(new EstadoNormal(personaje, sprite, personaje.getPosX(), personaje.getPosY()));
 	            personaje.activarInvulnerabilidad();
 	            System.out.println("EstadoSuperMario: Cambió a EstadoNormal y activó invulnerabilidad temporal");

@@ -1,12 +1,11 @@
 package Personaje;
 
-import Enemigos.EstadoDeKoopa; 
+import Enemigos.*;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
-import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
@@ -279,10 +278,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
     
 	public void recibirDano() {
-		if (!personaje.esInvulnerable()) {
-            personaje.morir();
-            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
-        }
+    	morir();
     }
     
     public void morir() {
@@ -424,10 +420,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	public void colisionLateralGoomba() {
 		morir();
+		personaje.setPuntuacion(-30);
 		System.out.println("MORIR PERSONAJE");
 	}
-	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		morir();
+		personaje.setPuntuacion(-45);
 		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
 	}
 	

@@ -1,6 +1,6 @@
 package Personaje;
 
-import Logica.Entidad; 
+import Logica.Entidad;   
 import Logica.Hitbox;
 import Logica.Visitor;
 
@@ -11,7 +11,7 @@ import java.util.TimerTask;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import Enemigos.EstadoDeKoopa;
+import Enemigos.*;
 import Fabricas.*;
 
 public class Personaje extends Entidad{
@@ -55,7 +55,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 10;   
-        estado = new EstadoNormal(this ,sprite, x ,y); 
+        estado = new EstadoEstrella(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -93,8 +93,8 @@ public class Personaje extends Entidad{
 		estado.colisionLateralGoomba();
 	}
 	
-	public void colisionLateralKoopa(EstadoDeKoopa kt) {
-		estado.colisionLateralKoopa(kt);
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
+		estado.colisionLateralKoopa(koopaTroopa);
 	}
 	
 	public void colisionSuperChampi() {
@@ -188,19 +188,13 @@ public class Personaje extends Entidad{
             }, 3000); // Tiempo de invulnerabilidad en milisegundos (3 segundos)
         }
     }
-
     public boolean esInvulnerable() {
         return invulnerable;
     }
-    
-    public void recibirDano() {
-    	this.estado.recibirDano();
-     }
 
-    
-    
-    		
-  
+    public void recibirDano() {
+    	estado.recibirDano();
+    }
 
     public void sumarVida() {
         this.vidas += 1;
@@ -211,7 +205,7 @@ public class Personaje extends Entidad{
     }
 
     public void cambiarEstado(EstadoDePersonaje nuevoEstado) {
-    	this.estado = nuevoEstado;
+        this.estado = nuevoEstado;
     }
 
     public void aceptarVisita(Visitor v) {

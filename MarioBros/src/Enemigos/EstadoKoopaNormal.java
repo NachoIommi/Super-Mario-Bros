@@ -1,11 +1,12 @@
 package Enemigos;
 
-import java.util.Timer;
+import java.util.Timer; 
 import java.util.TimerTask;
 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
+import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Personaje.EstadoSuperMario;
 import Personaje.Personaje;
@@ -79,9 +80,6 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		posX=posX+1;
 	}
 	
-	public void afectarPersonaje(Personaje p) {
-		p.colisionLateralKoopa(this);
-	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
 	    mori = true;
@@ -94,25 +92,51 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		        koopa.setSpriteActualizado(true);	            
 	        }
 	    }, 10000); // 10 segundos en milisegundos
+	    
 	}
-	
+	public void morir() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getKoopaTroopaMuerto();
+    	cargarSprite(sprite);
+    	actualizarSpriteKoopaMuerto();
+    	
+    	int posY = getPosY();
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+	}
 	private Sprite actualizarSpriteNormal() {
 	    GenerarSprite fabrica = new GenerarSpriteOriginal();
 	    return fabrica.getKoopaTroopa(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
 	}
 	
-	public void morir() {
-		//actualizarSprite();
-		hitb.actualizar(0, 0);
-		posX=0;
-		posY=-300;
-	}
-	
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getKoopaTroopaRetraido();
+		cargarSprite(sprite);
 		koopa.setSpriteActualizado(true);
 	}
+	
+	public void actualizarSpriteKoopaMuerto() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getKoopaTroopaMuerto();
+		cargarSprite(sprite);
+		koopa.setSpriteActualizado(true);
+	}
+	
 	public void cambiarEstado() {
 		this.actualizarSprite();
         koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  // Cambiar al estado extendido

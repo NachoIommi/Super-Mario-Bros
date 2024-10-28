@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
+import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Personaje.Personaje;
 
@@ -98,10 +99,43 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	public void setPosY(int y) {
 		posY = y;
 	}
+	public void morir() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getKoopaTroopaMuerto();
+    	cargarSprite(sprite);
+    	actualizarSpriteKoopaMuerto();
+    	
+    	int posY = getPosY();
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        
+	}
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		this.sprite = fabrica.getKoopaTroopaRetraido();		
+		cargarSprite(sprite);
+		koopa.setSpriteActualizado(true);
+	}
+	public void actualizarSpriteKoopaMuerto() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getKoopaTroopaMuerto();
+		cargarSprite(sprite);
+		koopa.setSpriteActualizado(true);
 	}
 	
 	public int getPosX() {
@@ -146,18 +180,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		
 	}
 	
-	public void afectarPersonaje(Personaje p) {
-		p.colisionLateralKoopa(this);
-
-	}
-	
 	public void serAfectadoPorPersonaje(Personaje p) {
 		saltoArriba=true;
-	}
-	public void morir() {
-		//actualizarSprite();
-		hitb.actualizar(0, 0);
-		posX=0;
-		posY=-300;
 	}
 }

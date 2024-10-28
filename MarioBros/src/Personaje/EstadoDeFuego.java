@@ -1,7 +1,6 @@
 package Personaje;
 
-import Enemigos.EstadoDeKoopa;
-import Enemigos.KoopaTroopa;
+import Enemigos.*;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
@@ -19,7 +18,6 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected boolean jump;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected Personaje p;
 
 	protected int vidas;
 	protected int monedas;
@@ -37,9 +35,8 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected float velY;
 	protected int alto;
 
-	public EstadoDeFuego(Personaje personaje,Sprite s,int x,int y) {
-		super(personaje);
-		this.p = personaje;
+	public EstadoDeFuego(Personaje p,Sprite s,int x,int y) {
+		super(p);
 		hitb = new Hitbox(x ,y,30 ,62);
 		setPosX(x);
 		setPosY(y-30);
@@ -205,7 +202,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     	personaje.cambiarEstado(e);
     	System.out.println("Colision Goomba");
     }
-	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		
 	}
 	public int getAlto() {
@@ -242,10 +239,10 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     }
     
 	public void recibirDano() {
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Mario fuego recibio daño y bajo a estado super ");
+		if (!personaje.esInvulnerable()) {
+            personaje.morir();
+            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
+        }
     }
     
     public void morir() {

@@ -1,14 +1,12 @@
 package Personaje;
 
-import Fabricas.GenerarSprite; 
-import Fabricas.GenerarSpriteOriginal;
-import Fabricas.Sprite;
+import Fabricas.*;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
-import Enemigos.EstadoDeKoopa;
+import Enemigos.*;
 
 public class EstadoEstrella extends EstadoDePersonaje {
 	
@@ -204,8 +202,9 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		
 	}
 
-	public void colisionLateralKoopa(EstadoDeKoopa kt) {
-		kt.morir();
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
+		personaje.setPuntuacion(90);
+		koopaTroopa.morir();
 	}
 	public int getAlto() {
 		return alto;

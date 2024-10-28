@@ -44,7 +44,13 @@ public class KoopaTroopa extends Enemigo{
 	public int getPosY() {
 		return estado.getPosY();
 	}
+	public void setPosX(int x) {
+		 posX = x;
+	}
 	
+	public void setPosY(int y) {
+		 posY = y;
+	}
 	public void setEstadoActual(EstadoDeKoopa nuevoEstado) {
 		this.estado = nuevoEstado;
 	}
@@ -62,20 +68,21 @@ public class KoopaTroopa extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.setPuntuacion(-45);
-		estado.afectarPersonaje(p);
+		p.colisionLateralKoopa(this);
 	}
-	
+	public void morir() {
+		estado.morir();
+	}
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(90);
 		estado.serAfectadoPorPersonaje(p);
 	}
 	
 	public void actualizarSprite() {
-		//GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	//sprite = fabrica.getKoopaDadoVuelta();
-    	//cargarSprite(sprite);
-    	//setSpriteActualizado(true);
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getKoopaTroopaMuerto();
+    	cargarSprite(sprite);
+    	setSpriteActualizado(true);	
 	}
 
 	public Hitbox getHitbox() {
