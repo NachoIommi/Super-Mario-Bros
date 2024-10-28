@@ -311,7 +311,7 @@ public class EstadoNormal extends EstadoDePersonaje {
         }
         
         personaje.nivelActual.reiniciarNivel();
-   		System.out.println("se ejecuto reiniciarNivel :: personaje");
+   		System.out.println("se ejecuto reiniciarNivel :: personajeNormal");
 
     }
     

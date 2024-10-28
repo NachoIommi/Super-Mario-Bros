@@ -298,6 +298,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
+        
+        personaje.nivelActual.reiniciarNivel();
     }
     
     public boolean getSaltando() {
