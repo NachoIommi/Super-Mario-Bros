@@ -9,27 +9,33 @@ import Personaje.Personaje;
 
 public class Spiny extends Enemigo{
 	
+	public double toleranciaAltura=20;
 	protected Sprite sprite;
 	protected Hitbox hitb;
+
 	protected int posX;
 	protected int posY;
-	protected boolean mostrable;
 	
 	protected boolean tocandoBloqueDerecha;
 	protected boolean tocandoBloqueIzquierda;
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
+	protected boolean mostrable;
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
 	
 	
 	public Spiny(Sprite sprite, int x, int y) {
 		posX = x;
-		posY = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30, 30);
-		mostrable = true;
-		setSpriteActualizado(false);
+        posY = y;
+        this.sprite = sprite;
+        hitb = new Hitbox(x ,y,30 ,30);
+        tocandoBloqueDerecha=false;
+	    tocandoBloqueIzquierda=false;
+	    tocandoBloqueAbajo=false;
+	    tocandoBloqueArriba=false;
+	    mostrable=true;
+	    setSpriteActualizado(false);
 	}
 
 	public Sprite getSprite() {
@@ -76,7 +82,7 @@ public class Spiny extends Enemigo{
 	        posY=posY+1;
 		
 		hitb.actualizar (posX, posY);		
-	}
+}
 	
 	public void moverIzq() {
 		posX=posX-2;
@@ -94,7 +100,7 @@ public class Spiny extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(-30);
-		p.morir();
+		p.recibirDano();
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {

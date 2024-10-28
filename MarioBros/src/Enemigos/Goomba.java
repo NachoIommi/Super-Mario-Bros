@@ -101,11 +101,12 @@ public class Goomba extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {	
 		p.colisionLateralGoomba();
+		
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		//p.setPuntuacion(60);
-		morir();
+		p.setPuntuacion(60);
+		p.recibirDano();
 	}
 	
 	public void morir() {

@@ -71,6 +71,7 @@ public class KoopaTroopa extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralKoopa(this);
+		p.recibirDano();
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
