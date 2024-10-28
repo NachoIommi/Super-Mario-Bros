@@ -479,4 +479,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		saltandoSobreEnemigo=b;
 		
 	}
+	
+	
 }

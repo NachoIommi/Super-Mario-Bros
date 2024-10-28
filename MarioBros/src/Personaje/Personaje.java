@@ -70,7 +70,7 @@ public class Personaje extends Entidad{
         saltandoSobreEnemigo=false;
         saltando=false;  
         alto=30;
-        
+        setSpriteActualizado(false);
     }
 	public void setRight(boolean b){
 		estado.setRight(b);
@@ -137,6 +137,7 @@ public class Personaje extends Entidad{
 	
 	public void actualizarSprite() {
 		estado.actualizarSprite();
+		//setSpriteActualizado(true);
 	}
 
 	public boolean getSaltando() {
@@ -297,6 +298,14 @@ public class Personaje extends Entidad{
 	
 	public void setPosY(int y) {
 		estado.setPosY(y);
+	}
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+		
 	}
 	
 }

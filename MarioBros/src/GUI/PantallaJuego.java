@@ -64,6 +64,7 @@ public class PantallaJuego extends JPanel {
             public void actionPerformed(ActionEvent e) {          	
                 actualizarPosicionPersonaje();
                 actualizarFondo(); 
+                actualizarImagenPersonaje();
                 actualizarImagenPlataformas();
                 actualizarImagenPowerUps();
                 actualizarImagenEnemigos();
@@ -330,15 +331,15 @@ public class PantallaJuego extends JPanel {
                 
                 	case(KeyEvent.VK_D):
                 		controladorVistas.obtenerPersonaje().setRight(true);
-                	actualizarImagenPersonaje();
+                		//actualizarImagenPersonaje();
                 		break;
                 	case(KeyEvent.VK_A):
                 		controladorVistas.obtenerPersonaje().setLeft(true);
-                	actualizarImagenPersonaje();
+                	//	actualizarImagenPersonaje();
                 		break;		
                 	case(KeyEvent.VK_W):
                 		controladorVistas.obtenerPersonaje().setJump(true);
-                		actualizarImagenPersonaje();
+                	//	actualizarImagenPersonaje();
          
                 		break;
                 }
@@ -350,15 +351,15 @@ public class PantallaJuego extends JPanel {
                 
             	case(KeyEvent.VK_D):
             		controladorVistas.obtenerPersonaje().setRight(false);
-            	actualizarImagenPersonaje();
+            	//actualizarImagenPersonaje();
             		break;
             	case(KeyEvent.VK_A):
             		controladorVistas.obtenerPersonaje().setLeft(false);
-            	actualizarImagenPersonaje();
+            	//actualizarImagenPersonaje();
             		break;		
             	case(KeyEvent.VK_W):
             		controladorVistas.obtenerPersonaje().setJump(false); //o llamar a saltar
-            		//controladorVistas.obtenerPersonaje().saltar();
+            		controladorVistas.obtenerPersonaje().saltar();
             		break;
             }     	
             	//actualizarImagenPersonaje();
@@ -413,9 +414,14 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenPersonaje() {
-        String ruta = personaje.getSprite().getRutaImagen();
-        personaje.setIcon(verificarExtensionPersonaje(ruta)); 
-        refrescar();
+    	if(personaje.necesitaActualizarSprite()) {
+    		String ruta = personaje.getSprite().getRutaImagen();
+            personaje.setIcon(verificarExtensionPersonaje(ruta)); 
+            personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ALTO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
+            refrescar();
+            personaje.setSpriteActualizado(false);
+    	}
+        
     }      
     
     public void actualizarImagenEnemigos(){

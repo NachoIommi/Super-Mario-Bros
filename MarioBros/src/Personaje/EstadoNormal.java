@@ -52,6 +52,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    jump=false;
 	    right=false;
 	    left=false;
+	    
 	}
 	
 	public void moverPersonaje() {	
@@ -230,21 +231,43 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public void actualizarSprite() {
 	    GenerarSprite fabrica = new GenerarSpriteOriginal();
-
+	    Sprite nuevoSprite = sprite;
+	   
+	    
+	    
+	    
+	    
+	    
 	    if (right && velX > 0) {
-	        sprite = fabrica.getPersonajeNormalCorriendoDerecha();
-	    } else if (left && velX > 0) {
-	        sprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
-	    } else if (left && velX < 0) {
-	        sprite = fabrica.getPersonajeNormalCorriendoIzquierda();
-	    } else if (right && velX < 0) {
-	        sprite = fabrica.getPersonajeNormalDerrapandoDerecha();
-	    } else if (!left && !right) {
-	        sprite = fabrica.getPersonajeNormalQuietoDerecha();
-	    }else if(velX==0)
-	    		sprite = fabrica.getPersonajeNormalQuietoDerecha();
+	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoDerecha();
+	    	
 
-	    personaje.cargarSprite(sprite);
+	    } else if (left && velX > 0) {	
+	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoDerecha();
+	    	 
+	        
+	    } else if (left && velX < 0) {
+	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoIzquierda();
+	        
+	    } else if (right && velX < 0) {
+	    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoDerecha();
+	        
+	    } else if (!left && !right) {
+	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
+	        
+	    }else if(velX==0) {
+	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
+		    
+	    }
+	    
+	   
+	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	personaje.cargarSprite(nuevoSprite);
+	    	personaje.setSpriteActualizado(true);
+	    }
+	    
+	    
+	    
 	}
 
 

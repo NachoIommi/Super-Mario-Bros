@@ -4,7 +4,7 @@ import Logica.Entidad;
 import Logica.Visitor;
 import Personaje.Personaje;
 public abstract class Enemigo extends Entidad{
-	protected boolean spriteActualizado;
+	
 	public abstract void afectarPersonaje(Personaje p);
 	public abstract void serAfectadoPorPersonaje(Personaje p);
 	public abstract void aceptarVisita(Visitor r);
@@ -21,6 +21,5 @@ public abstract class Enemigo extends Entidad{
 	public abstract void setTocandoBloqueArriba(boolean b);
 	public abstract void setTocandoBloqueAbajo(boolean b);
 	public abstract int getToleranciaAltura();
-	public abstract boolean necesitaActualizarSprite();
-	public abstract void setSpriteActualizado(boolean actualizada);
+	
 }
