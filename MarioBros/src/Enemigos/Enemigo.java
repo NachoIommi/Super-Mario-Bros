@@ -11,6 +11,8 @@ public abstract class Enemigo extends Entidad{
 	public abstract void moverse();
 	public abstract int getPosX();
 	public abstract int getPosY();
+	public abstract void setPosX(int x);
+	public abstract void setPosY(int y);
 	public abstract Sprite getSprite();
 	public abstract boolean mostrable();
 	public abstract void setMostrable(boolean b);

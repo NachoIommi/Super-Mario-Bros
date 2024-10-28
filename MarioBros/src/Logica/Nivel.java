@@ -110,7 +110,7 @@ public class Nivel {
 				}
 				switch (tipoEntidad) {
 				    case 0:
-				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY));
+				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getSuperMario(),posX,posY));
 				        break;
 				    case 1:
 				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY));

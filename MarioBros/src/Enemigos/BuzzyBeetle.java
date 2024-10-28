@@ -47,7 +47,13 @@ public class BuzzyBeetle extends Enemigo{
 	public int getPosY() {
 		return posY;
 	}
-	
+	public void setPosX(int x) {
+		posX = x;		
+	}
+
+	public void setPosY(int y) {
+		posY = y;
+	}
 	public void moverse() {
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
