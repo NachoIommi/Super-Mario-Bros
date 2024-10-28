@@ -219,6 +219,10 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		personaje.setPuntuacion(60);
 		spiny.morir();
 	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		personaje.setPuntuacion(30);
+		piranha.morir();
+	}
 	public int getAlto() {
 		return alto;
 	}

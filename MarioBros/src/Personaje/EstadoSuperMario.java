@@ -253,6 +253,15 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	System.out.println("Colision spiny cambiando a mini mario");
     	//PROGRAMAR INVULNERABILIDAD
 	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		velX=0;
+		recibirDano();
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Piranha cambiando a mini mario");
+    	//PROGRAMAR INVULNERABILIDAD
+	}
 	public void colisionVacio() {
 		morir();
 		System.out.println("MORIR X VACIO SUPERMARIO");
@@ -470,10 +479,4 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		saltandoSobreEnemigo=b;
 		
 	}
-
-	@Override
-	public void colisionPiranhaPlant() {
-		morir();
-	}
-
 }

@@ -51,13 +51,13 @@ public abstract class EstadoDePersonaje {
 	public abstract void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy);
 	public abstract void colisionLateralLakitu(Lakitu lakitu);
 	public abstract void colisionLateralSpiny(Spiny spiny);
+	public abstract void colisionLateralPiranha(PiranhaPlant piranha);
 	public abstract void setRight(boolean b);
 	public abstract void setLeft(boolean b);
 	public abstract void setJump(boolean b);
 	public abstract double getToleranciaAltura();
 	public abstract void setTocandoBloqueArriba(boolean b);
 	public abstract float getVelY();
-	public abstract void colisionPiranhaPlant();
 	public abstract void colisionVacio();
 	public abstract void saltarSobreEnemigo();
 

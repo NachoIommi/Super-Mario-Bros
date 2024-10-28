@@ -58,7 +58,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 10;   
-        estado = new EstadoSuperMario(this ,sprite, x ,y); 
+        estado = new EstadoNormal(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -88,10 +88,6 @@ public class Personaje extends Entidad{
 		return estado.getToleranciaAltura();
 	}
 	
-	public void colisionPiranhaPlant() {
-		estado.colisionPiranhaPlant();
-	}
-	
 	public void colisionLateralGoomba(Goomba goomba) {
 		estado.colisionLateralGoomba(goomba);
 	}
@@ -107,6 +103,9 @@ public class Personaje extends Entidad{
 	}
 	public void colisionLateralSpiny(Spiny spiny) {
 		estado.colisionLateralSpiny(spiny);
+	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		estado.colisionLateralPiranha(piranha);
 	}
 	public void colisionSuperChampi() {
 		estado.colisionSuperChampi();

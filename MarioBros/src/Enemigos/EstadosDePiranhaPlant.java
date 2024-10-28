@@ -23,8 +23,8 @@ public abstract class EstadosDePiranhaPlant {
 	public abstract Sprite getSprite();
 	public abstract int getPosY();
 	public abstract void cargarSprite(Sprite s);
-	public abstract void afectarPersonaje(Personaje p);
 	public abstract void serAfectadoPorPersonaje(Personaje p);
+	public abstract void morir();
 	public abstract void setMostrable(boolean b);
 	public abstract boolean mostrable();
 }

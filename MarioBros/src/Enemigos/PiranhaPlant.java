@@ -72,7 +72,11 @@ public class PiranhaPlant extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		estado.afectarPersonaje(p);
+		p.colisionLateralPiranha(this);
+	}
+	
+	public void morir() {
+		estado.morir();
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
@@ -80,11 +84,6 @@ public class PiranhaPlant extends Enemigo{
 		estado.serAfectadoPorPersonaje(p);
 	}
 	
-	public void morir() {
-		
-	}
-	
-
 	public Hitbox getHitbox() {
 		return estado.getHitbox();
 	}

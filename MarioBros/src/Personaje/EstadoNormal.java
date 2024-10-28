@@ -449,6 +449,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 		personaje.setPuntuacion(-30);
 		System.out.println("MORIR PERSONAJE POR SPINY");
 	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		morir();
+		personaje.setPuntuacion(-30);
+		System.out.println("MORIR PERSONAJE POR Piranha");
+	}
 	public void colisionVacio() {
 		morir();
 		System.out.println("MORIR X VACIO");
@@ -456,10 +461,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	public float getVelY() {
 		return velY;
-	}
-	
-	public void colisionPiranhaPlant() {
-		morir();
 	}
 
 

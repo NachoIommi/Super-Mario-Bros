@@ -230,6 +230,13 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     	personaje.cambiarEstado(e);
     	System.out.println("Colision spiny");
 	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Piranha");
+	}
 	public int getAlto() {
 		return alto;
 	}
@@ -445,12 +452,6 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 
 	@Override
 	public void setSaltandoSobreEnemigo(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionPiranhaPlant() {
 		// TODO Auto-generated method stub
 		
 	}

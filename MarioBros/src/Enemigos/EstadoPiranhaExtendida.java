@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Fabricas.*;
+import GUI.ConstantesVistas;
 
 
 public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
@@ -88,12 +89,6 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		this.s = fabrica.getPiranhaPlant();
 		piranha.setSpriteActualizado(true);
 	}
-	 
-	
-	
-	public void afectarPersonaje(Personaje p) {
-		//p.colisionLateralPiranha();
-	}
 	
 	public PiranhaPlant getPiranhaPlant() {
 		return piranha;
@@ -127,6 +122,25 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		this.s=s;	
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {		
+	}
+	public void morir() {    	
+    	int posY = getPosY();
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	public boolean mostrable() {
 		return mostrable;

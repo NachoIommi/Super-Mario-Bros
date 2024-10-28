@@ -58,11 +58,6 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 		this.s = fabrica.getPiranhaPlant();
 		piranha.setSpriteActualizado(true);
 	}
-
-    
-    public void afectarPersonaje(Personaje p) {		
-		System.out.println("estado Piranha invulnerable no hace daño");
-	}
     
     public PiranhaPlant getPiranhaPlant() {
 		return piranha;
@@ -101,6 +96,9 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	public void serAfectadoPorPersonaje(Personaje p) {		
 	}
 
+	public void morir() {
+    	
+    }
 	public boolean mostrable() {
 		return mostrable;
 	}
