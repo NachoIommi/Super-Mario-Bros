@@ -1,5 +1,8 @@
 package Enemigos;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
@@ -145,6 +148,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralKoopa(this);
+
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {

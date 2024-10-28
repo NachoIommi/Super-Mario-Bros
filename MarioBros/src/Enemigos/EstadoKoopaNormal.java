@@ -1,5 +1,8 @@
 package Enemigos;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
@@ -81,9 +84,23 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		mori=true;
-		cambiarEstado();
+	    mori = true;
+	    cambiarEstado();
+	    Timer timer = new Timer();
+	    timer.schedule(new TimerTask() {
+	        public void run() {	
+	        	
+		        koopa.setEstadoActual(new EstadoKoopaNormal(koopa, actualizarSpriteNormal(), koopa.getX(), koopa.getY()));
+		        koopa.setSpriteActualizado(true);	            
+	        }
+	    }, 10000); // 10 segundos en milisegundos
 	}
+	
+	private Sprite actualizarSpriteNormal() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+	    return fabrica.getKoopaTroopa(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
+	}
+	
 	public void morir() {
 		//actualizarSprite();
 		hitb.actualizar(0, 0);
