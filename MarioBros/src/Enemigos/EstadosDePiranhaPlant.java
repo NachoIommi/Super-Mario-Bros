@@ -1,6 +1,8 @@
 package Enemigos;
 
+import Fabricas.Sprite;
 import Logica.Hitbox;
+import Personaje.Personaje;
 
 public abstract class EstadosDePiranhaPlant {
 	
@@ -17,5 +19,12 @@ public abstract class EstadosDePiranhaPlant {
 	public abstract void actualizarSprite();
 	public abstract void cambiarEstado() ;
 	public abstract void moverse();
-	
+	public abstract int getPosX();
+	public abstract Sprite getSprite();
+	public abstract int getPosY();
+	public abstract void cargarSprite(Sprite s);
+	public abstract void afectarPersonaje(Personaje p);
+	public abstract void serAfectadoPorPersonaje(Personaje p);
+	public abstract void setMostrable(boolean b);
+	public abstract boolean mostrable();
 }

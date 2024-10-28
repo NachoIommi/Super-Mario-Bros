@@ -13,13 +13,12 @@ public class Tuberia extends Plataforma{
 	protected Hitbox hitb;
 	protected int reloj;
 	
-	public Tuberia(Sprite sprite, int x, int y, PiranhaPlant piranha,int reloj) {
+	public Tuberia(Sprite sprite, int x, int y, PiranhaPlant piranha) {
 		contenido = piranha;
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30,30);
-		this.reloj = reloj;
+		hitb = new Hitbox(x, y, 30,31);
 	}
 	
 	public Tuberia(Sprite sprite, int x,int y) {
@@ -29,11 +28,6 @@ public class Tuberia extends Plataforma{
 		hitb = new Hitbox(x , y, 30,30);
 	}
 
-	public void verificarCambioEstado() {
-        if (reloj % 5 == 0) {
-            contenido.cambiarEstado();  // Llamar al método para cambiar de estado
-        }
-    }
 	public Sprite getSprite() {
 		return sprite;
 	}
@@ -63,21 +57,12 @@ public class Tuberia extends Plataforma{
 		sprite = s;
 	}
 	
-
-	public void mostrarPiranha() {
-		
-	}
-	
 	public Hitbox getHitbox() {
 		return hitb;
-	}
-	
-	public void afectarPersonaje(Personaje p) {
-		
 	}
 
 	public boolean cambioEstado() {
 		return false;
 	}
-	
+
 }
