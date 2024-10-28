@@ -12,8 +12,8 @@ public class PiranhaPlant extends Enemigo{
 	private EstadosDePiranhaPlant estadoActual;
 	protected Sprite sprite;
 	protected Hitbox hitb;
-	protected int posX;
-	protected int posY;
+	protected int x;
+	protected int y;
 	protected boolean mostrable;
 	
 	private boolean subiendo;
@@ -21,8 +21,8 @@ public class PiranhaPlant extends Enemigo{
 	private int pixelesMovidos = 0;
 	
 	public PiranhaPlant(Sprite sprite, int x, int y) {
-		posX = x;
-		posY = y;
+		this.x = x;
+		this.y = y;
 		this.sprite = sprite;
 		estadoActual = new PiranhaInvulnerable(sprite, x, y, this);
 		hitb = new Hitbox(x+5, y, 20, 20);
@@ -45,23 +45,23 @@ public class PiranhaPlant extends Enemigo{
 	}
 
 	public int getPosX() {
-		return posX;
+		return x;
 	}
 
 	public int getPosY() {
-		return posY;
+		return y;
 	}
 	
 	public void moverse() {
 		
 		if(subiendo && pixelesMovidos < 30) {
 			setPosY(getPosY()-1);
-			hitb.actualizar(posX+5, posY);
+			hitb.actualizar(x+5, y);
 			estadoActual.cambiarEstado();
 			pixelesMovidos++;
 		}else if(!subiendo && pixelesMovidos > 0){
 				setPosY(getPosY()+1);
-				hitb.actualizar(posX+5, posY);
+				hitb.actualizar(x+5, y);
 				estadoActual.cambiarEstado();
 				pixelesMovidos--;
 		}
@@ -72,18 +72,21 @@ public class PiranhaPlant extends Enemigo{
 		
 	}
 	
-	public void iniciarMovimiento() {		
+	public void iniciarMovimiento() {
+		
 		timer = new Timer(5000, e -> {
 			subiendo = !subiendo;
 		});
 		timer.start();
+		
+	
 	}
 	public void setPosX(int x) {
-		posX = x;
+		this.x = x;
 	}
 
 	public void setPosY(int y) {  
-		posY = y;
+		this.y = y;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -91,7 +94,7 @@ public class PiranhaPlant extends Enemigo{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		sprite = s;
+		
 	}
 	
 	public void afectarPersonaje(Personaje p) {

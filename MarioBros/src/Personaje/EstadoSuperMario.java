@@ -1,11 +1,12 @@
 package Personaje;
 
-import Enemigos.KoopaTroopa;
+import Enemigos.EstadoDeKoopa;
 import Fabricas.GenerarSprite; 
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
@@ -215,7 +216,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	System.out.println("Colision Goomba");
     }
 	
-	public void colisionLateralKoopa(KoopaTroopa kt) {
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
 		velX=0;
     	GenerarSprite fabrica = new GenerarSpriteOriginal();	
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);

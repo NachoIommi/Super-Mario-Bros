@@ -84,13 +84,7 @@ public class Goomba extends Enemigo{
 	public int getPosY() {
 		return posY;
 	}
-	public void setPosX(int x) {
-		posX = x;		
-	}
 
-	public void setPosY(int y) {
-		posY = y;
-	}
 	public void aceptarVisita(Visitor v) {
 		v.visitarGoomba(this);
 	}
@@ -101,12 +95,11 @@ public class Goomba extends Enemigo{
 	
 	public void afectarPersonaje(Personaje p) {	
 		p.colisionLateralGoomba();
-		
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		p.setPuntuacion(60);
-		p.recibirDano();
+		//p.setPuntuacion(60);
+		morir();
 	}
 	
 	public void morir() {

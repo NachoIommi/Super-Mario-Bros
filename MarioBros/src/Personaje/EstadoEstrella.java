@@ -8,7 +8,7 @@ import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
-import Enemigos.KoopaTroopa;
+import Enemigos.EstadoDeKoopa;
 
 public class EstadoEstrella extends EstadoDePersonaje {
 	
@@ -204,8 +204,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		
 	}
 
-	public void colisionLateralKoopa(KoopaTroopa kt) {
-		personaje.setPuntuacion(100);
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
 		kt.morir();
 	}
 	public int getAlto() {

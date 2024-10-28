@@ -256,10 +256,6 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 		return new Sprite(rutaImagen + "/koopaRetraido.png");
 	}
 	
-	public Sprite getKoopaTroopaMuerto() {
-		return new Sprite(rutaImagen + "/koopaMuerto.png");
-	}
-	
 	public Sprite getMoneda() {
 		return new Sprite(rutaImagen + "/monedaQuieta.gif");
 	}

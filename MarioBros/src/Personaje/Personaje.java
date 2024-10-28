@@ -9,7 +9,7 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import Enemigos.KoopaTroopa;
+import Enemigos.EstadoDeKoopa;
 import Fabricas.*;
 
 public class Personaje extends Entidad{
@@ -48,7 +48,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 10;   
-        estado = new EstadoEstrella(this ,sprite, x ,y); 
+        estado = new EstadoNormal(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -86,7 +86,7 @@ public class Personaje extends Entidad{
 		estado.colisionLateralGoomba();
 	}
 	
-	public void colisionLateralKoopa(KoopaTroopa kt) {
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
 		estado.colisionLateralKoopa(kt);
 	}
 	

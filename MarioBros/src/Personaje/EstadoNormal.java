@@ -1,11 +1,12 @@
 package Personaje;
 
-import Enemigos.KoopaTroopa; 
+import Enemigos.EstadoDeKoopa; 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
@@ -244,16 +245,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    }
     }
 
-	public void colisionLateralGoomba() {
-		morir();
-		System.out.println("MORIR PERSONAJE");
-	}
-	public void colisionLateralKoopa(KoopaTroopa kt) {
-		setPuntuacion(-45);
-		morir();
-		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
-	}
-	
     public void colisionSuperChampi() {
     	setPuntuacionSuperChampi();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
@@ -428,7 +419,14 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return alto;
 	}
 
-	
+	public void colisionLateralGoomba() {
+		morir();
+		System.out.println("MORIR PERSONAJE");
+	}
+	public void colisionLateralKoopa(EstadoDeKoopa kt) {
+		morir();
+		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
+	}
 	
 	public void colisionVacio() {
 		morir();
@@ -443,5 +441,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 		morir();
 	}
 
+
+
+	
 
 }

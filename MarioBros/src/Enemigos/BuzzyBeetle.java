@@ -3,7 +3,6 @@ package Enemigos;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
-import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
@@ -48,13 +47,7 @@ public class BuzzyBeetle extends Enemigo{
 	public int getPosY() {
 		return posY;
 	}
-	public void setPosX(int x) {
-		posX = x;		
-	}
-
-	public void setPosY(int y) {
-		posY = y;
-	}
+	
 	public void moverse() {
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
@@ -100,7 +93,7 @@ public class BuzzyBeetle extends Enemigo{
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralGoomba();
 		p.setPuntuacion(-15);
-		p.recibirDano();
+		p.morir();
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
@@ -108,50 +101,18 @@ public class BuzzyBeetle extends Enemigo{
 		morir();
 	}
 	
-	/*public void morir() {
-		hitb.actualizar(0, 0);
-		posX=0;
-		posY=-300;
+	public void morir() {
 		actualizarSprite();
+		hitb.actualizar(0, 0);
 		System.out.println("buzzy muerto");
 		
-	}*/
-	
-	public void morir() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getKoopaTroopaMuerto();
-    	cargarSprite(sprite);
-    	actualizarSprite();
-    	
-    	int posY = getPosY();
-
-        for (int i = 0; i < 30; i++) {
-            setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            setPosY(getPosY() + 5);
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        
 	}
 	
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getBuzzyBeetleRetraido();
     	cargarSprite(sprite);
-    	setSpriteActualizado(true);
 	}
-	
 	public Hitbox getHitbox() {
 		return hitb;
 	}

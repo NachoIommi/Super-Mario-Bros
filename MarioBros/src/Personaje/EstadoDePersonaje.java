@@ -1,6 +1,6 @@
 package Personaje;
 
-import Enemigos.KoopaTroopa;
+import Enemigos.EstadoDeKoopa;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Plataformas.*;
@@ -59,5 +59,5 @@ public abstract class EstadoDePersonaje {
 
 	public abstract void setSaltandoSobreEnemigo(boolean b);
 
-	public abstract void colisionLateralKoopa(KoopaTroopa kt);
+	public abstract void colisionLateralKoopa(EstadoDeKoopa kt);
 }
