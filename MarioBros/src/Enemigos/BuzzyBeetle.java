@@ -98,8 +98,7 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.colisionLateralGoomba();
-		p.setPuntuacion(-15);
+		p.colisionLateralBuzzyBeetle(this);
 		p.recibirDano();
 	}
 	
@@ -107,15 +106,6 @@ public class BuzzyBeetle extends Enemigo{
 		p.setPuntuacion(30);
 		morir();
 	}
-	
-	/*public void morir() {
-		hitb.actualizar(0, 0);
-		posX=0;
-		posY=-300;
-		actualizarSprite();
-		System.out.println("buzzy muerto");
-		
-	}*/
 	
 	public void morir() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();

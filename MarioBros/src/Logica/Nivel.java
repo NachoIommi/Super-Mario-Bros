@@ -173,9 +173,9 @@ public class Nivel {
 				    case 62:
 				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getLakitu(), posX, posY));
 				        break;
-				   /* case 63:
-				    	juego.agregarEnemigo(fabricaSpiny.crearEnemigo(fabricaSprite.getSpiny(), posX, posY));
-				        break;*/
+				    case 63:
+				    	juego.agregarEnemigo(fabricaSpiny.crearEnemigo(fabricaSprite.getSpinyCaminandoDerecha(), posX, posY));
+				        break;
 				    case 64:
 				    	juego.agregarEnemigo(fabricaBuzzyBeetle.crearEnemigo(fabricaSprite.getBuzzyBeetle(), posX, posY));
 				        break;

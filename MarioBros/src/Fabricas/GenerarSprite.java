@@ -223,7 +223,9 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	public Sprite getSpinyCaminandoIzquierda() {
 		return new Sprite(rutaImagen + "/spinyCaminandoIzquierda.gif");
 	}
-	
+	public Sprite getSpinyMuerto() {
+		return new Sprite(rutaImagen + "/spinyMuerto.gif");
+	}
 	public Sprite getBuzzyBeetle() {
 		return new Sprite(rutaImagen + "/buzzyCaminandoDerecha.gif");
 	}

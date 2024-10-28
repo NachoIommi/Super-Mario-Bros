@@ -195,7 +195,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		return toleranciaAltura;
 	}
 	
-	public void colisionLateralGoomba() {
+	public void colisionLateralGoomba(Goomba goomba) {
 		velX=0;
     	GenerarSprite fabrica = new GenerarSpriteOriginal();	
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
@@ -203,7 +203,32 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     	System.out.println("Colision Goomba");
     }
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
-		
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Koopa");
+	}
+	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Buzzy");
+	}
+	public void colisionLateralLakitu(Lakitu lakitu) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision lakitu");
+	}
+	public void colisionLateralSpiny(Spiny spiny) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision spiny");
 	}
 	public int getAlto() {
 		return alto;

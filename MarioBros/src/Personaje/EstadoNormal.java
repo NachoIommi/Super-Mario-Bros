@@ -425,7 +425,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return alto;
 	}
 
-	public void colisionLateralGoomba() {
+	public void colisionLateralGoomba(Goomba goomba) {
 		morir();	
 		personaje.setPuntuacion(-30);
 		System.out.println("MORIR PERSONAJE");
@@ -435,7 +435,20 @@ public class EstadoNormal extends EstadoDePersonaje {
 		personaje.setPuntuacion(-45);
 		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
 	}
-	
+	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
+		morir();
+		personaje.setPuntuacion(-15);
+		System.out.println("MORIR PERSONAJE POR BUZZY BEETLE");
+	}
+	public void colisionLateralLakitu(Lakitu lakitu) {
+		morir();
+		System.out.println("MORIR PERSONAJE POR LAKITU");
+	}
+	public void colisionLateralSpiny(Spiny spiny) {
+		morir();
+		personaje.setPuntuacion(-30);
+		System.out.println("MORIR PERSONAJE POR SPINY");
+	}
 	public void colisionVacio() {
 		morir();
 		System.out.println("MORIR X VACIO");

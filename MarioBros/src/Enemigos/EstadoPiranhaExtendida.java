@@ -92,7 +92,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	
 	
 	public void afectarPersonaje(Personaje p) {
-		p.colisionLateralGoomba();
+		//p.colisionLateralPiranha();
 	}
 	
 	public PiranhaPlant getPiranhaPlant() {

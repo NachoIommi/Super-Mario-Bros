@@ -46,7 +46,11 @@ public abstract class EstadoDePersonaje {
 	public abstract void colisionChampiVerde();
 	public abstract void colisionMoneda();
 	public abstract int getAlto();
-	public abstract void colisionLateralGoomba();
+	public abstract void colisionLateralGoomba(Goomba goomba);
+	public abstract void colisionLateralKoopa(KoopaTroopa koopaTroopa);
+	public abstract void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy);
+	public abstract void colisionLateralLakitu(Lakitu lakitu);
+	public abstract void colisionLateralSpiny(Spiny spiny);
 	public abstract void setRight(boolean b);
 	public abstract void setLeft(boolean b);
 	public abstract void setJump(boolean b);
@@ -59,5 +63,5 @@ public abstract class EstadoDePersonaje {
 
 	public abstract void setSaltandoSobreEnemigo(boolean b);
 
-	public abstract void colisionLateralKoopa(KoopaTroopa koopaTroopa);
+	
 }

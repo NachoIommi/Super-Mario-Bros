@@ -193,8 +193,9 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		return toleranciaAltura;
 	}
 	
-	public void colisionLateralGoomba() {
-    	System.out.println("Colision Goomba en Estado Estrella");
+	public void colisionLateralGoomba(Goomba goomba) {
+		personaje.setPuntuacion(60);
+		goomba.morir();
     }
 
 	public void colisionPiranhaPlant() {
@@ -205,6 +206,18 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		personaje.setPuntuacion(90);
 		koopaTroopa.morir();
+	}
+	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
+		personaje.setPuntuacion(30);
+		buzzy.morir();
+	}
+	public void colisionLateralLakitu(Lakitu lakitu) {
+		personaje.setPuntuacion(60);
+		lakitu.morir();
+	}
+	public void colisionLateralSpiny(Spiny spiny) {
+		personaje.setPuntuacion(60);
+		spiny.morir();
 	}
 	public int getAlto() {
 		return alto;

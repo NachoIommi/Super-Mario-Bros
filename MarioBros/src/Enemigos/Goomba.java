@@ -3,6 +3,7 @@ package Enemigos;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
+import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
@@ -100,19 +101,37 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void afectarPersonaje(Personaje p) {	
-		p.colisionLateralGoomba();
+		p.colisionLateralGoomba(this);
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		//p.setPuntuacion(60);
+		p.setPuntuacion(60);
 		morir();
 	}
 	
 	public void morir() {
-		actualizarSprite();
-		hitb.actualizar(0, 0);
-		posX=0;
-		posY=-300;
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getKoopaTroopaMuerto();
+    	cargarSprite(sprite);
+    	actualizarSprite();
+    	
+    	int posY = getPosY();
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	
 	public void actualizarSprite() {
