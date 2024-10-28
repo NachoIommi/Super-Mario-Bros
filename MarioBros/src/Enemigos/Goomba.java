@@ -68,10 +68,10 @@ public class Goomba extends Enemigo{
 
 	
 	public void moverIzq() {
-		posX=posX-2;
+		posX=posX-1;
 	}
 	public void moverDer() {
-		posX=posX+2;
+		posX=posX+1;
 	}
 
 	public Sprite getSprite() {
@@ -110,6 +110,7 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void morir() {
+		 hitb = new Hitbox(0 ,0,0 ,0);
 		 new Thread(() -> {
 		        GenerarSprite fabrica = new GenerarSpriteOriginal();
 		        sprite = fabrica.getGoombaMuerto();

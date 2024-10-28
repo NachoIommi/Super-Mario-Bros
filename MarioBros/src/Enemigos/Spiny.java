@@ -103,6 +103,7 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void morir() {
+		hitb = new Hitbox(0 ,0,0 ,0);
 		new Thread(() -> {
 	        GenerarSprite fabrica = new GenerarSpriteOriginal();
 	        sprite = fabrica.getSpinySpawneando();

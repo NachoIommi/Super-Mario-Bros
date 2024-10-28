@@ -95,6 +95,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	    
 	}
 	public void morir() {
+		hitb = new Hitbox(0 ,0,0 ,0);
 		new Thread(() -> {
 	        GenerarSprite fabrica = new GenerarSpriteOriginal();
 	        sprite = fabrica.getKoopaTroopaMuerto();

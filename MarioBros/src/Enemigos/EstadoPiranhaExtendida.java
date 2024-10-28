@@ -123,7 +123,8 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {		
 	}
-	public void morir() {    	
+	public void morir() {   
+		hitb = new Hitbox(0 ,0,0 ,0);	
 		new Thread(() -> {	        
 	        int posY = getPosY();
 	        // Animación de desplazamiento hacia arriba
