@@ -210,6 +210,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 	public void colisionLateralGoomba() {
 		velX=0;
+		recibirDano();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();	
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
@@ -218,6 +219,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		velX=0;
+		recibirDano();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();	
     	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);

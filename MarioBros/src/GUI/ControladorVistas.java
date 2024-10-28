@@ -70,6 +70,20 @@ public class ControladorVistas {
 	    pantallaJuego.requestFocus();
 	}
 	
+	public void reiniciarNivel() {
+        if(pantallaJuego!=null) {
+        	pantallaJuego = null;
+        	pantallaJuego = new PantallaJuego(this);
+        	ventana.setContentPane(pantallaJuego);
+    	    ventana.revalidate();
+    	    pantallaJuego.requestFocus();
+        }
+        
+        System.out.println("se ejecuto reiniciarNivel :: controladorVistas");
+	}
+	
+	
+	
 	public void iniciarSiguienteNivel() {
 		
 		if (juego.getHiloPersonaje().isAlive()) {

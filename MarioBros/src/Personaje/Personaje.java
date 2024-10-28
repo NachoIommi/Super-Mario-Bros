@@ -2,6 +2,7 @@ package Personaje;
 
 import Logica.Entidad;   
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 
 import java.awt.Image;
@@ -26,6 +27,7 @@ public class Personaje extends Entidad{
 	protected int posY;
 	protected int direccionDelPersonaje;
 	protected Sprite s;
+	protected Nivel nivelActual;
 
 	protected float min = 10.0f;
 	public int max = 2700;
@@ -51,11 +53,12 @@ public class Personaje extends Entidad{
     protected int tiempoInvulnerable;
     protected static final int TIEMPO_INVULNERABILIDAD = 3000;
 	
-	public Personaje(Sprite sprite, int x, int y) {
+	public Personaje(Sprite sprite, int x, int y, Nivel nivel) {
+		nivelActual = nivel;
         vidas = 3;        
         monedas = 0;      
         puntuacion = 10;   
-        estado = new EstadoEstrella(this ,sprite, x ,y); 
+        estado = new EstadoNormal(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -170,10 +173,12 @@ public class Personaje extends Entidad{
     }
  
     public void morir() {
+    	
         estado.morir();
         if (this.vidas == 0) {
         	System.out.println("Game Over");
         }
+      
     }
     public void activarInvulnerabilidad() {
         if (!invulnerable) {

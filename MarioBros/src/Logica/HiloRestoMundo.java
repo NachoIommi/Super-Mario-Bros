@@ -1,5 +1,6 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Enemigos.Enemigo;
@@ -34,8 +35,10 @@ public class HiloRestoMundo extends Thread {
     	enEjecucion = true;
         while (enEjecucion) {
             try {
-            	for(Enemigo e : enemigo) {
-            		for(Plataforma p : plataforma) {
+            	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
+            	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
+            	for(Enemigo e : copiaEnemigos) {
+            		for(Plataforma p : copiaPlataforma) {
             			if (e.getHitbox().intersects(p.getHitbox())) {
             				double toleranciaAltura = e.getToleranciaAltura();
             				

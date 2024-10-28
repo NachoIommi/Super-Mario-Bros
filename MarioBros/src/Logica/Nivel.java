@@ -90,6 +90,7 @@ public class Nivel {
 	}
 
 	public void cargarNivel(int i) {
+		System.out.println("cargando nivel "+ i);
 		try {
 			 setNivelActual(i);	
 			 String ruta = "Niveles" + File.separator + "nivel-"+getNivelActual()+".txt";
@@ -110,7 +111,7 @@ public class Nivel {
 				}
 				switch (tipoEntidad) {
 				    case 0:
-				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY));
+				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY,this));
 				        break;
 				    case 1:
 				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY));
@@ -213,7 +214,11 @@ public class Nivel {
 	}
 
 	public void reiniciarNivel(){
+		juego.reseteo();
+		
 		cargarNivel(getNivelActual());
+		juego.reiniciarNivel();
+		System.out.println("se ejecuto reiniciarNivel :: nivel");
 	}
 
 	public void ganarJuego(){
@@ -223,7 +228,7 @@ public class Nivel {
 
 	public void perderJuego(){
 		//pantalla especial
-		juego.perderJuego();
+		//juego.perderJuego();
 			//botones
 				//reiniciar juego
 				//volver a pantalla inicial

@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -40,6 +41,9 @@ public class PantallaJuego extends JPanel {
     protected int maximoIzquierda = 10;
     protected JLabel bandera;
     protected Timer timer;
+    protected List<Enemigo> copiaEnemigos;
+    protected List<Plataforma> copiaPlataformas;
+    protected List<PowerUps> copiaPowerUps;
     private boolean banderaActualizada = false;
     private boolean nivelGanado = false;
     
@@ -251,7 +255,7 @@ public class PantallaJuego extends JPanel {
     }
     public void actualizarImagenPlataformas() {
     	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
-    	for (Plataforma p : listaPlataformas) {
+    	for (Plataforma p : copiaPlataformas) {
     		if(p.getSprite()==null) {
     			p.setVisible(false);
     		}
@@ -373,8 +377,8 @@ public class PantallaJuego extends JPanel {
     }
     
     public void mostrarEnemigos() {
-    	List<Enemigo> listaEnemigos = controladorVistas.obtenerEnemigo();
-    	for(Enemigo e : listaEnemigos) {
+    	copiaEnemigos = new ArrayList<Enemigo>(controladorVistas.obtenerEnemigo());
+    	for(Enemigo e : copiaEnemigos) {
     		e.setVisible(true);
     		String ruta = e.getSprite().getRutaImagen();
             e.setIcon(verificarExtension(ruta));
@@ -387,8 +391,8 @@ public class PantallaJuego extends JPanel {
 
     
     public void mostrarPlataformas() {
-    	List<Plataforma> listaPlataformas = controladorVistas.obtenerPlataforma();	
-    	for (Plataforma p : listaPlataformas) {
+    	copiaPlataformas = new ArrayList<Plataforma>(controladorVistas.juego.getPlataforma());
+    	for (Plataforma p : copiaPlataformas) {
     		p.setVisible(true);
     		String ruta = p.getSprite().getRutaImagen();
     		p.setIcon(verificarExtension(ruta));
@@ -399,8 +403,8 @@ public class PantallaJuego extends JPanel {
     }  
     
     public void mostrarPowerUps() {
-    	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();
-    	for(PowerUps p : listaPowerUps) {
+    	copiaPowerUps = new ArrayList<PowerUps>(controladorVistas.obtenerPowerUp());
+    	for(PowerUps p : copiaPowerUps) {
     		p.setBounds(p.getPosX(), p.getPosY(), 30, 30);
     		panelNivel.add(p);
             refrescar();
@@ -415,7 +419,7 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarImagenEnemigos(){
     	List<Enemigo> listaEnemigos = controladorVistas.obtenerEnemigo();
-    	for(Enemigo e : listaEnemigos) {
+    	for(Enemigo e : copiaEnemigos) {
     		if(e.mostrable() && e.necesitaActualizarSprite()) {   			
 	    		//e.setVisible(true);
 	    		String ruta = e.getSprite().getRutaImagen();
@@ -432,7 +436,7 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarImagenPowerUps() {
     	List<PowerUps> listaPowerUps = controladorVistas.obtenerPowerUp();
-    	for(PowerUps p : listaPowerUps) {
+    	for(PowerUps p : copiaPowerUps) {
     		if(p.mostrable()) {   			
 	    		p.setVisible(true);
 	    		String ruta = p.getSprite().getRutaImagen();

@@ -1,5 +1,6 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Enemigos.Enemigo;
@@ -44,7 +45,8 @@ public class HiloPersonaje extends Thread {
     	enEjecucion = true;
         while (enEjecucion) {
             try {
-                for(Plataforma p : plataforma) {
+            	List<Plataforma> copiaPlataformas = new ArrayList<Plataforma>(plataforma);
+                for(Plataforma p : copiaPlataformas) {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {
                         personaje.setTocandoBloque(true);
 
@@ -84,7 +86,8 @@ public class HiloPersonaje extends Thread {
                         }
                     }
                 }
-                for(Enemigo e : enemigo) {
+                List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
+                for(Enemigo e : copiaEnemigos) {
                 	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
                            
                 		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
@@ -121,8 +124,8 @@ public class HiloPersonaje extends Thread {
                         
                 	}
                 }
-                
-                for(PowerUps p : powerUp) {
+                List<PowerUps> copiaPowerUps = new ArrayList<PowerUps>(powerUp);
+                for(PowerUps p : copiaPowerUps) {
                 	if(personaje.getHitbox().intersects(p.getHitbox())) {
                 		p.aceptarVisita(visitorEntidad);}
                 	

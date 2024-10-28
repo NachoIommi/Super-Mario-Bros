@@ -309,6 +309,10 @@ public class EstadoNormal extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
+        
+        personaje.nivelActual.reiniciarNivel();
+   		System.out.println("se ejecuto reiniciarNivel :: personaje");
+
     }
     
     public boolean getSaltando() {
@@ -422,7 +426,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 
 	public void colisionLateralGoomba() {
-		morir();
+		morir();	
 		personaje.setPuntuacion(-30);
 		System.out.println("MORIR PERSONAJE");
 	}

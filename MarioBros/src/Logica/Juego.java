@@ -48,30 +48,34 @@ public class Juego {
 		System.out.println(enemigos.toString());
 	}
 	
-	public void iniciarSiguienteNivel() {
+	public void reseteo() {
 		//reinicio todo, entidades e hilos
-		if(hilo.isAlive()) {
-			hilo.detener();
-			
-		}
-		if(hiloRM.isAlive()) {
-			hiloRM.detener();
-		}
-		
-		if(reloj.isAlive()) {
-			reloj.detener();
-		}
-		
-		
-		powerUps.clear();
-		enemigos.clear();
-		plataformas.clear();
+				if(hilo.isAlive()) {
+					hilo.detener();
+					
+				}
+				if(hiloRM.isAlive()) {
+					hiloRM.detener();
+				}
+				
+				if(reloj.isAlive()) {
+					reloj.detener();
+				}
+				
+				
+				powerUps.clear();
+				enemigos.clear();
+				plataformas.clear();
+	}
 	
+	public void iniciarSiguienteNivel() {
+		
+		reseteo();
 		
 		System.out.println(enemigos.toString());
 		
 		nivel.ganarJuego();
-		System.out.print("cargando nivel: " + getNivel().getNivelActual());
+		System.out.println("cargando nivel: " + getNivel().getNivelActual());
 		System.out.println();
 		
 		iniciarJuego();
@@ -106,7 +110,11 @@ public class Juego {
 	    reloj.start();
 	}
 	
-	public void perderJuego() {
+	public void reiniciarNivel() {
+		iniciarJuego();
+		controladorVistas.reiniciarNivel();
+		
+		System.out.println("se ejecuto reiniciarNivel :: juego");
 		
 	}
 	
