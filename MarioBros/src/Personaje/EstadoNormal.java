@@ -54,7 +54,8 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    left=false;
 	}
 	
-	public void moverPersonaje() {	  
+	public void moverPersonaje() {	
+		actualizarSprite();
 		moverDerecha();	    
 	    moverIzquierda(); 	    	    	
 	    colisionDesliz(); 
@@ -69,7 +70,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    saltarSobreEnemigo();
 	    posY += velY;
 	    hitb.actualizar((int) posX, (int) posY);
-	    //actualizarSprite();
+	    actualizarSprite();
 	}
 
 	public void saltarSobreEnemigo() {
@@ -196,7 +197,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 	        velX -= 0.1f;  
 	    						//FRENA A MARIO FRICCIONADO
 	    if (velX < 0 && !left) 
-	        velX += 0.1f;  
+	        velX += 0.1f; 
+	    
+	    if (Math.abs(velX) < 0.1f) {
+	        velX = 0;
+	    }
 	}
 	
 	public void colisionDesliz() {
@@ -223,26 +228,25 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return toleranciaAltura;
 	}
 	
-	public void actualizarSprite(){
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right && getVelX() >0 ) {
-    		sprite = fabrica.getPersonajeNormalCorriendoDerecha();
-    		personaje.cargarSprite(sprite);}
-	    if(left) {
-	    	sprite = fabrica.getPersonajeNormalCorriendoIzquierda();
-	    	personaje.cargarSprite(sprite);}
-	    if(!left&& !right) {
-	    	sprite = fabrica.getPersonajeNormalQuietoDerecha();
-	    	personaje.cargarSprite(sprite);}
-	    if(left && getVelX() > 0) {
-	    	sprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
-	    	personaje.cargarSprite(sprite);
-	    }
-	    if(right && getVelX() < 0) {
-	    	sprite = fabrica.getPersonajeNormalDerrapandoDerecha();
-	    	personaje.cargarSprite(sprite);
-	    }
-    }
+	public void actualizarSprite() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+
+	    if (right && velX > 0) {
+	        sprite = fabrica.getPersonajeNormalCorriendoDerecha();
+	    } else if (left && velX > 0) {
+	        sprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
+	    } else if (left && velX < 0) {
+	        sprite = fabrica.getPersonajeNormalCorriendoIzquierda();
+	    } else if (right && velX < 0) {
+	        sprite = fabrica.getPersonajeNormalDerrapandoDerecha();
+	    } else if (!left && !right) {
+	        sprite = fabrica.getPersonajeNormalQuietoDerecha();
+	    }else if(velX==0)
+	    		sprite = fabrica.getPersonajeNormalQuietoDerecha();
+
+	    personaje.cargarSprite(sprite);
+	}
+
 
     public void colisionSuperChampi() {
     	setPuntuacionSuperChampi();

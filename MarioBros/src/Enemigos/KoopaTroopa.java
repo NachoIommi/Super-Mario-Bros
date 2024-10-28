@@ -98,7 +98,6 @@ public class KoopaTroopa extends Enemigo{
 		estado.setMostrable(b);
 	}
 
-	
 	public void setTocandoBloqueDerecha(boolean b) {
 		estado.setTocandoBloqueDerecha(b);
 	}

@@ -67,6 +67,7 @@ public class PantallaJuego extends JPanel {
                 actualizarImagenPlataformas();
                 actualizarImagenPowerUps();
                 actualizarImagenEnemigos();
+               // actualizarImagenPersonaje();
                 actualizarPosicionEnemigos();
                 reloj.setText("<html><div style='text-align: center;'>Reloj<br>" + controladorVistas.juego.getReloj().getSegundos() + "</div></html>");
                 monedas.setText("" + controladorVistas.juego.getPersonaje().getMonedas() );    

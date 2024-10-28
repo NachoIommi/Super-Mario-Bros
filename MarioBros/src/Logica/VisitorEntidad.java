@@ -8,13 +8,13 @@ import PowerUps.*;
 
 public class VisitorEntidad implements Visitor{
 	protected Personaje personaje;
+	protected KoopaTroopa koopa;
 	
 	public VisitorEntidad(Personaje personaje) {
         this.personaje = personaje;
     }
 	
-	public void visitarBolaDeFuego(BolaDeFuego b) {
-    	
+	public void visitarBolaDeFuego(BolaDeFuego b) {   	
     } 
 	
     public void visitarMoneda(Moneda m) {
@@ -45,8 +45,7 @@ public class VisitorEntidad implements Visitor{
     	l.recibirGolpe(personaje);
     }
     
-    public void visitarVacio(Vacio v) {
-    	
+    public void visitarVacio(Vacio v) {    	
     }
     
     public void visitarTuberia(Tuberia t) {
@@ -70,11 +69,10 @@ public class VisitorEntidad implements Visitor{
     }
     
     public void visitarGoomba(Goomba g) {
-    
+    	
     }
     
     public void visitarKoopaTroopa(KoopaTroopa k) {
-    	
     }
     
     public void visitarSprite(Sprite s) {

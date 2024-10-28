@@ -66,6 +66,35 @@ public class HiloRestoMundo extends Thread {
 		                            
 		                            
 		                }
+        				double toleranciaAltura = e.getToleranciaAltura();
+            			for(Enemigo otroE : copiaEnemigos) {
+            				if (e.getHitbox().getX() + e.getHitbox().getWidth() > otroE.getHitbox().getX() &&
+	                                e.getHitbox().getX() < otroE.getHitbox().getX() &&
+	                                Math.abs(e.getHitbox().getY() - otroE.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+	                            {
+	                                e.setTocandoBloqueDerecha(true);
+	                                e.setTocandoBloqueIzquierda(false);
+	                                
+	                                otroE.setTocandoBloqueDerecha(false);
+	                                otroE.setTocandoBloqueIzquierda(true);
+	                                //System.out.println("Colisión Der");
+	                            } 
+            				
+	            			else if (e.getHitbox().getX() < otroE.getHitbox().getX() + otroE.getHitbox().getWidth() &&
+	                                 e.getHitbox().getX() > otroE.getHitbox().getX() &&
+	                                 Math.abs(e.getHitbox().getY() - otroE.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+	                        {
+	                            e.setTocandoBloqueIzquierda(true);
+	                            e.setTocandoBloqueDerecha(false);
+	                            otroE.setTocandoBloqueDerecha(true);
+                                otroE.setTocandoBloqueIzquierda(false);
+	                            //System.out.println("Colisión Izq");
+	                        }
+	            			
+            				
+            				
+            			}
+            			
             		}
             		if(Math.abs(personaje.getPosX()-e.getPosX() )<600)
             			e.moverse();

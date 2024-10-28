@@ -20,6 +20,7 @@ public class HiloPersonaje extends Thread {
     protected VisitorEntidad visitorEntidad;
     private volatile boolean enEjecucion;
     
+    
     //probando Juanse
     protected boolean tocoGoombaDerecha;
     protected boolean tocoGoombaIzquierda;
