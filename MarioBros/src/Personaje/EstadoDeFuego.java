@@ -310,6 +310,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
+        personaje.nivelActual.reiniciarNivel();
     }
     
     public boolean getSaltando() {
