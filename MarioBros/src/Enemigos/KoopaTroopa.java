@@ -15,6 +15,7 @@ public class KoopaTroopa extends Enemigo{
 	protected int posX;
 	protected int posY;
 	protected boolean mostrable;
+	protected boolean murio;
 	
 	public KoopaTroopa(Sprite s, int x,int y) {
 		estado = new EstadoKoopaNormal(this ,s, x ,y); 
@@ -23,6 +24,7 @@ public class KoopaTroopa extends Enemigo{
 		hitb = new Hitbox(x, y, 30, 30);
 		mostrable = true; //?	
 		setSpriteActualizado(false);
+		murio = false;
 	}
 	
 	public void cambiarEstado() {
@@ -70,12 +72,12 @@ public class KoopaTroopa extends Enemigo{
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralKoopa(this);
 	}
-	public void morir() {
-		estado.morir();
-	}
 	public void serAfectadoPorPersonaje(Personaje p) {
 		p.setPuntuacion(90);
 		estado.serAfectadoPorPersonaje(p);
+	}
+	public void morir() {
+		estado.morir();
 	}
 	
 	public void actualizarSprite() {
@@ -126,8 +128,9 @@ public class KoopaTroopa extends Enemigo{
 	}
 
 	public void setSpriteActualizado(boolean actualizada) {
-		spriteActualizado = actualizada;
-		
+		spriteActualizado = actualizada;	
 	}
-
+	public boolean murio() {
+		return murio;
+	}
 }	

@@ -7,6 +7,7 @@ public abstract class Enemigo extends Entidad{
 	
 	public abstract void afectarPersonaje(Personaje p);
 	public abstract void serAfectadoPorPersonaje(Personaje p);
+	public abstract void morir();
 	public abstract void aceptarVisita(Visitor r);
 	public abstract void moverse();
 	public abstract int getPosX();
@@ -21,5 +22,7 @@ public abstract class Enemigo extends Entidad{
 	public abstract void setTocandoBloqueArriba(boolean b);
 	public abstract void setTocandoBloqueAbajo(boolean b);
 	public abstract int getToleranciaAltura();
+	public abstract boolean murio();
+	public abstract void actualizarSprite();
 	
 }

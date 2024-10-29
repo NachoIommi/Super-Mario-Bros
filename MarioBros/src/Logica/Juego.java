@@ -21,6 +21,7 @@ public class Juego {
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
 	protected HiloPersonaje hilo;
+	protected HiloAnimaciones hiloAnimaciones;
 	protected HiloRestoMundo hiloRM;
 	protected ControladorVistas controladorVistas;
 	//protected Musica musica; ver si va aca, no toy seguro
@@ -36,6 +37,7 @@ public class Juego {
 		
 	
 		hilo = new HiloPersonaje(this);
+		hiloAnimaciones = new HiloAnimaciones(this);
 		hiloRM = new HiloRestoMundo(this);
 		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
@@ -102,6 +104,13 @@ public class Juego {
 	    
 	    hiloRM = new HiloRestoMundo(this);
 	    hiloRM.start();
+	    
+	    if (hiloAnimaciones != null && hiloAnimaciones.isAlive()) {
+	        hiloAnimaciones.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
+	    }
+	    
+	    hiloAnimaciones = new HiloAnimaciones(this);
+	    hiloAnimaciones.start();
 
 	    if (reloj != null && reloj.isAlive()) {
 	        reloj.detener();
@@ -158,7 +167,7 @@ public class Juego {
 		enemigos.addLast(e);
 	}
 	
-	public List<Enemigo> getEnemigo() {
+	public List<Enemigo> getEnemigos() {
 		return enemigos;
 	}
 	
@@ -166,7 +175,7 @@ public class Juego {
 		plataformas.addLast(e);
 	}
 	
-	public List<Plataforma> getPlataforma() {
+	public List<Plataforma> getPlataformas() {
 		return plataformas;
 	}
 	
@@ -174,7 +183,7 @@ public class Juego {
 		powerUps.addLast(p);
 	}
 	
-	public List<PowerUps> getPowerUp() {
+	public List<PowerUps> getPowerUps() {
 		return powerUps;
 	}
 	
@@ -188,6 +197,9 @@ public class Juego {
 	
 	public HiloRestoMundo getHiloRM() {
 		return hiloRM;
+	}
+	public HiloAnimaciones getHiloAnimaciones() {
+		return hiloAnimaciones;
 	}
 	
 }

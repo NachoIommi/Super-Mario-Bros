@@ -294,6 +294,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
+        personaje.nivelActual.reiniciarNivel();
     }
     
     public boolean getSaltando() {

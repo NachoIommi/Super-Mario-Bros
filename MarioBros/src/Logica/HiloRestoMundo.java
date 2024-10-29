@@ -22,9 +22,9 @@ public class HiloRestoMundo extends Thread {
 
     public HiloRestoMundo(Juego juego) {
         this.juego = juego;   
-        plataforma = juego.getPlataforma();
-        enemigo = juego.getEnemigo();
-        powerUp = juego.getPowerUp();
+        plataforma = juego.getPlataformas();
+        enemigo = juego.getEnemigos();
+        powerUp = juego.getPowerUps();
         personaje = juego.getPersonaje();
 
     }

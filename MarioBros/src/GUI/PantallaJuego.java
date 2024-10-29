@@ -401,7 +401,7 @@ public class PantallaJuego extends JPanel {
 
     
     public void mostrarPlataformas() {
-    	copiaPlataformas = new ArrayList<Plataforma>(controladorVistas.juego.getPlataforma());
+    	copiaPlataformas = new ArrayList<Plataforma>(controladorVistas.juego.getPlataformas());
     	for (Plataforma p : copiaPlataformas) {
     		p.setVisible(true);
     		String ruta = p.getSprite().getRutaImagen();

@@ -29,7 +29,8 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
     
     protected Sprite sprite;
     protected Hitbox hitb;
-    protected boolean mori;
+    protected boolean recibirDano;
+    protected boolean murio;
 	
 	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
 		super(kt);
@@ -43,11 +44,12 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	    tocandoBloqueAbajo=false;
 	    tocandoBloqueArriba=false;
 	    mostrable=true;	
-	    mori=false;
+	    recibirDano=false;
+	    murio = false;
 	}
 	
 	public void moverse() {
-		if(!mori) {
+		if(!recibirDano) {
 		
 		if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
@@ -82,7 +84,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-	    mori = true;
+	    recibirDano = true;
 	    cambiarEstado();
 	    Timer timer = new Timer();
 	    timer.schedule(new TimerTask() {
@@ -96,54 +98,49 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	public void morir() {
 		hitb = new Hitbox(0 ,0,0 ,0);
-		new Thread(() -> {
-	        GenerarSprite fabrica = new GenerarSpriteOriginal();
-	        sprite = fabrica.getKoopaTroopaMuerto();
-	        cargarSprite(sprite);
-	        actualizarSprite();
-	        
-	        int posY = getPosY();
-	        // Animación de desplazamiento hacia arriba
-	        for (int i = 0; i < 30; i++) {
-	            setPosY(posY - (i * 2));
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        // Caída hacia la parte inferior de la ventana
-	        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-	            setPosY(getPosY() + 5);
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }).start();
+		murio = true;
 	}
 	private Sprite actualizarSpriteNormal() {
 	    GenerarSprite fabrica = new GenerarSpriteOriginal();
 	    return fabrica.getKoopaTroopa(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
 	}
 	
-	public void actualizarSprite() {
+	public void actualizarSpriteKoopaRetraido() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getKoopaTroopaRetraido();
 		cargarSprite(sprite);
 		koopa.setSpriteActualizado(true);
 	}
 	
-	public void actualizarSpriteKoopaMuerto() {
+	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getKoopaTroopaMuerto();
 		cargarSprite(sprite);
 		koopa.setSpriteActualizado(true);
+		
+		int posY = getPosY();
+        // Animación de desplazamiento hacia arriba
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        // Caída hacia la parte inferior de la ventana
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	
 	public void cambiarEstado() {
-		this.actualizarSprite();
+		this.actualizarSpriteKoopaRetraido();
         koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  // Cambiar al estado extendido
     }
 	public void cargarSprite(Sprite s) {
@@ -212,5 +209,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	public void setMostrable(boolean b) {
 		mostrable=b;
 	}
-	
+	public boolean murio() {
+		return murio;
+	}
 }

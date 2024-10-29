@@ -23,6 +23,7 @@ public class BuzzyBeetle extends Enemigo{
     protected boolean tocandoBloqueArriba;
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
+    protected boolean murio;
 	
 	public BuzzyBeetle(Sprite sprite, int x, int y) {
 		posX = x;
@@ -35,6 +36,7 @@ public class BuzzyBeetle extends Enemigo{
 	    tocandoBloqueArriba=false;
 		mostrable = true;
 		setSpriteActualizado(false);
+		murio = false;
 	}
 
 	public Sprite getSprite() {
@@ -103,38 +105,13 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		p.setPuntuacion(30);
 		morir();
+		p.setPuntuacion(30);
+		murio = true;
 	}
 	
 	public void morir() {
 		hitb = new Hitbox(0 ,0,0 ,0);
-		new Thread(() -> {
-	        GenerarSprite fabrica = new GenerarSpriteOriginal();
-	        sprite = fabrica.getBuzzyBeetleRetraido();
-	        cargarSprite(sprite);
-	        actualizarSprite();
-	        
-	        int posY = getPosY();
-	        // Animación de desplazamiento hacia arriba
-	        for (int i = 0; i < 30; i++) {
-	            setPosY(posY - (i * 2));
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        // Caída hacia la parte inferior de la ventana
-	        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-	            setPosY(getPosY() + 5);
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }).start();
 	}
 	
 	public void actualizarSprite() {
@@ -142,6 +119,26 @@ public class BuzzyBeetle extends Enemigo{
     	sprite = fabrica.getBuzzyBeetleRetraido();
     	cargarSprite(sprite);
     	setSpriteActualizado(true);
+    	
+    	int posY = getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+  
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	
 	public Hitbox getHitbox() {
@@ -184,7 +181,9 @@ public class BuzzyBeetle extends Enemigo{
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;
-		
+	}
+	public boolean murio() {
+		return murio;
 	}
 
 }

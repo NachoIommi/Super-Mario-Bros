@@ -247,9 +247,6 @@ public class Personaje extends Entidad{
     }
     
     public void setPuntuacion(int n){
-
-        this.puntuacion = puntuacion+n;
-
         this.puntuacion += n;
     }
     

@@ -22,6 +22,7 @@ public class Lakitu extends Enemigo{
 	protected boolean tocandoBloqueAbajo=false;
 	protected boolean tocandoBloqueArriba=false;
 	protected boolean mostrable=true;
+	protected boolean murio;
 	
 	public Lakitu(Sprite sprite, int x, int y, Personaje p) {
 		posX = x;
@@ -31,6 +32,7 @@ public class Lakitu extends Enemigo{
 		mostrable = true;
 		setSpriteActualizado(false);
 		personaje = p;
+		murio = false;
 	}
 	
 	public Lakitu(Sprite sprite, int x, int y) {
@@ -91,42 +93,39 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		p.setPuntuacion(60);
 		morir();
+		p.setPuntuacion(60);
+		murio = true;
 	}
 	
 	public void morir() {
-		new Thread(() -> {
-	        GenerarSprite fabrica = new GenerarSpriteOriginal();
-	        sprite = fabrica.getLakituPorDisparar();
-	        cargarSprite(sprite);
-	        actualizarSprite();
-	        
-	        int posY = getPosY();
-	        // Animación de desplazamiento hacia arriba
-	        for (int i = 0; i < 30; i++) {
-	            setPosY(posY - (i * 2));
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        // Caída hacia la parte inferior de la ventana
-	        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-	            setPosY(getPosY() + 5);
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }).start();
+		hitb = new Hitbox(0 ,0,0 ,0);
 	}
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getLakituPorDisparar();
-    	cargarSprite(sprite);
+        sprite = fabrica.getLakituPorDisparar();
+        cargarSprite(sprite);
+        setSpriteActualizado(true);
+        
+        int posY = getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+  
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	public Hitbox getHitbox() {
 		return hitb;
@@ -165,7 +164,9 @@ public class Lakitu extends Enemigo{
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;
-		
+	}
+	public boolean murio() {
+		return murio;
 	}
 
 }

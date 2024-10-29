@@ -16,7 +16,7 @@ public abstract class EstadoDeKoopa {
 	public abstract Hitbox getHitbox();
 	public abstract void setPosX(int x);
 	public abstract void setPosY(int y);
-	public abstract void actualizarSprite();
+	public abstract void actualizarSpriteKoopaRetraido();
     public abstract void cambiarEstado();
 	public abstract int getPosX();
 	public abstract int getPosY();

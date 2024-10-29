@@ -15,7 +15,7 @@ public class PiranhaPlant extends Enemigo{
 	protected int posX;
 	protected int posY;
 	protected boolean mostrable;
-	
+	protected boolean murio;
 	
 	public PiranhaPlant(Sprite s, int x, int y) {
 		estado = new EstadoPiranhaExtendida(this ,s, x ,y); 
@@ -24,7 +24,7 @@ public class PiranhaPlant extends Enemigo{
 		hitb = new Hitbox(x+15, y, 10, 30);
 		mostrable = true; 	
 		setSpriteActualizado(false);
-		
+		murio = false;		
 	}
 	public void moverse() {
 		estado.moverse();
@@ -129,6 +129,11 @@ public class PiranhaPlant extends Enemigo{
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;
+	}
+	public boolean murio() {
+		return murio;
+	}
+	public void actualizarSprite() {
 		
 	}
 	

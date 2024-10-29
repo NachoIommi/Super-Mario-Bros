@@ -113,15 +113,15 @@ public class ControladorVistas {
 	}
 	
 	public List<Enemigo> obtenerEnemigo() {
-		return juego.getEnemigo();
+		return juego.getEnemigos();
 	}
 	
 	public List<Plataforma> obtenerPlataforma() {
-		return juego.getPlataforma();
+		return juego.getPlataformas();
 	}
 	
 	public List<PowerUps> obtenerPowerUp() {
-		return juego.getPowerUp();
+		return juego.getPowerUps();
 	}
 	
 	public void guardarJugadorEnRanking(Jugador j) {

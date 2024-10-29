@@ -24,6 +24,7 @@ public class Goomba extends Enemigo{
 	protected boolean mostrable;
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
+    protected boolean murio;
 
 	public Goomba(Sprite sprite,int x,int y) {
 		posX = x;
@@ -36,6 +37,7 @@ public class Goomba extends Enemigo{
 	    tocandoBloqueArriba=false;
 	    mostrable=true;
 	    setSpriteActualizado(false);
+	    murio = false;
 	}
 	
 	public void moverse() {
@@ -105,38 +107,13 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		p.setPuntuacion(60);
 		morir();
+		p.setPuntuacion(60);
+		murio = true;;
 	}
 	
 	public void morir() {
-		 hitb = new Hitbox(0 ,0,0 ,0);
-		 new Thread(() -> {
-		        GenerarSprite fabrica = new GenerarSpriteOriginal();
-		        sprite = fabrica.getGoombaMuerto();
-		        cargarSprite(sprite);
-		        actualizarSprite();
-		        
-		        int posY = getPosY();
-		        // Animación de desplazamiento hacia arriba
-		        for (int i = 0; i < 30; i++) {
-		            setPosY(posY - (i * 2));
-		            try {
-		                Thread.sleep(14);
-		            } catch (InterruptedException e) {
-		                e.printStackTrace();
-		            }
-		        }
-		        // Caída hacia la parte inferior de la ventana
-		        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-		            setPosY(getPosY() + 5);
-		            try {
-		                Thread.sleep(14);
-		            } catch (InterruptedException e) {
-		                e.printStackTrace();
-		            }
-		        }
-		    }).start();
+		hitb = new Hitbox(0 ,0,0 ,0);
 	}
 	
 	public void actualizarSprite() {
@@ -144,6 +121,26 @@ public class Goomba extends Enemigo{
     	sprite = fabrica.getGoombaMuerto();
     	cargarSprite(sprite);
     	setSpriteActualizado(true);
+    	
+    	int posY = getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+  
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	
 	public Hitbox getHitbox() {
@@ -184,8 +181,9 @@ public class Goomba extends Enemigo{
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;
-		
 	}
-	
+	public boolean murio() {
+		return murio;
+	}
 }
 

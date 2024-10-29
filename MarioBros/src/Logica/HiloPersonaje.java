@@ -1,6 +1,6 @@
 package Logica;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import Enemigos.Enemigo;
@@ -12,9 +12,9 @@ public class HiloPersonaje extends Thread {
 
     protected Juego juego; 
     Personaje personaje;
-    List<Plataforma> plataforma;
-    List<Enemigo> enemigo;
-    List<PowerUps> powerUp;
+    List<Plataforma> plataformas;
+    List<Enemigo> enemigos;
+    List<PowerUps> powerUps;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
@@ -30,9 +30,9 @@ public class HiloPersonaje extends Thread {
     public HiloPersonaje(Juego juego) {
         this.juego = juego;
         personaje = juego.getPersonaje();
-        plataforma = juego.getPlataforma();
-        enemigo = juego.getEnemigo();
-        powerUp = juego.getPowerUp();    
+        plataformas = juego.getPlataformas();
+        enemigos = juego.getEnemigos();
+        powerUps = juego.getPowerUps();    
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
         visitorEntidad = new VisitorEntidad(personaje);
@@ -46,7 +46,7 @@ public class HiloPersonaje extends Thread {
     	enEjecucion = true;
         while (enEjecucion) {
             try {
-            	List<Plataforma> copiaPlataformas = new ArrayList<Plataforma>(plataforma);
+            	List<Plataforma> copiaPlataformas = new ArrayList<Plataforma>(plataformas);
                 for(Plataforma p : copiaPlataformas) {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {
                         personaje.setTocandoBloque(true);
@@ -87,7 +87,7 @@ public class HiloPersonaje extends Thread {
                         }
                     }
                 }
-                List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
+                List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
                 for(Enemigo e : copiaEnemigos) {
                 	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
                            
@@ -125,7 +125,7 @@ public class HiloPersonaje extends Thread {
                         
                 	}
                 }
-                List<PowerUps> copiaPowerUps = new ArrayList<PowerUps>(powerUp);
+                List<PowerUps> copiaPowerUps = new ArrayList<PowerUps>(powerUps);
                 for(PowerUps p : copiaPowerUps) {
                 	if(personaje.getHitbox().intersects(p.getHitbox())) {
                 		p.aceptarVisita(visitorEntidad);}
