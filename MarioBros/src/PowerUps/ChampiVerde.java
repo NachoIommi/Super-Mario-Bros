@@ -74,5 +74,17 @@ public class ChampiVerde extends PowerUps{
 	public void setMostrable(boolean b) {
 		mostrable=b;
 	}
+
+	@Override
+	public boolean necesitaActualizarSprite() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSpriteActualizado(boolean actualizada) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

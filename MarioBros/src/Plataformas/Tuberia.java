@@ -65,4 +65,16 @@ public class Tuberia extends Plataforma{
 		return false;
 	}
 
+	@Override
+	public boolean necesitaActualizarSprite() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSpriteActualizado(boolean actualizada) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

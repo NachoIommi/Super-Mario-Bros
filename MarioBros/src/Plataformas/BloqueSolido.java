@@ -60,5 +60,17 @@ public class BloqueSolido extends Plataforma{
 		
 	}
 
+	@Override
+	public boolean necesitaActualizarSprite() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSpriteActualizado(boolean actualizada) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

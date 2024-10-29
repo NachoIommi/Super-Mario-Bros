@@ -73,5 +73,17 @@ public class Moneda extends PowerUps{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean necesitaActualizarSprite() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSpriteActualizado(boolean actualizada) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
