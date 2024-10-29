@@ -227,26 +227,34 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		return alto;
 	}
 	
-	public void actualizarSprite(){
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right && getVelX() >0 ) {
-    		sprite = fabrica.getMarioEstrellaCorriendoDerecha();
-    		personaje.cargarSprite(sprite);}
-	    if(left) {
-	    	sprite = fabrica.getMarioEstrellaCorriendoIzquierda();
-	    	personaje.cargarSprite(sprite);}
-	    if(!left&& !right) {
-	    	sprite = fabrica.getMarioEstrellaQuietoDerecha();
-	    	personaje.cargarSprite(sprite);}
-	    if(left && getVelX() > 0) {
-	    	sprite = fabrica.getMarioEstrellaDerrapandoIzquierda();
-	    	personaje.cargarSprite(sprite);
+	public void actualizarSprite() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+	    Sprite nuevoSprite = sprite;
+	    
+	    if (right && velX > 0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaCorriendoDerecha();
+	    	
+	    } else if (left && velX > 0) {	
+	    	nuevoSprite = fabrica.getMarioEstrellaDerrapandoIzquierda();
+	    	 	        
+	    } else if (left && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaCorriendoIzquierda();
+	        
+	    } else if (right && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaDerrapandoDerecha();
+     
+	    } else if (!left && !right) {
+	    	nuevoSprite = fabrica.getMarioEstrellaQuietoDerecha();
+	        
+	    }else if(velX==0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaQuietoIzquierda();		    
+	    }	    
+	   
+	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	personaje.cargarSprite(nuevoSprite);
+	    	personaje.setSpriteActualizado(true);
 	    }
-	    if(right && getVelX() < 0) {
-	    	sprite = fabrica.getMarioEstrellaDerrapandoDerecha();
-	    	personaje.cargarSprite(sprite);
-	    }
-    }
+	}
 
 	public void saltar() {
     	if (jump && tocandoBloqueAbajo && !saltando ) {

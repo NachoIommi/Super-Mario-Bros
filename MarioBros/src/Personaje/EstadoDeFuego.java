@@ -241,26 +241,34 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		return alto;
 	}
 	
-	public void actualizarSprite(){
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	if(right && getVelX() >0 ) {
-    		sprite = fabrica.getMarioFlorDeFuegoCorriendoDerecha();
-    		personaje.cargarSprite(sprite);}
-	    if(left) {
-	    	sprite = fabrica.getMarioFlorDeFuegoCorriendoIzquierda();
-	    	personaje.cargarSprite(sprite);}
-	    if(!left&& !right) {
-	    	sprite = fabrica.getMarioFlorDeFuegoQuietoDerecha();
-	    	personaje.cargarSprite(sprite);}
-	    if(left && getVelX() > 0) {
-	    	sprite = fabrica.getMarioFlorDeFuegoDerrapandoIzquierda();
-	    	personaje.cargarSprite(sprite);
+	public void actualizarSprite() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+	    Sprite nuevoSprite = sprite;
+	    
+	    if (right && velX > 0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoCorriendoDerecha();
+	    	
+	    } else if (left && velX > 0) {	
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoDerrapandoIzquierda();
+	    	 	        
+	    } else if (left && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoCorriendoIzquierda();
+	        
+	    } else if (right && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoDerrapandoDerecha();
+     
+	    } else if (!left && !right) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoDerecha();
+	        
+	    }else if(velX==0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoIzquierda();		    
+	    }	    
+	   
+	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	personaje.cargarSprite(nuevoSprite);
+	    	personaje.setSpriteActualizado(true);
 	    }
-	    if(right && getVelX() < 0) {
-	    	sprite = fabrica.getMarioFlorDeFuegoDerrapandoDerecha();
-	    	personaje.cargarSprite(sprite);
-	    }
-    }
+	}
 
 	public void saltar() {
     	if (jump && tocandoBloqueAbajo && !saltando ) {
