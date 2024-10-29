@@ -13,7 +13,7 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoSuperMario extends EstadoDePersonaje {
 	
-	public double toleranciaAltura=5;
+	public double toleranciaAltura=50;
 	protected boolean right;
 	protected boolean left;
 	protected boolean jump;
@@ -39,9 +39,9 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 
 	public EstadoSuperMario(Personaje p,Sprite s,int x,int y) {
 		super(p);
-		hitb = new Hitbox(x ,y,30 ,60);
+		hitb = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
-		setPosY(y);
+		setPosY(y-23);
 		sprite =s;
 	    tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;

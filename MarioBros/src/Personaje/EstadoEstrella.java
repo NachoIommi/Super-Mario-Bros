@@ -10,7 +10,7 @@ import Enemigos.*;
 
 public class EstadoEstrella extends EstadoDePersonaje {
 	
-	public double toleranciaAltura=34;
+	public double toleranciaAltura=50;
 	protected boolean right;
 	protected boolean left;
 	protected boolean jump;
@@ -35,9 +35,9 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	public EstadoEstrella(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
-		hitb = new Hitbox(x ,y,30 ,62);
+		hitb = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
-		setPosY(y-30);
+		setPosY(y-23);
 		sprite =s;
 	    tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;

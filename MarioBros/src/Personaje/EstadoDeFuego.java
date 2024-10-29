@@ -12,7 +12,7 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoDeFuego extends EstadoDePersonaje {
 	
-	public double toleranciaAltura=34;
+	public double toleranciaAltura=50;
 	protected boolean right;
 	protected boolean left;
 	protected boolean jump;
@@ -37,9 +37,9 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 
 	public EstadoDeFuego(Personaje p,Sprite s,int x,int y) {
 		super(p);
-		hitb = new Hitbox(x ,y,30 ,62);
+		hitb = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
-		setPosY(y-30);
+		setPosY(y-23);;
 		sprite =s;
 	    tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
