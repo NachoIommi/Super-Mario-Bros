@@ -14,7 +14,16 @@ public class Ranking implements Serializable{
 	}
 	
 	public void addJugador(Jugador j) {
-		jugadores.add(j);
+		// Verificar si ya existe un jugador con el mismo nombre
+	    for (Jugador jugador : jugadores) {
+	        if (jugador != null && jugador.getNombre() != null && jugador.getNombre().equals(j.getNombre())) {
+	            // Si existe, actualizamos el puntaje
+	            jugador.setNuevoPuntaje(j.getPuntaje());
+	            return;
+	        }
+	    }
+	    // Si no existe, añadimos al jugador como nuevo
+	    jugadores.add(j);
 	}
 	
 	public void imprimirJugadores() {

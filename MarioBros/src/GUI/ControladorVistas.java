@@ -49,7 +49,9 @@ public class ControladorVistas {
 		// Agregar un listener para manejar el cierre de la ventana
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                cierreDeJuego(); // Llamar al método para guardar el ranking
+            	Jugador j = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),obtenerJuego().getPersonaje().getPuntuacion());
+	            guardarJugadorEnRanking(j); // Puntaje inicial 0
+                juego.cierreDeJuego(); // Llamar al método para guardar el ranking
             }
         });
 	}
@@ -104,6 +106,9 @@ public class ControladorVistas {
 		
 	}
 	
+	public Juego obtenerJuego() {
+		return juego;
+	}
 	public Personaje obtenerPersonaje() {
 		return juego.getPersonaje();
 	}
@@ -121,35 +126,10 @@ public class ControladorVistas {
 	}
 	
 	public void guardarJugadorEnRanking(Jugador j) {
-		cierreDeJuego();
-		System.out.println("Puntuación obtenida del personaje: " + juego.getPersonaje().getPuntuacion());
-		j.setNuevoPuntaje(juego.getPersonaje().getPuntuacion());
-	    //juego.getRanking().addJugador(j);
-	     
+	    juego.getRanking().addJugador(j);
 	    System.out.println("Ranking actualizado:");
 	    for (Jugador jugador : juego.getRanking().getJugadores()) { 
-	    	if(jugador.getNombre() == j.getNombre()) {
-	    		jugador.setNuevoPuntaje(juego.getPersonaje().getPuntuacion());
 	    		System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
-	    	} else {
-	    		System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
-	    	}
-	    }
+	    }	
 	}
-	
-	public void cierreDeJuego() {
-	    try {
-	        // Obtener la ruta relativa del archivo dentro del paquete
-	        String relativePath = "score.tdp";
-	        FileOutputStream fileOutputStream = new FileOutputStream(new File(getClass().getClassLoader().getResource(relativePath).toURI()));
-	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-	        objectOutputStream.writeObject(juego.getRanking());
-	        objectOutputStream.flush();
-	        objectOutputStream.close();
-	        System.out.println("Ranking guardado correctamente.");
-	    } catch (IOException | URISyntaxException e) {
-	        e.printStackTrace();
-	    }
-	}
-
 }

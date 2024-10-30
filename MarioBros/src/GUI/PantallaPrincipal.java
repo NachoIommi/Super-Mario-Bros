@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import Logica.Juego;
 import Logica.Jugador;
 import Logica.Ranking;
 
@@ -14,7 +15,8 @@ public class PantallaPrincipal extends JPanel{
 	protected JLabel imagenInicio;
 	protected JTextField ingresarNombre;
 	protected JButton botonIngresarNombre;
-
+	protected String nombreJugador;
+	
 	public PantallaPrincipal(ControladorVistas controladorVistas) {
 		this.controladorVistas = controladorVistas;
 		this.setSize(800,600);
@@ -24,6 +26,7 @@ public class PantallaPrincipal extends JPanel{
 		agregarBotonIngresarNombre();
 		agregarModosDeJuego();
 		agregarImagen();
+		nombreJugador = " ";
 	}
 	
 	public void agregarImagen() {
@@ -67,16 +70,18 @@ public class PantallaPrincipal extends JPanel{
 	    this.add(ingresarNombre);
 	}
 	
+
 	
 	public void registrarOyenteBotonNombre() {
 	    botonIngresarNombre.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e) {
-	            String nombreJugador = ingresarNombre.getText();
-	            Jugador j = new Jugador(nombreJugador,0);
-	            controladorVistas.guardarJugadorEnRanking(j); // Puntaje inicial 0
+	            nombreJugador = ingresarNombre.getText();
 	            controladorVistas.mostrarPantallaJuego(); // Cambiar a la pantalla de juego
 	        }
 	    });   
+	}
+	public String obtenerNombreDeJugador() {
+		return ingresarNombre.getText();
 	}
 	
 	public void agregarModosDeJuego() {

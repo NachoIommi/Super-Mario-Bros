@@ -1,9 +1,11 @@
 package Logica;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -244,6 +246,20 @@ public class Juego {
 	    return ranking; 
 	}
 	
+	public void cierreDeJuego() {
+	    try {
+	        // Obtener la ruta relativa del archivo dentro del paquete
+	        String relativePath = "score.tdp";
+	        FileOutputStream fileOutputStream = new FileOutputStream(new File(getClass().getClassLoader().getResource(relativePath).toURI()));
+	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+	        objectOutputStream.writeObject(ranking);
+	        objectOutputStream.flush();
+	        objectOutputStream.close();
+	        System.out.println("Ranking guardado correctamente.");
+	    } catch (IOException | URISyntaxException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	
 	public Ranking getRanking() {

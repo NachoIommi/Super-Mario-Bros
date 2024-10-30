@@ -57,6 +57,7 @@ public class Personaje extends Entidad{
 		nivelActual = nivel;
         vidas = 3;        
         monedas = 0;      
+        puntuacion = 0;
         estado = new EstadoEstrella(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
