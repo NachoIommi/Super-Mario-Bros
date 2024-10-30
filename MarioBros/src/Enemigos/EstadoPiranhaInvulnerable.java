@@ -14,7 +14,7 @@ import Fabricas.*;
 public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
 	protected boolean mostrable;
@@ -25,10 +25,24 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
         super(p);
 		sprite = s;
 		posX = x;
-		posY= y;
-		hitb = new Hitbox(0,0,0 ,0);
+		posY = y;
+		hitbox = new Hitbox(0,0,0 ,0);
 		mostrable=true;
 		entroTimer=false;
+    }
+    
+    // Setters
+    public void cambiarEstado() {
+    	actualizarSpriteCambioDeEstado();
+		piranha.setEstadoActual(new EstadoPiranhaExtendida( piranha,sprite, posX, posY));	
+    }
+    
+    public void serAfectadoPorPersonaje(Personaje p) {
+    	
+	}
+
+	public void morir() {
+    	
     }
     
     public void moverse() {   	
@@ -43,72 +57,62 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	    }, 3000);}
     }
     
-    private Sprite actualizarSpriteNormal() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
-	    return fabrica.getPiranhaPlantSpawneando(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
+    public void setPosX(int x) {
+		posX = x;
 	}
     
-    public void cambiarEstado() {
-    	actualizarSpriteCambioDeEstado();
-		piranha.setEstadoActual(new EstadoPiranhaExtendida( piranha,sprite, posX, posY));	
-    }
-    
-    public void actualizarSpriteCambioDeEstado() {
+	public void setPosY(int y) {
+		posY = y;
+	}
+	
+	public void setMostrable(boolean b) {
+		mostrable = b;
+	}
+	
+	public void cargarSprite(Sprite s) {
+		sprite=s;	
+	}
+	
+	public void actualizarSprite() {
+		
+	}
+	
+	public void actualizarSpriteCambioDeEstado() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getPiranhaPlant();
 		piranha.setSpriteActualizado(true);
 	}
     
-    public PiranhaPlant getPiranhaPlant() {
-		return piranha;
-	}
 	public void setPiranhaPlant(PiranhaPlant p) {
 		piranha = p;
 	}
-	public Hitbox getHitbox() {
-		return hitb;
-	}
 	
-	
-	public void setPosX(int x) {
-		posX=x;
-	}
-	public void setPosY(int y) {
-		posY=y;
-	}
-
-	public void cambiarEstado(EstadosDePiranhaPlant nuevoEstado) {
-		// TODO Auto-generated method stub
-		
-	}
+	 private Sprite actualizarSpriteNormal() {
+		    GenerarSprite fabrica = new GenerarSpriteOriginal();
+		    return fabrica.getPiranhaPlantSpawneando(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
+		}
+    // Getters
 	public int getPosX() {
 		return posX;
 	}
+	
 	public int getPosY() {
 		return posY;
 	}
+	
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
-	public void cargarSprite(Sprite s) {
-		this.sprite=s;	
-	}
-	public void serAfectadoPorPersonaje(Personaje p) {		
-	}
-
-	public void morir() {
-    	
-    }
-	public void actualizarSprite() {
-		
-	}
+	
 	public boolean mostrable() {
 		return mostrable;
 	}
 
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-
+	public PiranhaPlant getPiranhaPlant() {
+		return piranha;
+	}	
 }
-

@@ -11,7 +11,7 @@ public class KoopaTroopa extends Enemigo{
 	
 	private EstadoDeKoopa estado;
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
 	protected boolean mostrable;
@@ -21,31 +21,35 @@ public class KoopaTroopa extends Enemigo{
 		estado = new EstadoKoopaNormal(this ,s, x ,y); 
 		posX = x;
 		posY = y;
-		hitb = new Hitbox(x, y, 30, 30);
+		hitbox = new Hitbox(x, y, 30, 30);
 		mostrable = true; //?	
 		setSpriteActualizado(false);
 		murio = false;
 	}
 	
-	public void cambiarEstado() {
-        estado.cambiarEstado();  
-    }
-	
-	public EstadoDeKoopa getEstadoActual() {
-		return estado;
+	// Setters
+	public void afectarPersonaje(Personaje p) {
+		p.colisionLateralKoopa(this);
 	}
 	
-	public Sprite getSprite() {
-		return estado.getSprite();
+	public void serAfectadoPorPersonaje(Personaje p) {
+		p.setPuntuacion(90);
+		estado.serAfectadoPorPersonaje(p);
 	}
-
-	public int getPosX() {
-		return estado.getPosX();
+	
+	public void morir() {
+		murio = true;
+		estado.morir();
 	}
-
-	public int getPosY() {
-		return estado.getPosY();
+	
+	public void aceptarVisita(Visitor v) {
+		v.visitarKoopaTroopa(this);
 	}
+	
+	public void moverse() {
+		estado.moverse();
+	}
+	
 	public void setPosX(int x) {
 		 posX = x;
 	}
@@ -53,46 +57,6 @@ public class KoopaTroopa extends Enemigo{
 	public void setPosY(int y) {
 		 posY = y;
 	}
-	public void setEstadoActual(EstadoDeKoopa nuevoEstado) {
-		this.estado = nuevoEstado;
-	}
-	
-	public void moverse() {
-		estado.moverse();
-	}
-	
-	public void aceptarVisita(Visitor v) {
-		v.visitarKoopaTroopa(this);
-	}
-	
-	public void cargarSprite(Sprite s) {
-		estado.cargarSprite(s);
-	}
-	
-	public void afectarPersonaje(Personaje p) {
-		p.colisionLateralKoopa(this);
-	}
-	public void serAfectadoPorPersonaje(Personaje p) {
-		p.setPuntuacion(90);
-		estado.serAfectadoPorPersonaje(p);
-	}
-	public void morir() {
-		murio = true;
-		estado.morir();
-	}
-	
-	public void actualizarSprite() {
-		estado.actualizarSprite();
-	}
-
-	public Hitbox getHitbox() {
-		return estado.getHitbox();
-	}
-	
-	public boolean mostrable() {
-		return estado.mostrable();
-	}
-
 	
 	public void setMostrable(boolean b) {
 		estado.setMostrable(b);
@@ -116,19 +80,62 @@ public class KoopaTroopa extends Enemigo{
 		estado.setTocandoBloqueAbajo(b);
 		
 	}
-
-	public int getToleranciaAltura() {
-		return 20;
+	
+	public void cargarSprite(Sprite s) {
+		estado.cargarSprite(s);
 	}
 	
-	public boolean necesitaActualizarSprite() {
-		return spriteActualizado;
+	public void actualizarSprite() {
+		estado.actualizarSprite();
 	}
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;	
 	}
+	
+	public void cambiarEstado() {
+        estado.cambiarEstado();  
+    }
+	
+	// Getters
+	public int getPosX() {
+		return estado.getPosX();
+	}
+
+	public int getPosY() {
+		return estado.getPosY();
+	}
+	
+	public Hitbox getHitbox() {
+		return estado.getHitbox();
+	}
+	
+	public Sprite getSprite() {
+		return estado.getSprite();
+	}
+
+	public boolean mostrable() {
+		return estado.mostrable();
+	}
+
+	public int getToleranciaAltura() {
+		return 20;
+	}
+	
 	public boolean murio() {
 		return murio;
 	}
+	
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+	
+	public EstadoDeKoopa getEstadoActual() {
+		return estado;
+	}
+	
+	public void setEstadoActual(EstadoDeKoopa nuevoEstado) {
+		this.estado = nuevoEstado;
+	}
+	
 }	

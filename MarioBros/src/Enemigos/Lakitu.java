@@ -11,7 +11,7 @@ import Personaje.Personaje;
 public class Lakitu extends Enemigo{
 	
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
 	protected Personaje personaje;
@@ -24,70 +24,28 @@ public class Lakitu extends Enemigo{
 	protected boolean mostrable=true;
 	protected boolean murio;
 	
-	public Lakitu(Sprite sprite, int x, int y, Personaje p) {
+	public Lakitu(Sprite s, int x, int y, Personaje p) {
 		posX = x;
 		posY = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30, 30);
+		sprite = s;
+		hitbox = new Hitbox(x, y, 30, 30);
 		mostrable = true;
 		setSpriteActualizado(false);
 		personaje = p;
 		murio = false;
 	}
 	
-	public Lakitu(Sprite sprite, int x, int y) {
+	public Lakitu(Sprite s, int x, int y) {
 		posX = x;
 		posY = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30, 30);
+		sprite = s;
+		hitbox = new Hitbox(x, y, 30, 30);
 		mostrable = true;
 		setSpriteActualizado(false);
 	}
 	
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-	public void setPosX(int x) {
-		 posX = x;
-	}
 	
-	public void setPosY(int y) {
-		 posY = y;
-	}
-	public void moverse() {
-		actualizarPosicionConScroll();
-	}
-	
-	public void actualizarPosicionConScroll() {
-	    int marioX = personaje.getPosX();  // Obtén la posición X actual de Mario
-
-	    if (marioX > maxX) {
-	        maxX = marioX;
-	        posX = marioX + 150;
-	    } else {
-	        posX = maxX;
-	    }
-
-	    hitb.actualizar(posX, posY);
-	}
-
-	
-	public void aceptarVisita(Visitor v) {
-		v.visitarLakitu(this);
-	}
-	
-	public void cargarSprite(Sprite s) {
-		sprite = s;
-	}
-	
+	// Setters
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralLakitu(this);
 	}
@@ -99,40 +57,30 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void morir() {
-		hitb = new Hitbox(0 ,0,0 ,0);
+		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
 	}
-	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-        sprite = fabrica.getLakituPorDisparar();
-        cargarSprite(sprite);
-        setSpriteActualizado(true);
-        
-        int posY = getPosY();
-        // Animación de desplazamiento hacia arriba
-        for (int i = 0; i < 30; i++) {
-            setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        // Caída hacia la parte inferior de la ventana
-        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            setPosY(getPosY() + 5);
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+	
+	public void aceptarVisita(Visitor v) {
+		v.visitarLakitu(this);
 	}
-	public Hitbox getHitbox() {
-		return hitb;
+	
+	public void moverse() {
+		actualizarPosicionConScroll();
 	}
-
-	@Override
+	
+	public void setPosX(int x) {
+		 posX = x;
+	}
+	
+	public void setPosY(int y) {
+		 posY = y;
+	}
+	
+	public void setMostrable(boolean b) {
+		mostrable=b;
+	}
+	
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha = b;
 	}
@@ -147,27 +95,86 @@ public class Lakitu extends Enemigo{
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo = b;
 	}
+	
+	public void cargarSprite(Sprite s) {
+		sprite = s;
+	}
+	
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+        sprite = fabrica.getLakituPorDisparar();
+        cargarSprite(sprite);
+        setSpriteActualizado(true);
+        
+        int posY = getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+	
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+	}
+	
+	public void actualizarPosicionConScroll() {
+	    int marioX = personaje.getPosX();  // Obtén la posición X actual de Mario
+
+	    if (marioX > maxX) {
+	        maxX = marioX;
+	        posX = marioX + 150;
+	    } else {
+	        posX = maxX;
+	    }
+
+	    hitbox.actualizar(posX, posY);
+	}
+	
+	// Getters
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+	
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+	
+	public boolean mostrable() {
+		return mostrable;
+	}
+	
 	public int getToleranciaAltura() {
 		return 0;
 	}
 
-	public boolean mostrable() {
-		return mostrable;
-	}
-
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-
-	public boolean necesitaActualizarSprite() {
-		return spriteActualizado;
-	}
-
-	public void setSpriteActualizado(boolean actualizada) {
-		spriteActualizado = actualizada;
-	}
 	public boolean murio() {
 		return murio;
+	}
+	
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
 	}
 
 }

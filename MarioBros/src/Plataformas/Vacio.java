@@ -10,13 +10,13 @@ public class Vacio extends Plataforma {
 	protected Sprite sprite;
 	protected int x;
 	protected int y;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	
 	public Vacio(Sprite sprite, int x,int y) {
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30, 30);
+		hitbox = new Hitbox(x, y, 30, 30);
 	}
 
 	public void aceptarVisita(Visitor v) {
@@ -48,22 +48,22 @@ public class Vacio extends Plataforma {
 	}
 
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
-	@Override
+	
 	public void verificarCambioEstado() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public boolean necesitaActualizarSprite() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+
 	public void setSpriteActualizado(boolean actualizada) {
 		// TODO Auto-generated method stub
 		

@@ -10,7 +10,7 @@ public abstract class EstadoDeBloque{
 	protected BloqueDePregunta bloque;
 	
 	public EstadoDeBloque(BloqueDePregunta b) {
-		bloque=b;
+		bloque = b;
 	}
 	
 	public abstract void soltarContenido() ;

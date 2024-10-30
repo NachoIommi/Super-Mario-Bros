@@ -15,17 +15,17 @@ public class BloqueGolpeado extends EstadoDeBloque{
 	protected Sprite sprite;
 	protected int posX;
 	protected int posY;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected PowerUps contenido;
 	protected boolean mostrable;
 	protected int golpesRestantes;
 	
-	public BloqueGolpeado(BloqueDePregunta b, Sprite sprite, int x, int y,int g) {
+	public BloqueGolpeado(BloqueDePregunta b, Sprite s, int x, int y,int g) {
 		super(b);
-		this.sprite=sprite;
-		posX=x;
-		posY=y;
-		hitb = new Hitbox(x ,y,30 ,40);
+		sprite = s;
+		posX = x;
+		posY = y;
+		hitbox = new Hitbox(x ,y,30 ,40);
 		golpesRestantes=g;	
 		
 	}

@@ -12,7 +12,7 @@ public class Goomba extends Enemigo{
 	
 	public double toleranciaAltura=20;
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 
 	protected int posX;
 	protected int posY;
@@ -29,8 +29,8 @@ public class Goomba extends Enemigo{
 	public Goomba(Sprite sprite,int x,int y) {
 		posX = x;
         posY = y;
-        this.sprite = sprite;
-        hitb = new Hitbox(x ,y,30 ,30);
+        sprite = sprite;
+        hitbox = new Hitbox(x ,y,30 ,30);
         tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
@@ -39,69 +39,7 @@ public class Goomba extends Enemigo{
 	    setSpriteActualizado(false);
 	    murio = false;
 	}
-	
-	public void moverse() {
-		if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;
-		
-		if(!tocoParedIzquierda) {
-			moverIzq();			
-			hitb.actualizar (posX, posY);
-			
-		} else {
-			tocoParedIzquierda=true;
-			moverDer();
-			hitb.actualizar (posX, posY);
-		}
-						
-		if (tocandoBloqueDerecha) {
-			tocoParedDerecha=true;
-			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-		}
-
-		hitb.actualizar (posX, posY);		
-	
-
-		if (!tocandoBloqueAbajo) 
-	        posY=posY+1;
-		
-		hitb.actualizar (posX, posY);		
-}
-
-	
-	public void moverIzq() {
-		posX=posX-1;
-	}
-	public void moverDer() {
-		posX=posX+1;
-	}
-
-	public Sprite getSprite() {
-		return sprite;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-	
-	public int getPosY() {
-		return posY;
-	}
-	public void setPosX(int x) {
-		 posX = x;
-	}
-	
-	public void setPosY(int y) {
-		 posY = y;
-	}
-	public void aceptarVisita(Visitor v) {
-		v.visitarGoomba(this);
-	}
-	
-	public void cargarSprite(Sprite s) {
-		sprite = s;
-	}
-	
+	// Setters
 	public void afectarPersonaje(Personaje p) {	
 		p.colisionLateralGoomba(this);
 	}
@@ -113,8 +51,81 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void morir() {
-		hitb = new Hitbox(0 ,0,0 ,0);
+		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
+	}
+	
+	public void aceptarVisita(Visitor v) {
+		v.visitarGoomba(this);
+	}
+	
+	public void moverse() {
+		if(tocandoBloqueIzquierda) 
+			tocoParedIzquierda=true;
+		
+		if(!tocoParedIzquierda) {
+			moverIzq();			
+			hitbox.actualizar (posX, posY);
+			
+		} else {
+			tocoParedIzquierda=true;
+			moverDer();
+			hitbox.actualizar (posX, posY);
+		}
+						
+		if (tocandoBloqueDerecha) {
+			tocoParedDerecha=true;
+			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+		}
+
+		hitbox.actualizar (posX, posY);		
+	
+
+		if (!tocandoBloqueAbajo) 
+	        posY=posY+1;
+		
+		hitbox.actualizar (posX, posY);		
+	}
+
+	
+	public void moverIzq() {
+		posX=posX-1;
+	}
+	
+	public void moverDer() {
+		posX=posX+1;
+	}
+
+	public void setPosX(int x) {
+		 posX = x;
+	}
+	
+	public void setPosY(int y) {
+		 posY = y;
+	}
+	
+	public void setMostrable(boolean b) {
+		mostrable=b;
+	}
+	
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
+	}
+
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda=b;
+	}
+
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
+	}
+
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
+	}
+	
+	public void cargarSprite(Sprite s) {
+		sprite = s;
 	}
 	
 	public void actualizarSprite() {
@@ -144,47 +155,41 @@ public class Goomba extends Enemigo{
         }
 	}
 	
+	public void setSpriteActualizado(boolean actualizado) {
+		spriteActualizado = actualizado;
+	}
+	
+	// Getters
+	public int getPosX() {
+		return posX;
+	}
+	
+	public int getPosY() {
+		return posY;
+	}
+	
 	public Hitbox getHitbox() {
-    	return hitb;
+    	return hitbox;
     }
-
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
+	
+	public Sprite getSprite() {
+		return sprite;
 	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
+	
+	public boolean mostrable() {
+		return mostrable;
 	}
 
 	public int getToleranciaAltura() {
 		return (int)toleranciaAltura;
 	}
-
-	public boolean mostrable() {
-		return mostrable;
-	}
-
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-
-	public boolean necesitaActualizarSprite() {
-		return spriteActualizado;
-	}
-
-	public void setSpriteActualizado(boolean actualizada) {
-		spriteActualizado = actualizada;
-	}
+	
 	public boolean murio() {
 		return murio;
 	}
+	
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+	
 }
-

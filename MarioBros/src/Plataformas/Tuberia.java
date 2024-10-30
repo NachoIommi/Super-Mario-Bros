@@ -8,24 +8,24 @@ public class Tuberia extends Plataforma{
 	
 	protected Sprite sprite;
 	protected PiranhaPlant contenido;
-	protected int x;
-	protected int y;
-	protected Hitbox hitb;
+	protected int posX;
+	protected int posY;
+	protected Hitbox hitbox;
 	protected int reloj;
 	
-	public Tuberia(Sprite sprite, int x, int y, PiranhaPlant piranha) {
+	public Tuberia(Sprite s, int x, int y, PiranhaPlant piranha) {
 		contenido = piranha;
-		this.x = x;
-		this.y = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30,31);
+		posX = x;
+		posY = y;
+		sprite = s;
+		hitbox = new Hitbox(x, y, 30,31);
 	}
 	
-	public Tuberia(Sprite sprite, int x,int y) {
-		this.x = x;
-		this.y = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x , y, 30,30);
+	public Tuberia(Sprite s, int x,int y) {
+		posX = x;
+		posY = y;
+		sprite = s;
+		hitbox = new Hitbox(x , y, 30,30);
 	}
 
 	public Sprite getSprite() {
@@ -33,11 +33,11 @@ public class Tuberia extends Plataforma{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
 	
@@ -58,22 +58,20 @@ public class Tuberia extends Plataforma{
 	}
 	
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
 	public boolean cambioEstado() {
 		return false;
 	}
 
-	@Override
+	
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
 		
 	}
 

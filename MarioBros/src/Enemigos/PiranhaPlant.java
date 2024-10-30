@@ -11,7 +11,7 @@ public class PiranhaPlant extends Enemigo{
 	
 	private EstadosDePiranhaPlant estado;
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
 	protected boolean mostrable;
@@ -21,55 +21,15 @@ public class PiranhaPlant extends Enemigo{
 		estado = new EstadoPiranhaExtendida(this ,s, x ,y); 
 		posX = x;
 		posY = y;
-		hitb = new Hitbox(x+15, y, 10, 30);
+		hitbox = new Hitbox(x+15, y, 10, 30);
 		mostrable = true; 	
 		setSpriteActualizado(false);
 		murio = false;		
 	}
-	public void moverse() {
-		estado.moverse();
-	}
-	
+	// Setters
 	public void cambiarEstado() {
         estado.cambiarEstado();
     }
-	
-	public void setEstadoActual(EstadosDePiranhaPlant e) {
-		this.estado=e;
-	}
-	
-	public EstadosDePiranhaPlant getEstadoActual() {
-		return estado;
-	}
-		
-	public Sprite getSprite() {
-		return estado.getSprite();
-	}
-
-	public int getPosX() {
-		return estado.getPosX();
-	}
-
-	public int getPosY() {
-		return estado.getPosY();
-	}
-	
-	
-	public void setPosX(int x) {
-		estado.setPosX(x);
-	}
-
-	public void setPosY(int y) {  
-		estado.setPosY(y);	
-	}
-	
-	public void aceptarVisita(Visitor v) {
-		v.visitarPiranhaPlant(this);
-	}
-	
-	public void cargarSprite(Sprite s) {
-		estado.cargarSprite(s);
-	}
 	
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralPiranha(this);
@@ -85,23 +45,34 @@ public class PiranhaPlant extends Enemigo{
 		estado.morir();
 	}
 	
+	public void aceptarVisita(Visitor v) {
+		v.visitarPiranhaPlant(this);
+	}
 	
-	public Hitbox getHitbox() {
-		return estado.getHitbox();
+	public void moverse() {
+		estado.moverse();
+	}
+	
+	public void setPosX(int x) {
+		estado.setPosX(x);
 	}
 
-
+	public void setPosY(int y) {  
+		estado.setPosY(y);	
+	}
+	
+	public void setMostrable(boolean b) {
+		estado.setMostrable(b);
+	}
+	
 	public void setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
 		
 	}
 
 
 	public void setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
 		
 	}
-
 
 	public void setTocandoBloqueArriba(boolean b) {
 		
@@ -110,33 +81,64 @@ public class PiranhaPlant extends Enemigo{
 	public void setTocandoBloqueAbajo(boolean b) {
 		
 	}
-
 	
-	public int getToleranciaAltura() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void cargarSprite(Sprite s) {
+		estado.cargarSprite(s);
 	}
-
-	public boolean mostrable() {
-		return estado.mostrable();
-	}
-
-	public void setMostrable(boolean b) {
-		estado.setMostrable(b);
-	}
-
-	public boolean necesitaActualizarSprite() {
-		return spriteActualizado;
-	}
-
-	public void setSpriteActualizado(boolean actualizada) {
-		spriteActualizado = actualizada;
-	}
-	public boolean murio() {
-		return murio;
-	}
+	
 	public void actualizarSprite() {
 		estado.actualizarSprite();
 	}
+	
+	public void setSpriteActualizado(boolean actualizada) {
+		spriteActualizado = actualizada;
+	}
+	
+	public void setEstadoActual(EstadosDePiranhaPlant e) {
+		this.estado=e;
+	}
+	
+	// Getters
+	public int getPosX() {
+		return estado.getPosX();
+	}
+
+	public int getPosY() {
+		return estado.getPosY();
+	}
+	
+	public Hitbox getHitbox() {
+		return estado.getHitbox();
+	}
+	
+	public Sprite getSprite() {
+		return estado.getSprite();
+	}
+	
+	public boolean mostrable() {
+		return estado.mostrable();
+	}
+	
+	public int getToleranciaAltura() {
+		return 0;
+	}
+	
+	public boolean murio() {
+		return murio;
+	}
+	
+	public boolean necesitaActualizarSprite() {
+		return spriteActualizado;
+	}
+	
+	public EstadosDePiranhaPlant getEstadoActual() {
+		return estado;
+	}
+	
+	
+
+	
+	
+	
 	
 }

@@ -23,7 +23,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected boolean saltoArriba;
 	protected boolean murio;
 	
@@ -33,7 +33,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		posY = y;
 		this.kt	= kt;
 		sprite = s;
-		hitb = new Hitbox(x, y, 30, 30);
+		hitbox = new Hitbox(x, y, 30, 30);
 		tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
 	    tocandoBloqueAbajo=false;
@@ -42,10 +42,21 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	    saltoArriba=false;
 	    murio = false;
 	}
+	
+	// Setters
 	public void cambiarEstado() {
 		this.actualizarSpriteKoopaRetraido();
         kt.setEstadoActual(new EstadoKoopaNormal(kt,sprite,posX,posY));  // Cambiar al estado extendido
     }
+	
+	public void serAfectadoPorPersonaje(Personaje p) {
+		saltoArriba=true;
+	}
+	
+	public void morir() {
+		hitbox = new Hitbox(0 ,0,0 ,0);
+		murio = true;
+	}
 	
 	public void moverse() {
 		if(saltoArriba) {
@@ -55,13 +66,13 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 				
 			if(!tocoParedIzquierda) {
 				moverIzq();			
-				hitb.actualizar (posX, posY);
+				hitbox.actualizar (posX, posY);
 			}
 			else
 				 {
 				tocoParedIzquierda=true;
 				moverDer();
-				hitb.actualizar (posX, posY);}				
+				hitbox.actualizar (posX, posY);}				
 					
 			if (tocandoBloqueDerecha) {
 				tocoParedDerecha=true;
@@ -74,26 +85,6 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		
 	}
 	
-	public void moverIzq() {
-		posX=posX-4;
-	}
-	public void moverDer() {
-		posX=posX+4;
-	}
-	
-	
-	public KoopaTroopa getKoopaTroopa() {
-		return kt;
-	}
-
-	public void setKoopaTroopa(KoopaTroopa kt) {
-		this.kt = kt;
-	}
-
-	public Hitbox getHitbox() {
-		return hitb;
-	}
-
 	public void setPosX(int x) {
 		posX = x;
 	}
@@ -101,53 +92,9 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	public void setPosY(int y) {
 		posY = y;
 	}
-	public void morir() {
-		hitb = new Hitbox(0 ,0,0 ,0);
-		murio = true;
-	}
-	public void actualizarSpriteKoopaRetraido() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		this.sprite = fabrica.getKoopaTroopaRetraido();		
-		cargarSprite(sprite);
-		koopa.setSpriteActualizado(true);
-	}
-	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getKoopaTroopaMuerto();
-		cargarSprite(sprite);
-		koopa.setSpriteActualizado(true);
-		
-		int posY = getPosY();
-        // Animación de desplazamiento hacia arriba
-        for (int i = 0; i < 30; i++) {
-            setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        // Caída hacia la parte inferior de la ventana
-        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            setPosY(getPosY() + 5);
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-	}
 	
-	public int getPosX() {
-		return posX;
-	}
-	
-	public int getPosY() {
-		return posY;
-	}
-	
-	public Sprite getSprite() {
-		return sprite;
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 	
 	public void setTocandoBloqueDerecha(boolean b) {
@@ -167,23 +114,82 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		tocandoBloqueAbajo=b;
 	}
 	
+	public void cargarSprite(Sprite s) {
+		sprite = s;
+	}
+
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getKoopaTroopaMuerto();
+		cargarSprite(sprite);
+		koopa.setSpriteActualizado(true);
+		
+		int posY = getPosY();
+   
+        for (int i = 0; i < 30; i++) {
+            setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+       
+        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            setPosY(getPosY() + 5);
+            try {
+                Thread.sleep(14);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+	
+	public void actualizarSpriteKoopaRetraido() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getKoopaTroopaRetraido();		
+		cargarSprite(sprite);
+		koopa.setSpriteActualizado(true);
+	}
+	
+	public void moverIzq() {
+		posX = posX-4;
+	}
+	public void moverDer() {
+		posX = posX+4;
+	}
+	
+	public void setKoopaTroopa(KoopaTroopa kt) {
+		this.kt = kt;
+	}
+	
+	// Getters
+	public int getPosX() {
+		return posX;
+	}
+	
+	public int getPosY() {
+		return posY;
+	}
+	
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+	
 	public boolean mostrable() {
 		return mostrable;
 	}
 
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
-	public void cargarSprite(Sprite s) {
-		sprite = s;
-		
-	}
-	
-	public void serAfectadoPorPersonaje(Personaje p) {
-		saltoArriba=true;
-	}
 	public boolean murio() {
 		return murio;
 	}
+	
+	public KoopaTroopa getKoopaTroopa() {
+		return kt;
+	}
+
 }

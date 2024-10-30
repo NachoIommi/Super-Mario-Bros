@@ -1,6 +1,6 @@
 package Plataformas;
 
-import Fabricas.Sprite;
+import Fabricas.Sprite; 
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
@@ -8,15 +8,15 @@ import Personaje.Personaje;
 public class BloqueSolido extends Plataforma{
 	
 	protected Sprite sprite;
-	protected int x;
-	protected int y;
-	protected Hitbox hitb;
+	protected int posX;
+	protected int posY;
+	protected Hitbox hitbox;
 	
-	public BloqueSolido(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x, y, 30, 30);
+	public BloqueSolido(Sprite s, int x, int y) {
+		posX = x;
+		posY = y;
+		sprite = s;
+		hitbox = new Hitbox(x, y, 30, 30);
 	}
 	
 	public void recibirGolpe() {
@@ -27,11 +27,11 @@ public class BloqueSolido extends Plataforma{
 	}
 	
 	public void aceptarVisita(Visitor v) {
-		// no acepta nunca visita
+		
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		// tampoco afecta al personaje
+	
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -43,32 +43,28 @@ public class BloqueSolido extends Plataforma{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
-	@Override
+
 	public void verificarCambioEstado() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
-	@Override
+
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -17,7 +17,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	protected int posX;
 	protected int posY;
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected boolean mostrable;
 	protected int desplazado;
 	protected boolean subiendo;
@@ -30,7 +30,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		sprite = s;
 		posX = x;
 		posY = y;
-		hitb = new Hitbox(x+15, y, 20, 30);
+		hitbox = new Hitbox(x+15, y, 20, 30);
 		mostrable=true;
 		desplazado=0;
 		subiendo=true;
@@ -38,11 +38,25 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		entroTimer=false;
 	}
 	
+	// Setters
+	 public void cambiarEstado() {
+	    this.actualizarSpriteCambioDeEstado();
+		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,sprite, posX, posY));	
+	 }
+	
+	public void serAfectadoPorPersonaje(Personaje p) {
+		
+	}
+	
+	public void morir() {   
+		hitbox = new Hitbox(0 ,0,0 ,0);	
+	}
+	
 	public void moverse() {		
 		if(desplazado<30 && subiendo) {
 			posY = posY - 1; 	         
 	        desplazado++;
-	        hitb.actualizar(posX+15, posY);}
+	        hitbox.actualizar(posX+15, posY);}
 		
 		if(desplazado==30) {
 			subiendo =false;}
@@ -62,7 +76,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		if(bajando && desplazado!=0) {			
 			posY=posY+1;				
 		    desplazado--;
-		    hitb.actualizar(posX+15, posY); }
+		    hitbox.actualizar(posX+15, posY); }
 		
 		if(bajando && desplazado==0) {
 			subiendo=true;
@@ -72,25 +86,24 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		}
 			
 	}
-    
-	private Sprite actualizarSpriteNormal() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
-	    return fabrica.getPiranhaPlant(); 
+	
+	public void setPosX(int x) {
+		posX = x;
 	}
 	
+	public void setPosY(int y) {
+		posY = y;
+	}
 	
-	 public void cambiarEstado() {
-	    this.actualizarSpriteCambioDeEstado();
-		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,sprite, posX, posY));	
-	 }
+	public void setMostrable(boolean b) {
+		mostrable = b;
+	}
 	
-	 public void actualizarSpriteCambioDeEstado() {
-			GenerarSprite fabrica = new GenerarSpriteOriginal();
-			sprite = fabrica.getPiranhaPlant();
-			piranha.setSpriteActualizado(true);
-		}
-	 
-	 public void actualizarSprite() {
+	public void cargarSprite(Sprite s) {
+		sprite = s;	
+	}
+	
+	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
 		sprite = fabrica.getPiranhaPlant();
 		cargarSprite(sprite);
@@ -117,48 +130,39 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	        }
 	}
 	
-	public PiranhaPlant getPiranhaPlant() {
-		return piranha;
+	public void actualizarSpriteCambioDeEstado() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		sprite = fabrica.getPiranhaPlant();
+		piranha.setSpriteActualizado(true);
 	}
 	
 	public void setPiranhaPlant(PiranhaPlant p) {
 		piranha = p;
 	}
-	public Hitbox getHitbox() {
-		return hitb;
-	}
 	
-	public void setPosX(int x) {
-		posX=x;
-	}
-	public void setPosY(int y) {
-		posY=y;
-	}
-	
-	
+	// Getters
 	public int getPosX() {
 		return posX;
 	}
+	
 	public int getPosY() {
 		return posY;
 	}
+	
+	public Hitbox getHitbox() {
+		return hitbox;
+	}
+	
 	public Sprite getSprite() {
 		return sprite;
 	}
-	public void cargarSprite(Sprite s) {
-		sprite = s;	
-	}
-	public void serAfectadoPorPersonaje(Personaje p) {		
-	}
-	public void morir() {   
-		hitb = new Hitbox(0 ,0,0 ,0);	
-	}
+	
 	public boolean mostrable() {
 		return mostrable;
 	}
 
-	public void setMostrable(boolean b) {
-		mostrable=b;
+	public PiranhaPlant getPiranhaPlant() {
+		return piranha;
 	}
-
+	
 }
