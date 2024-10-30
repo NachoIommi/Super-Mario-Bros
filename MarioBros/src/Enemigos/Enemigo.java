@@ -1,5 +1,5 @@
 package Enemigos;
-import Fabricas.Sprite;
+import Fabricas.Sprite; 
 import Logica.Entidad;
 import Logica.Hitbox;
 import Logica.Visitor;

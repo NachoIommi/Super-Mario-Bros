@@ -25,10 +25,10 @@ public class BuzzyBeetle extends Enemigo{
     protected boolean tocoParedDerecha;
     protected boolean murio;
 	
-	public BuzzyBeetle(Sprite sprite, int x, int y) {
+	public BuzzyBeetle(Sprite s, int x, int y) {
 		posX = x;
 		posY = y;
-		this.sprite = sprite;
+		sprite = s;
 		hitbox = new Hitbox(x, y, 30, 30);
 		tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;

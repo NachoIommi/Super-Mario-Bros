@@ -26,10 +26,10 @@ public class Goomba extends Enemigo{
     protected boolean tocoParedDerecha;
     protected boolean murio;
 
-	public Goomba(Sprite sprite,int x,int y) {
+	public Goomba(Sprite s,int x,int y) {
 		posX = x;
         posY = y;
-        sprite = sprite;
+        sprite = s;
         hitbox = new Hitbox(x ,y,30 ,30);
         tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;
