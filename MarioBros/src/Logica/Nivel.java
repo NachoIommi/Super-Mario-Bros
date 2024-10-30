@@ -133,13 +133,13 @@ public class Nivel {
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY));
 				        break;
 				      
-				    case 4:
+				    case 4: //Tuberia con Piranha 
 				    	Enemigo e = fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY);
-				    	Plataforma p = fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY, e,reloj);
-				    	juego.agregarPlataforma(p); //Tuberia con Piranha 
+				    	Plataforma p = fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY, e);
+				    	juego.agregarPlataforma(p); 
 				    	juego.agregarEnemigo(e);
 				        break;
-				    case 5:
+				    case 5://Tuberia sin Piranha 
 				    	juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY)); //Tuberia sin Piranha
 				        break;
 				    case 6:
@@ -163,9 +163,10 @@ public class Nivel {
 				    case 35:
 				    	juego.agregarPowerUp(fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY));
 				        break;
+				        /*
 				    case 61:
 				    	juego.agregarEnemigo(fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
-				        break;
+				        break;*/
 				    case 62:
 				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getLakitu(), posX, posY));
 				        break;
