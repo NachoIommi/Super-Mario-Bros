@@ -28,13 +28,11 @@ public class ControladorVistas {
 	protected PantallaJuego pantallaJuego;
 	protected PantallaPerder pantallaPerder;
 	protected Juego juego;
-	protected Ranking ranking;
 	
-	public ControladorVistas(Juego juego, Ranking ranking) {
+	public ControladorVistas(Juego juego) {
 		this.juego = juego;
-		this.ranking = ranking;
 		iniciar();
-		pantallaPrincipal = new PantallaPrincipal(this,ranking);
+		pantallaPrincipal = new PantallaPrincipal(this);
 		pantallaJuego = new PantallaJuego(this);
 		pantallaPerder = new PantallaPerder(this);
 	}
@@ -58,8 +56,6 @@ public class ControladorVistas {
 	
 	public void mostrarPantallaPrincipal() {
 		ventana.setContentPane(pantallaPrincipal);
-		
-		
 	}
 	
 	public void mostrarPantallaJuego() {
@@ -125,11 +121,19 @@ public class ControladorVistas {
 	}
 	
 	public void guardarJugadorEnRanking(Jugador j) {
-	    ranking.addJugador(j);
-	    cierreDeJuego(); 
+		cierreDeJuego();
+		System.out.println("Puntuación obtenida del personaje: " + juego.getPersonaje().getPuntuacion());
+		j.setNuevoPuntaje(juego.getPersonaje().getPuntuacion());
+	    //juego.getRanking().addJugador(j);
+	     
 	    System.out.println("Ranking actualizado:");
-	    for (Jugador jugador : ranking.getJugadores()) { 
-	        System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
+	    for (Jugador jugador : juego.getRanking().getJugadores()) { 
+	    	if(jugador.getNombre() == j.getNombre()) {
+	    		jugador.setNuevoPuntaje(juego.getPersonaje().getPuntuacion());
+	    		System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
+	    	} else {
+	    		System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
+	    	}
 	    }
 	}
 	
@@ -139,7 +143,7 @@ public class ControladorVistas {
 	        String relativePath = "score.tdp";
 	        FileOutputStream fileOutputStream = new FileOutputStream(new File(getClass().getClassLoader().getResource(relativePath).toURI()));
 	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-	        objectOutputStream.writeObject(this.ranking);
+	        objectOutputStream.writeObject(juego.getRanking());
 	        objectOutputStream.flush();
 	        objectOutputStream.close();
 	        System.out.println("Ranking guardado correctamente.");

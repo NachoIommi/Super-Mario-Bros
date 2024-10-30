@@ -7,19 +7,21 @@ public class Jugador implements Comparable<Jugador>, Serializable{
 	private String nombre;
 	private Integer puntaje;
 	
-	public Jugador(String nombre, Integer puntos) {
-		this.nombre = nombre;
-		this.puntaje = puntos;
+	public Jugador(String n, Integer puntos) {
+		nombre = n;
+		puntaje = puntos;
 	}
-
-	
 	
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 	
 	public Integer getPuntaje() {
-		return this.puntaje;
+		return puntaje;
+	}
+	
+	public void setNuevoPuntaje(int p) {
+		puntaje = p;
 	}
 	
 	public int compareTo(Jugador arg0) {

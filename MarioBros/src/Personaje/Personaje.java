@@ -22,7 +22,7 @@ public class Personaje extends Entidad{
 	protected Hitbox hitb;
 	protected int vidas;
 	protected int monedas;
-	protected int puntuacion;
+	protected int puntuacion = 0;
 	protected int posX;
 	protected int posY;
 	protected int direccionDelPersonaje;
@@ -57,7 +57,6 @@ public class Personaje extends Entidad{
 		nivelActual = nivel;
         vidas = 3;        
         monedas = 0;      
-        puntuacion = 10;   
         estado = new EstadoEstrella(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
@@ -243,11 +242,11 @@ public class Personaje extends Entidad{
 
     
     public int getPuntuacion(){
-        return this.puntuacion;
+        return puntuacion;
     }
     
     public void setPuntuacion(int n){
-        this.puntuacion += n;
+        puntuacion += n;
     }
     
     public EstadoDePersonaje getEstado(){

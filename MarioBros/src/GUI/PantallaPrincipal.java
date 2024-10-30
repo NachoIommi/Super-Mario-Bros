@@ -14,11 +14,9 @@ public class PantallaPrincipal extends JPanel{
 	protected JLabel imagenInicio;
 	protected JTextField ingresarNombre;
 	protected JButton botonIngresarNombre;
-	protected Ranking ranking;
 
-	public PantallaPrincipal(ControladorVistas controladorVistas, Ranking ranking) {
+	public PantallaPrincipal(ControladorVistas controladorVistas) {
 		this.controladorVistas = controladorVistas;
-		this.ranking = ranking;
 		this.setSize(800,600);
 		this.setLayout(null);
 		this.setVisible(true);
@@ -69,10 +67,6 @@ public class PantallaPrincipal extends JPanel{
 	    this.add(ingresarNombre);
 	}
 	
-	public void guardarJugadorEnRanking(Jugador j) {
-	    ranking.addJugador(j);
-	    controladorVistas.cierreDeJuego();
-	}
 	
 	public void registrarOyenteBotonNombre() {
 	    botonIngresarNombre.addActionListener(new ActionListener(){

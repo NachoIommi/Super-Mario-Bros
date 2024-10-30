@@ -1,10 +1,19 @@
 package Logica;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import Enemigos.Enemigo;
 import GUI.ControladorVistas;
+import Launcher.Launcher;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -17,9 +26,12 @@ public class Juego {
 	protected Nivel nivel;
 	protected int modoDeJuego;
 	protected Personaje personaje;
+	protected Ranking ranking;
+	
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
+	
 	protected HiloPersonaje hilo;
 	protected HiloAnimaciones hiloAnimaciones;
 	protected HiloRestoMundo hiloRM;
@@ -34,7 +46,8 @@ public class Juego {
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
 		cargarPrimerNivel();
-		
+		ranking = cargarRanking();
+
 	
 		hilo = new HiloPersonaje(this);
 		hiloAnimaciones = new HiloAnimaciones(this);
@@ -202,4 +215,38 @@ public class Juego {
 		return hiloAnimaciones;
 	}
 	
+	public static Ranking cargarRanking() {
+	    Ranking ranking = new Ranking(); 
+	    try {
+	        String relativePath = Launcher.configuration.getProperty("file");
+	        if (relativePath == null || relativePath.isEmpty()) {
+	            System.out.println("La ruta del archivo de ranking no está configurada.");
+	            return ranking;
+	        }
+	        URL resource = Launcher.class.getClassLoader().getResource(relativePath);
+	        if (resource == null) {
+	            System.out.println("No se encontró el archivo de ranking en la ruta: " + relativePath);
+	            return ranking;
+	        }
+
+	        File file = new File(resource.toURI()); 
+
+	        try (FileInputStream fileInputStream = new FileInputStream(file);
+	             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+	             
+	            ranking = (Ranking) objectInputStream.readObject();
+	            System.out.println("Ranking cargado correctamente: ");
+	        }
+	    } catch (IOException | ClassNotFoundException | URISyntaxException e) {
+	        System.out.println("Error al cargar el ranking.");
+	        e.printStackTrace();
+	    }
+	    return ranking; 
+	}
+	
+	
+	
+	public Ranking getRanking() {
+		return ranking;
+	}
 }

@@ -23,8 +23,7 @@ public class Launcher {
 			public void run() {
 				try { 
 					Juego juego = new Juego();
-					Ranking ranking = cargarRanking();
-					ControladorVistas controladorVistas = new ControladorVistas(juego,ranking);
+					ControladorVistas controladorVistas = new ControladorVistas(juego);
 					juego.setControladorVistas(controladorVistas);
 					controladorVistas.ventana.setVisible(true);
 					controladorVistas.mostrarPantallaPrincipal();
@@ -33,35 +32,6 @@ public class Launcher {
 				}
 			}
 		});	
-	}
-	
-	public static Ranking cargarRanking() {
-	    Ranking ranking = new Ranking(); 
-	    try {
-	        String relativePath = Launcher.configuration.getProperty("file");
-	        if (relativePath == null || relativePath.isEmpty()) {
-	            System.out.println("La ruta del archivo de ranking no está configurada.");
-	            return ranking;
-	        }
-	        URL resource = Launcher.class.getClassLoader().getResource(relativePath);
-	        if (resource == null) {
-	            System.out.println("No se encontró el archivo de ranking en la ruta: " + relativePath);
-	            return ranking;
-	        }
-
-	        File file = new File(resource.toURI()); 
-
-	        try (FileInputStream fileInputStream = new FileInputStream(file);
-	             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-	             
-	            ranking = (Ranking) objectInputStream.readObject();
-	            System.out.println("Ranking cargado correctamente: ");
-	        }
-	    } catch (IOException | ClassNotFoundException | URISyntaxException e) {
-	        System.out.println("Error al cargar el ranking.");
-	        e.printStackTrace();
-	    }
-	    return ranking; 
 	}
 	
 	private static void loadConfiguration() {
