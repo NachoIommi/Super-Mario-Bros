@@ -51,6 +51,35 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    left=false;	
 	    alto=60;
 	}
+	// Setters
+	public void morir() {
+    	personaje.setVidas(personaje.getVidas()-1);
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getMarioFlorDeFuegoMuerto();
+    	personaje.cargarSprite(sprite);
+    	personaje.setSpriteActualizado(true);
+    	
+    	int posY = personaje.getPosY();
+
+        for (int i = 0; i < 30; i++) {
+            personaje.setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            personaje.setPosY(personaje.getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        personaje.nivelActual.reiniciarNivel();
+    }
 	
 	public void moverPersonaje() {	  
 		moverDerecha();	    
@@ -68,17 +97,214 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    actualizarSprite();
 	}
 
-	public void moverDerecha() {
-		if (right) {
-			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-		        if (velX < 5)
-		            velX += 0.1f;
-		    } 			
-			else 
-				velX = 0;				
-			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()+3);
-		}		
+	public void setPosX(int x) {
+	    this.posX = x;
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	}
+
+	public void setPosY(int y) {
+	    this.posY = y;
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	}
+	
+	public void saltar() {
+    	if (jump && tocandoBloqueAbajo && !saltando ) {
+	        saltando = true;
+	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
+	    }
+    }
+    
+	public void recibirDano() {
+		if (!personaje.esInvulnerable()) {
+            personaje.morir();
+            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
+        }
+    }
+	
+	public void sumarVida() {
+		
+	}
+	
+	public void sumarPuntos(int puntos) {
+        this.puntuacion += puntos;
+    }
+
+	public void setPuntuacion(int n) {
+		
+	}
+	
+	public void setPuntuacionChampiVerde() {
+		personaje.setPuntuacion(100);
+	}
+
+	public void setPuntuacionEstrella() {
+		personaje.setPuntuacion(30);
+	}
+
+	public void setPuntuacionFlorDeFuego() {
+		personaje.setPuntuacion(50);
+	}
+
+	public void setPuntuacionSuperChampi() {
+		personaje.setPuntuacion(50);
+	}
+	public void setPuntuacionMoneda(){
+		personaje.setPuntuacion(5);
+	}
+	
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
+	}
+	
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda=b;
+	}
+	
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
+	}
+	
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
+	}
+	
+	public void actualizarSprite() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+	    Sprite nuevoSprite = sprite;
+	    
+	    if (right && velX > 0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoCorriendoDerecha();
+	    	
+	    } else if (left && velX > 0) {	
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoDerrapandoIzquierda();
+	    	 	        
+	    } else if (left && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoCorriendoIzquierda();
+	        
+	    } else if (right && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoDerrapandoDerecha();
+     
+	    } else if (!left && !right) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoDerecha();
+	        
+	    }else if(velX==0) {
+	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoIzquierda();		    
+	    }	    
+	   
+	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	personaje.cargarSprite(nuevoSprite);
+	    	personaje.setSpriteActualizado(true);
+	    }
+	}
+	
+	public void actualizarMin() {
+		personaje.actualizarMin();
+	}
+	
+	public void cargarSprite(Sprite s) {
+		sprite = s;
+	}
+	
+	public void setSaltando(boolean b){
+		saltando = b;
+	}
+	
+	public void setSaltandoSobreEnemigo(boolean b) {
+		
+	}
+	
+	public void saltarSobreEnemigo() {
+	
+	}
+	
+	public void setRight(boolean b){
+		right = b;
+	}
+	
+	public void setLeft(boolean b){
+		left = b;
+	}
+	
+	public void setJump(boolean b){
+		jump = b;
+	}
+	
+	public void colisionSuperChampi() {
+		
+	}
+	
+	public void colisionEstrella() {
+		
+	}
+
+	
+	public void colisionFlorDeFuego() {
+	
+	}
+
+	
+	public void colisionChampiVerde() {
+		
+	}
+
+	public void colisionMoneda() {
+
+	}
+	
+	public void colisionLateralGoomba(Goomba goomba) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Goomba");
+    }
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Koopa");
+	}
+	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Buzzy");
+	}
+	public void colisionLateralLakitu(Lakitu lakitu) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision lakitu");
+	}
+	public void colisionLateralSpiny(Spiny spiny) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision spiny");
+	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		velX=0;
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
+    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision Piranha");
+	}
+	
+	public void colisionVacio() {
+		morir();
+	}
+	
+	public void romperLadrilloSolido(LadrilloSolido l) {
+		
+	}
+
+	public void moverBloqueGolpeable(BloqueGolpeable b) {
+		
 	}
 	
 	public void moverIzquierda() {
@@ -94,6 +320,19 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 			}
 	}
 	
+	public void moverDerecha() {
+		if (right) {
+			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
+		        if (velX < 5)
+		            velX += 0.1f;
+		    } 			
+			else 
+				velX = 0;				
+			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
+				setPosX(getPosX()+3);
+		}		
+	}
+
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
 	    	setPosX(getPosX()+1);	    		
@@ -179,295 +418,45 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    }
 	}
 	
-	public void setRight(boolean b){
-		right=b;
+	// Getters
+	public int getPosX() {
+		return Math.round(posX);
 	}
 	
-	public void setLeft(boolean b){
-		left=b;
+	public int getPosY() {
+		return Math.round(posY);	
 	}
 	
-	public void setJump(boolean b){
-		jump=b;
-	}
-	
-	public double getToleranciaAltura() {
-		return toleranciaAltura;
-	}
-	
-	public void colisionLateralGoomba(Goomba goomba) {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Goomba");
+	public Hitbox getHitbox() {
+    	return hitb;
     }
-	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Koopa");
-	}
-	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Buzzy");
-	}
-	public void colisionLateralLakitu(Lakitu lakitu) {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision lakitu");
-	}
-	public void colisionLateralSpiny(Spiny spiny) {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision spiny");
-	}
-	public void colisionLateralPiranha(PiranhaPlant piranha) {
-		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Piranha");
-	}
-	public int getAlto() {
-		return alto;
-	}
-	
-	public void actualizarSprite() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
-	    Sprite nuevoSprite = sprite;
-	    
-	    if (right && velX > 0) {
-	    	nuevoSprite = fabrica.getMarioFlorDeFuegoCorriendoDerecha();
-	    	
-	    } else if (left && velX > 0) {	
-	    	nuevoSprite = fabrica.getMarioFlorDeFuegoDerrapandoIzquierda();
-	    	 	        
-	    } else if (left && velX < 0) {
-	    	nuevoSprite = fabrica.getMarioFlorDeFuegoCorriendoIzquierda();
-	        
-	    } else if (right && velX < 0) {
-	    	nuevoSprite = fabrica.getMarioFlorDeFuegoDerrapandoDerecha();
-     
-	    } else if (!left && !right) {
-	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoDerecha();
-	        
-	    }else if(velX==0) {
-	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoIzquierda();		    
-	    }	    
-	   
-	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
-	    	personaje.cargarSprite(nuevoSprite);
-	    	personaje.setSpriteActualizado(true);
-	    }
-	}
 
-	public void saltar() {
-    	if (jump && tocandoBloqueAbajo && !saltando ) {
-	        saltando = true;
-	        tocandoBloqueAbajo = false;
-	        velY = -4;  // IMPULSO INICIAL
-	    }
-    }
-    
-	public void recibirDano() {
-		if (!personaje.esInvulnerable()) {
-            personaje.morir();
-            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
-        }
-    }
-    
-    public void morir() {
-    	personaje.setVidas(personaje.getVidas()-1);
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getMarioFlorDeFuegoMuerto();
-    	personaje.cargarSprite(sprite);
-    	personaje.setSpriteActualizado(true);
-    	
-    	int posY = personaje.getPosY();
-
-        for (int i = 0; i < 30; i++) {
-            personaje.setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            personaje.setPosY(personaje.getPosY() + 5);
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        personaje.nivelActual.reiniciarNivel();
-    }
-    
-    public boolean getSaltando() {
-		return saltando;
-	}
-    
-	public void setSaltando(boolean b){
-		saltando=b;
+	public Sprite getSprite() {
+		return sprite;
 	}
 	
 	public float getVelX() {
 		return velX;
 	}
 	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
+	public float getVelY() {
+		return 0;
 	}
 	
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
+	public double getToleranciaAltura() {
+		return toleranciaAltura;
 	}
 	
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-	
-	public Hitbox getHitbox() {
-    	return hitb;
-    }
-	
-    public void sumarPuntos(int puntos) {
-        this.puntuacion += puntos;
-    }
-    
-	public void cargarSprite(Sprite s) {
-		sprite = s;
-	}
-	
-	public Sprite getSprite() {
-		return sprite;
-	}
-	
-	public int getPosX() {
-		return Math.round(posX);
-	}
-	
-	public int getPosY() {
-		return Math.round(posY);
-		
-	}
-
-	public void setPosX(int x) {
-	    this.posX = x;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
-	}
-
-	public void setPosY(int y) {
-	    this.posY = y;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
-	}
-	
-	public void actualizarMin() {
-		personaje.actualizarMin();
+	public int getAlto() {
+		return alto;
 	}
 	
 	public float getMin() {
 		return personaje.getMin();
 	}
-	
-	public void sumarVida() {
-		
-	}
-
-	public void setPuntuacion(int n) {
-		
-	}
-
-	public void setPuntuacionChampiVerde() {
-		personaje.setPuntuacion(100);
-	}
-
-	public void setPuntuacionEstrella() {
-		personaje.setPuntuacion(30);
-	}
-
-	public void setPuntuacionFlorDeFuego() {
-		personaje.setPuntuacion(50);
-	}
-
-	public void setPuntuacionSuperChampi() {
-		personaje.setPuntuacion(50);
-	}
-	public void setPuntuacionMoneda(){
-		personaje.setPuntuacion(5);
-	}
-
-	public void romperLadrilloSolido(LadrilloSolido l) {
-		
-	}
-
-	public void moverBloqueGolpeable(BloqueGolpeable b) {
-		
-	}
-
-	public void colisionSuperChampi() {
-		
-	}
-
-	@Override
-	public float getVelY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void colisionEstrella() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionFlorDeFuego() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionChampiVerde() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void colisionMoneda() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void saltarSobreEnemigo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSaltandoSobreEnemigo(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void colisionVacio() {
-		morir();
+    
+    public boolean getSaltando() {
+		return saltando;
 	}
 
 }

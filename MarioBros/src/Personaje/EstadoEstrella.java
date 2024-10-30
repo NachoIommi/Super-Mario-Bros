@@ -1,5 +1,4 @@
 package Personaje;
-
 import Fabricas.*;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
@@ -50,6 +49,36 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	    alto=60;
 	}
 	
+	// Setters
+	public void morir() {                              //si puede morir: cuando toca vacio
+    	personaje.setVidas(personaje.getVidas()-1);
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getMarioEstrellaMuerto();
+    	personaje.cargarSprite(sprite);
+    	personaje.setSpriteActualizado(true);
+    	
+    	int posY = personaje.getPosY();
+
+        for (int i = 0; i < 50; i++) {
+            personaje.setPosY(posY - (i * 2));
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
+            personaje.setPosY(personaje.getPosY() + 5);
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        personaje.nivelActual.reiniciarNivel();
+    }
+	
 	public void moverPersonaje() {	  
 		moverDerecha();	    
 	    moverIzquierda(); 	    	    	
@@ -66,17 +95,190 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	    actualizarSprite();
 	}
 
-	public void moverDerecha() {
-		if (right) {
-			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-		        if (velX < 5)
-		            velX += 0.1f;
-		    } 			
-			else 
-				velX = 0;				
-			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()+3);
-		}		
+	public void setPosX(int x) {
+	    this.posX = x;
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	}
+
+	public void setPosY(int y) {
+	    this.posY = y;
+	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	}
+	
+	public void saltar() {
+    	if (jump && tocandoBloqueAbajo && !saltando ) {
+	        saltando = true;
+	        tocandoBloqueAbajo = false;
+	        velY = -4;  // IMPULSO INICIAL
+	    }
+    }
+    
+	public void recibirDano() {
+    	//Mario estrella nunca va a recibir daño JAJAJAJ!!
+    }
+	
+	public void sumarVida() {
+		
+	}
+	
+	public void sumarPuntos(int puntos) {
+        this.puntuacion += puntos;
+    }
+	
+	public void setPuntuacion(int n) {
+		
+	}
+
+	public void setPuntuacionChampiVerde() {
+		personaje.setPuntuacion(100);
+	}
+
+	public void setPuntuacionEstrella() {
+		personaje.setPuntuacion(35);
+	}
+
+	public void setPuntuacionFlorDeFuego() {
+		personaje.setPuntuacion(30); //varia segun el estado anterior?
+	}
+
+	public void setPuntuacionSuperChampi() {
+		personaje.setPuntuacion(50); //varia segun el estado anterior?
+	}
+	
+	public void setPuntuacionMoneda(){
+		personaje.setPuntuacion(5);
+	}
+	
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha=b;
+	}
+	
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda=b;
+	}
+	
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba=b;
+	}
+	
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo=b;
+	}
+	
+	public void actualizarSprite() {
+	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+	    Sprite nuevoSprite = sprite;
+	    
+	    if (right && velX > 0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaCorriendoDerecha();
+	    	
+	    } else if (left && velX > 0) {	
+	    	nuevoSprite = fabrica.getMarioEstrellaDerrapandoIzquierda();
+	    	 	        
+	    } else if (left && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaCorriendoIzquierda();
+	        
+	    } else if (right && velX < 0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaDerrapandoDerecha();
+     
+	    } else if (!left && !right) {
+	    	nuevoSprite = fabrica.getMarioEstrellaQuietoDerecha();
+	        
+	    }else if(velX==0) {
+	    	nuevoSprite = fabrica.getMarioEstrellaQuietoIzquierda();		    
+	    }	    
+	   
+	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	personaje.cargarSprite(nuevoSprite);
+	    	personaje.setSpriteActualizado(true);
+	    }
+	}
+	
+	public void actualizarMin() {
+		personaje.actualizarMin();
+	}
+	
+	public void cargarSprite(Sprite s) {
+		sprite = s;
+	}
+	
+	public void setSaltando(boolean b){
+		saltando  =b;
+	}
+	
+	public void setSaltandoSobreEnemigo(boolean b) {
+		
+	}
+	
+	public void saltarSobreEnemigo() {
+		
+	}
+	
+	public void setRight(boolean b){
+		right=b;
+	}
+	
+	public void setLeft(boolean b){
+		left=b;
+	}
+	
+	public void setJump(boolean b){
+		jump=b;
+	}
+
+	public void colisionSuperChampi() {
+		
+    }
+    
+    public void colisionFlorDeFuego() {
+    	
+    }
+    
+    public void colisionEstrella() {
+    }
+    
+	public void colisionChampiVerde() {
+	}
+
+	public void colisionMoneda() {
+	}
+	
+	public void colisionLateralGoomba(Goomba goomba) {
+		personaje.setPuntuacion(60);
+		goomba.morir();
+    }
+
+	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
+		personaje.setPuntuacion(90);
+		koopaTroopa.morir();
+	}
+	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
+		personaje.setPuntuacion(30);
+		buzzy.morir();
+	}
+	public void colisionLateralLakitu(Lakitu lakitu) {
+		personaje.setPuntuacion(60);
+		lakitu.morir();
+	}
+	public void colisionLateralSpiny(Spiny spiny) {
+		personaje.setPuntuacion(60);
+		spiny.morir();
+	}
+	public void colisionLateralPiranha(PiranhaPlant piranha) {
+		personaje.setPuntuacion(30);
+		piranha.morir();
+	}
+	
+	public void colisionVacio() {
+		morir();
+	}
+
+	public void romperLadrilloSolido(LadrilloSolido l) {
+		
+	}
+
+	public void moverBloqueGolpeable(BloqueGolpeable b) {
+		
 	}
 	
 	public void moverIzquierda() {
@@ -91,6 +293,19 @@ public class EstadoEstrella extends EstadoDePersonaje {
 				setPosX(getPosX()-3);
 			}
 	}
+	
+	public void moverDerecha() {
+		if (right) {
+			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
+		        if (velX < 5)
+		            velX += 0.1f;
+		    } 			
+			else 
+				velX = 0;				
+			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
+				setPosX(getPosX()+3);
+		}		
+	}	
 	
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
@@ -177,270 +392,45 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	    }
 	}
 	
-	public void setRight(boolean b){
-		right=b;
-	}
-	
-	public void setLeft(boolean b){
-		left=b;
-	}
-	
-	public void setJump(boolean b){
-		jump=b;
-	}
-	
-	public double getToleranciaAltura() {
-		return toleranciaAltura;
-	}
-	
-	public void colisionLateralGoomba(Goomba goomba) {
-		personaje.setPuntuacion(60);
-		goomba.morir();
-    }
-
-	public void colisionPiranhaPlant() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
-		personaje.setPuntuacion(90);
-		koopaTroopa.morir();
-	}
-	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
-		personaje.setPuntuacion(30);
-		buzzy.morir();
-	}
-	public void colisionLateralLakitu(Lakitu lakitu) {
-		personaje.setPuntuacion(60);
-		lakitu.morir();
-	}
-	public void colisionLateralSpiny(Spiny spiny) {
-		personaje.setPuntuacion(60);
-		spiny.morir();
-	}
-	public void colisionLateralPiranha(PiranhaPlant piranha) {
-		personaje.setPuntuacion(30);
-		piranha.morir();
-	}
-	public int getAlto() {
-		return alto;
-	}
-	
-	public void actualizarSprite() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
-	    Sprite nuevoSprite = sprite;
-	    
-	    if (right && velX > 0) {
-	    	nuevoSprite = fabrica.getMarioEstrellaCorriendoDerecha();
-	    	
-	    } else if (left && velX > 0) {	
-	    	nuevoSprite = fabrica.getMarioEstrellaDerrapandoIzquierda();
-	    	 	        
-	    } else if (left && velX < 0) {
-	    	nuevoSprite = fabrica.getMarioEstrellaCorriendoIzquierda();
-	        
-	    } else if (right && velX < 0) {
-	    	nuevoSprite = fabrica.getMarioEstrellaDerrapandoDerecha();
-     
-	    } else if (!left && !right) {
-	    	nuevoSprite = fabrica.getMarioEstrellaQuietoDerecha();
-	        
-	    }else if(velX==0) {
-	    	nuevoSprite = fabrica.getMarioEstrellaQuietoIzquierda();		    
-	    }	    
-	   
-	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
-	    	personaje.cargarSprite(nuevoSprite);
-	    	personaje.setSpriteActualizado(true);
-	    }
-	}
-
-	public void saltar() {
-    	if (jump && tocandoBloqueAbajo && !saltando ) {
-	        saltando = true;
-	        tocandoBloqueAbajo = false;
-	        velY = -4;  // IMPULSO INICIAL
-	    }
-    }
-    
-	public void recibirDano() {
-    	//Mario estrella nunca va a recibir daño JAJAJAJ!!
-    }
-    
-    public void morir() {                              //si puede morir: cuando toca vacio
-    	personaje.setVidas(personaje.getVidas()-1);
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getMarioEstrellaMuerto();
-    	personaje.cargarSprite(sprite);
-    	personaje.setSpriteActualizado(true);
-    	
-    	int posY = personaje.getPosY();
-
-        for (int i = 0; i < 50; i++) {
-            personaje.setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            personaje.setPosY(personaje.getPosY() + 5);
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        personaje.nivelActual.reiniciarNivel();
-    }
-    
-    public boolean getSaltando() {
-		return saltando;
-	}
-    
-	public void setSaltando(boolean b){
-		saltando=b;
-	}
-	
-	public float getVelX() {
-		return velX;
-	}
-	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-	
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-	
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-	
-	public Hitbox getHitbox() {
-    	return hitb;
-    }
-
-    public void sumarPuntos(int puntos) {
-        this.puntuacion += puntos;
-    }
-    
-	public void cargarSprite(Sprite s) {
-		sprite = s;
-	}
-	
-	public Sprite getSprite() {
-		return sprite;
-	}
-	
+	// Getters
 	public int getPosX() {
 		return Math.round(posX);
 	}
 	
 	public int getPosY() {
 		return Math.round(posY);
-		
-	}
-
-	public void setPosX(int x) {
-	    this.posX = x;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
-	}
-
-	public void setPosY(int y) {
-	    this.posY = y;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
 	}
 	
-	public void actualizarMin() {
-		personaje.actualizarMin();
+	public Hitbox getHitbox() {
+    	return hitb;
+    }
+	
+	public Sprite getSprite() {
+		return sprite;
+	}
+	
+	public float getVelX() {
+		return velX;
+	}
+	
+	public float getVelY() {
+		return velY;
+	}	
+	
+	public double getToleranciaAltura() {
+		return toleranciaAltura;
+	}
+	
+	public int getAlto() {
+		return alto;
 	}
 	
 	public float getMin() {
 		return personaje.getMin();
 	}
-	
-	public void sumarVida() {
-		
-	}
 
-	public void setPuntuacion(int n) {
-		
+    public boolean getSaltando() {
+		return saltando;
 	}
-
-	public void setPuntuacionChampiVerde() {
-		personaje.setPuntuacion(100);
-	}
-
-	public void setPuntuacionEstrella() {
-		personaje.setPuntuacion(35);
-	}
-
-	public void setPuntuacionFlorDeFuego() {
-		personaje.setPuntuacion(30); //varia segun el estado anterior?
-	}
-
-	public void setPuntuacionSuperChampi() {
-		personaje.setPuntuacion(50); //varia segun el estado anterior?
-	}
-	public void setPuntuacionMoneda(){
-		personaje.setPuntuacion(5);
-	}
-
-	public void romperLadrilloSolido(LadrilloSolido l) {
-		
-	}
-
-	public void moverBloqueGolpeable(BloqueGolpeable b) {
-		
-	}
-
-	public void colisionSuperChampi() {
-    }
-    
-    public void colisionFlorDeFuego() {
-    }
-    
-    public void colisionEstrella() {
-    }
-    
-	public void colisionChampiVerde() {
-	}
-
-	public void colisionMoneda() {
-	}
-	public float getVelY() {
-		return velY;
-	}
-
-	public void saltarSobreGoomba() {
-		
-	}
-
-	public void setSaltandoSobreGoomba(boolean b) {
-
-	}
-
-	public void saltarSobreEnemigo() {
-		
-	}
-
-	public void setSaltandoSobreEnemigo(boolean b) {
-		
-	}
-
-	public void colisionVacio() {
-		morir();
-	}
-
-	
 
 }
