@@ -16,7 +16,7 @@ public abstract class EstadosDePiranhaPlant {
 	public abstract Hitbox getHitbox();
 	public abstract void setPosX(int x);
 	public abstract void setPosY(int y);
-	public abstract void actualizarSprite();
+	public abstract void actualizarSpriteCambioDeEstado();
 	public abstract void cambiarEstado() ;
 	public abstract void moverse();
 	public abstract int getPosX();
@@ -27,4 +27,5 @@ public abstract class EstadosDePiranhaPlant {
 	public abstract void morir();
 	public abstract void setMostrable(boolean b);
 	public abstract boolean mostrable();
+	public abstract void actualizarSprite();
 }

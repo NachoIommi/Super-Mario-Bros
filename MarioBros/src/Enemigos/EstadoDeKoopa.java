@@ -31,6 +31,7 @@ public abstract class EstadoDeKoopa {
 	public abstract void cargarSprite(Sprite s);
 	public abstract void serAfectadoPorPersonaje(Personaje p);
 	public abstract void morir();
+	public abstract void actualizarSprite();
 }
 
 

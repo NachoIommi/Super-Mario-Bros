@@ -16,7 +16,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 
 	protected int posX;
 	protected int posY;
-	protected Sprite s;
+	protected Sprite sprite;
 	protected Hitbox hitb;
 	protected boolean mostrable;
 	protected int desplazado;
@@ -27,7 +27,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	
 	public EstadoPiranhaExtendida(PiranhaPlant p,Sprite s,int x,int y) {
 		super(p);
-		this.s = s;
+		sprite = s;
 		posX = x;
 		posY = y;
 		hitb = new Hitbox(x+15, y, 20, 30);
@@ -80,14 +80,41 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	
 	
 	 public void cambiarEstado() {
-	    this.actualizarSprite();
-		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,s, posX, posY));	
+	    this.actualizarSpriteCambioDeEstado();
+		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,sprite, posX, posY));	
 	 }
 	
+	 public void actualizarSpriteCambioDeEstado() {
+			GenerarSprite fabrica = new GenerarSpriteOriginal();
+			sprite = fabrica.getPiranhaPlant();
+			piranha.setSpriteActualizado(true);
+		}
+	 
 	 public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		this.s = fabrica.getPiranhaPlant();
+		sprite = fabrica.getPiranhaPlant();
+		cargarSprite(sprite);
 		piranha.setSpriteActualizado(true);
+		
+		 int posY = getPosY();
+	        // Animación de desplazamiento hacia arriba
+	        for (int i = 0; i < 30; i++) {
+	            setPosY(posY - (i * 2));
+	            try {
+	                Thread.sleep(14);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        // Caída hacia la parte inferior de la ventana
+	        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
+	            setPosY(getPosY() + 5);
+	            try {
+	                Thread.sleep(14);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	}
 	
 	public PiranhaPlant getPiranhaPlant() {
@@ -116,36 +143,15 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		return posY;
 	}
 	public Sprite getSprite() {
-		return s;
+		return sprite;
 	}
 	public void cargarSprite(Sprite s) {
-		this.s=s;	
+		sprite = s;	
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {		
 	}
 	public void morir() {   
 		hitb = new Hitbox(0 ,0,0 ,0);	
-		new Thread(() -> {	        
-	        int posY = getPosY();
-	        // Animación de desplazamiento hacia arriba
-	        for (int i = 0; i < 30; i++) {
-	            setPosY(posY - (i * 2));
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        // Caída hacia la parte inferior de la ventana
-	        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-	            setPosY(getPosY() + 5);
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }).start();
 	}
 	public boolean mostrable() {
 		return mostrable;
@@ -154,7 +160,5 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	public void setMostrable(boolean b) {
 		mostrable=b;
 	}
-
-	
 
 }

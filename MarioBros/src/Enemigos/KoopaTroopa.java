@@ -77,14 +77,12 @@ public class KoopaTroopa extends Enemigo{
 		estado.serAfectadoPorPersonaje(p);
 	}
 	public void morir() {
+		murio = true;
 		estado.morir();
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getKoopaTroopaMuerto();
-    	cargarSprite(sprite);
-    	setSpriteActualizado(true);	
+		estado.actualizarSprite();
 	}
 
 	public Hitbox getHitbox() {

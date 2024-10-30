@@ -13,7 +13,7 @@ import Fabricas.*;
 
 public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 
-	protected Sprite s;
+	protected Sprite sprite;
 	protected Hitbox hitb;
 	protected int posX;
 	protected int posY;
@@ -23,7 +23,7 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 
     public EstadoPiranhaInvulnerable(PiranhaPlant p ,Sprite s,int x,int y) {
         super(p);
-		this.s = s;
+		sprite = s;
 		posX = x;
 		posY= y;
 		hitb = new Hitbox(0,0,0 ,0);
@@ -49,13 +49,13 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	}
     
     public void cambiarEstado() {
-    	this.actualizarSprite();
-		piranha.setEstadoActual(new EstadoPiranhaExtendida( piranha,s, posX, posY));	
+    	actualizarSpriteCambioDeEstado();
+		piranha.setEstadoActual(new EstadoPiranhaExtendida( piranha,sprite, posX, posY));	
     }
     
-    public void actualizarSprite() {
+    public void actualizarSpriteCambioDeEstado() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		this.s = fabrica.getPiranhaPlant();
+		sprite = fabrica.getPiranhaPlant();
 		piranha.setSpriteActualizado(true);
 	}
     
@@ -88,10 +88,10 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 		return posY;
 	}
 	public Sprite getSprite() {
-		return s;
+		return sprite;
 	}
 	public void cargarSprite(Sprite s) {
-		this.s=s;	
+		this.sprite=s;	
 	}
 	public void serAfectadoPorPersonaje(Personaje p) {		
 	}
@@ -99,6 +99,9 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	public void morir() {
     	
     }
+	public void actualizarSprite() {
+		
+	}
 	public boolean mostrable() {
 		return mostrable;
 	}

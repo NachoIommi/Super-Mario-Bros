@@ -103,6 +103,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	}
 	public void morir() {
 		hitb = new Hitbox(0 ,0,0 ,0);
+		murio = true;
 	}
 	public void actualizarSpriteKoopaRetraido() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();

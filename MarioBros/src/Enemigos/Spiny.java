@@ -106,6 +106,7 @@ public class Spiny extends Enemigo{
 	
 	public void morir() {
 		hitb = new Hitbox(0 ,0,0 ,0);
+		murio = true;
 	}
 	public void actualizarSprite() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
@@ -114,7 +115,7 @@ public class Spiny extends Enemigo{
     	setSpriteActualizado(true);
     	
     	int posY = getPosY();
-    
+        // Animación de desplazamiento hacia arriba
         for (int i = 0; i < 30; i++) {
             setPosY(posY - (i * 2));
             try {
@@ -123,7 +124,7 @@ public class Spiny extends Enemigo{
                 e.printStackTrace();
             }
         }
-       
+        // Caída hacia la parte inferior de la ventana
         while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
             setPosY(getPosY() + 5);
             try {
