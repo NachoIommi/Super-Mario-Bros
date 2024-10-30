@@ -201,15 +201,15 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getLakitu() {
-		return new Sprite(rutaImagen + "/lakituApuntandoDerecha.png");
+		return new Sprite(rutaImagen + "/lakituApuntandoDerecha.gif");
 	}
 	
 	public Sprite getLakituApuntandoIzquierda() {
-		return new Sprite(rutaImagen + "/lakituApuntandoIzquierda.png");
+		return new Sprite(rutaImagen + "/lakituApuntandoIzquierda.gif");
 	}
 	
 	public Sprite getLakituPorDisparar() {
-		return new Sprite(rutaImagen + "/lakituPorDisparar.png");
+		return new Sprite(rutaImagen + "/lakituPorDisparar.gif");
 	}
 	
 	public Sprite getSpinySpawneando() {

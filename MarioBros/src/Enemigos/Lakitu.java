@@ -132,15 +132,14 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void actualizarPosicionConScroll() {
-	    int marioX = personaje.getPosX();  // Obtén la posición X actual de Mario
+	    int marioX = personaje.getPosX();
+	    int offsetX = 150;        // Distancia entre mario y laki
 
 	    if (marioX > maxX) {
-	        maxX = marioX;
-	        posX = marioX + 150;
-	    } else {
-	        posX = maxX;
+	        maxX = marioX;   // Que solo avance si avanza mario
 	    }
 
+	    posX = maxX + offsetX;
 	    hitbox.actualizar(posX, posY);
 	}
 	

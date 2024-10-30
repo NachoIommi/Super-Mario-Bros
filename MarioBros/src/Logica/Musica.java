@@ -9,7 +9,7 @@ import java.io.File;
 
 public class Musica { //Actua como la clase singleton, musica = singleton aca
 
-    private static Musica instancia = null;
+    private static Musica archivo = null;
     private Clip clip;
 
     private Musica() { // es privado para evitar instanciación externa
@@ -21,15 +21,16 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
     }
 
     // Método estático para obtener la única instancia
-    public static Musica getInstancia() {
-        if (instancia == null) {
-            instancia = new Musica();
+    public static Musica getMusica() {
+        if (archivo == null) {
+            archivo = new Musica();
         }
-        return instancia;
+        return archivo;
     }
 
     public void reproducirMusica(String rutaArchivo) {
         try {
+        	detenerMusica();
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(rutaArchivo));
             clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -48,6 +49,7 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
 
     public void reiniciarMusica() {
         if (clip != null) {
+        	detenerMusica();
             clip.setFramePosition(0); // Reposicionar al inicio
             clip.start();
         }
