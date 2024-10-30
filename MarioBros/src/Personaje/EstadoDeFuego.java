@@ -290,6 +290,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getMarioFlorDeFuegoMuerto();
     	personaje.cargarSprite(sprite);
+    	personaje.setSpriteActualizado(true);
     	
     	int posY = personaje.getPosY();
 

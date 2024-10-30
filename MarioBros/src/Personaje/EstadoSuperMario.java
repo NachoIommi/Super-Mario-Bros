@@ -332,6 +332,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getSuperMarioMuerto();
     	personaje.cargarSprite(sprite);
+    	personaje.setSpriteActualizado(true);
     	
     	int posY = personaje.getPosY();
 

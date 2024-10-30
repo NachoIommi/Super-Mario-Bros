@@ -246,10 +246,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 	    } else if (!left && !right) {
 	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
 	        
-	    }else if(velX==0) {
-	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();		    
-	    }	    
-	   
+	    } else if(velX==0) {
+	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
+	    	
+	    } 
+	    
 	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
 	    	personaje.cargarSprite(nuevoSprite);
 	    	personaje.setSpriteActualizado(true);
@@ -300,6 +301,7 @@ public class EstadoNormal extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getPersonajeNormalMuerto();
     	personaje.cargarSprite(sprite);
+    	personaje.setSpriteActualizado(true);
     	
     	int posY = personaje.getPosY();
 

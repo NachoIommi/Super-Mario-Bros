@@ -269,11 +269,11 @@ public class EstadoEstrella extends EstadoDePersonaje {
     }
     
     public void morir() {                              //si puede morir: cuando toca vacio
-    	System.out.println("llamamos al morir de estrella jaja");
     	personaje.setVidas(personaje.getVidas()-1);
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getMarioEstrellaMuerto();
     	personaje.cargarSprite(sprite);
+    	personaje.setSpriteActualizado(true);
     	
     	int posY = personaje.getPosY();
 
