@@ -23,7 +23,8 @@ public class HiloAnimaciones extends Thread{
 	    	enEjecucion = true;
 	    	while(enEjecucion) {
 	    		try {
-	                for(Enemigo e : enemigos) {
+	    			List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
+	                for(Enemigo e : copiaEnemigos) {
 	                	if(e.murio()) {
 	                		e.actualizarSprite();
 	                	}

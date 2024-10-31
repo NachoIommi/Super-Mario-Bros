@@ -32,6 +32,7 @@ public class HiloRestoMundo extends Thread {
     	enEjecucion = true;
         while (enEjecucion) {
             try {
+            	List<PowerUps> copiaPowerUp = new ArrayList<PowerUps>(powerUp);
             	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
             	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
             	
@@ -95,7 +96,7 @@ public class HiloRestoMundo extends Thread {
 		            			
             		}
             	
-            	for(PowerUps power : powerUp) {
+            	for(PowerUps power : copiaPowerUp) {
             		if (power.mostrable()) {
 	            		double toleranciaAltura = 10;
 	            		for(Plataforma p : copiaPlataforma) {
@@ -105,7 +106,7 @@ public class HiloRestoMundo extends Thread {
 	                            {
 	                                power.setTocandoBloqueDerecha(true);
 	                                power.setTocandoBloqueIzquierda(false);
-	                               System.out.println("power Colisión Der");
+	               //                System.out.println("power Colisión Der");
 	                            }  
 	
 	                            else if (power.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
@@ -115,23 +116,23 @@ public class HiloRestoMundo extends Thread {
 	                                power.setTocandoBloqueIzquierda(true);
 	                                power.setTocandoBloqueDerecha(false);
 	                                
-	                                System.out.println("power Colisión Izq");
+	             //                   System.out.println("power Colisión Izq");
 	                            }
 	
 	                    if (power.getHitbox().getY() + power.getHitbox().getHeight() >= p.getHitbox().getY() &&
-	                    	    power.getHitbox().getY() + power.getHitbox().getHeight() <= p.getHitbox().getY() + 2 && // Rango de 2 unidades
+	                    	    power.getHitbox().getY() + power.getHitbox().getHeight() <= p.getHitbox().getY() + 3 && // Rango de 2 unidades
 	                    	    power.getHitbox().getX() + power.getHitbox().getWidth() > p.getHitbox().getX() &&
 	                    	    power.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth()) 
 	                    	{
 	                    	    power.setTocandoBloqueAbajo(true);
-	                    	    System.out.println("power Colisión piso");
+	              //      	    System.out.println("power Colisión piso");
 	                    	}
 	
 	                            
 	                            else if (power.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
 	                                     power.getHitbox().getY() + power.getHitbox().getHeight() > p.getHitbox().getY()) 
 	                            {
-	                                power.setTocandoBloqueArriba(true);	                                
+	             //                   power.setTocandoBloqueArriba(true);	                                
 	                            }
 	                            
 	            		}

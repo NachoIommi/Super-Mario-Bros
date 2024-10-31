@@ -41,7 +41,8 @@ public class Juego {
 	//protected Musica musica; ver si va aca, no toy seguro
 	
 	public Juego() {
-		reloj = new Reloj();
+		modoDeJuego=2;
+		reloj = new Reloj();		
 		nivel = new Nivel(300,this);
 		personaje = null;
 		enemigos = new ArrayList<Enemigo>();
@@ -49,7 +50,7 @@ public class Juego {
 		powerUps = new ArrayList<PowerUps>();
 		cargarPrimerNivel();
 		ranking = cargarRanking();
-
+		
 	
 		hilo = new HiloPersonaje(this);
 		hiloAnimaciones = new HiloAnimaciones(this);
