@@ -33,9 +33,7 @@ public class HiloRestoMundo extends Thread {
         while (enEjecucion) {
             try {
             	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
-            	List<PowerUps> copiaPowerUp = new ArrayList<PowerUps>(powerUp);
             	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
-            	List<Plataforma> copiaPlataforma2 = new ArrayList<Plataforma>(plataforma);
             	
             	for(Enemigo e : copiaEnemigos) {
             		for(Plataforma p : copiaPlataforma) {

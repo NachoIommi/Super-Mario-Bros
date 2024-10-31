@@ -36,7 +36,6 @@ public class HiloPersonaje extends Thread {
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
         visitorEntidad = new VisitorEntidad(personaje);
-        toleranciaAltura = personaje.getToleranciaAltura();
     }
   
     public void detener() {
@@ -46,6 +45,7 @@ public class HiloPersonaje extends Thread {
     	enEjecucion = true;
         while (enEjecucion) {
             try {
+                toleranciaAltura = personaje.getToleranciaAltura();
             	List<Plataforma> copiaPlataformas = new ArrayList<Plataforma>(plataformas);
                 for(Plataforma p : copiaPlataformas) {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {

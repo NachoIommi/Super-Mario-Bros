@@ -24,7 +24,7 @@ public class SuperChampi extends PowerUps{
 		posX = x;
 		posY = y;
 		this.sprite = sprite;
-		hitbox = new Hitbox(0 ,0,25 ,25);
+		hitbox = new Hitbox(0 ,0,30 ,30);
 		mostrable=false;
 		tocandoBloqueDerecha=false;
 	    tocandoBloqueIzquierda=false;

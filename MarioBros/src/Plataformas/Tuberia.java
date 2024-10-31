@@ -18,7 +18,7 @@ public class Tuberia extends Plataforma{
 		posX = x;
 		posY = y;
 		sprite = s;
-		hitbox = new Hitbox(x, y, 32,30);
+		hitbox = new Hitbox(x-5, y, 40,30);
 	}
 	
 	public Tuberia(Sprite s, int x,int y) {
