@@ -8,15 +8,15 @@ public class Moneda extends PowerUps{
 	protected Sprite sprite;
 	protected int posX;
 	protected int posY;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected boolean mostrable;
 	
 	public Moneda(Sprite sprite, int x, int y) {
 		posX = x;
 		posY = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x , y, 30, 30);
-		mostrable=false;
+		hitbox = new Hitbox(x , y, 30, 30);
+		mostrable=true;
 	}
 	
 	public void moverse() {
@@ -48,7 +48,7 @@ public class Moneda extends PowerUps{
 	}
 	
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
 	@Override
@@ -86,7 +86,11 @@ public class Moneda extends PowerUps{
 
 	@Override
 	public void afectarPersonaje(Personaje p) {
-		// TODO Auto-generated method stub
+		p.setPuntuacion(5);
+		p.setMonedas(1);
+		hitbox.actualizar(0, 0);
+		setMostrable(false);
+		hitbox.actualizar(0, 0);
 		
 	}
 
