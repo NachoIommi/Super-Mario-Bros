@@ -26,6 +26,7 @@ public class ControladorVistas {
 	public JFrame ventana;
 	protected PantallaPrincipal pantallaPrincipal;
 	protected PantallaJuego pantallaJuego;
+	protected PantallaModoDeJuego pantallaModoDeJuego;
 	protected PantallaPerder pantallaPerder;
 	protected Juego juego;
 	
@@ -35,6 +36,7 @@ public class ControladorVistas {
 		pantallaPrincipal = new PantallaPrincipal(this);
 		pantallaJuego = new PantallaJuego(this);
 		pantallaPerder = new PantallaPerder(this);
+		pantallaModoDeJuego = new PantallaModoDeJuego(this);
 	}
 	
 	public void iniciar() {
@@ -55,6 +57,12 @@ public class ControladorVistas {
             }
         });
 	}
+	
+	public void mostrarPantallaModoDeJuego(){
+		ventana.setContentPane(pantallaModoDeJuego);
+	}
+	
+	
 	
 	public void mostrarPantallaPrincipal() {
 		ventana.setContentPane(pantallaPrincipal);
