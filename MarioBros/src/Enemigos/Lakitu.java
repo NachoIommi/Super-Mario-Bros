@@ -7,6 +7,8 @@ import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Lakitu extends Enemigo{
 	
@@ -16,6 +18,7 @@ public class Lakitu extends Enemigo{
 	protected int posY;
 	protected Personaje personaje;
 	protected int maxX;
+	private Timer spawnTimer;
 	
 	protected boolean tocandoBloqueDerecha=false;
 	protected boolean tocandoBloqueIzquierda=false;
@@ -23,6 +26,7 @@ public class Lakitu extends Enemigo{
 	protected boolean tocandoBloqueArriba=false;
 	protected boolean mostrable=true;
 	protected boolean murio;
+	protected boolean direccionDerecha;
 	
 	public Lakitu(Sprite s, int x, int y, Personaje p) {
 		posX = x;
@@ -139,9 +143,63 @@ public class Lakitu extends Enemigo{
 	        maxX = marioX;   // Que solo avance si avanza mario
 	    }
 
-	    posX = maxX + offsetX;
+	    //posX = maxX + offsetX;
+	    moverseLateralmente();
 	    hitbox.actualizar(posX, posY);
 	}
+	
+	public void moverseLateralmente() {
+	    int limiteIzquierdo = maxX;
+	    int limiteDerecho = maxX + 200;
+
+	    if (posX >= limiteDerecho) {
+	        direccionDerecha = false;
+	    } else if (posX <= limiteIzquierdo) {
+	        direccionDerecha  = true;
+	    }
+
+	    if (posX < maxX) {
+	        posX = maxX;
+	    } else {
+	        posX += direccionDerecha ? 2 : -2; // Si direccionDerecha = true, posX += 2, else -= 2
+	    }
+	    
+	    hitbox.actualizar(posX, posY);
+	}
+	
+	private void iniciarSpawnTimer() {
+        spawnTimer = new Timer();
+        // Ejecutar el método spawnSpiny cada 2000 ms (2 segundos)
+       // spawnTimer.schedule(new TimerTask() {
+            @Override
+           // public void run() {
+               // spawnSpiny();
+           // }
+       // }, 0, 2000); // 0 ms de espera antes de iniciar, cada 2000 ms*/
+    }
+	
+	/*private void spawnSpiny() { 
+        // Crear una nueva instancia de Spiny en la posición de Lakitu
+        Spiny spiny = new Spiny(parámetros necesarios, como posición inicial );
+        // Aquí puedes establecer la posición inicial en la ubicación actual de Lakitu
+        spiny.setPosX(getPosX());
+        spiny.setPosY(getPosY());
+
+        // Lógica para hacer que el Spiny caiga
+        new Thread(() -> {
+            while (spiny.getPosY() < altura objetivo) {
+                spiny.setPosY(spiny.getPosY() +  velocidad de caída );
+                try {
+                    Thread.sleep(50); // Controlar la velocidad de caída
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            // Una vez que cae, activa el movimiento del Spiny
+            spiny.comenzarAMoverse(); // Implementa este método en la clase Spiny
+        
+        
+    }*/
 	
 	// Getters
 	public int getPosX() {
