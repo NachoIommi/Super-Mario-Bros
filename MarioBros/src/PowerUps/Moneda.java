@@ -6,15 +6,17 @@ import Fabricas.Sprite;
 public class Moneda extends PowerUps{
 	
 	protected Sprite sprite;
-	protected int x;
-	protected int y;
+	protected int posX;
+	protected int posY;
 	protected Hitbox hitb;
+	protected boolean mostrable;
 	
 	public Moneda(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
 		hitb = new Hitbox(x , y, 30, 30);
+		mostrable=false;
 	}
 	
 	public void moverse() {
@@ -25,53 +27,28 @@ public class Moneda extends PowerUps{
 		v.visitarMoneda(this);
 	}
 	
-	public void cargarSprite(Sprite s) {
-		
-	}
-
-	public void afectarPersonaje(Personaje p) { 
-		p.setPuntuacion(5);
-    	p.setMonedas(1);
-	}
-	
 	public Sprite getSprite() {
 		return sprite;
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
-
+	
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
+	public void setPosX(int x) {
+		this.posX=x;
+	}
+	
+	public void setPosY(int y) {
+		this.posY=y;
+	}
+	
 	public Hitbox getHitbox() {
 		return hitb;
-	}
-
-	@Override
-	public void setPosX(int x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setPosY(int x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean mostrable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setMostrable(boolean b) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -85,29 +62,42 @@ public class Moneda extends PowerUps{
 		// TODO Auto-generated method stub
 		
 	}
+	public void setMostrable(boolean b) {
+		mostrable=b;
+	}
 
-	@Override
 	public void setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		
+		
 	}
 
-	@Override
 	public void setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
 		
+	
 	}
 
-	@Override
 	public void setTocandoBloqueArriba(boolean b) {
+		
+	}
+
+
+	public void setTocandoBloqueAbajo(boolean b) {
+	
+	}
+
+	@Override
+	public void afectarPersonaje(Personaje p) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		
+	public boolean mostrable() {
+								
+		return mostrable;
 	}
+	
+	@Override
+	public void cargarSprite(Sprite s) {
+			}
 	
 }

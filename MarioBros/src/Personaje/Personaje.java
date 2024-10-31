@@ -247,7 +247,7 @@ public class Personaje extends Entidad{
     }
     
     public void setMonedas(int n){
-        this.monedas = n;
+        monedas += n;
     }
 
     
