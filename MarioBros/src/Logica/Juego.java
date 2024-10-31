@@ -163,11 +163,11 @@ public class Juego {
 	}
 	
 	public int getModoDeJuego() {
-		return 2; 
-	}//Retonarmos un '2' a modo de convension ya que no hicimos el metodo de seleccion del modoDeJuego
+		return modoDeJuego; 
+	}
 	
 	public void setModoDeJuego(int n) {
-		
+		modoDeJuego = n;
 	}
 	
 	public void agregarPersonaje(Personaje p) {

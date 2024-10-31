@@ -326,7 +326,7 @@ public class PantallaJuego extends JPanel {
     public void actualizarFondo() {
     	//personaje = controladorVistas.obtenerPersonaje();
     	int velocidad = Math.round(personaje.getVelX());
-    	if(personaje.getPosX() > maximoDerecha ) {
+    	if(personaje.getPosX() >= maximoDerecha ) {
     		moverFondo(-velocidad);
     	}
     }
