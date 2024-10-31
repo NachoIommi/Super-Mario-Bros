@@ -26,7 +26,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		sprite = s;
 		posX = x;
 		posY = y;
-		hitbox = new Hitbox(x ,y,30 ,40);
+		hitbox = new Hitbox(x ,y,30 ,30);
 		contenido=p;
 		golpesRestantes=golpes;	
 		
