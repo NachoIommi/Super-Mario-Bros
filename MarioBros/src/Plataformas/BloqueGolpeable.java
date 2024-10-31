@@ -23,8 +23,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	protected PowerUps contenido;
 	protected boolean mostrable;
 	protected int golpesRestantes;
-	protected boolean bloqueMonedas = false;
-	
+	protected boolean bloqueMonedas = false;	
 	
 	public BloqueGolpeable(BloqueDePregunta b, Sprite s, int x, int y, PowerUps p, int golpes) {
 		super(b);
@@ -35,8 +34,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		contenido=p;
 		golpesRestantes=golpes;	
 		if (golpes>1)
-			bloqueMonedas=true;
-		
+			bloqueMonedas=true;	
 	}
 	
 	public void soltarContenido() {

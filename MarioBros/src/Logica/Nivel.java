@@ -141,6 +141,8 @@ public class Nivel {
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,s ,1));
 				    			juego.agregarPowerUp(s);
 				    			break;
+				    			
+				    			
 				    		 default:
 				    			 break;
 				    	}
