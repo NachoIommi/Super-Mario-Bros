@@ -9,7 +9,6 @@ import Plataformas.*;
 import PowerUps.PowerUps;
 
 public class HiloRestoMundo extends Thread {
-
     protected Juego juego; 
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
@@ -19,14 +18,12 @@ public class HiloRestoMundo extends Thread {
     protected VisitorEntidad visitorEntidad;
     private volatile boolean enEjecucion;
     Personaje personaje;
-
     public HiloRestoMundo(Juego juego) {
         this.juego = juego;   
         plataforma = juego.getPlataformas();
         enemigo = juego.getEnemigos();
         powerUp = juego.getPowerUps();
         personaje = juego.getPersonaje();
-
     }
     public void detener() {
     	enEjecucion = false;
@@ -36,12 +33,14 @@ public class HiloRestoMundo extends Thread {
         while (enEjecucion) {
             try {
             	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
+            	List<PowerUps> copiaPowerUp = new ArrayList<PowerUps>(powerUp);
             	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
+            	List<Plataforma> copiaPlataforma2 = new ArrayList<Plataforma>(plataforma);
+            	
             	for(Enemigo e : copiaEnemigos) {
             		for(Plataforma p : copiaPlataforma) {
             			if (e.getHitbox().intersects(p.getHitbox())) {
-            				double toleranciaAltura = e.getToleranciaAltura();
-            				
+            				double toleranciaAltura = e.getToleranciaAltura();           				
 		            			if (e.getHitbox().getX() + e.getHitbox().getWidth() > p.getHitbox().getX() &&
 		                                e.getHitbox().getX() < p.getHitbox().getX() &&
 		                                Math.abs(e.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
@@ -62,9 +61,7 @@ public class HiloRestoMundo extends Thread {
 		                                e.getHitbox().getY() < p.getHitbox().getY()) 
 		                            {
 		                                e.setTocandoBloqueAbajo(true);
-		                            }
-		                            
-		                            
+		                            }		                         		                            
 		                }
         				double toleranciaAltura = e.getToleranciaAltura();
             			for(Enemigo otroE : copiaEnemigos) {
@@ -73,8 +70,7 @@ public class HiloRestoMundo extends Thread {
 	                                Math.abs(e.getHitbox().getY() - otroE.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
 	                            {
 	                                e.setTocandoBloqueDerecha(true);
-	                                e.setTocandoBloqueIzquierda(false);
-	                                
+	                                e.setTocandoBloqueIzquierda(false);                                
 	                                otroE.setTocandoBloqueDerecha(false);
 	                                otroE.setTocandoBloqueIzquierda(true);
 	                                //System.out.println("Colisión Der");
@@ -90,11 +86,7 @@ public class HiloRestoMundo extends Thread {
                                 otroE.setTocandoBloqueIzquierda(false);
 	                            //System.out.println("Colisión Izq");
 	                        }
-	            			
-            				
-            				
-            			}
-            			
+         			}         			
             		}
             		if(Math.abs(personaje.getPosX()-e.getPosX() )<600)
             			e.moverse();
@@ -104,11 +96,54 @@ public class HiloRestoMundo extends Thread {
                     e.setTocandoBloqueAbajo(false);
 		            			
             		}
-            		
             	
-            	
-               
-                
+            	for(PowerUps power : powerUp) {
+            		if (power.mostrable()) {
+	            		double toleranciaAltura = 10;
+	            		for(Plataforma p : copiaPlataforma) {
+	                    if (power.getHitbox().getX() + power.getHitbox().getWidth() > p.getHitbox().getX() &&
+	                                power.getHitbox().getX() < p.getHitbox().getX() &&
+	                                Math.abs(power.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+	                            {
+	                                power.setTocandoBloqueDerecha(true);
+	                                power.setTocandoBloqueIzquierda(false);
+	                               System.out.println("power Colisión Der");
+	                            }  
+	
+	                            else if (power.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
+	                                     power.getHitbox().getX() > p.getHitbox().getX() &&
+	                                     Math.abs(power.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+	                            {
+	                                power.setTocandoBloqueIzquierda(true);
+	                                power.setTocandoBloqueDerecha(false);
+	                                
+	                                System.out.println("power Colisión Izq");
+	                            }
+	
+	                    if (power.getHitbox().getY() + power.getHitbox().getHeight() >= p.getHitbox().getY() &&
+	                    	    power.getHitbox().getY() + power.getHitbox().getHeight() <= p.getHitbox().getY() + 2 && // Rango de 2 unidades
+	                    	    power.getHitbox().getX() + power.getHitbox().getWidth() > p.getHitbox().getX() &&
+	                    	    power.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth()) 
+	                    	{
+	                    	    power.setTocandoBloqueAbajo(true);
+	                    	    System.out.println("power Colisión piso");
+	                    	}
+	
+	                            
+	                            else if (power.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
+	                                     power.getHitbox().getY() + power.getHitbox().getHeight() > p.getHitbox().getY()) 
+	                            {
+	                                power.setTocandoBloqueArriba(true);	                                
+	                            }
+	                            
+	            		}
+	            		power.moverse();
+	            		power.setTocandoBloqueDerecha(false);
+	                    power.setTocandoBloqueIzquierda(false);
+	                    power.setTocandoBloqueAbajo(false);
+	    			}
+            	}
+            
                 Thread.sleep(16);
             } catch (InterruptedException e) {
                 e.printStackTrace();
