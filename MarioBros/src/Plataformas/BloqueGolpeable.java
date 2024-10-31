@@ -50,10 +50,13 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	public void recibirGolpe(Personaje p) {
 		if(!bloqueMonedas) {
 			if(golpesRestantes!=1 ) {
+				soltarContenido();
 				golpesRestantes--;
 				
 			}
-			else {			
+			else {		
+				soltarContenido();
+				golpesRestantes--;
 				GenerarSprite fabrica = new GenerarSpriteOriginal();
 				EstadoDeBloque e = new BloqueGolpeado(bloque,fabrica.getBloqueDePreguntaRoto(),posX,posY,0);
 				bloque.cambiarEstado(e);
