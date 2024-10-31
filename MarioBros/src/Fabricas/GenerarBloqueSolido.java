@@ -18,10 +18,12 @@ public class GenerarBloqueSolido implements GenerarPlataformas {
 	}
 
 	@Override
-	public Plataforma crearPlataforma(Sprite s, int x, int y, Enemigo e,int relojs) {
+	public Plataforma crearPlataforma(Sprite s, int x, int y, Enemigo p) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 	
 }
