@@ -57,7 +57,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	// Setters
 	public void morir() {
-    	personaje.setVidas(personaje.getVidas()-1);
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getPersonajeNormalMuerto();
     	personaje.cargarSprite(sprite);
@@ -83,7 +82,7 @@ public class EstadoNormal extends EstadoDePersonaje {
             }
         }
         
-        personaje.nivelActual.reiniciarNivel();
+        personaje.morir();
    		System.out.println("se ejecuto reiniciarNivel :: personajeNormal");
 
     }

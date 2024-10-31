@@ -180,14 +180,23 @@ public class Personaje extends Entidad{
     	return estado.getHitbox();
     }
  
-    public void morir() {
-    	
-        estado.morir();
-        if (this.vidas == 0) {
-        	System.out.println("Game Over");
-        }
-      
-    }
+	public void morir() {
+	    if (vidas > 0) {
+	        int puntuacionAnterior = puntuacion;
+	        int vidasAnterior = vidas - 1;  // Resta una vida
+
+	        nivelActual.reiniciarNivel(); // Reinicia el nivel sin modificar vidas y puntuación
+
+	        // Restaura las vidas y la puntuación después del reinicio del nivel
+	        this.setPuntuacion(puntuacionAnterior);
+	        this.setVidas(vidasAnterior);
+	        activarInvulnerabilidad(); // Activa invulnerabilidad después de morir
+	    } else {
+	        System.out.println("Game Over");
+	        // Lógica adicional para manejar el fin del juego si se desea
+	    }
+	}
+
     public void activarInvulnerabilidad() {
         if (!invulnerable) {
             invulnerable = true; // Activa la invulnerabilidad

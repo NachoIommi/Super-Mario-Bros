@@ -39,6 +39,7 @@ public class Nivel {
 	protected GenerarSprite fabricaSprite;
 	protected int reloj;
 	protected int nivelActual;
+	protected Personaje p;
 	
 	public Nivel(int tiempo, Juego juego) {
 		
@@ -111,8 +112,10 @@ public class Nivel {
 				}
 				switch (tipoEntidad) {
 				    case 0:
-				    	juego.agregarPersonaje(fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY,this));
-				        break;
+				    	p = fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY,this);
+				    	juego.agregarPersonaje(p);
+				        
+				    	break;
 				    case 1:
 				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY));
 				        break;
@@ -210,13 +213,18 @@ public class Nivel {
 			perderJuego();
 	}
 
-	public void reiniciarNivel(){
+	public void reiniciarNivel() {
+	    int vidas = p.getVidas()-1;
+	    int puntuacion = p.getPuntuacion();
 		juego.reseteo();
-		
-		cargarNivel(getNivelActual());
-		juego.reiniciarNivel();
-		System.out.println("se ejecuto reiniciarNivel :: nivel");
+	    cargarNivel(getNivelActual());
+	    juego.reiniciarNivel();
+	    p.setVidas(vidas);
+	    p.setPuntuacion(puntuacion);
+	    
+	    System.out.println("Nivel reiniciado sin afectar puntuación o vidas.");
 	}
+
 
 	public void ganarJuego(){
 		//hay que ver caso nivel final
