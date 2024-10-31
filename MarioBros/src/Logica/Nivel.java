@@ -93,6 +93,13 @@ public class Nivel {
 	public void cargarNivel(int i) {
 		System.out.println("cargando nivel "+ i);
 		try {
+			int vidas = 3;
+			int puntuacion = 0;
+
+			if(i>0) {
+				 vidas = p.getVidas();
+				 puntuacion = p.getPuntuacion();
+			 }
 			 setNivelActual(i);	
 			 String ruta = "Niveles" + File.separator + "nivel-"+getNivelActual()+".txt";
 			 FileReader lector = new FileReader(ruta);
@@ -199,7 +206,9 @@ public class Nivel {
 				
 			}
 			//setReloj();
-			//setNivelActual(i);			
+			//setNivelActual(i);
+			 p.setVidas(vidas);
+			 p.setPuntuacion(puntuacion);
 		}catch(IOException | NumberFormatException e) {
 				System.out.println(e.getMessage());}
 	}

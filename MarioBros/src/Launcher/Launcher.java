@@ -28,6 +28,7 @@ public class Launcher {
 					controladorVistas.ventana.setVisible(true);
 					controladorVistas.mostrarPantallaPrincipal();
 				} catch (Exception e) {
+			
 					e.printStackTrace();
 				}
 			}
