@@ -51,51 +51,64 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		if(!bloqueMonedas) {
 			if(golpesRestantes!=1 ) {
 				golpesRestantes--;
-				soltarContenido();
-			}
-			else {
 				
-				soltarContenido();
+			}
+			else {			
 				GenerarSprite fabrica = new GenerarSpriteOriginal();
 				EstadoDeBloque e = new BloqueGolpeado(bloque,fabrica.getBloqueDePreguntaRoto(),posX,posY,0);
 				bloque.cambiarEstado(e);
 				bloque.setSprite(fabrica.getBloqueDePreguntaRoto());}
 		}
 		else {
-			if(golpesRestantes!=1 ) {
-
-	        	System.out.println("1");
-	        	contenido.setMostrable(true);
-				Timer timer = new Timer();
-			    timer.schedule(new TimerTask() {
-			        public void run() {		
-			        	System.out.println("2");
-			        	contenido.setMostrable(false);
-			        }
-			    }, 2000);
-			p.setMonedas(1);
-			p.setPuntuacion(5);
-			golpesRestantes--;
+			if (golpesRestantes != 1) {
+	            soltarContenido();
+	            // Animación de movimiento ascendente
+	            Timer timer = new Timer();
+	            TimerTask animacionSubida = new TimerTask() {
+	                int tiempo = 0;
+	                int alturaInicial = contenido.getPosY();
+	                
+	                public void run() {
+	                    tiempo += 50;  // intervalo en milisegundos
+	                    // La moneda sube 2 píxeles cada 50 ms
+	                    contenido.setPosY(alturaInicial - (tiempo / 50) * 2);	                    	                
+	                    if (tiempo >= 500) {
+	                        contenido.setMostrable(false);
+	                        contenido.setPosY(alturaInicial); 
+	                        this.cancel();
+	                    }
+	                }
+	            };
+	            timer.scheduleAtFixedRate(animacionSubida, 0, 50); // Ejecuta cada 50 ms
+	            p.setMonedas(1);
+	            p.setPuntuacion(5);
+	            golpesRestantes--;}
 			
-		}
-		else {
-
-
-        	contenido.setMostrable(true);
-			Timer timer = new Timer();
-		    timer.schedule(new TimerTask() {
-		        public void run() {
-		        	contenido.setMostrable(false);
-		        }
-		    }, 2000);
-		    
-			p.setMonedas(1);
-			p.setPuntuacion(5);
-			GenerarSprite fabrica = new GenerarSpriteOriginal();
-			EstadoDeBloque e = new BloqueGolpeado(bloque,fabrica.getBloqueDePreguntaRoto(),posX,posY,0);
-			bloque.cambiarEstado(e);
-			bloque.setSprite(fabrica.getBloqueDePreguntaRoto());}
-			
+			else {	     
+				soltarContenido();
+	            Timer timer = new Timer();
+	            TimerTask animacionSubidaFinal = new TimerTask() {
+	                int tiempo = 0;
+	                int alturaInicial = contenido.getPosY();
+	                
+	                public void run() {
+	                    tiempo += 50;
+	                    contenido.setPosY(alturaInicial - (tiempo / 50) * 2);	                    
+	                    if (tiempo >= 500) {
+	                        contenido.setMostrable(false);
+	                        contenido.setPosY(alturaInicial);
+	                        this.cancel();
+	                    }
+	                }
+	            };
+	            timer.scheduleAtFixedRate(animacionSubidaFinal, 0, 50);
+	            p.setMonedas(1);
+	            p.setPuntuacion(5);
+	            GenerarSprite fabrica = new GenerarSpriteOriginal();
+	            EstadoDeBloque e = new BloqueGolpeado(bloque, fabrica.getBloqueDePreguntaRoto(), posX, posY, 0);
+	            bloque.cambiarEstado(e);
+	            bloque.setSprite(fabrica.getBloqueDePreguntaRoto());
+	        }
 		}
 	}
 
@@ -107,10 +120,6 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		return golpesRestantes;
 	}
 
-
-
-	
-	@Override
 	public void aceptarVisita(Visitor v) {
 		// TODO Auto-generated method stub
 		

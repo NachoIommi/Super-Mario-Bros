@@ -381,6 +381,7 @@ public class EstadoNormal extends EstadoDePersonaje {
             setPosX(getPosX()+1);
             velX = 0;
         }
+	    
 	}
 	
 	public void gravedad() {
@@ -411,7 +412,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
+	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
 	

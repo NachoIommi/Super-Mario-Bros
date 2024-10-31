@@ -19,7 +19,6 @@ public class VisitorEntidad implements Visitor{
 	
     public void visitarMoneda(Moneda m) {
     	m.afectarPersonaje(personaje);
-    	System.out.println("moenda");
     	
     }
     
