@@ -41,14 +41,14 @@ public class Juego {
 	//protected Musica musica; ver si va aca, no toy seguro
 	
 	public Juego() {
-		modoDeJuego=2;
+		
 		reloj = new Reloj();		
-		nivel = new Nivel(300,this);
+		
 		personaje = null;
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		cargarPrimerNivel();
+		
 		ranking = cargarRanking();
 		
 	
@@ -61,7 +61,11 @@ public class Juego {
 	public void setControladorVistas(ControladorVistas controladorVistas) {
 		this.controladorVistas = controladorVistas;
 	}
+	
 	public void cargarPrimerNivel() {
+		if(nivel == null) {
+			nivel = new Nivel(300,this);
+		}
 		nivel.cargarNivel(0);
 		System.out.println(enemigos.toString());
 	}

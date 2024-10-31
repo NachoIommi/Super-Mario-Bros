@@ -27,7 +27,8 @@ public class Launcher {
 					juego.setControladorVistas(controladorVistas);
 					controladorVistas.ventana.setVisible(true);
 					controladorVistas.mostrarPantallaModoDeJuego();
-				//	controladorVistas.mostrarPantallaPrincipal();
+				
+
 				} catch (Exception e) {
 			
 					e.printStackTrace();

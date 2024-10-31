@@ -66,7 +66,7 @@ public class Nivel {
 			fabricaFlorDeFuego = new GenerarFlorDeFuego();
 			fabricaChampiVerde = new GenerarChampiVerde();		
 			
-			if(juego.getModoDeJuego() == 2 ) {
+			if(juego.getModoDeJuego() == 1 ) {
 				fabricaSprite = new GenerarSpriteOriginal();
 			}else {
 				fabricaSprite = new GenerarSpriteReemplazo();

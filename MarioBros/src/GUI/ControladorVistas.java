@@ -34,9 +34,7 @@ public class ControladorVistas {
 		this.juego = juego;
 		iniciar();
 		pantallaPrincipal = new PantallaPrincipal(this);
-		pantallaJuego = new PantallaJuego(this);
-		pantallaPerder = new PantallaPerder(this);
-		pantallaModoDeJuego = new PantallaModoDeJuego(this);
+	
 	}
 	
 	public void iniciar() {
@@ -51,7 +49,7 @@ public class ControladorVistas {
 		// Agregar un listener para manejar el cierre de la ventana
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-            	Jugador j = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),obtenerJuego().getPersonaje().getPuntuacion());
+            	Jugador j = new Jugador("carleto",obtenerJuego().getPersonaje().getPuntuacion());
 	            guardarJugadorEnRanking(j); // Puntaje inicial 0
                 juego.cierreDeJuego(); // Llamar al método para guardar el ranking
             }
@@ -59,20 +57,33 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaModoDeJuego(){
+		if(pantallaModoDeJuego == null) {
+			pantallaModoDeJuego = new PantallaModoDeJuego(this);
+		}
 		ventana.setContentPane(pantallaModoDeJuego);
 	}
 	public void mostrarPantallaPerder() {
+		if(pantallaPerder == null) {
+			pantallaPerder = new PantallaPerder(this);
+		}
 		ventana.setContentPane(pantallaPerder);
 	}
 	
 	
 	public void mostrarPantallaPrincipal() {
+		if(pantallaPrincipal == null) {
+			pantallaPrincipal = new PantallaPrincipal(this);
+		}
 		ventana.setContentPane(pantallaPrincipal);
 	}
 	
 	public void mostrarPantallaJuego() {
-		
+		juego.cargarPrimerNivel();
 		juego.iniciarJuego();
+		if(pantallaJuego == null) {
+			pantallaJuego = new PantallaJuego(this);
+		}
+		
 		ventana.setContentPane(pantallaJuego);
 	    ventana.revalidate();
 	    pantallaJuego.requestFocus();
