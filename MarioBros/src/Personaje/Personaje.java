@@ -192,6 +192,7 @@ public class Personaje extends Entidad{
 	        this.setVidas(vidasAnterior);
 	        activarInvulnerabilidad(); // Activa invulnerabilidad después de morir
 	    } else {
+	        nivelActual.perderJuego();
 	        System.out.println("Game Over");
 	        // Lógica adicional para manejar el fin del juego si se desea
 	    }

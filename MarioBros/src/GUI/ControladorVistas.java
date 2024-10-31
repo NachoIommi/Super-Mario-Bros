@@ -61,7 +61,9 @@ public class ControladorVistas {
 	public void mostrarPantallaModoDeJuego(){
 		ventana.setContentPane(pantallaModoDeJuego);
 	}
-	
+	public void mostrarPantallaPerder() {
+		ventana.setContentPane(pantallaPerder);
+	}
 	
 	
 	public void mostrarPantallaPrincipal() {

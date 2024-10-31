@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import Enemigos.Enemigo;
 import Fabricas.*;
+import GUI.PantallaPerder;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.Moneda;
@@ -240,14 +241,11 @@ public class Nivel {
 		cargarNivel(getNivelActual()+1);
 	}
 
-	public void perderJuego(){
-		//pantalla especial
-		//juego.perderJuego();
-			//botones
-				//reiniciar juego
-				//volver a pantalla inicial
-		//cargar al ranking 
+	public void perderJuego() {
+	    juego.getControladorVistas().mostrarPantallaPerder();
+	    System.out.println("Juego terminado: Se ha mostrado la pantalla de pérdida.");
 	}
+
 	//ver tema RELOJ
 
 }
