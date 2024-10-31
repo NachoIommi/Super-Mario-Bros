@@ -7,22 +7,54 @@ import Personaje.Personaje;
 
 public class ChampiVerde extends PowerUps{
 	
-	protected int x;
-	protected int y;
-	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected int posX;
+	protected int posY;
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
 	protected boolean mostrable;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
+	protected Sprite sprite;
+	protected Hitbox hitbox;
 	
 	public ChampiVerde(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitbox = new Hitbox(x ,y,30 ,30);
 		mostrable=false;
 	}
 	
 	public void moverse() {
-		
+		if(tocandoBloqueIzquierda) 
+			tocoParedIzquierda=true;
+			
+		if(!tocoParedIzquierda) {
+			moverIzq();			
+			hitbox.actualizar (posX, posY);
+		}
+		else
+			 {
+			tocoParedIzquierda=true;
+			moverDer();
+			hitbox.actualizar (posX, posY);}				
+				
+		if (tocandoBloqueDerecha) {
+			tocoParedDerecha=true;
+			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+				}
+
+		if (!tocandoBloqueAbajo) 
+	        posY=posY+1;
+	
+	}
+	public void moverIzq() {
+		posX = posX-3;
+	}
+	public void moverDer() {
+		posX = posX+3;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -42,15 +74,15 @@ public class ChampiVerde extends PowerUps{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
 	@Override
@@ -83,6 +115,30 @@ public class ChampiVerde extends PowerUps{
 
 	@Override
 	public void setSpriteActualizado(boolean actualizada) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueDerecha(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueIzquierda(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueArriba(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueAbajo(boolean b) {
 		// TODO Auto-generated method stub
 		
 	}

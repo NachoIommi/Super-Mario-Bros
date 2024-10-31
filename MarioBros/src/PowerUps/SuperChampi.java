@@ -7,31 +7,77 @@ import Personaje.Personaje;
 
 public class SuperChampi extends PowerUps{
 	
-	protected int x;
-	protected int y;
-	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected int posX;
+	protected int posY;
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
 	protected boolean mostrable;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
+    protected boolean cayendo;
+	protected Sprite sprite;
+	protected Hitbox hitbox;
 	
 	public SuperChampi(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(0 , 0, 30, 30);
+		hitbox = new Hitbox(0 ,0,25 ,25);
 		mostrable=false;
+		tocandoBloqueDerecha=false;
+	    tocandoBloqueIzquierda=false;
+	    tocandoBloqueAbajo=false;
+	    tocandoBloqueArriba=false;
 	}
 	
-	public void moverse() {		
+	public void moverse() {
+		
+		if(mostrable){			
+			if(tocandoBloqueIzquierda) {
+				tocoParedIzquierda=true;
+				tocoParedDerecha=false;}
+			
+			if(tocandoBloqueDerecha)
+				tocoParedDerecha=true;
+			
+			if(!tocoParedDerecha) {
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}
+			else {
+				tocoParedDerecha=true;
+				moverIzq();
+				hitbox.actualizar (posX, posY);
+			}	
+			
+			if (!tocandoBloqueAbajo) {
+		        posY=posY+3;}
+			
+			hitbox.actualizar (posX, posY);		
+			corregirPosEnColision();
+		}
+		
 	}
-
+	public void moverIzq() {
+		posX = posX-2;
+	}
+	public void moverDer() {
+		posX = posX+2;
+	}
+	public void corregirPosEnColision() {
+		if(tocandoBloqueIzquierda)  
+	    	posX=posX+1;	    		
+	    if(tocandoBloqueDerecha) 
+	    	posX=posX-1;	    
+	}
+	
+	
 	public boolean mostrable() {
 		return mostrable;
 	}
-	
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
+
 	public void aceptarVisita(Visitor v) {
 		v.visitarSuperChampi(this);
 	}
@@ -41,9 +87,11 @@ public class SuperChampi extends PowerUps{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.colisionSuperChampi();	
+		
+		p.colisionSuperChampi();
+		hitbox.actualizar(0, 0);
 		setMostrable(false);
-		hitb.actualizar(0, 0);
+		hitbox.actualizar(0, 0);
 		//p.setEstado(null);
 		//p.getEstado().setPuntuacionSuperChampi();
 	}
@@ -53,23 +101,23 @@ public class SuperChampi extends PowerUps{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 	
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
 	public void setPosX(int x) {
-		this.x=x;
+		this.posX=x;
 	}
 	
 	public void setPosY(int y) {
-		this.y=y;
+		this.posY=y;
 	}
 	
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
 	@Override
@@ -83,10 +131,29 @@ public class SuperChampi extends PowerUps{
 		// TODO Auto-generated method stub
 		
 	}
+	public void setMostrable(boolean b) {
+		mostrable=b;
+	}
+
+	public void setTocandoBloqueDerecha(boolean b) {
+		
+		tocandoBloqueDerecha=b;
+	}
+
+	public void setTocandoBloqueIzquierda(boolean b) {
+		
+		tocandoBloqueIzquierda=b;
+	}
+
+	public void setTocandoBloqueArriba(boolean b) {
+		
+		tocandoBloqueArriba=b;
+	}
 
 
-
-	
-
+	public void setTocandoBloqueAbajo(boolean b) {
+		
+		tocandoBloqueAbajo=b;
+	}
 	
 }

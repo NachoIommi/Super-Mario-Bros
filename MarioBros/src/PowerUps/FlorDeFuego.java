@@ -85,6 +85,30 @@ public class FlorDeFuego extends PowerUps{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setTocandoBloqueDerecha(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueIzquierda(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueArriba(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTocandoBloqueAbajo(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
