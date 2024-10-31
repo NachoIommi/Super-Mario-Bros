@@ -131,7 +131,7 @@ public class Nivel {
 				    	switch(tipoPUp)
 				    	{
 					    	case 31:
-				    			PowerUps m = fabricaMoneda.crearPowerUp(fabricaSprite.getMoneda(), posX, posY);
+				    			PowerUps m = fabricaMoneda.crearPowerUp(fabricaSprite.getMonedaSaltando(), posX, posY);
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,m ,5));
 				    			juego.agregarPowerUp(m);
 				    			break;
