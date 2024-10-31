@@ -78,9 +78,10 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaJuego() {
-		juego.cargarPrimerNivel();
-		juego.iniciarJuego();
+		
 		if(pantallaJuego == null) {
+			juego.cargarPrimerNivel();
+			juego.iniciarJuego();
 			pantallaJuego = new PantallaJuego(this);
 		}
 		

@@ -94,7 +94,7 @@ public class Juego {
 		
 		reseteo();
 		
-		System.out.println(enemigos.toString());
+		
 		
 		nivel.ganarJuego();
 		System.out.println("cargando nivel: " + getNivel().getNivelActual());
