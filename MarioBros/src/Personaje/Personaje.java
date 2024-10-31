@@ -260,6 +260,10 @@ public class Personaje extends Entidad{
         puntuacion += n;
     }
     
+    public Nivel getNivelActual() {
+    	return nivelActual;
+    }
+    
     public EstadoDePersonaje getEstado(){
         return this.estado;
     }

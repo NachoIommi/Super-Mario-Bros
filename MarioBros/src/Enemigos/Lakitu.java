@@ -171,7 +171,7 @@ public class Lakitu extends Enemigo{
         spawnTimer = new Timer();
         // Ejecutar el método spawnSpiny cada 2000 ms (2 segundos)
        // spawnTimer.schedule(new TimerTask() {
-            @Override
+            
            // public void run() {
                // spawnSpiny();
            // }

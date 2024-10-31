@@ -3,6 +3,7 @@ package Personaje;
 import Enemigos.*;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
@@ -177,7 +178,13 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 	
 	public void actualizarSprite() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+		GenerarSprite fabrica;
+		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			 fabrica = new GenerarSpriteOriginal();
+		}else {
+			 fabrica = new GenerarSpriteReemplazo();
+		}
+	   
 	    Sprite nuevoSprite = sprite;
 	    
 	    if (right && velX > 0) {

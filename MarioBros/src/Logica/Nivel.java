@@ -242,7 +242,9 @@ public class Nivel {
 	    System.out.println("Nivel reiniciado sin afectar puntuación o vidas.");
 	}
 
-
+	public Juego getJuego() {
+		return juego;
+	}
 	public void ganarJuego(){
 		//hay que ver caso nivel final
 		cargarNivel(getNivelActual()+1);
