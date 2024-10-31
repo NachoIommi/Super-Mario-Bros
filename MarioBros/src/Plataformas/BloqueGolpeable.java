@@ -33,8 +33,10 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		hitbox = new Hitbox(x ,y,30 ,30);
 		contenido=p;
 		golpesRestantes=golpes;	
-		if (golpes>1)
+		if (golpes>1) {
 			bloqueMonedas=true;	
+			contenido.getHitbox().actualizar(0, 0);
+		}
 	}
 	
 	public void soltarContenido() {
