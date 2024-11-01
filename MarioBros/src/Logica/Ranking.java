@@ -22,36 +22,28 @@ public class Ranking implements Serializable{
 	        if (jugador != null && jugador.getNombre() != null && jugador.getNombre().equals(j.getNombre())) {
 	            // Si existe, actualizamos el puntaje
 	            jugador.setNuevoPuntaje(j.getPuntaje());
+	            ordenarTopCinco();
 	            return;
 	        }
 	    }
 	    // Si no existe, añadimos al jugador como nuevo
 	    jugadores.add(j);
-	    //ordenarTopCinco();
+	    ordenarTopCinco();
 	}
 	
 	public void imprimirJugadores() {
-		Collections.sort(this.jugadores, Collections.reverseOrder());
-		System.out.println("\n Mejores Jugadores");
-		int i = 0;
-		for(Jugador j : this.jugadores) {
-			System.out.println(j.getNombre() + " " + j.getPuntaje());
-			if(i == 5)
-				break;
-			i++;
-		}
+	    System.out.println("\nMejores Jugadores");
+	    for (Jugador j : mostrarTopCinco()) {
+	        System.out.println(j.getNombre() + " " + j.getPuntaje());
+	    }
 	}
 	
 	public void ordenarTopCinco(){
-		Collections.sort(this.jugadores, Collections.reverseOrder());
-		int i = 0;
-		for(Jugador j : this.jugadores) {
-			topCinco.add(j);
-			if(i == 5) {
-				break;
-			}
-			i++;
-		}
+		topCinco.clear();
+		Collections.sort(jugadores, Collections.reverseOrder());
+		for (int i = 0; i < Math.min(5, jugadores.size()); i++) {
+	        topCinco.add(jugadores.get(i));
+	    }
 	}
 	public List<Jugador> mostrarTopCinco(){
 		return topCinco;

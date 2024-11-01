@@ -1,3 +1,4 @@
+
 package GUI;
 import java.awt.Color;
 
@@ -94,19 +95,14 @@ public class PantallaRanking extends JPanel{
     }
     
     public void mostrarRanking() {
-    	//JLabel j1 = new JLabel("Jugador j1 ");
-    	//JLabel j2 = new JLabel("Jugador j2 ");
     	JLabel[] labelJugadores = new JLabel[5];
         for (int j = 0; j < labelJugadores.length; j++) {
-            labelJugadores[j] = new JLabel(); // Crear un nuevo JLabel
-            labelJugadores[j].setBounds(30, 280 + (j * 30), 150, 50); // Ajustar la posición vertical
-            labelJugadores[j].setVisible(true); // Hacer visible el JLabel
-            add(labelJugadores[j]); // Añadir el JLabel al contenedor
+            labelJugadores[j] = new JLabel(); 
+            labelJugadores[j].setBounds(30, 280 + (j * 30), 350, 50); 
+            labelJugadores[j].setVisible(true); 
+            add(labelJugadores[j]); 
         }
-       // j1.setBounds(30, 280, 150, 50); // Asegúrate de que estas dimensiones sean adecuadas
-        //j1.setVisible(true);
         
-        controladorVistas.obtenerJuego().getRanking().ordenarTopCinco();
         try {
             Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(12f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -118,43 +114,15 @@ public class PantallaRanking extends JPanel{
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
-        // Actualizar los JLabels con los datos de los jugadores en orden inverso
         List<Jugador> topCinco = controladorVistas.obtenerJuego().getRanking().mostrarTopCinco();
-        int j = topCinco.size(); // Obtener el tamaño de la lista de jugadores
-        for (int i = 0; i < labelJugadores.length; i++) {
-            if (i < j) { // Asegurarse de no acceder fuera de los límites
-                Jugador jugador = topCinco.get(j - 1 - i); // Acceder en orden inverso
-                labelJugadores[i].setText(jugador.getNombre() + " " + jugador.getPuntaje());
-            } else {
-                labelJugadores[i].setText(""); // Limpiar el JLabel si no hay suficientes jugadores
-            }
+        for (int i = 0; i < topCinco.size() && i < labelJugadores.length; i++) {
+            Jugador jugador = topCinco.get(i);
+            labelJugadores[i].setText(jugador.getNombre() + " " + jugador.getPuntaje());
         }
 
-        revalidate(); // Revalidar el contenedor
-        repaint();    // Redibujar el contenedor
+        revalidate(); 
+        repaint();    
       
-        
-        /* ranking = new JTextField();
-        ranking.setEditable(false);
-        ranking.setBounds(150, 280, 300, 300);
-        ranking.setBorder(null);
-        ranking.setBackground(Color.WHITE);
-        ranking.setFont(new Font("Arial", Font.PLAIN, 14)); // Ajusta la fuente según sea necesario
-        
-        controladorVistas.obtenerJuego().getRanking().ordenarTopCinco();
-       // System.out.println(controladorVistas.obtenerJuego().getRanking().mostrarTopCinco().toString());
-
-        String top = ""; // Usar StringBuilder para mejorar el rendimiento
-        for (Jugador j : controladorVistas.obtenerJuego().getRanking().mostrarTopCinco()) {
-            //top.append(j.toString()).append("\n"); // Usar StringBuilder para construir la cadena
-        	top += j.toString()+"\n";
-        }
-
-        ranking.setText(top.toString()); // Establecer el texto del JTextField al contenido del ranking
-        this.add(ranking);
-        */
     }
-    
-    
-    
+
 }

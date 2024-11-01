@@ -50,7 +50,7 @@ public class ControladorVistas {
 		// Agregar un listener para manejar el cierre de la ventana
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-            	Jugador j = new Jugador("Pablito",300); //obtenerJuego().getPersonaje().getPuntuacion()
+            	Jugador j = new Jugador("KENDRICK",310); //obtenerJuego().getPersonaje().getPuntuacion()
 	            guardarJugadorEnRanking(j); // Puntaje inicial 0
                 juego.cierreDeJuego(); // Llamar al método para guardar el ranking
             }
