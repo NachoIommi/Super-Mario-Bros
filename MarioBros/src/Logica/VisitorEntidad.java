@@ -47,6 +47,7 @@ public class VisitorEntidad implements Visitor{
     }
     
     public void visitarVacio(Vacio v) {    	
+    	
     }
     
     public void visitarTuberia(Tuberia t) {

@@ -177,34 +177,26 @@ public class Personaje extends Entidad{
     }
  
 	public void morir() {
-	    if (vidas > 0) {
-	        int puntuacionAnterior = puntuacion;
-	        int vidasAnterior = vidas - 1;  // Resta una vida
-
-	        nivelActual.reiniciarNivel(); // Reinicia el nivel sin modificar vidas y puntuación
-
-	        // Restaura las vidas y la puntuación después del reinicio del nivel
-	        this.setPuntuacion(puntuacionAnterior);
-	        this.setVidas(vidasAnterior);
-	        activarInvulnerabilidad(); // Activa invulnerabilidad después de morir
+	    if (vidas > 1) {
+	        nivelActual.reiniciarNivel();   
+	        activarInvulnerabilidad(); 
 	    } else {
 	        nivelActual.perderJuego();
 	        System.out.println("Game Over");
-	        // Lógica adicional para manejar el fin del juego si se desea
 	    }
 	}
 
     public void activarInvulnerabilidad() {
         if (!invulnerable) {
-            invulnerable = true; // Activa la invulnerabilidad
+            invulnerable = true;
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    invulnerable = false; // Desactiva invulnerabilidad después de 3 segundos
+                    invulnerable = false; 
                     timer.cancel();
                 }
-            }, 3000); // Tiempo de invulnerabilidad en milisegundos (3 segundos)
+            }, 3000);
         }
     }
     public boolean esInvulnerable() {

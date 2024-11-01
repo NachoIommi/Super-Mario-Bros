@@ -312,6 +312,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public void colisionVacio() {
 		morir();
+		personaje.setPuntuacion(-15);
 		System.out.println("MORIR X VACIO");
 	}
 	

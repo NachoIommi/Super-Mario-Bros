@@ -223,7 +223,6 @@ public class Nivel {
 	
 	public void perderVida(Personaje p){
 		if(p.getVidas() != 1){
-			p.setVidas(p.getVidas() - 1);
 			reiniciarNivel();
 		}
 		else

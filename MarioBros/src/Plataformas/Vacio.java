@@ -24,8 +24,8 @@ public class Vacio extends Plataforma {
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		p.morir();
-		p.setPuntuacion(-15);
+		p.colisionVacio();
+		
 	}
 	
 	public void cargarSprite(Sprite s) {
