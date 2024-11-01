@@ -47,12 +47,13 @@ public class ControladorVistas {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
 		
-		// Agregar un listener para manejar el cierre de la ventana
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-            	Jugador j = new Jugador("KENDRICK",310); //obtenerJuego().getPersonaje().getPuntuacion()
-	            guardarJugadorEnRanking(j); // Puntaje inicial 0
-                juego.cierreDeJuego(); // Llamar al método para guardar el ranking
+            	if(obtenerJuego().getPersonaje() != null) {
+            		Jugador jugador = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),obtenerJuego().getPersonaje().getPuntuacion());
+                	guardarJugadorEnRanking(jugador); 
+                    juego.cierreDeJuego(); 
+            	}
             }
         });
 	}
@@ -154,11 +155,10 @@ public class ControladorVistas {
 		return juego.getPowerUps();
 	}
 	
-	public void guardarJugadorEnRanking(Jugador j) {
-	    juego.getRanking().addJugador(j);
-	    System.out.println("Ranking actualizado:");
-	    for (Jugador jugador : juego.getRanking().mostrarTopCinco()) { 
-	    		System.out.println("Nombre: " + jugador.getNombre() + ", Puntaje: " + jugador.getPuntaje());
-	    }	
+	public void guardarJugadorEnRanking(Jugador jugador) {
+	    if(jugador != null) {
+	    	juego.getRanking().addJugador(jugador);
+	    	
+	    } 
 	}
 }

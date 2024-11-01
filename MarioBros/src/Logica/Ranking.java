@@ -13,20 +13,16 @@ public class Ranking implements Serializable{
 	public Ranking() {
 		jugadores = new ArrayList<Jugador>();
 		topCinco = new ArrayList<Jugador>();
-		//System.out.println(topCinco.toString());
 	}
 	
 	public void addJugador(Jugador j) {
-		// Verificar si ya existe un jugador con el mismo nombre
 	    for (Jugador jugador : jugadores) {
 	        if (jugador != null && jugador.getNombre() != null && jugador.getNombre().equals(j.getNombre())) {
-	            // Si existe, actualizamos el puntaje
 	            jugador.setNuevoPuntaje(j.getPuntaje());
 	            ordenarTopCinco();
 	            return;
 	        }
 	    }
-	    // Si no existe, añadimos al jugador como nuevo
 	    jugadores.add(j);
 	    ordenarTopCinco();
 	}

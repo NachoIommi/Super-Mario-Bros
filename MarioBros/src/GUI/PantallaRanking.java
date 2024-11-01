@@ -36,7 +36,6 @@ public class PantallaRanking extends JPanel{
     	this.setSize(800,600);
 		this.setLayout(null);
 		this.setVisible(true);
-		
 		mostrarRanking();
 		agregarBotonVolver();
         agregarImagen();  
@@ -96,6 +95,10 @@ public class PantallaRanking extends JPanel{
     
     public void mostrarRanking() {
     	JLabel[] labelJugadores = new JLabel[5];
+    	JLabel ranking = new JLabel("RANKING");
+        ranking.setBounds(30, 250, 350, 50); 
+        ranking.setVisible(true); 
+        add(ranking);
         for (int j = 0; j < labelJugadores.length; j++) {
             labelJugadores[j] = new JLabel(); 
             labelJugadores[j].setBounds(30, 280 + (j * 30), 350, 50); 
@@ -111,6 +114,9 @@ public class PantallaRanking extends JPanel{
                 label.setFont(marioFuente);
                 label.setForeground(Color.WHITE);
             }
+
+            ranking.setFont(marioFuente.deriveFont(22f));
+            ranking.setForeground(Color.WHITE);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
@@ -119,10 +125,8 @@ public class PantallaRanking extends JPanel{
             Jugador jugador = topCinco.get(i);
             labelJugadores[i].setText(jugador.getNombre() + " " + jugador.getPuntaje());
         }
-
         revalidate(); 
         repaint();    
-      
     }
 
 }

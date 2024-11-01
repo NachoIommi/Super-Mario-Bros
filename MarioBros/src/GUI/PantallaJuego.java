@@ -127,7 +127,7 @@ public class PantallaJuego extends JPanel {
         }  
     }
    
-    //MOSTRAR LABELS
+    //MOSTRAR LABELS 
     
     public void agregarImagenNivel() {
     	String ruta = controladorVistas.juego.getNivel().getSprite().getRutaImagen();
