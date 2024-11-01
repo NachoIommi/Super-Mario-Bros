@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,7 @@ public class PantallaJuego extends JPanel {
     private Timer refrescarPantalla;
     private Personaje personaje;
     private int posicionInicialX = 0;  
-    private float maximoDerecha = 280.0f;
+    private float maximoDerecha = 298.0f;
     private boolean banderaActualizada = false;
     private boolean nivelGanado = false;
 
@@ -92,6 +93,7 @@ public class PantallaJuego extends JPanel {
             		actualizarPosicionPuntuacion(0);
             		actualizarPosicionVidas(0);
             		actualizarPosicionMonedas(0);
+            		
             		
                     actualizarFondo(); 
                     actualizarImagenPersonaje();
@@ -359,19 +361,21 @@ public class PantallaJuego extends JPanel {
     
     // COMANDOS UTILES
     
-    public void moverFondo(int posicionX) {
-        posicionInicialX += posicionX; 
-        if (posicionInicialX < -imagenFondo.getIcon().getIconWidth()) {
-        	posicionInicialX = -imagenFondo.getIcon().getIconWidth();
-        }
-        int velocidad = Math.round(personaje.getVelX());
+  
+    
+    public void moverFondo(int velocidad) {
+    	int mitadAnchoVentana = panelScrollNivel.getViewport().getWidth() / 2;
+    	System.out.println("mitad"+mitadAnchoVentana	);
+    	System.out.println("maximo: "+maximoDerecha	);
+    	System.out.println("minimo: "+personaje.getMin());
+        
         if (maximoDerecha <= (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
             panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+velocidad);
             actualizarPosicionReloj(velocidad);
             actualizarPosicionMonedas(velocidad);
             actualizarPosicionPuntuacion(velocidad);
             actualizarPosicionVidas(velocidad);         
-            maximoDerecha += personaje.getVelX();
+            maximoDerecha += velocidad;
             controladorVistas.obtenerPersonaje().actualizarMin();
         }      
         repaint();
@@ -380,8 +384,10 @@ public class PantallaJuego extends JPanel {
     public void actualizarFondo() {
     	int velocidad = Math.round(personaje.getVelX());
     	if(personaje.getPosX() >= maximoDerecha ) {
-    		moverFondo(-velocidad);	
+    		moverFondo(velocidad);	
     	}
+  
+    	
     }
  
     public void eventosTeclado() {
