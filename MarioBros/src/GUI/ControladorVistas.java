@@ -133,8 +133,6 @@ public class ControladorVistas {
         	mostrarPantallaJuego();
         }
 	
-        
-		
 	}
 	
 	public Juego obtenerJuego() {

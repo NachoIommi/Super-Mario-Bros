@@ -131,10 +131,6 @@ public class Personaje extends Entidad{
 		estado.moverPersonaje();
 	}
 	
-	public void saltar() {
-
-    }
-	
 	public void actualizarSprite() {
 		estado.actualizarSprite();
 		//setSpriteActualizado(true);
@@ -229,6 +225,7 @@ public class Personaje extends Entidad{
 
     public void cambiarEstado(EstadoDePersonaje nuevoEstado) {
         this.estado = nuevoEstado;
+        setSpriteActualizado(true);
     }
 
     public void aceptarVisita(Visitor v) {
@@ -295,7 +292,7 @@ public class Personaje extends Entidad{
 	}
 	
 	public void actualizarMin() {
-		if(estado.getVelX()>0)
+		if(estado.getVelX()>=0)
 			min+=estado.getVelX();
 	}
 	
