@@ -7,8 +7,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 
 import java.io.IOException;
-
-
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -48,7 +47,7 @@ public class PantallaRanking extends JPanel{
 		imagenInicio = new JLabel();
 		imagenInicio.setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
 		ImageIcon icono = new ImageIcon(ruta);
-		Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_DEFAULT);
+		Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
 		Icon iconoEscalado = new ImageIcon(imagenEscalada);
 		imagenInicio.setIcon(iconoEscalado);
 		this.add(imagenInicio);
@@ -95,7 +94,47 @@ public class PantallaRanking extends JPanel{
     }
     
     public void mostrarRanking() {
-        ranking = new JTextField();
+    	//JLabel j1 = new JLabel("Jugador j1 ");
+    	//JLabel j2 = new JLabel("Jugador j2 ");
+    	JLabel[] labelJugadores = new JLabel[5];
+        for (int j = 0; j < labelJugadores.length; j++) {
+            labelJugadores[j] = new JLabel(); // Crear un nuevo JLabel
+            labelJugadores[j].setBounds(30, 280 + (j * 30), 150, 50); // Ajustar la posición vertical
+            labelJugadores[j].setVisible(true); // Hacer visible el JLabel
+            add(labelJugadores[j]); // Añadir el JLabel al contenedor
+        }
+       // j1.setBounds(30, 280, 150, 50); // Asegúrate de que estas dimensiones sean adecuadas
+        //j1.setVisible(true);
+        
+        controladorVistas.obtenerJuego().getRanking().ordenarTopCinco();
+        try {
+            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(12f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(marioFuente);
+            for (JLabel label : labelJugadores) {
+                label.setFont(marioFuente);
+                label.setForeground(Color.WHITE);
+            }
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        // Actualizar los JLabels con los datos de los jugadores en orden inverso
+        List<Jugador> topCinco = controladorVistas.obtenerJuego().getRanking().mostrarTopCinco();
+        int j = topCinco.size(); // Obtener el tamaño de la lista de jugadores
+        for (int i = 0; i < labelJugadores.length; i++) {
+            if (i < j) { // Asegurarse de no acceder fuera de los límites
+                Jugador jugador = topCinco.get(j - 1 - i); // Acceder en orden inverso
+                labelJugadores[i].setText(jugador.getNombre() + " " + jugador.getPuntaje());
+            } else {
+                labelJugadores[i].setText(""); // Limpiar el JLabel si no hay suficientes jugadores
+            }
+        }
+
+        revalidate(); // Revalidar el contenedor
+        repaint();    // Redibujar el contenedor
+      
+        
+        /* ranking = new JTextField();
         ranking.setEditable(false);
         ranking.setBounds(150, 280, 300, 300);
         ranking.setBorder(null);
@@ -113,6 +152,7 @@ public class PantallaRanking extends JPanel{
 
         ranking.setText(top.toString()); // Establecer el texto del JTextField al contenido del ranking
         this.add(ranking);
+        */
     }
     
     
