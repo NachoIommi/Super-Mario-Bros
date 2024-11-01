@@ -8,9 +8,12 @@ import java.util.List;
 public class Ranking implements Serializable{
 
 	protected List<Jugador> jugadores;
+	protected List<Jugador> topCinco;
 	
 	public Ranking() {
 		jugadores = new ArrayList<Jugador>();
+		topCinco = new ArrayList<Jugador>();
+		//System.out.println(topCinco.toString());
 	}
 	
 	public void addJugador(Jugador j) {
@@ -24,6 +27,7 @@ public class Ranking implements Serializable{
 	    }
 	    // Si no existe, añadimos al jugador como nuevo
 	    jugadores.add(j);
+	    //ordenarTopCinco();
 	}
 	
 	public void imprimirJugadores() {
@@ -36,6 +40,21 @@ public class Ranking implements Serializable{
 				break;
 			i++;
 		}
+	}
+	
+	public void ordenarTopCinco(){
+		Collections.sort(this.jugadores, Collections.reverseOrder());
+		int i = 0;
+		for(Jugador j : this.jugadores) {
+			topCinco.add(j);
+			if(i == 5) {
+				break;
+			}
+			i++;
+		}
+	}
+	public List<Jugador> mostrarTopCinco(){
+		return topCinco;
 	}
 	
 	public List<Jugador> getJugadores(){

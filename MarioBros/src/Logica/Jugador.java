@@ -21,6 +21,9 @@ public class Jugador implements Comparable<Jugador>, Serializable{
 	public Integer getPuntaje() {
 		return puntaje;
 	}
+	public String toString() {
+		return "Nombre: "+nombre+", Puntaje: "+puntaje;
+	}
 	
 	public void setNuevoPuntaje(int p) {
 		puntaje = p;

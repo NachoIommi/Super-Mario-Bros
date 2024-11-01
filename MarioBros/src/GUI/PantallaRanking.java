@@ -15,6 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import Logica.Jugador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +28,8 @@ public class PantallaRanking extends JPanel{
 	protected JLabel imagenInicio;
 	protected JButton botonVolver;
 	protected JButton botonModoMario;
+	protected JTextField ranking;
+	
 
     public PantallaRanking(ControladorVistas controladorVistas) {
     	this.controladorVistas = controladorVistas;
@@ -32,6 +37,7 @@ public class PantallaRanking extends JPanel{
 		this.setLayout(null);
 		this.setVisible(true);
 		
+		mostrarRanking();
 		agregarBotonVolver();
         agregarImagen();  
         
@@ -87,5 +93,28 @@ public class PantallaRanking extends JPanel{
  	   revalidate();
         repaint();
     }
+    
+    public void mostrarRanking() {
+        ranking = new JTextField();
+        ranking.setEditable(false);
+        ranking.setBounds(150, 280, 300, 300);
+        ranking.setBorder(null);
+        ranking.setBackground(Color.WHITE);
+        ranking.setFont(new Font("Arial", Font.PLAIN, 14)); // Ajusta la fuente según sea necesario
+        
+        controladorVistas.obtenerJuego().getRanking().ordenarTopCinco();
+       // System.out.println(controladorVistas.obtenerJuego().getRanking().mostrarTopCinco().toString());
+
+        String top = ""; // Usar StringBuilder para mejorar el rendimiento
+        for (Jugador j : controladorVistas.obtenerJuego().getRanking().mostrarTopCinco()) {
+            //top.append(j.toString()).append("\n"); // Usar StringBuilder para construir la cadena
+        	top += j.toString()+"\n";
+        }
+
+        ranking.setText(top.toString()); // Establecer el texto del JTextField al contenido del ranking
+        this.add(ranking);
+    }
+    
+    
     
 }
