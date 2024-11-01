@@ -32,6 +32,7 @@ public class Spiny extends Enemigo{
 		mostrable = true;
 		setSpriteActualizado(false);
 		murio = false;
+		moverse();
 	}
 	
 	// Setters	
@@ -71,15 +72,16 @@ public class Spiny extends Enemigo{
 		if (tocandoBloqueDerecha) {
 			tocoParedDerecha=true;
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-		}
+		}		
 
-		hitbox.actualizar (posX, posY);		
-	
-
-		if (!tocandoBloqueAbajo) 
+		if (!tocandoBloqueAbajo) { 
 	        posY=posY+1;
+		} else {
+			actualizarSprite2();
+			setSpriteActualizado(true);
+		}
 		
-		hitbox.actualizar (posX, posY);		
+		hitbox.actualizar (posX, posY);	
 	}
 	
 	public void setPosX(int x) {
@@ -141,6 +143,11 @@ public class Spiny extends Enemigo{
         }
 	}
 	
+	public void actualizarSprite2(){
+		 GenerarSprite fabrica = new GenerarSpriteOriginal();
+	     sprite = fabrica.getSpinyCaminandoDerecha();
+	}
+	
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;	
 	}
@@ -187,6 +194,10 @@ public class Spiny extends Enemigo{
 	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
+	}
+	
+	public boolean getTocandoAbajo() {
+		return tocandoBloqueAbajo;
 	}
 	
 }

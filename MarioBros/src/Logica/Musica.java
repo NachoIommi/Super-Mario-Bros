@@ -10,11 +10,11 @@ import java.io.File;
 public class Musica { //Actua como la clase singleton, musica = singleton aca
 
     private static Musica archivo = null;
-    private Clip clip;
+    private Clip clipMusica, clipSonido;
 
     private Musica() { // es privado para evitar instanciación externa
     	 try {
-             clip = AudioSystem.getClip();
+             clipMusica = AudioSystem.getClip();
          } catch (LineUnavailableException e) {
              e.printStackTrace();
          }
@@ -32,26 +32,37 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
         try {
         	detenerMusica();
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(rutaArchivo));
-            clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clipMusica = AudioSystem.getClip();
+            clipMusica.open(audioStream);
+            clipMusica.start();
+            clipMusica.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void reproducirSonido(String rutaArchivo) {
+        try {
+        	AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(rutaArchivo));
+            clipSonido = AudioSystem.getClip();
+            clipSonido.open(audioStream);
+            clipSonido.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void detenerMusica() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
+        if (clipMusica != null && clipMusica.isRunning()) {
+            clipMusica.stop();
         }
     }
 
     public void reiniciarMusica() {
-        if (clip != null) {
+        if (clipMusica != null) {
         	detenerMusica();
-            clip.setFramePosition(0); // Reposicionar al inicio
-            clip.start();
+            clipMusica.setFramePosition(0); // Reposicionar al inicio
+            clipMusica.start();
         }
     }
 }
