@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -15,6 +16,7 @@ public class PantallaPrincipal extends JPanel{
 	protected JLabel imagenInicio;
 	protected JTextField ingresarNombre;
 	protected JButton botonIngresarNombre;
+	protected JButton botonVerRanking;
 	protected String nombreJugador;
 	
 	public PantallaPrincipal(ControladorVistas controladorVistas) {
@@ -24,6 +26,7 @@ public class PantallaPrincipal extends JPanel{
 		this.setVisible(true);
 		agregarNombre();
 		agregarBotonIngresarNombre();
+		agregarBotonVerRanking();
 		agregarModosDeJuego();
 		agregarImagen();
 		nombreJugador = " ";
@@ -43,13 +46,49 @@ public class PantallaPrincipal extends JPanel{
 	public void agregarBotonIngresarNombre() {
 		botonIngresarNombre = new JButton();
 		botonIngresarNombre.setText("Ingresar Nombre");
-		botonIngresarNombre.setBounds(150, 300, 300, 20);
+		botonIngresarNombre.setBounds(150, 315, 300, 20);
+		
+		try {
+            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(marioFuente);
+            botonIngresarNombre.setFont(marioFuente);
+            botonIngresarNombre.setForeground(Color.WHITE);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+		
 		botonIngresarNombre.setOpaque(false);
 		botonIngresarNombre.setContentAreaFilled(false);
 		botonIngresarNombre.setBorderPainted(false);
 		registrarOyenteBotonNombre();
 		this.add(botonIngresarNombre);
 	}
+	public void agregarBotonVerRanking() {
+        botonVerRanking = new JButton("Ver Ranking");
+        botonVerRanking.setBounds(150, 355, 300, 20);  
+        botonVerRanking.setVisible(true);
+        
+        botonVerRanking.setFont(new Font("Arial", Font.BOLD, 16));  // Cambia "Arial" y el tamaño a tu gusto
+        botonVerRanking.setForeground(Color.BLACK);  // Color de texto en negro
+        try {
+            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(marioFuente);
+            botonVerRanking.setFont(marioFuente);
+            botonVerRanking.setForeground(Color.WHITE);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        
+        botonVerRanking.setOpaque(false);  
+        botonVerRanking.setContentAreaFilled(false);  
+        botonVerRanking.setBorderPainted(false);
+        botonVerRanking.setFocusPainted(false);  
+
+        registrarOyenteBotonVerRanking();
+        this.add(botonVerRanking);
+    }
 	
 	public void agregarNombre() {
 	    ingresarNombre = new JTextField();
@@ -77,6 +116,13 @@ public class PantallaPrincipal extends JPanel{
 	        public void actionPerformed(ActionEvent e) {
 	            nombreJugador = ingresarNombre.getText();
 	            controladorVistas.mostrarPantallaJuego(); // Cambiar a la pantalla de juego
+	        }
+	    });   
+	}
+	public void registrarOyenteBotonVerRanking() {
+	    botonVerRanking.addActionListener(new ActionListener(){
+	        public void actionPerformed(ActionEvent e) {
+	            controladorVistas.mostrarPantallaRanking(); 
 	        }
 	    });   
 	}

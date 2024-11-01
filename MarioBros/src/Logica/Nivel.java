@@ -1,6 +1,6 @@
 package Logica;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.File;
 
 import Personaje.*;

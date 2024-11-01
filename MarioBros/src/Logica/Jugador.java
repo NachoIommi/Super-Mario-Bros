@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Jugador implements Comparable<Jugador>, Serializable{
 	
+	private static final long serialVersionUID = 9092039043357571029L;
+	
 	private String nombre;
 	private Integer puntaje;
 	
