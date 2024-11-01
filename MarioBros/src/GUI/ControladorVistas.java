@@ -112,6 +112,13 @@ public class ControladorVistas {
         System.out.println("se ejecuto reiniciarNivel :: controladorVistas");
 	}
 	
+	public void perderJuego() {
+		mostrarPantallaPerder();
+		if(pantallaJuego != null) {
+			pantallaJuego = null;
+		}
+	}
+	
 	
 	
 	public void iniciarSiguienteNivel() {

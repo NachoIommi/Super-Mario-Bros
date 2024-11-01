@@ -146,7 +146,7 @@ public class Juego {
 	
 	public void perderJuego() {
 		reseteo();
-		controladorVistas.mostrarPantallaPerder();
+		controladorVistas.perderJuego();
 	}
 	
 	public void seleccionarMundo(Mundo m) {

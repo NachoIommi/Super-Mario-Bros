@@ -27,7 +27,6 @@ public class PantallaRanking extends JPanel{
 	protected ControladorVistas controladorVistas;
 	protected JLabel imagenInicio;
 	protected JButton botonVolver;
-	protected JButton botonModoMario;
 	protected JTextField ranking;
 	
 
