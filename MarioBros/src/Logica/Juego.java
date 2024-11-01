@@ -55,7 +55,7 @@ public class Juego {
 		hilo = new HiloPersonaje(this);
 		hiloAnimaciones = new HiloAnimaciones(this);
 		hiloRM = new HiloRestoMundo(this);
-		//Musica.getInstancia().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
+		Musica.getMusica().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {
