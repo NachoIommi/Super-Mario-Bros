@@ -151,6 +151,10 @@ public class Spiny extends Enemigo{
 	public void moverDer() {
 		posX = posX+2;
 	}
+	
+	public void spawnear() {
+        moverse();
+    }
 
 	// Getters
 	public int getPosX() {
