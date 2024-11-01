@@ -308,4 +308,8 @@ public class Personaje extends Entidad{
 		
 	}
 	
+	public void disparar() {
+		estado.disparar();
+	}
+	
 }

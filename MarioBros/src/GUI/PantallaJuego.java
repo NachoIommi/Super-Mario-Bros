@@ -405,6 +405,8 @@ public class PantallaJuego extends JPanel {
                     	case(KeyEvent.VK_W):
                     		controladorVistas.obtenerPersonaje().setJump(true);
                     		break;
+                    	case(KeyEvent.VK_SPACE):
+                    		controladorVistas.obtenerPersonaje().disparar();
                     }
                 }
                 public void keyReleased(KeyEvent k) {

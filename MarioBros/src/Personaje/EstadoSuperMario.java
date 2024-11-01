@@ -494,5 +494,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     public boolean getSaltando() {
 		return saltando;
 	}
+	@Override
+	public void disparar() {	
+	}
 
 }

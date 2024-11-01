@@ -1,6 +1,6 @@
 package Fabricas;
 
-import Personaje.BolaDeFuego;
+import Logica.BolaDeFuego;
 
 public class GenerarBolaDeFuego implements GeneradorDeEntidades{
 	

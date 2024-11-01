@@ -1,9 +1,6 @@
-package Personaje;
+package Logica;
 
 import Fabricas.Sprite;
-import Logica.Entidad;
-import Logica.Hitbox;
-import Logica.Visitor;
 
 public class BolaDeFuego extends Entidad{
 	

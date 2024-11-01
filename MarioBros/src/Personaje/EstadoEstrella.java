@@ -433,4 +433,9 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		return saltando;
 	}
 
+	@Override
+	public void disparar() {
+		
+	}
+
 }

@@ -81,4 +81,5 @@ public abstract class EstadoDePersonaje {
 	public abstract int getAlto();
 	public abstract float getMin();
 	public abstract  boolean getSaltando();
+	public abstract void disparar();
 }

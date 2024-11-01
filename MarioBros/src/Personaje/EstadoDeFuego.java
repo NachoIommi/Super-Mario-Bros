@@ -51,6 +51,11 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    left=false;	
 	    alto=60;
 	}
+	
+	public void disparar() {
+		//
+	}
+	
 	// Setters
 	public void morir() {
     	personaje.setVidas(personaje.getVidas()-1);

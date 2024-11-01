@@ -487,6 +487,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return saltando;
 	}
 
+	@Override
+	public void disparar() {
+		
+	}
+
 	
 
 	
