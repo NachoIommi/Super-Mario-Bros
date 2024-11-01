@@ -142,9 +142,11 @@ public class Juego {
 	public void reiniciarNivel() {
 		iniciarJuego();
 		controladorVistas.reiniciarNivel();
-		
-		System.out.println("se ejecuto reiniciarNivel :: juego");
-		
+	}
+	
+	public void perderJuego() {
+		reseteo();
+		controladorVistas.mostrarPantallaPerder();
 	}
 	
 	public void seleccionarMundo(Mundo m) {

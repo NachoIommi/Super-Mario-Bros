@@ -230,29 +230,29 @@ public class Nivel {
 	}
 
 	public void reiniciarNivel() {
-	    int vidas = p.getVidas()-1;
-	    int puntuacion = p.getPuntuacion();
+		int vidas = p.getVidas(); 
+		int puntuacion = p.getPuntuacion();
 		juego.reseteo();
-	    cargarNivel(getNivelActual());
-	    juego.reiniciarNivel();
-	    p.setVidas(vidas);
-	    p.setPuntuacion(puntuacion);
-	    
-	    System.out.println("Nivel reiniciado sin afectar puntuación o vidas.");
+		cargarNivel(getNivelActual());
+		 
+		if (vidas > 0) { 
+	        p.setVidas(vidas); 
+	        p.setPuntuacion(puntuacion);       
+		}
+		juego.reiniciarNivel(); 
 	}
 
 	public Juego getJuego() {
 		return juego;
 	}
 	public void ganarJuego(){
-		//hay que ver caso nivel final
 		cargarNivel(getNivelActual()+1);
 	}
 
 	public void perderJuego() {
-	    juego.getControladorVistas().mostrarPantallaPerder();
-	    System.out.println("Juego terminado: Se ha mostrado la pantalla de pérdida.");
+		juego.perderJuego();
 	}
+
 
 	//ver tema RELOJ
 

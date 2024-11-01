@@ -177,14 +177,14 @@ public class Personaje extends Entidad{
     }
  
 	public void morir() {
-	    if (vidas > 1) {
-	        nivelActual.reiniciarNivel();   
-	        activarInvulnerabilidad(); 
-	    } else {
-	        nivelActual.perderJuego();
-	        System.out.println("Game Over");
-	    }
-	}
+        vidas--;
+        if(vidas > 0) {
+        	nivelActual.reiniciarNivel();   
+        	activarInvulnerabilidad();
+        } else {
+        	nivelActual.perderJuego();
+        }
+}
 
     public void activarInvulnerabilidad() {
         if (!invulnerable) {
