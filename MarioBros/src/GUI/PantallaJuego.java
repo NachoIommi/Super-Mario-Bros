@@ -23,6 +23,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Enemigos.Enemigo;
+import Logica.BolaDeFuego;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.PowerUps;
@@ -31,6 +32,9 @@ public class PantallaJuego extends JPanel {
 	
 	private ControladorVistas controladorVistas;
     private List<Enemigo> copiaEnemigos;
+    //
+    private List<BolaDeFuego> copiaBolas;
+    //
     //List<Enemigo> copiaEnemigos = new CopyOnWriteArrayList<>();
     private List<Plataforma> copiaPlataformas;
     private List<PowerUps> copiaPowerUps;
@@ -58,6 +62,7 @@ public class PantallaJuego extends JPanel {
         eventosTeclado();
         setFocusable(true);
         iniciarTimerRefresco();
+        copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
     }
     
     public void agregarPanelNivel() {
@@ -96,7 +101,8 @@ public class PantallaJuego extends JPanel {
             		actualizarPosicionPuntuacion(0);
             		actualizarPosicionVidas(0);
             		actualizarPosicionMonedas(0);
-            		
+            		mostrarBolas();
+                    actualizarPosBolas();
             		actualizarListaEnemigos();
             		
                     actualizarFondo(); 
@@ -136,6 +142,42 @@ public class PantallaJuego extends JPanel {
    
     //MOSTRAR LABELS 
     
+    public void mostrarBolas() {
+    	
+    	if(copiaBolas.size()!=controladorVistas.obtenerBolas().size()){
+    		copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
+		    if(!copiaBolas.isEmpty()){
+		    	BolaDeFuego bola = copiaBolas.getLast();
+			    		bola.setVisible(true);
+			    		String ruta = bola.getSprite().getRutaImagen();
+			            bola.setIcon(verificarExtension(ruta));
+			            bola.setBounds(bola.getPosX(), bola.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
+			            panelNivel.add(bola, Integer.valueOf(1));
+			    	}
+    	}	
+    }
+    
+    public void actualizarPosBolas() {
+    	if(copiaBolas.size()>0) {
+        	for(BolaDeFuego e : copiaBolas) {
+        		e.setLocation(e.getPosX(), e.getPosY());	
+        	}
+    	}
+    }
+    
+    public void actualizarImagenBolas() {
+    	if(copiaBolas.size()>0) {
+    	for(BolaDeFuego enemigo : copiaBolas) 
+    	{   		
+	    	String ruta = enemigo.getSprite().getRutaImagen();
+	    	enemigo.setIcon(verificarExtension(ruta));
+	    	enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 30, 30);		
+	    	enemigo.setSpriteActualizado(false);
+    		
+    	}
+    }
+    }
+
     public void agregarImagenNivel() {
     	String ruta = controladorVistas.juego.getNivel().getSprite().getRutaImagen();
     	imagenFondo = new JLabel();

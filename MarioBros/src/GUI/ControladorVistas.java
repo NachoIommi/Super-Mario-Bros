@@ -159,6 +159,9 @@ public class ControladorVistas {
 	public List<PowerUps> obtenerPowerUp() {
 		return juego.getPowerUps();
 	}
+	public List<BolaDeFuego> obtenerBolas(){
+		return juego.getBolas();
+	}
 	
 	public void guardarJugadorEnRanking(Jugador jugador) {
 	    if(jugador != null) {

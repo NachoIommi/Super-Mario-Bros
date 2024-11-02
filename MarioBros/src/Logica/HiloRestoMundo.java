@@ -13,6 +13,7 @@ public class HiloRestoMundo extends Thread {
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
     List<PowerUps> powerUp;
+    List<BolaDeFuego> bolas;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
@@ -24,6 +25,7 @@ public class HiloRestoMundo extends Thread {
         enemigo = juego.getEnemigos();
         powerUp = juego.getPowerUps();
         personaje = juego.getPersonaje();
+        bolas = juego.getBolas();
     }
     public void detener() {
     	enEjecucion = false;
@@ -35,6 +37,7 @@ public class HiloRestoMundo extends Thread {
             	List<PowerUps> copiaPowerUp = new ArrayList<PowerUps>(powerUp);
             	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
             	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
+            	List<BolaDeFuego> copiaBolas = new ArrayList<BolaDeFuego>(bolas);
             	
             	for(Enemigo e : copiaEnemigos) {
             		for(Plataforma p : copiaPlataforma) {
@@ -141,6 +144,10 @@ public class HiloRestoMundo extends Thread {
 	                    power.setTocandoBloqueIzquierda(false);
 	                    power.setTocandoBloqueAbajo(false);
 	    			}
+            	}
+            	
+            	for(BolaDeFuego bola : copiaBolas) {
+            		bola.moverse();
             	}
             
                 Thread.sleep(16);

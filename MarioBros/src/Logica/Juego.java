@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import Enemigos.Enemigo;
 import GUI.ControladorVistas;
@@ -33,6 +34,7 @@ public class Juego {
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
 	protected List<PowerUps> powerUps;
+	protected List<BolaDeFuego> bolas;
 	
 	protected HiloPersonaje hilo;
 	protected HiloAnimaciones hiloAnimaciones;
@@ -48,7 +50,9 @@ public class Juego {
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUps>();
-		
+		//
+		bolas = new ArrayList<BolaDeFuego>();
+		//
 		ranking = cargarRanking();
 		
 	
@@ -184,6 +188,13 @@ public class Juego {
 	
 	public void agregarEnemigo(Enemigo e) {
 		enemigos.addLast(e);
+	}
+	
+	public void agregarBola(BolaDeFuego b) {
+		bolas.addLast(b);
+	}
+	public List<BolaDeFuego> getBolas(){
+		return bolas;
 	}
 	
 	public List<Enemigo> getEnemigos() {

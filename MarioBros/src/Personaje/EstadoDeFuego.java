@@ -1,10 +1,13 @@
 package Personaje;
 
 import Enemigos.*;
+import Fabricas.GenerarEnemigos;
+import Fabricas.GenerarSpiny;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
+import Logica.BolaDeFuego;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
@@ -53,7 +56,10 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 	
 	public void disparar() {
-		//
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	sprite = fabrica.getBolaDeFuego();
+		BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX() , getPosY());
+		personaje.getNivelActual().getJuego().agregarBola(bola);
 	}
 	
 	// Setters
