@@ -102,6 +102,7 @@ public class ControladorVistas {
 	
 	public void reiniciarNivel() {
         if(pantallaJuego!=null) {
+        	pantallaJuego.setPantallaCorriendo(false);
         	pantallaJuego = null;
         	pantallaJuego = new PantallaJuego(this);
         	ventana.setContentPane(pantallaJuego);
@@ -115,6 +116,7 @@ public class ControladorVistas {
 	public void perderJuego() {
 		mostrarPantallaPerder();
 		if(pantallaJuego != null) {
+			pantallaJuego.setPantallaCorriendo(false);
 			pantallaJuego = null;
 		}
 	}

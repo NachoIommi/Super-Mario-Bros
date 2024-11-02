@@ -53,6 +53,7 @@ public class PantallaJuego extends JPanel {
     private float maximoDerecha = 298.0f;
     private boolean banderaActualizada = false;
     private boolean nivelGanado = false;
+    private boolean pantallaCorriendo = false;
 
     public PantallaJuego(ControladorVistas controladorVistas) {
         this.controladorVistas = controladorVistas;
@@ -63,6 +64,7 @@ public class PantallaJuego extends JPanel {
         setFocusable(true);
         iniciarTimerRefresco();
         copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
+        pantallaCorriendo = true;
     }
     
     public void agregarPanelNivel() {
@@ -93,30 +95,32 @@ public class PantallaJuego extends JPanel {
     public void iniciarTimerRefresco() {
         refrescarPantalla = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent e) {   
-            	if(personaje.getPosX() < imagenFondo.getWidth()-320) {
-            		
-            		actualizarPosicionPersonaje();
-            		actualizarPosicionEnemigos();
-            		actualizarPosicionReloj(0);
-            		actualizarPosicionPuntuacion(0);
-            		actualizarPosicionVidas(0);
-            		actualizarPosicionMonedas(0);
-            		mostrarBolas();
-                    actualizarPosBolas();
-            	//	actualizarListaEnemigos();
-            		
-                    actualizarFondo(); 
-                    actualizarImagenPersonaje();
-                    actualizarImagenPlataformas();
-                    actualizarImagenPowerUps();
-                    actualizarImagenEnemigos();  
-                    
-                    
+            	if(pantallaCorriendo) {
+	            		if(personaje.getPosX() < imagenFondo.getWidth()-320) {
+	                		
+	            			mostrarBolas();
+	            			
+	                		actualizarPosicionPersonaje();
+	                		actualizarPosicionEnemigos();
+	                		actualizarPosicionReloj(0);
+	                		actualizarPosicionPuntuacion(0);
+	                		actualizarPosicionVidas(0);
+	                		actualizarPosicionMonedas(0);
+	                        actualizarPosBolas();	                		
+	                        actualizarFondo(); 
+	                        actualizarImagenPersonaje();
+	                        actualizarImagenPlataformas();
+	                        actualizarImagenPowerUps();
+	                        actualizarImagenEnemigos();            
+	                	}
+	                    llegoAlFinal();
+	                }
             	}
-                llegoAlFinal();
-            }
         });
         refrescarPantalla.start();
+    }
+    public void setPantallaCorriendo(boolean b) {
+    	pantallaCorriendo = b;
     }
     
     public void llegoAlFinal() {
@@ -172,14 +176,13 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarImagenBolas() {
     	if(copiaBolas.size()>0) {
-    	for(BolaDeFuego enemigo : copiaBolas) 
-    	{   		
-	    	String ruta = enemigo.getSprite().getRutaImagen();
-	    	enemigo.setIcon(verificarExtension(ruta));
-	    	enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 15, 15);		
-	    	enemigo.setSpriteActualizado(false);
+	    	for(BolaDeFuego enemigo : copiaBolas) {   		
+		    	String ruta = enemigo.getSprite().getRutaImagen();
+		    	enemigo.setIcon(verificarExtension(ruta));
+		    	enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 15, 15);		
+		    	enemigo.setSpriteActualizado(false);
+	    	}
     	}
-    }
     }
 
     public void agregarImagenNivel() {
@@ -324,8 +327,7 @@ public class PantallaJuego extends JPanel {
     	}
     }
     
-   // ACTUALIZAR POSICIONES 
-    
+   // ACTUALIZAR POSICIONES  
     public void actualizarPosicionImagenFondo(int x) {
     	imagenFondo.setLocation(imagenFondo.getX() + x, 0);   	
     }
@@ -342,7 +344,6 @@ public class PantallaJuego extends JPanel {
         		enemigo.setLocation(enemigo.getPosX(), enemigo.getPosY());	
         	}
     	}
-    	
     }
     
     public void actualizarPosicionMonedas(int x) {
@@ -449,9 +450,6 @@ public class PantallaJuego extends JPanel {
     }
     
     // COMANDOS UTILES
-    
-  
-    
     public void moverFondo(int velocidad) {
     	int mitadAnchoVentana = panelScrollNivel.getViewport().getWidth() / 2;
     	System.out.println("mitad"+mitadAnchoVentana	);
