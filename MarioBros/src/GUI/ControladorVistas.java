@@ -119,8 +119,6 @@ public class ControladorVistas {
 		}
 	}
 	
-	
-	
 	public void iniciarSiguienteNivel() {
 		
 		if (juego.getHiloPersonaje().isAlive()) {

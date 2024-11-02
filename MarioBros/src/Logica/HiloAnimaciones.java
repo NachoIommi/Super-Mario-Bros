@@ -22,6 +22,7 @@ public class HiloAnimaciones extends Thread{
 	    public void run() {
 	    	enEjecucion = true;
 	    	while(enEjecucion) {
+	    		 
 	    		try {
 	    			List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
 	                for(Enemigo e : copiaEnemigos) {

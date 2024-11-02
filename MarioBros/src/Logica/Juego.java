@@ -91,11 +91,7 @@ public class Juego {
 	}
 	
 	public void iniciarSiguienteNivel() {
-		
 		reseteo();
-		
-		
-		
 		nivel.ganarJuego();
 		System.out.println("cargando nivel: " + getNivel().getNivelActual());
 		System.out.println();
@@ -146,6 +142,7 @@ public class Juego {
 	
 	public void perderJuego() {
 		reseteo();
+		nivel = null;
 		controladorVistas.perderJuego();
 	}
 	

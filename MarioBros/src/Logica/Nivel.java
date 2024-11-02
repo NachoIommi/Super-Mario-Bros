@@ -68,7 +68,7 @@ public class Nivel {
 			
 			if(juego.getModoDeJuego() == 1 ) {
 				fabricaSprite = new GenerarSpriteOriginal();
-			}else {
+			} else {
 				fabricaSprite = new GenerarSpriteReemplazo();
 			}
 			spriteNivel = null;

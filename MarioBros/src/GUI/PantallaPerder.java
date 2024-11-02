@@ -68,8 +68,8 @@ public class PantallaPerder extends JPanel {
     public void registrarOyenteBotonReiniciar() {
 		botonReiniciar.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e) {
-	        	System.out.println("volvi");
-	            controladorVistas.mostrarPantallaModoDeJuego(); 
+	        	System.out.println("volvi"); 
+	        	controladorVistas.mostrarPantallaModoDeJuego();
 	        }
 	    });   
 	}

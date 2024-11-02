@@ -475,5 +475,26 @@ public class PantallaJuego extends JPanel {
     	   revalidate();
            repaint();
     }
+    
+    public void reiniciarPantalla() {
+        // Limpia el contenido previo
+        panelNivel.removeAll();
+        
+        // Agrega de nuevo el fondo y los sprites actualizados
+        agregarImagenNivel();
+        mostrarPersonaje();  // Mostrar el nuevo personaje seleccionado
+        mostrarEnemigos();
+        mostrarPlataformas();
+        mostrarPowerUps();
+        mostrarReloj();
+        mostrarMonedas();
+        mostrarBandera();
+        mostrarPuntuacion();
+        mostrarVidas();
+        
+        panelNivel.revalidate(); // Actualiza el layout del panel
+        panelNivel.repaint(); // Redibuja el panel con los nuevos componentes
+    }
+
  
 }
