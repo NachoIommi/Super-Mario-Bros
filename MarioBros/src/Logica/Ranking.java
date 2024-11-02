@@ -17,7 +17,7 @@ public class Ranking implements Serializable{
 	
 	public void addJugador(Jugador j) {
 	    for (Jugador jugador : jugadores) {
-	        if (jugador != null && jugador.getNombre() != null && jugador.getNombre().equals(j.getNombre())) {
+	        if (jugador != null && jugador.getNombre() != null && jugador.getNombre().equals(j.getNombre()) && jugador.getPuntaje() < j.getPuntaje()) {
 	            jugador.setNuevoPuntaje(j.getPuntaje());
 	            ordenarTopCinco();
 	            return;
