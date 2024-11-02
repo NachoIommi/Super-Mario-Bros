@@ -10,6 +10,9 @@ import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,8 +25,8 @@ public class Lakitu extends Enemigo{
 	protected Personaje personaje;
 	protected int maxX;
 	private Timer spinyTimer;
-	private int distanciaConPersonaje = 200;
-    boolean spinyBajando;
+	private int distanciaConPersonaje = 250;
+	private static final long intervaloSpiny = 5000;
 	
 	protected boolean tocandoBloqueDerecha=false;
 	protected boolean tocandoBloqueIzquierda=false;
@@ -32,6 +35,7 @@ public class Lakitu extends Enemigo{
 	protected boolean mostrable=true;
 	protected boolean murio;
 	protected boolean direccionDerecha;
+	List<Enemigo> enemigosParaAgregar;
 	
 	public Lakitu(Sprite s, int x, int y, Personaje p) {
 		posX = x;
@@ -43,6 +47,7 @@ public class Lakitu extends Enemigo{
 		personaje = p;
 		murio = false;
 		iniciarSpawningSpiny();
+		enemigosParaAgregar = new ArrayList<>();
 	}
 	
 	public Lakitu(Sprite s, int x, int y) {
@@ -69,7 +74,6 @@ public class Lakitu extends Enemigo{
 	public void morir() {
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
-		detenerSpawningSpiny();
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -153,68 +157,49 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void moverseLateralmente() {
-	    int limiteIzquierdo = maxX;
+	    int limiteIzquierdo = Math.abs(maxX - distanciaConPersonaje); //Para caso lakitu al principio del nivel
 	    int limiteDerecho = maxX + distanciaConPersonaje;
+	    int velocidadLakitu = (personaje.getPosX() > maxX) ? 8 : 4; //mas rapido si mario avanzo
 
 	    if (posX >= limiteDerecho) {
 	        direccionDerecha = false;
 	    } else if (posX <= limiteIzquierdo) {
-	        direccionDerecha  = true;
+	        direccionDerecha = true;
 	    }
 
-	    if (posX < maxX) {
-	        posX = maxX;
-	    } else {
-	        posX += direccionDerecha ? 2 : -2; // Si direccionDerecha = true, posX += 2, else -= 2
-	    }
-	    
+	    posX += direccionDerecha ? velocidadLakitu : -velocidadLakitu;
 	    hitbox.actualizar(posX, posY);
 	}
 	
-	public void iniciarSpawningSpiny() {
-	    Timer spinyTimer = new Timer();
-	    int intervaloSpiny = 2000; // Intervalo entre lanzamientos de Spiny
-	    spinyBajando = true; // Controla si el Spiny está descendiendo
-
-	    spinyTimer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            lanzarSpiny();
-	            System.out.println("INTENTE SPAWNEAR");
-	        }
-	    }, 0, intervaloSpiny);
-	}
+	private void iniciarSpawningSpiny() {
+        spinyTimer = new Timer();
+        spinyTimer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                lanzarSpiny();
+                
+            }
+        }, 0, intervaloSpiny); // arranca 2seg despues y repite cada 2 segundos
+    }
 
 	private void lanzarSpiny() {
-	    GenerarSprite fabricaSprite;
-	    
-	    if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
-	        fabricaSprite = new GenerarSpriteOriginal();
-	    } else {
-	        fabricaSprite = new GenerarSpriteReemplazo();
-	    }
-	    
-	    GenerarEnemigos fabricaSpiny = new GenerarSpiny();
-	    Spiny nuevoSpiny = (Spiny) fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY); // ESTO ES UNA ASCO CREO JAJAJA
-	    personaje.getNivelActual().getJuego().agregarEnemigo(nuevoSpiny);
+		
+		GenerarSprite fabricaSprite;
+		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+		    fabricaSprite = new GenerarSpriteOriginal();
+		} else {
+		    fabricaSprite = new GenerarSpriteReemplazo();
+		}
+ 
+		GenerarEnemigos fabricaSpiny = new GenerarSpiny();
+		Spiny nuevoSpiny = (Spiny) fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX - 60, posY + 60);
+		personaje.getNivelActual().getJuego().agregarEnemigo(nuevoSpiny);
+		 
+		 
+    }
 
-
-	    Timer timerCaida = new Timer();
-	    timerCaida.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            if (spinyBajando && nuevoSpiny.getPosY() < 390) {
-	                nuevoSpiny.setPosY(nuevoSpiny.getPosY() + 10);
-	                nuevoSpiny.getHitbox().actualizar(nuevoSpiny.getPosX(), nuevoSpiny.getPosY());
-	            } else {
-	                spinyBajando = false;
-	                timerCaida.cancel();
-	                nuevoSpiny.moverse(); // Inicia el movimiento en el suelo
-	            }
-	        }
-	    }, 0, 100); // Frecuencia de actualización de la caída
-	}
 	    
-	public void detenerSpawningSpiny() { //Si muere el lakitu, corro esto
-	        spinyTimer.cancel();
+	public void detenerSpawningSpiny() {
+		spinyTimer.cancel();
 	}
 	
 	// Getters

@@ -19,7 +19,7 @@ public class VisitorEntidad implements Visitor{
 	
     public void visitarMoneda(Moneda m) {
     	m.afectarPersonaje(personaje);
-    	
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/agarrarMoneda.wav");
     	
     }
     
@@ -29,22 +29,27 @@ public class VisitorEntidad implements Visitor{
     
     public void visitarSuperChampi(SuperChampi s) {
     	s.afectarPersonaje(personaje);
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/marioCrece.wav");
     }
     
     public void visitarEstrella(Estrella e) {
     	e.afectarPersonaje(personaje);
+    	
     }
     
     public void visitarChampiVerde(ChampiVerde c) {
     	c.afectarPersonaje(personaje);
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/superChampi.wav");
     }
     
     public void visitarBloqueDePregunta(BloqueDePregunta p) {
     	p.recibirGolpe(personaje);
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/spawneaPowerUp.wav");
     }
     
     public void visitarLadrilloSolido(LadrilloSolido l) {
     	l.recibirGolpe(personaje);
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/romperBloque.wav");
     }
     
     public void visitarVacio(Vacio v) {    	
@@ -76,6 +81,7 @@ public class VisitorEntidad implements Visitor{
     }
     
     public void visitarKoopaTroopa(KoopaTroopa k) {
+    	
     }
     
     public void visitarSprite(Sprite s) {

@@ -46,16 +46,20 @@ public class VisitorEnemigoAfectado implements Visitor{
 		
 	}
 
-	public void visitarVacio(Vacio v) {		v.afectarPersonaje(personaje);
+	public void visitarVacio(Vacio v) {
+		v.afectarPersonaje(personaje);
 	}
 
-	public void visitarTuberia(Tuberia t) {	
+	public void visitarTuberia(Tuberia t) {
+	
 	}
 		
-	public void visitarPiranhaPlant(PiranhaPlant p) {		p.afectarPersonaje(personaje);
+	public void visitarPiranhaPlant(PiranhaPlant p) {
+		p.afectarPersonaje(personaje);
 	}
 
-	public void visitarLakitu(Lakitu l) {		l.serAfectadoPorPersonaje(personaje);
+	public void visitarLakitu(Lakitu l) {
+		l.serAfectadoPorPersonaje(personaje);
 	}
 
 	public void visitarSpiny(Spiny s) {
@@ -72,6 +76,7 @@ public class VisitorEnemigoAfectado implements Visitor{
 
 	public void visitarKoopaTroopa(KoopaTroopa k) {
 		k.serAfectadoPorPersonaje(personaje);
+		Musica.getMusica().reproducirSonido("Sonido/Sonidos/patearKoopaTroopa.wav");
 	}
 
 	public void visitarMusica(Musica m) {

@@ -32,7 +32,6 @@ public class Spiny extends Enemigo{
 		mostrable = true;
 		setSpriteActualizado(false);
 		murio = false;
-		moverse();
 	}
 	
 	// Setters	
@@ -56,30 +55,35 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void moverse() {
-		if(tocandoBloqueIzquierda) 
+		if(tocandoBloqueAbajo) {
+			if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
 		
-		if(!tocoParedIzquierda) {
-			moverIzq();			
-			hitbox.actualizar (posX, posY);
+			if(!tocoParedIzquierda) {
+				moverIzq();			
+				hitbox.actualizar (posX, posY);
 			
-		} else {
-			tocoParedIzquierda=true;
-			moverDer();
-			hitbox.actualizar (posX, posY);
-		}
+			} else {
+				tocoParedIzquierda=true;
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}
 						
-		if (tocandoBloqueDerecha) {
-			tocoParedDerecha=true;
-			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-		}		
-
-		if (!tocandoBloqueAbajo) { 
-	        posY=posY+1;
+			if (tocandoBloqueDerecha) {
+				tocoParedDerecha=true;
+				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+			}
+			actualizarSpriteACaminando();
 		} else {
-			actualizarSprite2();
+			if (!tocandoBloqueAbajo) { 
+				posY=posY+2;
+			}
+				
+		
+		} 
+			
 			setSpriteActualizado(true);
-		}
+		
 		
 		hitbox.actualizar (posX, posY);	
 	}
@@ -143,7 +147,7 @@ public class Spiny extends Enemigo{
         }
 	}
 	
-	public void actualizarSprite2(){
+	public void actualizarSpriteACaminando(){
 		 GenerarSprite fabrica = new GenerarSpriteOriginal();
 	     sprite = fabrica.getSpinyCaminandoDerecha();
 	}
