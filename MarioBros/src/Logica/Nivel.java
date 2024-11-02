@@ -40,7 +40,7 @@ public class Nivel {
 	protected GenerarSprite fabricaSprite;
 	protected int reloj;
 	protected int nivelActual;
-	protected Personaje p;
+	protected Personaje personaje;
 	
 	public Nivel(int tiempo, Juego juego) {
 		
@@ -98,8 +98,8 @@ public class Nivel {
 			int puntuacion = 0;
 
 			if(i>0) {
-				 vidas = p.getVidas();
-				 puntuacion = p.getPuntuacion();
+				 vidas = personaje.getVidas();
+				 puntuacion = personaje.getPuntuacion();
 			 }
 			 setNivelActual(i);	
 			 String ruta = "Niveles" + File.separator + "nivel-"+getNivelActual()+".txt";
@@ -120,8 +120,8 @@ public class Nivel {
 				}
 				switch (tipoEntidad) {
 				    case 0:
-				    	p = fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY,this);
-				    	juego.agregarPersonaje(p);
+				    	personaje = fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY,this);
+				    	juego.agregarPersonaje(personaje);
 				        
 				    	break;
 				    case 1:
@@ -215,8 +215,8 @@ public class Nivel {
 			}
 			//setReloj();
 			//setNivelActual(i);
-			 p.setVidas(vidas);
-			 p.setPuntuacion(puntuacion);
+			 personaje.setVidas(vidas);
+			 personaje.setPuntuacion(puntuacion);
 		}catch(IOException | NumberFormatException e) {
 				System.out.println(e.getMessage());}
 	}
@@ -230,16 +230,19 @@ public class Nivel {
 	}
 
 	public void reiniciarNivel() {
-		int vidas = p.getVidas(); 
-		int puntuacion = p.getPuntuacion();
-		juego.reseteo();
-		cargarNivel(getNivelActual());
-		 
-		if (vidas > 0) { 
-	        p.setVidas(vidas); 
-	        p.setPuntuacion(puntuacion);       
+		if(personaje != null) {
+			int vidas = personaje.getVidas(); 
+			int puntuacion = personaje.getPuntuacion();
+			juego.reseteo();
+			cargarNivel(getNivelActual());
+			 
+			if (vidas > 0) { 
+		        personaje.setVidas(vidas); 
+		        personaje.setPuntuacion(puntuacion);       
+			}
+			juego.reiniciarNivel(); 
 		}
-		juego.reiniciarNivel(); 
+		
 	}
 
 	public Juego getJuego() {

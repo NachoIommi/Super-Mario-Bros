@@ -88,6 +88,7 @@ public class Juego {
 					reloj.detener();
 				}
 				
+				personaje = null;
 				
 				powerUps.clear();
 				enemigos.clear();
@@ -147,6 +148,7 @@ public class Juego {
 	public void perderJuego() {
 		reseteo();
 		nivel = null;
+		personaje = null;
 		controladorVistas.perderJuego();
 	}
 	
