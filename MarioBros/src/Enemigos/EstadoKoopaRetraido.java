@@ -124,25 +124,7 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		cargarSprite(sprite);
 		koopa.setSpriteActualizado(true);
 		
-		int posY = getPosY();
-   
-        for (int i = 0; i < 30; i++) {
-            setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-       
-        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            setPosY(getPosY() + 5);
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+	
 	}
 	
 	public void actualizarSpriteKoopaRetraido() {
