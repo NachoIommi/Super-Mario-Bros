@@ -30,11 +30,17 @@ public class FlorDeFuego extends PowerUps{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		
+	    if (mostrable) {
+	        this.sprite = s;
+	    }
 	}
 
+
 	public void afectarPersonaje(Personaje p) {
-		p.getEstado().setPuntuacionFlorDeFuego();
+		if (mostrable) {  // Solo afecta si la flor es visible
+	        p.getEstado().setPuntuacionFlorDeFuego();
+	        mostrable = false;  // La flor se consume al afectar al personaje
+	    }
 	}
 
 	public Sprite getSprite() {

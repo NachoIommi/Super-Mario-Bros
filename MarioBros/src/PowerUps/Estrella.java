@@ -7,24 +7,77 @@ import Personaje.Personaje;
 
 public class Estrella extends PowerUps{
 	
-	protected int x;
-	protected int y;
-	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected int posX;
+	protected int posY;
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
 	protected boolean mostrable;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
+    protected boolean cayendo;
+	protected Sprite sprite;
+	protected Hitbox hitbox;
 	
 	public Estrella(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
+		posX = x;
+		posY = y;
 		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
+		hitbox = new Hitbox(0 ,0,30 ,30);
 		mostrable=false;
+		tocandoBloqueDerecha=false;
+	    tocandoBloqueIzquierda=false;
+	    tocandoBloqueAbajo=false;
+	    tocandoBloqueArriba=false;
 	}
 	
 	public void moverse() {
 		
+		if(mostrable){			
+			if(tocandoBloqueIzquierda) {
+				tocoParedIzquierda=true;
+				tocoParedDerecha=false;}
+			
+			if(tocandoBloqueDerecha)
+				tocoParedDerecha=true;
+			
+			if(!tocoParedDerecha) {
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}
+			else {
+				tocoParedDerecha=true;
+				moverIzq();
+				hitbox.actualizar (posX, posY);
+			}	
+			
+			if (!tocandoBloqueAbajo) {
+		        posY=posY+3;}
+			
+			hitbox.actualizar (posX, posY);		
+			corregirPosEnColision();
+		}
+		
+	}
+	public void moverIzq() {
+		posX = posX-2;
+	}
+	public void moverDer() {
+		posX = posX+2;
+	}
+	public void corregirPosEnColision() {
+		if(tocandoBloqueIzquierda)  
+	    	posX=posX+1;	    		
+	    if(tocandoBloqueDerecha) 
+	    	posX=posX-1;	    
 	}
 	
+	
+	public boolean mostrable() {
+		return mostrable;
+	}
+
 	public void aceptarVisita(Visitor v) {
 		v.visitarEstrella(this);
 	}
@@ -32,9 +85,15 @@ public class Estrella extends PowerUps{
 	public void cargarSprite(Sprite s) {
 		
 	}
-
+	
 	public void afectarPersonaje(Personaje p) {
-		p.getEstado().setPuntuacionEstrella();
+		
+		p.colisionEstrella();
+		hitbox.actualizar(0, 0);
+		setMostrable(false);
+		hitbox.actualizar(0, 0);
+		//p.setEstado(null);
+		//p.getEstado().setPuntuacionSuperChampi();
 	}
 
 	public Sprite getSprite() {
@@ -42,36 +101,23 @@ public class Estrella extends PowerUps{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
-
+	
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
-	public Hitbox getHitbox() {
-		return hitb;
-	}
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-
-	@Override
 	public void setPosX(int x) {
-		// TODO Auto-generated method stub
-		
+		this.posX=x;
 	}
-
-	@Override
-	public void setPosY(int x) {
-		// TODO Auto-generated method stub
-		
+	
+	public void setPosY(int y) {
+		this.posY=y;
 	}
-
-	@Override
-	public boolean mostrable() {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public Hitbox getHitbox() {
+		return hitbox;
 	}
 
 	@Override
@@ -85,28 +131,29 @@ public class Estrella extends PowerUps{
 		// TODO Auto-generated method stub
 		
 	}
+	public void setMostrable(boolean b) {
+		mostrable=b;
+	}
 
-	@Override
 	public void setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
 		
+		tocandoBloqueDerecha=b;
 	}
 
-	@Override
 	public void setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
 		
+		tocandoBloqueIzquierda=b;
 	}
 
-	@Override
 	public void setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
 		
+		tocandoBloqueArriba=b;
 	}
 
-	@Override
+
 	public void setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
 		
+		tocandoBloqueAbajo=b;
 	}
+	
 }

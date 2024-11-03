@@ -58,7 +58,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;
-        estado = new EstadoDeFuego(this ,sprite, x ,y); 
+        estado = new EstadoNormal(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -120,7 +120,7 @@ public class Personaje extends Entidad{
     }
     
     public void colisionVacio() {
-		estado.morir();
+    	estado.morir();
 	}
 	
 	public int getAlto() {

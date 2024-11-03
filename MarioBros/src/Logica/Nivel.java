@@ -135,6 +135,11 @@ public class Nivel {
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,m ,5));
 				    			juego.agregarPowerUp(m);
 				    			break;
+				    		
+					    	case 32:
+					    		PowerUps e = fabricaEstrella.crearPowerUp(fabricaSprite.getEstrella(), posX, posY);
+					    		juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY, e, 1));
+					    		juego.agregarPowerUp(e);
 				    			
 				    		case 33:
 				    			PowerUps  s = fabricaSuperChampi.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY-30) ;
@@ -142,6 +147,11 @@ public class Nivel {
 				    			juego.agregarPowerUp(s);
 				    			break;
 				    			
+				    		case 34:
+				    			PowerUps  f = fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY) ;
+				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,f ,1));
+				    			juego.agregarPowerUp(f);
+				    			break;
 				    			
 				    		 default:
 				    			 break;
