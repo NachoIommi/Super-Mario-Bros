@@ -79,7 +79,6 @@ public class SuperChampi extends PowerUp{
 	}
 	
 	public void afectarPersonaje(Personaje p) {
-		
 		p.colisionSuperChampi();
 		hitbox.actualizar(0, 0);
 		setMostrable(false);

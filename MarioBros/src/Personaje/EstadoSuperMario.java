@@ -200,10 +200,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 	
 	public void colisionSuperChampi() {
-		
+		setPuntuacionSuperChampi();
     }
     
     public void colisionFlorDeFuego() {
+    	setPuntuacionFlorDeFuego();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
@@ -211,6 +212,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     }
     
     public void colisionEstrella() {
+    	setPuntuacionEstrella();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
@@ -222,7 +224,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 
 	public void colisionMoneda() {
-		
+		setPuntuacionMoneda();
 	}
 
 	public void colisionLateralGoomba(Goomba goomba) {

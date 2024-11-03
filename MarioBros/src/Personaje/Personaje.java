@@ -58,7 +58,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;
-        estado = new EstadoSuperMario(this ,sprite, x ,y); 
+        estado = new EstadoNormal(this ,sprite, x ,y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;

@@ -21,7 +21,7 @@ public class Estrella extends PowerUp{
 		posX = x;
 		posY = y;
 		sprite = s;
-		hitbox = new Hitbox(x ,y,30 ,30);
+		hitbox = new Hitbox(0 ,0,30 ,30);
 	}
 	
 	public void moverse() {
