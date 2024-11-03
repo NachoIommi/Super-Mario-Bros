@@ -19,7 +19,7 @@ public class Personaje extends Entidad{
 	
 	public double toleranciaAltura;
 	private EstadoDePersonaje estado;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected int vidas;
 	protected int monedas;
 	protected int puntuacion = 0;
@@ -58,11 +58,7 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;
-<<<<<<< HEAD
-        estado = new EstadoNormal(this ,sprite, x ,y); 
-=======
         estado = new EstadoSuperMario(this ,sprite, x ,y); 
->>>>>>> 42fc62a (Refactoring de clases hijas con clases abstractas)
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;

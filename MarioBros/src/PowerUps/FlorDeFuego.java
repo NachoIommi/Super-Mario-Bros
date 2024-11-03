@@ -5,20 +5,19 @@ import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
-public class FlorDeFuego extends PowerUps{
+public class FlorDeFuego extends PowerUp{
 	
-	protected int x;
-	protected int y;
+	protected int posX;
+	protected int posY;
 	protected Sprite sprite;
-	protected Hitbox hitb;
-	protected boolean mostrable;
+	protected Hitbox hitbox;
 	
-	public FlorDeFuego(Sprite sprite, int x, int y) {
-		this.x = x;
-		this.y = y;
-		this.sprite = sprite;
-		hitb = new Hitbox(x ,y,30 ,30);
-		mostrable=false;
+	public FlorDeFuego(Sprite s, int x, int y) {
+		super();
+		posX = x;
+		posY = y;
+		sprite = s;
+		hitbox = new Hitbox(x ,y,30 ,30);
 	}
 	
 	public void moverse() {
@@ -30,16 +29,15 @@ public class FlorDeFuego extends PowerUps{
 	}
 	
 	public void cargarSprite(Sprite s) {
-	    if (mostrable) {
-	        this.sprite = s;
+		if (mostrable) {
+			sprite = s;
 	    }
 	}
 
-
 	public void afectarPersonaje(Personaje p) {
-		if (mostrable) {  // Solo afecta si la flor es visible
+		if (mostrable) {
 	        p.getEstado().setPuntuacionFlorDeFuego();
-	        mostrable = false;  // La flor se consume al afectar al personaje
+	        mostrable = false;  
 	    }
 	}
 
@@ -48,73 +46,32 @@ public class FlorDeFuego extends PowerUps{
 	}
 
 	public int getPosX() {
-		return x;
+		return posX;
 	}
 
 	public int getPosY() {
-		return y;
+		return posY;
 	}
 
 	public Hitbox getHitbox() {
-		return hitb;
-	}
-	public void setMostrable(boolean b) {
-		mostrable=b;
+		return hitbox;
 	}
 
-	@Override
 	public void setPosX(int x) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void setPosY(int x) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public boolean mostrable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }

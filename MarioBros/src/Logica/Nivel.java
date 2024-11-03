@@ -13,7 +13,7 @@ import GUI.PantallaPerder;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
 import PowerUps.Moneda;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class Nivel {
 	
@@ -131,27 +131,28 @@ public class Nivel {
 				    	switch(tipoPUp)
 				    	{
 					    	case 31:
-				    			PowerUps m = fabricaMoneda.crearPowerUp(fabricaSprite.getMonedaSaltando(), posX, posY);
+				    			PowerUp m = fabricaMoneda.crearPowerUp(fabricaSprite.getMonedaSaltando(), posX, posY);
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,m ,5));
 				    			juego.agregarPowerUp(m);
 				    			break;
-				    		
+				    			
 					    	case 32:
-					    		PowerUps e = fabricaEstrella.crearPowerUp(fabricaSprite.getEstrella(), posX, posY);
+					    		PowerUp e = fabricaEstrella.crearPowerUp(fabricaSprite.getEstrella(), posX, posY);
 					    		juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY, e, 1));
 					    		juego.agregarPowerUp(e);
 				    			
 				    		case 33:
-				    			PowerUps  s = fabricaSuperChampi.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY-30) ;
+				    			PowerUp  s = fabricaSuperChampi.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY-30) ;
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,s ,1));
 				    			juego.agregarPowerUp(s);
 				    			break;
 				    			
 				    		case 34:
-				    			PowerUps  f = fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY) ;
+				    			PowerUp  f = fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY) ;
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,f ,1));
 				    			juego.agregarPowerUp(f);
 				    			break;
+				    			
 				    			
 				    		 default:
 				    			 break;
