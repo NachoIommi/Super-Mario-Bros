@@ -2,6 +2,7 @@ package PowerUps;
 
 import Fabricas.Sprite;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -16,8 +17,8 @@ public class Estrella extends PowerUp{
     protected boolean tocoParedDerecha;
 	
 	
-	public Estrella(Sprite s, int x, int y) {
-		super();
+	public Estrella(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;

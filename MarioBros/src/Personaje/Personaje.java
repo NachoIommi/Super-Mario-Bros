@@ -28,7 +28,6 @@ public class Personaje extends Entidad{
 	protected int posY;
 	protected int direccionDelPersonaje;
 	protected Sprite s;
-	protected Nivel nivelActual;
 
 	protected float min = 10.0f;
 	public int max = 2700;
@@ -54,8 +53,8 @@ public class Personaje extends Entidad{
     protected int tiempoInvulnerable;
     protected static final int TIEMPO_INVULNERABILIDAD = 3000;
 	
-	public Personaje(Sprite sprite, int x, int y, Nivel nivel) {
-		nivelActual = nivel;
+	public Personaje(Sprite sprite, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;

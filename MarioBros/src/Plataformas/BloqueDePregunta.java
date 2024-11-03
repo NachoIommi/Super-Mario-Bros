@@ -1,6 +1,7 @@
 package Plataformas;
 
 import Fabricas.Sprite;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.EstadoDePersonaje;
 import Personaje.Personaje;
@@ -14,8 +15,8 @@ public class BloqueDePregunta extends BloqueSolido {
 	protected int golpesRestantes;
 	protected boolean cambio;
 	
-	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUp p , int golpes) {
-		super(sprite, x, y);
+	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUp p , int golpes, Nivel nivelActual) {
+		super(sprite, x, y, nivelActual);
 		contenido = p;
 		golpesRestantes=golpes;
 		estado= new BloqueGolpeable(this,sprite,x,y,p,golpes);

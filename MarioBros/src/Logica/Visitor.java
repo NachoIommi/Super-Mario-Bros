@@ -27,7 +27,7 @@ public interface Visitor {
 	public void visitarMusica(Musica m);
 	public void visitarPantalla(Juego j);
 	public void visitarSprite(Sprite s);
-	public void visitarAnimador(Animador a);
+
 	
 
 }

@@ -1,6 +1,7 @@
 package Plataformas;
 import Fabricas.Sprite;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Logica.VisitorEntidad;
 import Personaje.Personaje;
@@ -12,7 +13,8 @@ public class Vacio extends Plataforma {
 	protected int y;
 	protected Hitbox hitbox;
 	
-	public Vacio(Sprite sprite, int x,int y) {
+	public Vacio(Sprite sprite, int x,int y, Nivel nivelActual) {
+		super(nivelActual);
 		this.x = x;
 		this.y = y;
 		this.sprite = sprite;

@@ -13,7 +13,7 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	}
 	
 	public Sprite getNivel(int n) {
-		return new Sprite("/img/nivel-1.png");
+		return new Sprite(rutaImagen + "/nivel-"+n+".png");
 	}
 	
 	public Sprite getPersonajeNormalDerrapandoDerecha() {
@@ -194,6 +194,10 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	
 	public Sprite getPiranhaPlant() {
 		return new Sprite(rutaImagen + "/piranhaPlant.gif");
+	}
+	
+	public Sprite getPiranhaPlantMuerta() {
+		return new Sprite (rutaImagen + "/piranhaMuerta.png");
 	}
 	
 	public Sprite getPiranhaPlantSpawneando() {

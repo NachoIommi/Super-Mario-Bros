@@ -8,6 +8,7 @@ import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite ;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -31,8 +32,8 @@ public class Lakitu extends Enemigo{
 	protected boolean direccionDerecha;
 	List<Enemigo> enemigosParaAgregar;
 	
-	public Lakitu(Sprite s, int x, int y, Personaje p) {
-		super();
+	public Lakitu(Sprite s, int x, int y, Personaje p, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;
@@ -43,8 +44,8 @@ public class Lakitu extends Enemigo{
 		enemigosParaAgregar = new ArrayList<>();
 	}
 	
-	public Lakitu(Sprite s, int x, int y) {
-		super();
+	public Lakitu(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;
@@ -164,7 +165,7 @@ public class Lakitu extends Enemigo{
 		}
  
 		GenerarEnemigos fabricaSpiny = new GenerarSpiny();
-		Spiny nuevoSpiny = (Spiny) fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX - 60, posY + 60);
+		Spiny nuevoSpiny = (Spiny) fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX - 60, posY + 60, nivelActual);
 		personaje.getNivelActual().getJuego().agregarEnemigo(nuevoSpiny);
 
     }

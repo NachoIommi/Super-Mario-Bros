@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Musica;
@@ -16,7 +17,6 @@ import PowerUps.PowerUp;
 
 public class BloqueGolpeable extends EstadoDeBloque{
 	
-	//protected BloqueDePregunta bloque;
 	protected Sprite sprite;
 	protected int posX;
 	protected int posY;
@@ -50,6 +50,13 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	}
 
 	public void recibirGolpe(Personaje p) {
+		GenerarSprite fabricaSprite = null;
+		if(bloque.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			fabricaSprite = new GenerarSpriteOriginal();
+		}else {
+			fabricaSprite = new GenerarSpriteReemplazo();
+		}
+		
 		if(!bloqueMonedas) {
 			if(golpesRestantes!=1 ) {
 				soltarContenido();
@@ -59,10 +66,10 @@ public class BloqueGolpeable extends EstadoDeBloque{
 			else {		
 				soltarContenido();
 				golpesRestantes--;
-				GenerarSprite fabrica = new GenerarSpriteOriginal();
-				EstadoDeBloque e = new BloqueGolpeado(bloque,fabrica.getBloqueDePreguntaRoto(),posX,posY,0);
+				
+				EstadoDeBloque e = new BloqueGolpeado(bloque,fabricaSprite.getBloqueDePreguntaRoto(),posX,posY,0);
 				bloque.cambiarEstado(e);
-				bloque.setSprite(fabrica.getBloqueDePreguntaRoto());}
+				bloque.setSprite(fabricaSprite.getBloqueDePreguntaRoto());}
 		}
 		else {
 			if (golpesRestantes != 1) {
@@ -109,10 +116,9 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	            timer.scheduleAtFixedRate(animacionSubidaFinal, 0, 50);
 	            p.setMonedas(1);
 	            p.setPuntuacion(5);
-	            GenerarSprite fabrica = new GenerarSpriteOriginal();
-	            EstadoDeBloque e = new BloqueGolpeado(bloque, fabrica.getBloqueDePreguntaRoto(), posX, posY, 0);
+	            EstadoDeBloque e = new BloqueGolpeado(bloque, fabricaSprite.getBloqueDePreguntaRoto(), posX, posY, 0);
 	            bloque.cambiarEstado(e);
-	            bloque.setSprite(fabrica.getBloqueDePreguntaRoto());
+	           // bloque.setSprite(fabrica.getBloqueDePreguntaRoto());
 	        }
 		}
 	}

@@ -13,7 +13,8 @@ public class Tuberia extends Plataforma{
 	protected Hitbox hitbox;
 	protected int reloj;
 	
-	public Tuberia(Sprite s, int x, int y, PiranhaPlant piranha) {
+	public Tuberia(Sprite s, int x, int y, PiranhaPlant piranha, Nivel nivelActual) {
+		super(nivelActual);
 		contenido = piranha;
 		posX = x;
 		posY = y;
@@ -21,7 +22,8 @@ public class Tuberia extends Plataforma{
 		hitbox = new Hitbox(x-5, y, 40,30);
 	}
 	
-	public Tuberia(Sprite s, int x,int y) {
+	public Tuberia(Sprite s, int x,int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;

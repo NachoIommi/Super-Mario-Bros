@@ -10,7 +10,8 @@ public class BolaDeFuego extends Entidad{
 	protected Hitbox hitb;
 	protected int posXInicial;
 	
-	public BolaDeFuego(Sprite sprite, int x, int y) {
+	public BolaDeFuego(Sprite sprite, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		this.sprite = sprite;

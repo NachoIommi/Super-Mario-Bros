@@ -150,7 +150,12 @@ public class ControladorVistas {
 		return juego;
 	}
 	public Personaje obtenerPersonaje() {
-		return juego.getPersonaje();
+		if(juego.getPersonaje() == null) {
+			return null;
+		}else {
+			return juego.getPersonaje();
+		}
+		
 	}
 	
 	public List<Enemigo> obtenerEnemigo() {

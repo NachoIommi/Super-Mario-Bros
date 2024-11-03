@@ -4,6 +4,7 @@ import javax.swing.Timer;
 
 import Fabricas.Sprite;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -17,7 +18,8 @@ public class PiranhaPlant extends Enemigo{
 	protected boolean mostrable;
 	protected boolean murio;
 	
-	public PiranhaPlant(Sprite s, int x, int y) {
+	public PiranhaPlant(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		estado = new EstadoPiranhaExtendida(this ,s, x ,y); 
 		posX = x;
 		posY = y;

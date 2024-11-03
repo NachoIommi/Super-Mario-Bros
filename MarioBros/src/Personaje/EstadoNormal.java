@@ -55,7 +55,7 @@ public class EstadoNormal extends EstadoDePersonaje {
     	
     	int posY = personaje.getPosY();
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 45; i++) {
             personaje.setPosY(posY - (i * 2));
             try {
                 Thread.sleep(16);

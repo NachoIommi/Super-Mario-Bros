@@ -23,10 +23,12 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	protected boolean subiendo;
 	protected boolean bajando;
 	protected boolean entroTimer;
+	protected boolean muerto;
 	
 	
 	public EstadoPiranhaExtendida(PiranhaPlant p,Sprite s,int x,int y) {
 		super(p);
+		muerto = false;
 		sprite = s;
 		posX = x;
 		posY = y;
@@ -75,7 +77,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	
 	// Setters
 	 public void cambiarEstado() {
-	    this.actualizarSpriteCambioDeEstado();
+		actualizarSprite();
 		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,sprite, posX, posY));	
 	 }
 	
@@ -84,7 +86,9 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	}
 	
 	public void morir() {   
+		muerto = true;
 		hitbox = new Hitbox(0 ,0,0 ,0);	
+		actualizarSprite();
 	}
 	
 	
@@ -106,36 +110,28 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getPiranhaPlant();
+		
+		GenerarSprite fabrica;
+		
+		if(piranha.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			fabrica = new GenerarSpriteOriginal();
+		}else {
+			fabrica = new GenerarSpriteReemplazo();
+		}
+		
+		if(!muerto) {
+			sprite = fabrica.getPiranhaPlant();
+		}else {
+			sprite = fabrica.getPiranhaPlantMuerta();
+		}
 		cargarSprite(sprite);
 		piranha.setSpriteActualizado(true);
-		
-		 int posY = getPosY();
-	        // Animación de desplazamiento hacia arriba
-	        for (int i = 0; i < 30; i++) {
-	            setPosY(posY - (i * 2));
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        // Caída hacia la parte inferior de la ventana
-	        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-	            setPosY(getPosY() + 5);
-	            try {
-	                Thread.sleep(14);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
 	}
 	
 	public void actualizarSpriteCambioDeEstado() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getPiranhaPlant();
-		piranha.setSpriteActualizado(true);
+	
+		
+		
 	}
 	
 	public void setPiranhaPlant(PiranhaPlant p) {

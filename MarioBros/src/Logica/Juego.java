@@ -184,7 +184,12 @@ public class Juego {
 	}
 	
 	public Personaje getPersonaje() {
-		return personaje;
+		if(personaje == null) {
+			return null;
+		}else {
+			return personaje;
+		}
+		
 	}
 	
 	public void agregarEnemigo(Enemigo e) {

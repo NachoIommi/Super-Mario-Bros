@@ -2,9 +2,11 @@ package Enemigos;
 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -17,8 +19,8 @@ public class BuzzyBeetle extends Enemigo{
 
 	public double toleranciaAltura=20;
 	
-	public BuzzyBeetle(Sprite s, int x, int y) {
-		super();
+	public BuzzyBeetle(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;
@@ -33,14 +35,17 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
+		murio = true;
 		morir();
 		p.setPuntuacion(30);
-		murio = true;
+		
 	}
 	
 	public void morir() {
+		actualizarSprite();
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
+		
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -87,30 +92,19 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getBuzzyBeetleRetraido();
+		GenerarSprite fabricaSprite;
+		
+        if(nivelActual.getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+		
+    	sprite = fabricaSprite.getBuzzyBeetleRetraido();
     	cargarSprite(sprite);
     	setSpriteActualizado(true);
+    	System.out.println("actualice sprite :: buzzy");
     	
-    	int posY = getPosY();
-        // Animación de desplazamiento hacia arriba
-        for (int i = 0; i < 30; i++) {
-            setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        // Caída hacia la parte inferior de la ventana
-        while (getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            setPosY(getPosY() + 5);
-            try {
-                Thread.sleep(14);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
 	}
 	
 	public void setSpriteActualizado(boolean actualizada) {

@@ -3,6 +3,7 @@ import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.EstadoNormal;
 import Personaje.Personaje;
@@ -15,8 +16,8 @@ public class KoopaTroopa extends Enemigo{
 	protected int posX;
 	protected int posY;
 	
-	public KoopaTroopa(Sprite s, int x,int y) {
-		super();
+	public KoopaTroopa(Sprite s, int x,int y, Nivel nivelActual) {
+		super(nivelActual);
 		estado = new EstadoKoopaNormal(this ,s, x ,y); 
 		posX = x;
 		posY = y;

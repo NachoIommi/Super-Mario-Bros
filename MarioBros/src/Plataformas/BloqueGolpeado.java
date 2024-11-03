@@ -11,7 +11,6 @@ import PowerUps.PowerUp;
 
 public class BloqueGolpeado extends EstadoDeBloque{
 	
-	protected BloqueDePregunta bloque;
 	protected Sprite sprite;
 	protected int posX;
 	protected int posY;

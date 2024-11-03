@@ -485,29 +485,29 @@ public class PantallaJuego extends JPanel {
                     int keyCode = k.getKeyCode(); 
                     switch(keyCode) {
                     	case(KeyEvent.VK_D):
-                    		controladorVistas.obtenerPersonaje().setRight(true);
+                    		personaje.setRight(true);
                     		break;
                     	case(KeyEvent.VK_A):
-                    		controladorVistas.obtenerPersonaje().setLeft(true);
+                    		personaje.setLeft(true);
                     		break;		
                     	case(KeyEvent.VK_W):
-                    		controladorVistas.obtenerPersonaje().setJump(true);
+                    		personaje.setJump(true);
                     		break;
                     	case(KeyEvent.VK_SPACE):
-                    		controladorVistas.obtenerPersonaje().disparar();
+                    		personaje.disparar();
                     }
                 }
                 public void keyReleased(KeyEvent k) {
                 	int keyCode = k.getKeyCode(); 
                     switch(keyCode) {
                 	case(KeyEvent.VK_D):
-                		controladorVistas.obtenerPersonaje().setRight(false);               	
+                		personaje.setRight(false);               	
                 		break;
                 	case(KeyEvent.VK_A):
-                		controladorVistas.obtenerPersonaje().setLeft(false);               	
+                		personaje.setLeft(false);               	
                 		break;		
                 	case(KeyEvent.VK_W):
-                		controladorVistas.obtenerPersonaje().setJump(false); 
+                		personaje.setJump(false); 
                 		break;
                 }     	
                 }

@@ -10,8 +10,8 @@ public class Moneda extends PowerUp{
 	protected int posY;
 	protected Hitbox hitbox;
 	
-	public Moneda(Sprite s, int x, int y) {
-		super();
+	public Moneda(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;

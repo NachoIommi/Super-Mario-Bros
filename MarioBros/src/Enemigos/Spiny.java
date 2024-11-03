@@ -5,6 +5,7 @@ import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -15,8 +16,8 @@ public class Spiny extends Enemigo{
 	protected int posX;
 	protected int posY;
 	
-	public Spiny(Sprite s, int x, int y) {
-		super();
+	public Spiny(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;
@@ -38,6 +39,7 @@ public class Spiny extends Enemigo{
 	public void morir() {
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
+		
 	}
 	
 	public void aceptarVisita(Visitor v) {

@@ -85,8 +85,6 @@ public class VisitorEnemigo implements Visitor {
 		
 	}
 	
-	public void visitarAnimador(Animador a) {
-		
-	}
+
 
 }

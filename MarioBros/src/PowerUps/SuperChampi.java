@@ -2,6 +2,7 @@ package PowerUps;
 
 import Fabricas.Sprite;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -16,8 +17,8 @@ public class SuperChampi extends PowerUp{
 	protected Sprite sprite;
 	protected Hitbox hitbox;
 	
-	public SuperChampi(Sprite s, int x, int y) {
-		super();
+	public SuperChampi(Sprite s, int x, int y, Nivel nivelActual) {
+		super(nivelActual);
 		posX = x;
 		posY = y;
 		sprite = s;

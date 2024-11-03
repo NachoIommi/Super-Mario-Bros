@@ -2,6 +2,7 @@ package Enemigos;
 import Fabricas.Sprite; 
 import Logica.Entidad;
 import Logica.Hitbox;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 public abstract class Enemigo extends Entidad{
@@ -15,7 +16,8 @@ public abstract class Enemigo extends Entidad{
     protected boolean tocoParedDerecha;
     protected boolean murio;
 	
-	public Enemigo() {
+	public Enemigo(Nivel nivelActual) {
+		super(nivelActual);
 		tocandoBloqueDerecha = false;
 		tocandoBloqueIzquierda = false;
 		tocandoBloqueAbajo = false;
@@ -54,6 +56,11 @@ public abstract class Enemigo extends Entidad{
 	public abstract void actualizarSprite();
 	public abstract void setSpriteActualizado(boolean actualizado);
 	// Getters
+	
+	public Nivel getNivelActual() {
+		return nivelActual;
+	}
+	
 	public abstract int getPosX();
 	public abstract int getPosY();
 	public abstract Hitbox getHitbox();

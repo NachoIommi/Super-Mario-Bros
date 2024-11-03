@@ -1,6 +1,7 @@
 package PowerUps;
 import Fabricas.Sprite;
 import Logica.Entidad;
+import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
 
@@ -12,9 +13,9 @@ public abstract class PowerUp extends Entidad{
 	protected boolean tocandoBloqueAbajo;
     protected boolean tocandoBloqueArriba;
     
-	public PowerUp() {
+	public PowerUp(Nivel nivelActual) {
+		super(nivelActual);
 		mostrable = false;
-		
 		tocandoBloqueDerecha = false;
 	    tocandoBloqueIzquierda = false;
 	    tocandoBloqueAbajo = false;

@@ -44,7 +44,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	public void disparar() {
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getBolaDeFuego();
-		BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX() , getPosY());
+		BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX() , getPosY(), personaje.getNivelActual());
 		personaje.getNivelActual().getJuego().agregarBola(bola);
 	}
 	
