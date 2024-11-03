@@ -41,6 +41,18 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
         }
     }
     
+    public void reproducirMusicaSinLoop(String rutaArchivo) {
+        try {
+        	detenerMusica();
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(rutaArchivo));
+            clipMusica = AudioSystem.getClip();
+            clipMusica.open(audioStream);
+            clipMusica.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void reproducirSonido(String rutaArchivo) {
         try {
         	AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(rutaArchivo));

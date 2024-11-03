@@ -44,7 +44,6 @@ public class VisitorEntidad implements Visitor{
     
     public void visitarBloqueDePregunta(BloqueDePregunta p) {
     	p.recibirGolpe(personaje);
-    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/spawneaPowerUp.wav");
     }
     
     public void visitarLadrilloSolido(LadrilloSolido l) {

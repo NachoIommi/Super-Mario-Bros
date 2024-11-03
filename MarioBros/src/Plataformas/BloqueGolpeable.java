@@ -9,6 +9,7 @@ import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
+import Logica.Musica;
 import Logica.Visitor;
 import Personaje.Personaje;
 import PowerUps.PowerUp;
@@ -43,6 +44,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		contenido.setPosX(posX);
 		contenido.setPosY(posY-30);	
 		System.out.println("visitado soltar contenido");
+		Musica.getMusica().reproducirSonido("Sonido/Sonidos/spawneaPowerUp.wav");
 		contenido.setMostrable(true);
 		
 	}

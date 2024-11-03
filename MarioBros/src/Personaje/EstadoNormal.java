@@ -7,6 +7,7 @@ import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Musica;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
@@ -39,6 +40,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	// Setters
 	public void morir() {
+		Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
 		GenerarSprite fabricaSprite;
 		
         if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
@@ -53,7 +55,7 @@ public class EstadoNormal extends EstadoDePersonaje {
     	
     	int posY = personaje.getPosY();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 60; i++) {
             personaje.setPosY(posY - (i * 2));
             try {
                 Thread.sleep(16);
@@ -63,14 +65,14 @@ public class EstadoNormal extends EstadoDePersonaje {
         }
 
         while (personaje.getPosY() < 500) {
-            personaje.setPosY(personaje.getPosY() + 5);
+            personaje.setPosY(personaje.getPosY() + 4);
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        
+        //Musica.getMusica().reproducirMusica("Sonido/Canciones/muerte.wav");
         personaje.morir();
     }
 	
@@ -106,6 +108,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
 	        velY = -4;  // IMPULSO INICIAL
+	        Musica.getMusica().reproducirSonido("Sonido/Sonidos/saltarMarioNormal.wav");
 	    }
     }
 	
@@ -216,6 +219,7 @@ public class EstadoNormal extends EstadoDePersonaje {
     }
     
     public void colisionEstrella() {
+    	Musica.getMusica().reproducirMusica("Sonido/Canciones/marioEstrellaCancion.wav");
     	setPuntuacionEstrella();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);

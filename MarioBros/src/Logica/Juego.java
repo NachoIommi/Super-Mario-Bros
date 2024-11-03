@@ -40,7 +40,6 @@ public class Juego {
 	protected HiloAnimaciones hiloAnimaciones;
 	protected HiloRestoMundo hiloRM;
 	protected ControladorVistas controladorVistas;
-	//protected Musica musica; ver si va aca, no toy seguro
 	
 	public Juego() {
 		
@@ -59,7 +58,6 @@ public class Juego {
 		hilo = new HiloPersonaje(this);
 		hiloAnimaciones = new HiloAnimaciones(this);
 		hiloRM = new HiloRestoMundo(this);
-		Musica.getMusica().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 	}
 	
 	public void setControladorVistas(ControladorVistas controladorVistas) {
@@ -150,6 +148,7 @@ public class Juego {
 		nivel = null;
 		personaje = null;
 		controladorVistas.perderJuego();
+		//Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/gameOver.wav");
 	}
 	
 	public void seleccionarMundo(Mundo m) {

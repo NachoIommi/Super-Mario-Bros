@@ -2,6 +2,7 @@ package Personaje;
 
 import Logica.Entidad;   
 import Logica.Hitbox;
+import Logica.Musica;
 import Logica.Nivel;
 import Logica.Visitor;
 
@@ -121,6 +122,7 @@ public class Personaje extends Entidad{
     
     public void colisionVacio() {
     	estado.morir();
+    	
 	}
 	
 	public int getAlto() {
@@ -183,7 +185,9 @@ public class Personaje extends Entidad{
         	activarInvulnerabilidad();
         } else {
         	nivelActual.perderJuego();
+        	
         }
+        
 }
 
     public void activarInvulnerabilidad() {
@@ -204,6 +208,10 @@ public class Personaje extends Entidad{
 
     public void recibirDano() {
     	estado.recibirDano();
+    }
+    
+    public void tocarBandera() {
+    	Musica.getMusica().reproducirSonido("Sonido/Canciones/tocarBandera.wav");
     }
 
     public void sumarVida() {

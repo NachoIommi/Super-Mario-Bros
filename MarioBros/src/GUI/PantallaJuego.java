@@ -128,7 +128,8 @@ public class PantallaJuego extends JPanel {
         	nivelGanado = true;
         	if(!banderaActualizada) {
         		actualizarImagenBandera();
-                banderaActualizada = true;     
+                banderaActualizada = true;
+                personaje.tocarBandera();
         	}      	           
             if (timerBandera != null && timerBandera.isRunning()) {
                 return;

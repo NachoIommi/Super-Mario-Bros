@@ -1,15 +1,4 @@
-/Logica/
 /Personaje/
-/Enemigos/
-/Fabricas/
+/Logica/
+/Plataformas/
 /GUI/
-/img/
-/spritesOriginales/
-<<<<<<< HEAD
-/Plataformas/
-/Launcher/
-/PowerUps/
-=======
-/PowerUps/
-/Plataformas/
->>>>>>> 42fc62a (Refactoring de clases hijas con clases abstractas)

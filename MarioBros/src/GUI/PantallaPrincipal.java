@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import Logica.Juego;
 import Logica.Jugador;
+import Logica.Musica;
 import Logica.Ranking;
 
 public class PantallaPrincipal extends JPanel{

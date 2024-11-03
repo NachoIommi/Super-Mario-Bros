@@ -10,6 +10,7 @@ import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.BolaDeFuego;
 import Logica.Hitbox;
+import Logica.Musica;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
@@ -49,6 +50,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	// Setters
 	public void morir() {
+		Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
 		GenerarSprite fabricaSprite;
 		
         if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
@@ -63,7 +65,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     	
     	int posY = personaje.getPosY();
 
-        for (int i = 0; i < 30; i++) {
+    	for (int i = 0; i < 60; i++) {
             personaje.setPosY(posY - (i * 2));
             try {
                 Thread.sleep(16);
@@ -72,8 +74,8 @@ public class EstadoDeFuego extends EstadoDePersonaje {
             }
         }
 
-        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            personaje.setPosY(personaje.getPosY() + 5);
+        while (personaje.getPosY() < 500) {
+            personaje.setPosY(personaje.getPosY() + 4);
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
@@ -114,6 +116,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
 	        velY = -4;  // IMPULSO INICIAL
+	        Musica.getMusica().reproducirSonido("Sonido/Sonidos/saltarRestoDeMarios.wav");
 	    }
     }
     
@@ -207,7 +210,12 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 	
 	public void colisionEstrella() {
+		Musica.getMusica().reproducirMusica("Sonido/Canciones/marioEstrellaCancion.wav");
 		setPuntuacionEstrella();
+    	GenerarSprite fabrica = new GenerarSpriteOriginal();
+    	EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
+    	personaje.cambiarEstado(e);
+    	System.out.println("Colision con estrella hecha");
 	}
 
 	
@@ -272,7 +280,8 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 	
 	public void romperLadrilloSolido(LadrilloSolido l) {
-		
+		l.getHitbox().actualizar(0, 0);
+		l.cargarSprite(null);
 	}
 
 	public void moverBloqueGolpeable(BloqueGolpeable b) {

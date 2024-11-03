@@ -2,6 +2,7 @@ package Personaje;
 import Fabricas.*;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Musica;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
@@ -33,7 +34,8 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 	
 	// Setters
-	public void morir() {          
+	public void morir() { 
+		Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
 		GenerarSprite fabricaSprite;
 		
         if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
@@ -48,7 +50,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
     	
     	int posY = personaje.getPosY();
 
-        for (int i = 0; i < 50; i++) {
+    	for (int i = 0; i < 60; i++) {
             personaje.setPosY(posY - (i * 2));
             try {
                 Thread.sleep(16);
@@ -57,8 +59,8 @@ public class EstadoEstrella extends EstadoDePersonaje {
             }
         }
 
-        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
-            personaje.setPosY(personaje.getPosY() + 5);
+        while (personaje.getPosY() < 500) {
+            personaje.setPosY(personaje.getPosY() + 4);
             try {
                 Thread.sleep(16);
             } catch (InterruptedException e) {
@@ -99,6 +101,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
 	        velY = -4;  
+	        Musica.getMusica().reproducirSonido("Sonido/Sonidos/saltarRestoDeMarios.wav");
 	    }
     }
     
@@ -243,7 +246,8 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 
 	public void romperLadrilloSolido(LadrilloSolido l) {
-		
+		l.getHitbox().actualizar(0, 0);
+		l.cargarSprite(null);
 	}
 
 	public void moverBloqueGolpeable(BloqueGolpeable b) {

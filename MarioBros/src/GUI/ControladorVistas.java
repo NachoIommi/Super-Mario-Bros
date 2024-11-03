@@ -59,12 +59,14 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaModoDeJuego(){
+		Musica.getMusica().reproducirMusica("Sonido/Canciones/seleccionPersonaje.wav");
 		if(pantallaModoDeJuego == null) {
 			pantallaModoDeJuego = new PantallaModoDeJuego(this);
 		}
 		ventana.setContentPane(pantallaModoDeJuego);
 	}
 	public void mostrarPantallaPerder() {
+		Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/gameOver.wav");
 		if(pantallaPerder == null) {
 			pantallaPerder = new PantallaPerder(this);
 		}
@@ -73,6 +75,7 @@ public class ControladorVistas {
 	
 	
 	public void mostrarPantallaPrincipal() {
+		Musica.getMusica().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
 		if(pantallaPrincipal == null) {
 			pantallaPrincipal = new PantallaPrincipal(this);
 		}

@@ -7,6 +7,7 @@ import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
+import Logica.Musica;
 import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
@@ -38,38 +39,38 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 	// Setters
 	  public void morir() {
-		  	GenerarSprite fabricaSprite;
+		  Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
+		  GenerarSprite fabricaSprite;
 			
-	        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
-	            fabricaSprite = new GenerarSpriteOriginal();
-	        } else {
-	            fabricaSprite = new GenerarSpriteReemplazo();
-	        }
+	       if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+	           fabricaSprite = new GenerarSpriteOriginal();
+	       } else {
+	           fabricaSprite = new GenerarSpriteReemplazo();
+	       }
 	    
-	    	sprite = fabricaSprite.getSuperMarioMuerto();
-	    	personaje.cargarSprite(sprite);
-	    	personaje.setSpriteActualizado(true);
+	       sprite = fabricaSprite.getSuperMarioMuerto();
+	       personaje.cargarSprite(sprite);
+	       personaje.setSpriteActualizado(true);
 	    	
-	    	int posY = personaje.getPosY();
+	       int posY = personaje.getPosY();
 
-	        for (int i = 0; i < 30; i++) {
-	            personaje.setPosY(posY - (i * 2));
-	            try {
-	                Thread.sleep(16);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
+	       for (int i = 0; i < 60; i++) {   	   
+	    	   personaje.setPosY(posY - (i * 2));
+	           try {
+	               Thread.sleep(16);
+	           } catch (InterruptedException e) {
+	               e.printStackTrace();
+	           }
+	       }
 
-	        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
-	            personaje.setPosY(personaje.getPosY() + 5);
-	            try {
-	                Thread.sleep(16);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        
+	       while (personaje.getPosY() < 500) {
+	           personaje.setPosY(personaje.getPosY() + 4);
+	           try {
+	               Thread.sleep(16);
+	           } catch (InterruptedException e) {
+	               e.printStackTrace();
+	           }
+	       }
 	        personaje.morir();
 	    }
 	  
@@ -106,6 +107,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
 	        velY = -4;  // IMPULSO INICIAL
+	        Musica.getMusica().reproducirSonido("Sonido/Sonidos/saltarRestoDeMarios.wav");
 	    }
     }
 	
@@ -212,6 +214,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     }
     
     public void colisionEstrella() {
+    	Musica.getMusica().reproducirMusica("Sonido/Canciones/marioEstrellaCancion.wav");
     	setPuntuacionEstrella();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
