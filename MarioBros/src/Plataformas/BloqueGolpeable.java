@@ -11,7 +11,7 @@ import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class BloqueGolpeable extends EstadoDeBloque{
 	
@@ -20,12 +20,12 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	protected int posX;
 	protected int posY;
 	protected Hitbox hitbox;
-	protected PowerUps contenido;
+	protected PowerUp contenido;
 	protected boolean mostrable;
 	protected int golpesRestantes;
 	protected boolean bloqueMonedas = false;	
 	
-	public BloqueGolpeable(BloqueDePregunta b, Sprite s, int x, int y, PowerUps p, int golpes) {
+	public BloqueGolpeable(BloqueDePregunta b, Sprite s, int x, int y, PowerUp p, int golpes) {
 		super(b);
 		sprite = s;
 		posX = x;
@@ -141,13 +141,13 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	}
 
 	@Override
-	public PowerUps getContenido() {
+	public PowerUp getContenido() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setContenido(PowerUps p) {
+	public void setContenido(PowerUp p) {
 		// TODO Auto-generated method stub
 		
 	}

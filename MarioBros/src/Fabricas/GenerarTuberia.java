@@ -4,7 +4,7 @@ import Enemigos.Enemigo;
 import Enemigos.PiranhaPlant;
 import Plataformas.Plataforma;
 import Plataformas.Tuberia;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class GenerarTuberia implements GenerarPlataformas{
 	
@@ -14,7 +14,7 @@ public class GenerarTuberia implements GenerarPlataformas{
 	}
 
 	@Override
-	public Plataforma crearPlataforma(Sprite s, int x, int y, PowerUps p, int i) {
+	public Plataforma crearPlataforma(Sprite s, int x, int y, PowerUp p, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}

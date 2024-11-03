@@ -5,31 +5,23 @@ import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
-public class SuperChampi extends PowerUps{
+public class SuperChampi extends PowerUp{
 	
 	protected int posX;
 	protected int posY;
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean mostrable;
+	
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
     protected boolean cayendo;
 	protected Sprite sprite;
 	protected Hitbox hitbox;
 	
-	public SuperChampi(Sprite sprite, int x, int y) {
+	public SuperChampi(Sprite s, int x, int y) {
+		super();
 		posX = x;
 		posY = y;
-		this.sprite = sprite;
+		sprite = s;
 		hitbox = new Hitbox(0 ,0,30 ,30);
-		mostrable=false;
-		tocandoBloqueDerecha=false;
-	    tocandoBloqueIzquierda=false;
-	    tocandoBloqueAbajo=false;
-	    tocandoBloqueArriba=false;
 	}
 	
 	public void moverse() {
@@ -93,7 +85,6 @@ public class SuperChampi extends PowerUps{
 		setMostrable(false);
 		hitbox.actualizar(0, 0);
 		//p.setEstado(null);
-		//p.getEstado().setPuntuacionSuperChampi();
 	}
 
 	public Sprite getSprite() {
@@ -120,40 +111,11 @@ public class SuperChampi extends PowerUps{
 		return hitbox;
 	}
 
-	@Override
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
 		
 	}
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-
-	public void setTocandoBloqueDerecha(boolean b) {
-		
-		tocandoBloqueDerecha=b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		
-		tocandoBloqueArriba=b;
-	}
-
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		
-		tocandoBloqueAbajo=b;
-	}
-	
 }

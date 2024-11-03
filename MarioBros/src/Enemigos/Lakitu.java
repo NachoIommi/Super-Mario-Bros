@@ -1,6 +1,6 @@
 package Enemigos;
 
-import Fabricas.GenerarEnemigos;
+import Fabricas.GenerarEnemigos; 
 import Fabricas.GenerarSpiny;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
@@ -28,34 +28,27 @@ public class Lakitu extends Enemigo{
 	private int distanciaConPersonaje = 250;
 	private static final long intervaloSpiny = 5000;
 	
-	protected boolean tocandoBloqueDerecha=false;
-	protected boolean tocandoBloqueIzquierda=false;
-	protected boolean tocandoBloqueAbajo=false;
-	protected boolean tocandoBloqueArriba=false;
-	protected boolean mostrable=true;
-	protected boolean murio;
 	protected boolean direccionDerecha;
 	List<Enemigo> enemigosParaAgregar;
 	
 	public Lakitu(Sprite s, int x, int y, Personaje p) {
+		super();
 		posX = x;
 		posY = y;
 		sprite = s;
 		hitbox = new Hitbox(x, y, 30, 30);
-		mostrable = true;
 		setSpriteActualizado(false);
 		personaje = p;
-		murio = false;
 		iniciarSpawningSpiny();
 		enemigosParaAgregar = new ArrayList<>();
 	}
 	
 	public Lakitu(Sprite s, int x, int y) {
+		super();
 		posX = x;
 		posY = y;
 		sprite = s;
 		hitbox = new Hitbox(x, y, 30, 30);
-		mostrable = true;
 		setSpriteActualizado(false);
 	}
 	
@@ -91,25 +84,6 @@ public class Lakitu extends Enemigo{
 	
 	public void setPosY(int y) {
 		 posY = y;
-	}
-	
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha = b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda = b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba = b;
-	}
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo = b;
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -182,7 +156,6 @@ public class Lakitu extends Enemigo{
     }
 
 	private void lanzarSpiny() {
-		
 		GenerarSprite fabricaSprite;
 		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
 		    fabricaSprite = new GenerarSpriteOriginal();
@@ -193,11 +166,9 @@ public class Lakitu extends Enemigo{
 		GenerarEnemigos fabricaSpiny = new GenerarSpiny();
 		Spiny nuevoSpiny = (Spiny) fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX - 60, posY + 60);
 		personaje.getNivelActual().getJuego().agregarEnemigo(nuevoSpiny);
-		 
-		 
+
     }
 
-	    
 	public void detenerSpawningSpiny() {
 		spinyTimer.cancel();
 	}
@@ -219,20 +190,11 @@ public class Lakitu extends Enemigo{
 		return sprite;
 	}
 	
-	public boolean mostrable() {
-		return mostrable;
-	}
-	
 	public int getToleranciaAltura() {
 		return 0;
 	}
 
-	public boolean murio() {
-		return murio;
-	}
-	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
-
 }

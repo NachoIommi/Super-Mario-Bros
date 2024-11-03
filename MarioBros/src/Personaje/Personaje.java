@@ -58,7 +58,11 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;
+<<<<<<< HEAD
         estado = new EstadoNormal(this ,sprite, x ,y); 
+=======
+        estado = new EstadoSuperMario(this ,sprite, x ,y); 
+>>>>>>> 42fc62a (Refactoring de clases hijas con clases abstractas)
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
@@ -191,7 +195,6 @@ public class Personaje extends Entidad{
             invulnerable = true;
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
-                @Override
                 public void run() {
                     invulnerable = false; 
                     timer.cancel();
@@ -221,7 +224,7 @@ public class Personaje extends Entidad{
     }
 
     public void aceptarVisita(Visitor v) {
-        //v.visitarPersonaje(this);
+       
     }
 
     public int getVidas(){

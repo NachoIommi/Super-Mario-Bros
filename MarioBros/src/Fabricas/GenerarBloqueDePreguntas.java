@@ -3,11 +3,11 @@ package Fabricas;
 import Enemigos.Enemigo;
 import Plataformas.BloqueDePregunta;
 import Plataformas.Plataforma;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class GenerarBloqueDePreguntas implements GenerarPlataformas{
 	
-	public BloqueDePregunta crearPlataforma(Sprite sprite, int x, int y , PowerUps p,int i){
+	public BloqueDePregunta crearPlataforma(Sprite sprite, int x, int y , PowerUp p,int i){
 		return new BloqueDePregunta(sprite, x, y,p,i);
 	}
 

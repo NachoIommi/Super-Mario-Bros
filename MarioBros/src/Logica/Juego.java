@@ -19,7 +19,7 @@ import GUI.ControladorVistas;
 import Launcher.Launcher;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class Juego {
 	
@@ -33,7 +33,7 @@ public class Juego {
 	
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
-	protected List<PowerUps> powerUps;
+	protected List<PowerUp> powerUps;
 	protected List<BolaDeFuego> bolas;
 	
 	protected HiloPersonaje hilo;
@@ -49,7 +49,7 @@ public class Juego {
 		personaje = null;
 		enemigos = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
-		powerUps = new ArrayList<PowerUps>();
+		powerUps = new ArrayList<PowerUp>();
 		//
 		bolas = new ArrayList<BolaDeFuego>();
 		//
@@ -211,11 +211,11 @@ public class Juego {
 		return plataformas;
 	}
 	
-	public void agregarPowerUp(PowerUps p) {
+	public void agregarPowerUp(PowerUp p) {
 		powerUps.addLast(p);
 	}
 	
-	public List<PowerUps> getPowerUps() {
+	public List<PowerUp> getPowerUps() {
 		return powerUps;
 	}
 	

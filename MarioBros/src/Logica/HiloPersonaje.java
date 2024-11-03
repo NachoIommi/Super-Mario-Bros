@@ -6,7 +6,7 @@ import java.util.List;
 import Enemigos.Enemigo;
 import Personaje.Personaje;
 import Plataformas.*;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class HiloPersonaje extends Thread {
 
@@ -14,7 +14,7 @@ public class HiloPersonaje extends Thread {
     Personaje personaje;
     List<Plataforma> plataformas;
     List<Enemigo> enemigos;
-    List<PowerUps> powerUps;
+    List<PowerUp> powerUps;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
     protected VisitorEntidad visitorEntidad;
@@ -125,8 +125,8 @@ public class HiloPersonaje extends Thread {
                         
                 	}
                 }
-                List<PowerUps> copiaPowerUps = new ArrayList<PowerUps>(powerUps);
-                for(PowerUps p : copiaPowerUps) {
+                List<PowerUp> copiaPowerUps = new ArrayList<PowerUp>(powerUps);
+                for(PowerUp p : copiaPowerUps) {
                 	if(personaje.getHitbox().intersects(p.getHitbox())) {
                 		p.aceptarVisita(visitorEntidad);}
                 	

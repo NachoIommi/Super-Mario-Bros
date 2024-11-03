@@ -13,9 +13,7 @@ import Plataformas.LadrilloSolido;
 public class EstadoNormal extends EstadoDePersonaje {
 
 	public double toleranciaAltura = 30;
-	protected boolean right;
-	protected boolean left;
-	protected boolean jump;
+	
 	protected Sprite sprite;
 	protected Hitbox hitbox;
 
@@ -24,13 +22,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	protected int puntuacion;
 	protected float posX;
 	protected float posY;
-	
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-    protected boolean saltando;
-    protected boolean saltandoSobreEnemigo;
 	
 	protected float velX;
 	protected float velY;
@@ -42,24 +33,21 @@ public class EstadoNormal extends EstadoDePersonaje {
 		hitbox = new Hitbox(x ,y,30 ,40);
 		setPosX(x);
 		setPosY(y);
-		sprite = s;
-	    tocandoBloqueDerecha = false;
-	    tocandoBloqueIzquierda = false;
-	    tocandoBloqueAbajo = false;
-	    tocandoBloqueArriba = false;
-	    saltandoSobreEnemigo = false;
-	    saltando = false;  
+		sprite = s;  
 	    alto = 30;
-	    jump = false;
-	    right = false;
-	    left = false;
-	    
 	}
 	
 	// Setters
 	public void morir() {
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getPersonajeNormalMuerto();
+		GenerarSprite fabricaSprite;
+		
+        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+        
+    	sprite = fabricaSprite.getPersonajeNormalMuerto();
     	personaje.cargarSprite(sprite);
     	personaje.setSpriteActualizado(true);
     	
@@ -74,7 +62,7 @@ public class EstadoNormal extends EstadoDePersonaje {
             }
         }
 
-        while (personaje.getPosY() < ConstantesVistas.VENTANA_ALTO) {
+        while (personaje.getPosY() < 500) {
             personaje.setPosY(personaje.getPosY() + 5);
             try {
                 Thread.sleep(16);
@@ -84,8 +72,6 @@ public class EstadoNormal extends EstadoDePersonaje {
         }
         
         personaje.morir();
-   		System.out.println("se ejecuto reiniciarNivel :: personajeNormal");
-
     }
 	
 	public void moverPersonaje() {	
@@ -126,7 +112,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void recibirDano() {
 		if (!personaje.esInvulnerable()) {
             personaje.morir();
-            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
+            personaje.activarInvulnerabilidad(); 
 		}
     }
 	
@@ -161,27 +147,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 		personaje.setPuntuacion(5);
 	}
 	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-	
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-	
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-	
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
 	public void actualizarSprite() {
 		GenerarSprite fabrica;
 		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
 			 fabrica = new GenerarSpriteOriginal();
-		}else {
+		} else {
 			 fabrica = new GenerarSpriteReemplazo();
 		}
 	   
@@ -220,14 +190,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 		sprite = s;
 	}
 	
-	public void setSaltando(boolean b){
-		saltando = b;
-	}
-	
-	public void setSaltandoSobreEnemigo(boolean b) {
-		saltandoSobreEnemigo=b;
-	}
-	
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
@@ -235,19 +197,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 			saltando=true;
 		}
 	}
-	
-	public void setRight(boolean b){
-		right=b;
-	}
-	
-	public void setLeft(boolean b){
-		left=b;
-	}
-	
-	public void setJump(boolean b){
-		jump=b;
-	}
-	
+
 	public void colisionSuperChampi() {
     	setPuntuacionSuperChampi();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
@@ -274,46 +224,40 @@ public class EstadoNormal extends EstadoDePersonaje {
     
 	public void colisionChampiVerde() {
 		personaje.setVidas(personaje.getVidas()+1);
+		setPuntuacionChampiVerde();
 	}
 
 	public void colisionMoneda() {
-		personaje.setPuntuacion(personaje.getPuntuacion()+5);
+		setPuntuacionMoneda();
 	}
 	
 	public void colisionLateralGoomba(Goomba goomba) {
 		morir();	
 		personaje.setPuntuacion(-30);
-		System.out.println("MORIR PERSONAJE");
 	}
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		morir();
 		personaje.setPuntuacion(-45);
-		System.out.println("MORIR PERSONAJE POR KOOPA TROOPA");
 	}
 	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
 		morir();
 		personaje.setPuntuacion(-15);
-		System.out.println("MORIR PERSONAJE POR BUZZY BEETLE");
 	}
 	public void colisionLateralLakitu(Lakitu lakitu) {
 		morir();
-		System.out.println("MORIR PERSONAJE POR LAKITU");
 	}
 	public void colisionLateralSpiny(Spiny spiny) {
 		morir();
 		personaje.setPuntuacion(-30);
-		System.out.println("MORIR PERSONAJE POR SPINY");
 	}
 	public void colisionLateralPiranha(PiranhaPlant piranha) {
 		morir();
 		personaje.setPuntuacion(-30);
-		System.out.println("MORIR PERSONAJE POR Piranha");
 	}
 	
 	public void colisionVacio() {
 		morir();
 		personaje.setPuntuacion(-15);
-		System.out.println("MORIR X VACIO");
 	}
 	
 	public void romperLadrilloSolido(LadrilloSolido l) {
@@ -483,18 +427,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return personaje.getMin();
 	}
 
-    public boolean getSaltando() {
-		return saltando;
-	}
-
-	@Override
 	public void disparar() {
 		
 	}
-
-	
-
-	
-
-
 }

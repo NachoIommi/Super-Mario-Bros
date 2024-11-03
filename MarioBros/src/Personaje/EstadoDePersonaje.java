@@ -1,6 +1,6 @@
 package Personaje;
 
-import Enemigos.*; 
+import Enemigos.*;  
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Plataformas.*;
@@ -9,8 +9,30 @@ public abstract class EstadoDePersonaje {
 	
 	protected Personaje personaje;
 	
+	protected boolean right;
+	protected boolean left;
+	protected boolean jump;
+	
+	
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
+    protected boolean saltando;
+    protected boolean saltandoSobreEnemigo;
+	
 	public EstadoDePersonaje(Personaje personaje) {
 		this.personaje = personaje;
+		 jump = false;
+		 right = false;
+		 left = false;
+		 
+		 tocandoBloqueDerecha = false;
+		 tocandoBloqueIzquierda = false;
+		 tocandoBloqueAbajo = false;
+		 tocandoBloqueArriba = false;
+		 saltando = false;
+		 saltandoSobreEnemigo = false;
 	}
 	// Setters
 	public abstract void morir();
@@ -28,22 +50,49 @@ public abstract class EstadoDePersonaje {
 	public abstract void setPuntuacionFlorDeFuego();
 	public abstract void setPuntuacionSuperChampi();
 	public abstract void setPuntuacionMoneda();
-	public abstract void setTocandoBloqueDerecha(boolean b);
-	public abstract void setTocandoBloqueIzquierda(boolean b);
-	public abstract void setTocandoBloqueArriba(boolean b);
-	public abstract void setTocandoBloqueAbajo(boolean b);
+	
+	public void setTocandoBloqueDerecha(boolean b) {
+		tocandoBloqueDerecha = b;
+	}
+	
+	public void setTocandoBloqueIzquierda(boolean b) {
+		tocandoBloqueIzquierda = b;
+	}
+	
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba = b;
+	}
+	
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo = b;
+	}
 	
 	
 	public abstract void actualizarSprite();
 	public abstract void actualizarMin();
 	public abstract void cargarSprite(Sprite s);
 	
-	public abstract void setSaltando(boolean b);
-	public abstract void setSaltandoSobreEnemigo(boolean b);
+	public void setSaltando(boolean b){
+		saltando = b;
+	}
+	
+	public void setSaltandoSobreEnemigo(boolean b) {
+		saltandoSobreEnemigo = b;
+	}
+	
 	public abstract void saltarSobreEnemigo();
-	public abstract void setRight(boolean b);
-	public abstract void setLeft(boolean b);
-	public abstract void setJump(boolean b);
+	
+	public void setRight(boolean b){
+		right = b;
+	}
+	
+	public void setLeft(boolean b){
+		left = b;
+	}
+	
+	public void setJump(boolean b){
+		jump = b;
+	}
 	
 	public abstract void colisionSuperChampi();
 	public abstract void colisionFlorDeFuego();
@@ -69,6 +118,7 @@ public abstract class EstadoDePersonaje {
 	public abstract void detenerSalto();
 	public abstract void detenerFriccion();
 	public abstract void colisionDesliz();
+	public abstract void disparar();
 	
 	// Getters
 	public abstract int getPosX();
@@ -80,6 +130,7 @@ public abstract class EstadoDePersonaje {
 	public abstract double getToleranciaAltura();
 	public abstract int getAlto();
 	public abstract float getMin();
-	public abstract  boolean getSaltando();
-	public abstract void disparar();
+	public boolean getSaltando() {
+		return saltando;
+	}
 }

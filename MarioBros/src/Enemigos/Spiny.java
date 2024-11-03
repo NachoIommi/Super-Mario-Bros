@@ -14,24 +14,14 @@ public class Spiny extends Enemigo{
 	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
-	protected boolean mostrable;
 	
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean tocoParedIzquierda;
-    protected boolean tocoParedDerecha;
-    protected boolean murio;
-	
-	public Spiny(Sprite sprite, int x, int y) {
+	public Spiny(Sprite s, int x, int y) {
+		super();
 		posX = x;
 		posY = y;
-		this.sprite = sprite;
+		sprite = s;
 		hitbox = new Hitbox(x, y, 30, 30);
-		mostrable = true;
 		setSpriteActualizado(false);
-		murio = false;
 	}
 	
 	// Setters	
@@ -78,13 +68,9 @@ public class Spiny extends Enemigo{
 			if (!tocandoBloqueAbajo) { 
 				posY=posY+2;
 			}
-				
-		
 		} 
 			
 			setSpriteActualizado(true);
-		
-		
 		hitbox.actualizar (posX, posY);	
 	}
 	
@@ -94,26 +80,6 @@ public class Spiny extends Enemigo{
 	
 	public void setPosY(int y) {
 		 posY = y;
-	}
-	
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
 	}
 	
 	public void cargarSprite(Sprite s) {
@@ -192,10 +158,6 @@ public class Spiny extends Enemigo{
 		return 0;
 	}
 	
-	public boolean murio() {
-		return murio;
-	}
-	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
@@ -203,5 +165,4 @@ public class Spiny extends Enemigo{
 	public boolean getTocandoAbajo() {
 		return tocandoBloqueAbajo;
 	}
-	
 }

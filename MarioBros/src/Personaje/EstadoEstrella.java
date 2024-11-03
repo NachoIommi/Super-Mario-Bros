@@ -10,9 +10,6 @@ import Enemigos.*;
 public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public double toleranciaAltura=50;
-	protected boolean right;
-	protected boolean left;
-	protected boolean jump;
 	protected Sprite sprite;
 	protected Hitbox hitb;
 
@@ -21,12 +18,6 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	protected int puntuacion;
 	protected float posX;
 	protected float posY;
-	
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-    protected boolean saltando;
 	
 	protected float velX;
 	protected float velY;
@@ -37,23 +28,21 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		hitb = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
 		setPosY(y-23);
-		sprite =s;
-	    tocandoBloqueDerecha=false;
-	    tocandoBloqueIzquierda=false;
-	    tocandoBloqueAbajo=false;
-	    tocandoBloqueArriba=false;
-	    saltando=false;  
-	    jump=false;
-	    right=false;
-	    left=false;	
-	    alto=60;
+		sprite = s;
+	    alto = 60;
 	}
 	
 	// Setters
-	public void morir() {                              //si puede morir: cuando toca vacio
-    	personaje.setVidas(personaje.getVidas()-1);
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getMarioEstrellaMuerto();
+	public void morir() {          
+		GenerarSprite fabricaSprite;
+		
+        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+        
+    	sprite = fabricaSprite.getMarioEstrellaMuerto();
     	personaje.cargarSprite(sprite);
     	personaje.setSpriteActualizado(true);
     	
@@ -76,7 +65,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
-        personaje.nivelActual.reiniciarNivel();
+        personaje.morir();
     }
 	
 	public void moverPersonaje() {	  
@@ -97,24 +86,24 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar(Math.round(posX), Math.round(posY)); 
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitb.actualizar(Math.round(posX), Math.round(posY)); 
 	}
 	
 	public void saltar() {
     	if (jump && tocandoBloqueAbajo && !saltando ) {
 	        saltando = true;
 	        tocandoBloqueAbajo = false;
-	        velY = -4;  // IMPULSO INICIAL
+	        velY = -4;  
 	    }
     }
     
 	public void recibirDano() {
-    	//Mario estrella nunca va a recibir daño JAJAJAJ!!
+    	
     }
 	
 	public void sumarVida() {
@@ -138,35 +127,26 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 
 	public void setPuntuacionFlorDeFuego() {
-		personaje.setPuntuacion(30); //varia segun el estado anterior?
+		personaje.setPuntuacion(50); 
 	}
 
 	public void setPuntuacionSuperChampi() {
-		personaje.setPuntuacion(50); //varia segun el estado anterior?
+		personaje.setPuntuacion(50);
 	}
 	
 	public void setPuntuacionMoneda(){
 		personaje.setPuntuacion(5);
 	}
 	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-	
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-	
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-	
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
 	public void actualizarSprite() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+		
+		GenerarSprite fabrica;
+		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			 fabrica = new GenerarSpriteOriginal();
+		} else {
+			 fabrica = new GenerarSpriteReemplazo();
+		}
+	   
 	    Sprite nuevoSprite = sprite;
 	    
 	    if (right && velX > 0) {
@@ -202,45 +182,34 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		sprite = s;
 	}
 	
-	public void setSaltando(boolean b){
-		saltando  =b;
-	}
-	
-	public void setSaltandoSobreEnemigo(boolean b) {
-		
-	}
 	
 	public void saltarSobreEnemigo() {
-		
-	}
-	
-	public void setRight(boolean b){
-		right=b;
-	}
-	
-	public void setLeft(boolean b){
-		left=b;
-	}
-	
-	public void setJump(boolean b){
-		jump=b;
+		if (saltandoSobreEnemigo ) {
+			velY = -3;
+			posY=posY-5;
+			saltando=true;
+		}
 	}
 
 	public void colisionSuperChampi() {
-		
+		setPuntuacionSuperChampi();
     }
     
     public void colisionFlorDeFuego() {
-    	
+    	setPuntuacionFlorDeFuego();
     }
     
     public void colisionEstrella() {
+    	setPuntuacionEstrella();
     }
     
 	public void colisionChampiVerde() {
+		personaje.setVidas(personaje.getVidas()+1);
+		setPuntuacionChampiVerde();
 	}
 
 	public void colisionMoneda() {
+		setPuntuacionMoneda();
 	}
 	
 	public void colisionLateralGoomba(Goomba goomba) {
@@ -289,7 +258,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		    } 
 			else 
 		        velX = 0;       	    
-			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
+			if(tocandoBloqueDerecha) 
 				setPosX(getPosX()-3);
 			}
 	}
@@ -302,7 +271,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		    } 			
 			else 
 				velX = 0;				
-			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
+			if(tocandoBloqueIzquierda) 
 				setPosX(getPosX()+3);
 		}		
 	}	
@@ -346,9 +315,9 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public void gravedad() {
 		if (!tocandoBloqueAbajo) {
-	        velY += 0.3;  // Gravedad
+	        velY += 0.3;
 	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire        
+	            velY += 0.6;       
 	    } 
 	    else {
 	        velY = 0;  
@@ -363,23 +332,23 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	            	velY=0;	            
 	        } 
 	        else {
-	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
+	            saltando = false;  
 	        }
 	    }
 	}
 	
 	public void detenerSalto() {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
-	        velY = 0;  // Detiene el movimiento hacia arriba
-	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
+	        velY = 0; 
+	        saltando = false; 
+	        setPosY(getPosY()+1);
 	    }
 	}
 
 	public void detenerFriccion() {
 		if (velX > 0 && !right) 
 	        velX -= 0.1f;  
-	    						//FRENA A MARIO FRICCIONADO
+	    						
 	    if (velX < 0 && !left) 
 	        velX += 0.1f;  
 	}
@@ -426,16 +395,10 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 	
 	public float getMin() {
-		return personaje.getMin();
+	   return personaje.getMin();
 	}
 
-    public boolean getSaltando() {
-		return saltando;
-	}
-
-	@Override
 	public void disparar() {
 		
 	}
-
 }

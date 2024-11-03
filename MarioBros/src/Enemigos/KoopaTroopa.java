@@ -1,5 +1,5 @@
 package Enemigos;
-import Fabricas.GenerarSprite;
+import Fabricas.GenerarSprite; 
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.Sprite;
 import Logica.Hitbox;
@@ -14,17 +14,14 @@ public class KoopaTroopa extends Enemigo{
 	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
-	protected boolean mostrable;
-	protected boolean murio;
 	
 	public KoopaTroopa(Sprite s, int x,int y) {
+		super();
 		estado = new EstadoKoopaNormal(this ,s, x ,y); 
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(x, y, 30, 30);
-		mostrable = true; //?	
 		setSpriteActualizado(false);
-		murio = false;
 	}
 	
 	// Setters
@@ -122,10 +119,6 @@ public class KoopaTroopa extends Enemigo{
 		return 20;
 	}
 	
-	public boolean murio() {
-		return murio;
-	}
-	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
@@ -137,5 +130,4 @@ public class KoopaTroopa extends Enemigo{
 	public void setEstadoActual(EstadoDeKoopa nuevoEstado) {
 		this.estado = nuevoEstado;
 	}
-	
 }	

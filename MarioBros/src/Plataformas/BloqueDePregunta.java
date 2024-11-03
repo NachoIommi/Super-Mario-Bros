@@ -4,17 +4,17 @@ import Fabricas.Sprite;
 import Logica.Visitor;
 import Personaje.EstadoDePersonaje;
 import Personaje.Personaje;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class BloqueDePregunta extends BloqueSolido {
 	
 	protected EstadoDeBloque estado;
-	protected PowerUps contenido;
+	protected PowerUp contenido;
 	protected boolean mostrable;
 	protected int golpesRestantes;
 	protected boolean cambio;
 	
-	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUps p , int golpes) {
+	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUp p , int golpes) {
 		super(sprite, x, y);
 		contenido = p;
 		golpesRestantes=golpes;
@@ -46,11 +46,11 @@ public class BloqueDePregunta extends BloqueSolido {
 		return estado;
 	}
 	
-	public PowerUps getContenido() {
+	public PowerUp getContenido() {
 		return contenido;
 	}
 	
-	public void setContenido(PowerUps p) {
+	public void setContenido(PowerUp p) {
 		contenido = p;
 	}
 	public boolean cambioEstado() {

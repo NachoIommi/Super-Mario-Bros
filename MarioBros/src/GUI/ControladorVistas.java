@@ -19,7 +19,7 @@ import Enemigos.Enemigo;
 import Logica.*;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class ControladorVistas {
 
@@ -158,7 +158,7 @@ public class ControladorVistas {
 		return juego.getPlataformas();
 	}
 	
-	public List<PowerUps> obtenerPowerUp() {
+	public List<PowerUp> obtenerPowerUp() {
 		return juego.getPowerUps();
 	}
 	public List<BolaDeFuego> obtenerBolas(){

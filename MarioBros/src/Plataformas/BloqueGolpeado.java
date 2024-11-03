@@ -7,7 +7,7 @@ import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.EstadoSuperMario;
 import Personaje.Personaje;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class BloqueGolpeado extends EstadoDeBloque{
 	
@@ -16,7 +16,7 @@ public class BloqueGolpeado extends EstadoDeBloque{
 	protected int posX;
 	protected int posY;
 	protected Hitbox hitbox;
-	protected PowerUps contenido;
+	protected PowerUp contenido;
 	protected boolean mostrable;
 	protected int golpesRestantes;
 	
@@ -76,13 +76,13 @@ public class BloqueGolpeado extends EstadoDeBloque{
 	}
 
 	@Override
-	public PowerUps getContenido() {
+	public PowerUp getContenido() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setContenido(PowerUps p) {
+	public void setContenido(PowerUp p) {
 		// TODO Auto-generated method stub
 		
 	}

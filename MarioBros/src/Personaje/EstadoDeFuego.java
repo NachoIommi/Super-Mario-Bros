@@ -5,6 +5,7 @@ import Fabricas.GenerarEnemigos;
 import Fabricas.GenerarSpiny;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.BolaDeFuego;
@@ -16,9 +17,7 @@ import Plataformas.LadrilloSolido;
 public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	public double toleranciaAltura=50;
-	protected boolean right;
-	protected boolean left;
-	protected boolean jump;
+
 	protected Sprite sprite;
 	protected Hitbox hitb;
 
@@ -28,12 +27,6 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected float posX;
 	protected float posY;
 	
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-    protected boolean saltando;
-	
 	protected float velX;
 	protected float velY;
 	protected int alto;
@@ -42,17 +35,9 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		super(p);
 		hitb = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
-		setPosY(y-23);;
-		sprite =s;
-	    tocandoBloqueDerecha=false;
-	    tocandoBloqueIzquierda=false;
-	    tocandoBloqueAbajo=false;
-	    tocandoBloqueArriba=false;
-	    saltando=false;  
-	    jump=false;
-	    right=false;
-	    left=false;	
-	    alto=60;
+		setPosY(y-23);
+		sprite = s;
+	    alto = 60;
 	}
 	
 	public void disparar() {
@@ -64,9 +49,15 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	// Setters
 	public void morir() {
-    	personaje.setVidas(personaje.getVidas()-1);
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getMarioFlorDeFuegoMuerto();
+		GenerarSprite fabricaSprite;
+		
+        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+    	
+    	sprite = fabricaSprite.getMarioFlorDeFuegoMuerto();
     	personaje.cargarSprite(sprite);
     	personaje.setSpriteActualizado(true);
     	
@@ -89,7 +80,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
                 e.printStackTrace();
             }
         }
-        personaje.nivelActual.reiniciarNivel();
+        personaje.morir();
     }
 	
 	public void moverPersonaje() {	  
@@ -164,24 +155,14 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		personaje.setPuntuacion(5);
 	}
 	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-	
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-	
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-	
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
 	public void actualizarSprite() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
+		GenerarSprite fabrica;
+		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			 fabrica = new GenerarSpriteOriginal();
+		} else {
+			 fabrica = new GenerarSpriteReemplazo();
+		}
+	   
 	    Sprite nuevoSprite = sprite;
 	    
 	    if (right && velX > 0) {
@@ -217,50 +198,30 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		sprite = s;
 	}
 	
-	public void setSaltando(boolean b){
-		saltando = b;
-	}
-	
-	public void setSaltandoSobreEnemigo(boolean b) {
-		
-	}
-	
 	public void saltarSobreEnemigo() {
 	
 	}
 	
-	public void setRight(boolean b){
-		right = b;
-	}
-	
-	public void setLeft(boolean b){
-		left = b;
-	}
-	
-	public void setJump(boolean b){
-		jump = b;
-	}
-	
 	public void colisionSuperChampi() {
-		
+		setPuntuacionSuperChampi();
 	}
 	
 	public void colisionEstrella() {
-		
+		setPuntuacionEstrella();
 	}
 
 	
 	public void colisionFlorDeFuego() {
-	
+		setPuntuacionFlorDeFuego();
 	}
 
 	
 	public void colisionChampiVerde() {
-		
+		setPuntuacionChampiVerde();
 	}
 
 	public void colisionMoneda() {
-
+		setPuntuacionMoneda();
 	}
 	
 	public void colisionLateralGoomba(Goomba goomba) {
@@ -464,10 +425,6 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	public float getMin() {
 		return personaje.getMin();
-	}
-    
-    public boolean getSaltando() {
-		return saltando;
 	}
 
 }

@@ -17,27 +17,14 @@ public class Goomba extends Enemigo{
 	protected int posX;
 	protected int posY;
 	
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean mostrable;
-	protected boolean tocoParedIzquierda;
-    protected boolean tocoParedDerecha;
-    protected boolean murio;
 
 	public Goomba(Sprite s,int x,int y) {
+		super();
 		posX = x;
         posY = y;
         sprite = s;
         hitbox = new Hitbox(x ,y,30 ,30);
-        tocandoBloqueDerecha=false;
-	    tocandoBloqueIzquierda=false;
-	    tocandoBloqueAbajo=false;
-	    tocandoBloqueArriba=false;
-	    mostrable=true;
 	    setSpriteActualizado(false);
-	    murio = false;
 	}
 	// Setters
 	public void afectarPersonaje(Personaje p) {	
@@ -104,26 +91,6 @@ public class Goomba extends Enemigo{
 		 posY = y;
 	}
 	
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
@@ -175,21 +142,12 @@ public class Goomba extends Enemigo{
 	public Sprite getSprite() {
 		return sprite;
 	}
-	
-	public boolean mostrable() {
-		return mostrable;
-	}
 
 	public int getToleranciaAltura() {
 		return (int)toleranciaAltura;
 	}
 	
-	public boolean murio() {
-		return murio;
-	}
-	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
-	
 }

@@ -26,7 +26,7 @@ import Enemigos.Enemigo;
 import Logica.BolaDeFuego;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class PantallaJuego extends JPanel {
 	
@@ -37,7 +37,7 @@ public class PantallaJuego extends JPanel {
     //
     //List<Enemigo> copiaEnemigos = new CopyOnWriteArrayList<>();
     private List<Plataforma> copiaPlataformas;
-    private List<PowerUps> copiaPowerUps;
+    private List<PowerUp> copiaPowerUps;
     private JScrollPane panelScrollNivel;
     private JLayeredPane panelNivel;
     private JLabel imagenFondo;
@@ -235,8 +235,8 @@ public class PantallaJuego extends JPanel {
     }  
     
     public void mostrarPowerUps() {
-    	copiaPowerUps = new ArrayList<PowerUps>(controladorVistas.obtenerPowerUp());
-    	for(PowerUps powerUp : copiaPowerUps) {
+    	copiaPowerUps = new ArrayList<PowerUp>(controladorVistas.obtenerPowerUp());
+    	for(PowerUp powerUp : copiaPowerUps) {
     		powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO);
     		panelNivel.add(powerUp, Integer.valueOf(1));
     	}
@@ -427,7 +427,7 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenPowerUps() {
-    	for(PowerUps powerUp : copiaPowerUps) {
+    	for(PowerUp powerUp : copiaPowerUps) {
     		if(powerUp.mostrable()) {   			
 	    		powerUp.setVisible(true);
 	    		String ruta = powerUp.getSprite().getRutaImagen();
@@ -478,7 +478,7 @@ public class PantallaJuego extends JPanel {
     }
  
     public void eventosTeclado() {
-    	if(!nivelGanado) {
+    	if(!nivelGanado && personaje != null) {
     		addKeyListener(new KeyAdapter() {
                 public void keyPressed(KeyEvent k) {
                     int keyCode = k.getKeyCode(); 

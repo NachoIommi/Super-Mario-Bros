@@ -3,7 +3,7 @@ package Plataformas;
 import Fabricas.Sprite;
 import Logica.Visitor;
 import Personaje.Personaje;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public abstract class EstadoDeBloque{
 	
@@ -23,7 +23,7 @@ public abstract class EstadoDeBloque{
 	
 	public abstract EstadoDeBloque getEstado() ;
 	
-	public abstract PowerUps getContenido() ;
+	public abstract PowerUp getContenido() ;
 	
-	public abstract void setContenido(PowerUps p);
+	public abstract void setContenido(PowerUp p);
 }

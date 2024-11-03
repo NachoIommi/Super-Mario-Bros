@@ -5,26 +5,22 @@ import Logica.Hitbox;
 import Logica.Visitor;
 import Personaje.Personaje;
 
-public class ChampiVerde extends PowerUps{
+public class ChampiVerde extends PowerUp{
 	
 	protected int posX;
 	protected int posY;
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean mostrable;
+	
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
 	protected Sprite sprite;
 	protected Hitbox hitbox;
 	
-	public ChampiVerde(Sprite sprite, int x, int y) {
+	public ChampiVerde(Sprite s, int x, int y) {
+		super();
 		posX = x;
 		posY = y;
-		this.sprite = sprite;
+		sprite = s;
 		hitbox = new Hitbox(x ,y,30 ,30);
-		mostrable=false;
 	}
 	
 	public void moverse() {
@@ -85,62 +81,22 @@ public class ChampiVerde extends PowerUps{
 		return hitbox;
 	}
 
-	@Override
+
 	public void setPosX(int x) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void setPosY(int x) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public boolean mostrable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-
-	@Override
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void setTocandoBloqueDerecha(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTocandoBloqueIzquierda(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTocandoBloqueArriba(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTocandoBloqueAbajo(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

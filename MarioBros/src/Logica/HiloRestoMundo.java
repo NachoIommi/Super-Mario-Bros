@@ -6,13 +6,13 @@ import java.util.List;
 import Enemigos.Enemigo;
 import Personaje.Personaje;
 import Plataformas.*;
-import PowerUps.PowerUps;
+import PowerUps.PowerUp;
 
 public class HiloRestoMundo extends Thread {
     protected Juego juego; 
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
-    List<PowerUps> powerUp;
+    List<PowerUp> powerUp;
     List<BolaDeFuego> bolas;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
@@ -34,7 +34,7 @@ public class HiloRestoMundo extends Thread {
     	enEjecucion = true;
         while (enEjecucion) {
             try {
-            	List<PowerUps> copiaPowerUp = new ArrayList<PowerUps>(powerUp);
+            	List<PowerUp> copiaPowerUp = new ArrayList<PowerUp>(powerUp);
             	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
             	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
             	List<BolaDeFuego> copiaBolas = new ArrayList<BolaDeFuego>(bolas);
@@ -99,7 +99,7 @@ public class HiloRestoMundo extends Thread {
 		            			
             		}
             	
-            	for(PowerUps power : copiaPowerUp) {
+            	for(PowerUp power : copiaPowerUp) {
             		if (power.mostrable()) {
 	            		double toleranciaAltura = 10;
 	            		for(Plataforma p : copiaPlataforma) {
