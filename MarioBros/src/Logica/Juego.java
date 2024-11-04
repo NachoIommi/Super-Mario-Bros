@@ -30,6 +30,7 @@ public class Juego {
 	protected int modoDeJuego;
 	protected Personaje personaje;
 	protected Ranking ranking;
+	protected int puntuacion;
 	
 	protected List<Enemigo> enemigos;
 	protected List<Plataforma> plataformas;
@@ -144,13 +145,18 @@ public class Juego {
 	}
 	
 	public void perderJuego() {
+		guardarPuntuacion();
 		reseteo();
 		nivel = null;
-		personaje = null;
 		controladorVistas.perderJuego();
 		//Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/gameOver.wav");
 	}
-	
+	public void guardarPuntuacion() {
+		puntuacion = personaje.getPuntuacion();
+	}
+	public int getPuntuacion() {
+		return puntuacion;
+	}
 	public void seleccionarMundo(Mundo m) {
 		
 	}
