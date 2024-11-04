@@ -96,7 +96,7 @@ public class PantallaJuego extends JPanel {
         refrescarPantalla = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent e) {   
             	if(pantallaCorriendo) {
-	            		if(personaje.getPosX() < imagenFondo.getWidth()-320) {
+	            		if(personaje.getPosX() < imagenFondo.getWidth()-302) {
 	                		
 	            			mostrarBolas();
 	            			
@@ -127,7 +127,7 @@ public class PantallaJuego extends JPanel {
     }
     
     public void llegoAlFinal() {
-        if (personaje != null && personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 320 && !nivelGanado) {
+        if (personaje != null && personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 302 && !nivelGanado) {
         	nivelGanado = true;
         	if(!banderaActualizada) {
         		actualizarImagenBandera();
@@ -251,13 +251,20 @@ public class PantallaJuego extends JPanel {
     }
     
     public void mostrarBandera() {
+    	String ruta;
     	bandera = new JLabel();
-    	String ruta = "/spritesOriginales/banderaBajando1.png";    	
+    	if(controladorVistas.obtenerJuego().getModoDeJuego() == 1) {
+    		ruta = "/spritesOriginales/banderaBajando1.png";
+    	}else {
+    		ruta = "/spritesReemplazo/banderaBajando1.png";
+    	}
+    	    	
     	ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
-    	Image imagenEscalada = icono.getImage().getScaledInstance(30, 300, Image.SCALE_DEFAULT);
+    	Image imagenEscalada = icono.getImage().getScaledInstance(45, 300, Image.SCALE_DEFAULT);
     	ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
     	bandera.setIcon(iconoEscalado);
-    	bandera.setBounds(imagenFondo.getWidth()-320, 30, 30, 500);
+    	bandera.setBounds(imagenFondo.getWidth()-302, 130, 45, 300);
+    
     	panelNivel.add(bandera, Integer.valueOf(1));
     }
     
@@ -449,10 +456,17 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarImagenBandera() {
     	
-    	String ruta = "/spritesOriginales/banderaBajando.gif";
+    	String ruta;
+    	bandera = new JLabel();
+    	if(controladorVistas.obtenerJuego().getModoDeJuego() == 1) {
+    		ruta = "/spritesOriginales/banderaBajando.gif";
+    	}else {
+    		ruta = "/spritesReemplazo/banderaBajando.gif";
+    	}
+    	
     	ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
         Image gifImage = icono.getImage();
-        Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, 300, Image.SCALE_DEFAULT);
+        Image gifAgrandado = gifImage.getScaledInstance(45, 300, Image.SCALE_DEFAULT);
         ImageIcon iconoEscalado = new ImageIcon(gifAgrandado);
         bandera.setIcon(iconoEscalado);
     }
