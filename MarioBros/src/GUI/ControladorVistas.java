@@ -49,6 +49,9 @@ public class ControladorVistas {
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
         		Jugador jugador = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),obtenerJuego().getPuntuacion());
+        		if(pantallaPrincipal.obtenerNombreDeJugador().isEmpty()) {
+        			jugador.setNombre("Jugador ");
+        		}
             	guardarJugadorEnRanking(jugador); 
                 juego.cierreDeJuego(); 
             }

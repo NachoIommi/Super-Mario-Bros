@@ -28,7 +28,9 @@ public class Jugador implements Comparable<Jugador>, Serializable{
 	public void setNuevoPuntaje(int p) {
 		puntaje = p;
 	}
-	
+	public void setNombre(String n) {
+		nombre = n;
+	}
 	public int compareTo(Jugador arg0) {
 		return this.puntaje.compareTo(arg0.getPuntaje());
 	}
