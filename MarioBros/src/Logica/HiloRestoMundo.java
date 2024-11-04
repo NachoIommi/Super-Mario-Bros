@@ -212,10 +212,8 @@ public class HiloRestoMundo extends Thread {
                                  		bola.setTocandoEnemigo(true);                                	                             		
                                  }                                                                              
                      	}
-                     }
-          		
-            		bola.moverse2();
-            		//bola.setTocandoBloqueAbajo(false);
+                     }         		
+            		bola.moverse();
             	}
             
                 Thread.sleep(16);

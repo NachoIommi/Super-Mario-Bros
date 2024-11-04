@@ -435,7 +435,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return personaje.getMin();
 	}
 
-	public void disparar() {
-		
+	public void disparar() {		
+	}
+	public boolean puedeDisparar() {
+		return false;
+	}
+	public void setPuedeDisparar(boolean b) {		
 	}
 }

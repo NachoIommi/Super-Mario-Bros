@@ -323,5 +323,11 @@ public class Personaje extends Entidad{
 	public void disparar() {
 		estado.disparar();
 	}
+	public boolean puedeDisparar() {
+		return estado.puedeDisparar();
+	}
+	public void setPuedeDisparar(boolean b) {
+		estado.setPuedeDisparar(b);
+	}
 	
 }

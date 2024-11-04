@@ -406,4 +406,12 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	public void disparar() {
 		
 	}
+
+	public boolean puedeDisparar() {
+		return false;
+	}
+
+	@Override
+	public void setPuedeDisparar(boolean b) {		
+	}
 }

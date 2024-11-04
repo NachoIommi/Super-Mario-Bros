@@ -133,4 +133,6 @@ public abstract class EstadoDePersonaje {
 	public boolean getSaltando() {
 		return saltando;
 	}
+	public abstract boolean puedeDisparar();
+	public abstract void setPuedeDisparar(boolean b);
 }

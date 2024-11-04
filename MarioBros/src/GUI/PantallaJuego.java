@@ -187,8 +187,10 @@ public class PantallaJuego extends JPanel {
     	System.out.println("size copiabolas"+copiaBolas.size());
     	if(copiaBolas.size()>0) {
             for(BolaDeFuego bola : copiaBolas) {
-            	if(bola.exploto()) 
+            	if(bola.exploto()) {
             		bola.setVisible(false); 	
+            		controladorVistas.obtenerBolas().remove(bola);            	
+            	}
             }
         }
     }
@@ -514,6 +516,8 @@ public class PantallaJuego extends JPanel {
                     		break;
                     	case(KeyEvent.VK_SPACE):
                     		personaje.disparar();
+                    		personaje.setPuedeDisparar(false);
+                    		break;
                     }
                 }
                 public void keyReleased(KeyEvent k) {
@@ -527,6 +531,9 @@ public class PantallaJuego extends JPanel {
                 		break;		
                 	case(KeyEvent.VK_W):
                 		personaje.setJump(false); 
+                		break;
+                	case(KeyEvent.VK_SPACE):
+                		personaje.setPuedeDisparar(true);
                 		break;
                 }     	
                 }
