@@ -152,7 +152,7 @@ public class HiloRestoMundo extends Thread {
             	}
             	
             	for(BolaDeFuego bola : copiaBolas) {
-            		int toleranciaAltura=15;
+            		int toleranciaAltura=5;
             		for(Plataforma p : copiaPlataforma) {
 	                    if (bola.getHitbox().getX() + bola.getHitbox().getWidth() > p.getHitbox().getX() &&
 	                                bola.getHitbox().getX() < p.getHitbox().getX() &&
@@ -214,8 +214,8 @@ public class HiloRestoMundo extends Thread {
                      	}
                      }
           		
-            		bola.moverse();
-            		System.out.println(juego.getBolas().size());
+            		bola.moverse2();
+            		//bola.setTocandoBloqueAbajo(false);
             	}
             
                 Thread.sleep(16);

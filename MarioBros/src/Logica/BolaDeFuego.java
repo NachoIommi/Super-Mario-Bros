@@ -23,6 +23,8 @@ public class BolaDeFuego extends Entidad{
     protected boolean tocoParedDerecha;
     protected boolean exploto =false;
     protected boolean tocoEnemigo=false;
+    protected boolean subiendo=false;
+    protected int contador;
 	
 	public BolaDeFuego(Sprite sprite, int x, int y, Nivel nivelActual,int direccion) {
 		super(nivelActual);
@@ -49,6 +51,46 @@ public class BolaDeFuego extends Entidad{
 			posX=posX-5;
 			hitbox.actualizar (posX, posY);
 			}
+	}
+	public void moverse2() {
+		if(direc==0) {
+			if(!tocandoBloqueAbajo && !subiendo) {
+				posY=posY+3;
+				posX=posX+4;
+				hitbox.actualizar (posX, posY);
+			}
+			if(tocandoBloqueAbajo && subiendo) {
+				contador++;
+				posY=posY-3;
+				posX=posX+4;
+				hitbox.actualizar (posX, posY);
+				if(contador == 13) {
+	                contador = 0;
+	                subiendo = false; 
+	                tocandoBloqueAbajo=false;
+	            }
+			}
+				
+		}
+		else {
+			if(!tocandoBloqueAbajo && !subiendo) {
+				posY=posY+3;
+				posX=posX-4;
+				hitbox.actualizar (posX, posY);
+			}
+			if(tocandoBloqueAbajo && subiendo) {
+				contador++;
+				posY=posY-3;
+				posX=posX-4;
+				hitbox.actualizar (posX, posY);
+				if(contador == 13) {
+	                contador = 0;
+	                subiendo = false; 
+	                tocandoBloqueAbajo=false;
+	            }
+				
+			}
+		}
 	}
 	
 	public void explotar() {		
@@ -77,11 +119,7 @@ public class BolaDeFuego extends Entidad{
 
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo = b;
-	}
-
-	
-	public void moverse2() {
-		
+		subiendo=true;
 	}
 	
 	public void aceptarVisita(Visitor v) {
