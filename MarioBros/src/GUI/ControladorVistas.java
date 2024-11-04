@@ -27,6 +27,7 @@ public class ControladorVistas {
 	protected PantallaPrincipal pantallaPrincipal;
 	protected PantallaRanking pantallaRanking;
 	protected PantallaJuego pantallaJuego;
+	protected PantallaVictoria pantallaVictoria;
 	protected PantallaModoDeJuego pantallaModoDeJuego;
 	protected PantallaPerder pantallaPerder;
 	protected Juego juego;
@@ -35,7 +36,6 @@ public class ControladorVistas {
 		this.juego = juego;
 		iniciar();
 		pantallaPrincipal = new PantallaPrincipal(this);
-	
 	}
 	
 	public void iniciar() {
@@ -46,7 +46,6 @@ public class ControladorVistas {
 		ventana.setLocationRelativeTo(null);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
-		
         ventana.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
             	if(obtenerJuego().getPersonaje() != null) {
@@ -82,6 +81,30 @@ public class ControladorVistas {
 		ventana.setContentPane(pantallaPrincipal);
 	}
 	
+	public void mostrarPantallaVictoria() {
+		
+		
+		
+		if (juego.getHiloPersonaje().isAlive()) {
+            juego.getHiloPersonaje().detener();
+        }
+        if (juego.getReloj().isAlive()) {
+            juego.getReloj().detener();
+        }
+        if(juego.getHiloRM().isAlive()) {
+        	juego.getHiloRM().detener();
+        }
+        
+        juego.reseteo();
+		
+        if(pantallaJuego!=null) {
+        	pantallaJuego = null;
+        	pantallaVictoria = new PantallaVictoria(this);
+        }
+        
+		ventana.setContentPane(pantallaVictoria);
+	}
+	
 	public void mostrarPantallaJuego() {
 		
 		if(pantallaJuego == null) {
@@ -112,8 +135,7 @@ public class ControladorVistas {
     	    ventana.revalidate();
     	    pantallaJuego.requestFocus();
         }
-        
-        System.out.println("se ejecuto reiniciarNivel :: controladorVistas");
+       
 	}
 	
 	public void perderJuego() {

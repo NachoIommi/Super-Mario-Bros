@@ -136,8 +136,14 @@ public class PantallaJuego extends JPanel {
             }                        
             timerBandera = new Timer(1050, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                	timerBandera.stop();                     
-                    controladorVistas.iniciarSiguienteNivel();                   
+                	timerBandera.stop();  
+                	
+                	if(controladorVistas.obtenerJuego().getNivel().getNivelActual() == 2) {
+                		controladorVistas.mostrarPantallaVictoria();
+                	}else {
+                		controladorVistas.iniciarSiguienteNivel();    
+                	}
+                                   
                 }
             });
             timerBandera.setRepeats(false); 
@@ -441,7 +447,7 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenBandera() {
-    	System.out.println("se actualizo bandera");
+    	
     	String ruta = "/spritesOriginales/banderaBajando.gif";
     	ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
         Image gifImage = icono.getImage();
@@ -453,9 +459,7 @@ public class PantallaJuego extends JPanel {
     // COMANDOS UTILES
     public void moverFondo(int velocidad) {
     	int mitadAnchoVentana = panelScrollNivel.getViewport().getWidth() / 2;
-    	System.out.println("mitad"+mitadAnchoVentana	);
-    	System.out.println("maximo: "+maximoDerecha	);
-    	System.out.println("minimo: "+personaje.getMin());
+    	
         
         if (maximoDerecha <= (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
             panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+velocidad);
@@ -545,7 +549,7 @@ public class PantallaJuego extends JPanel {
      }
     
     public ImageIcon verificarExtension(String ruta) {
-        ImageIcon iconoEscalado;
+    	 ImageIcon iconoEscalado;
         
         if(ruta.toLowerCase().endsWith(".gif")) {
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
