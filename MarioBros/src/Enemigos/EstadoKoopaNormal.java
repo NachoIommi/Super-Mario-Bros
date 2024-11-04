@@ -111,13 +111,26 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	private Sprite actualizarSpriteNormal() {
-	    GenerarSprite fabrica = new GenerarSpriteOriginal();
-	    return fabrica.getKoopaTroopa(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
+	    GenerarSprite fabricaSprite;
+	    
+	    if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+	    return fabricaSprite.getKoopaTroopa(); 
 	}
 	
 	public void actualizarSpriteKoopaRetraido() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getKoopaTroopaRetraido();
+		GenerarSprite fabricaSprite;
+		
+        if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+		
+		sprite = fabricaSprite.getKoopaTroopaRetraido();
 		cargarSprite(sprite);
 		koopa.setSpriteActualizado(true);
 	}

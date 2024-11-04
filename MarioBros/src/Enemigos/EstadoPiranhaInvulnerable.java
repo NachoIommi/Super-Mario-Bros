@@ -61,7 +61,7 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	}
 	
 	public void cargarSprite(Sprite s) {
-		sprite=s;	
+		sprite = s;	
 	}
 	
 	public void actualizarSprite() {
@@ -69,17 +69,18 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	}
 	
 	public void actualizarSpriteCambioDeEstado() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
+		GenerarSprite fabrica;
+		
+		if(piranha.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			fabrica = new GenerarSpriteOriginal();
+		}else {
+			fabrica = new GenerarSpriteReemplazo();
+		}
+
 		sprite = fabrica.getPiranhaPlant();
 		piranha.setSpriteActualizado(true);
 	}
     
-	
-	
-	 private Sprite actualizarSpriteNormal() {
-		    GenerarSprite fabrica = new GenerarSpriteOriginal();
-		    return fabrica.getPiranhaPlantSpawneando(); // Asegúrate de tener un método que retorne la sprite de Koopa normal
-		}
     // Getters
 	public int getPosX() {
 		return posX;

@@ -223,7 +223,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     }
     
 	public void colisionChampiVerde() {
-		personaje.setVidas(personaje.getVidas()+1);
+		personaje.sumarVida();
+		setPuntuacionChampiVerde();
 	}
 
 	public void colisionMoneda() {

@@ -113,7 +113,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		
 		if(!muerto) {
 			sprite = fabrica.getPiranhaPlant();
-		}else {
+		} else {
 			sprite = fabrica.getPiranhaPlantMuerta();
 		}
 		cargarSprite(sprite);

@@ -111,8 +111,6 @@ public class Goomba extends Enemigo{
     	sprite = fabricaSprite.getGoombaMuerto();
     	cargarSprite(sprite);
     	setSpriteActualizado(true);
-    	
-    	
 	}
 	
 	public void setSpriteActualizado(boolean actualizado) {

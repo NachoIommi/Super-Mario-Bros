@@ -66,11 +66,6 @@ public class SuperChampi extends PowerUp{
 	    	posX=posX-1;	    
 	}
 	
-	
-	public boolean mostrable() {
-		return mostrable;
-	}
-
 	public void aceptarVisita(Visitor v) {
 		v.visitarSuperChampi(this);
 	}
@@ -84,7 +79,6 @@ public class SuperChampi extends PowerUp{
 		hitbox.actualizar(0, 0);
 		setMostrable(false);
 		hitbox.actualizar(0, 0);
-		//p.setEstado(null);
 	}
 
 	public Sprite getSprite() {

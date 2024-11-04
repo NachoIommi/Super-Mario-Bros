@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
@@ -86,12 +87,18 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	}
 
 	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getKoopaTroopaMuerto();
+		GenerarSprite fabricaSprite;
+		
+        if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+		
+		sprite = fabricaSprite.getKoopaTroopaMuerto();
 		cargarSprite(sprite);
 		koopa.setSpriteActualizado(true);
 		
-	
 	}
 	
 	public void actualizarSpriteKoopaRetraido() {

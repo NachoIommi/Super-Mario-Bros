@@ -153,6 +153,11 @@ public class Nivel {
 				    			juego.agregarPowerUp(f);
 				    			break;
 				    			
+				    		 case 35:
+				    			PowerUp  c = fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY, this);
+					    		juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,c ,1, this));
+					    		juego.agregarPowerUp(c);
+				    			break;
 				    			
 				    		 default:
 				    			 break;

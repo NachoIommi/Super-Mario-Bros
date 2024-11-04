@@ -21,37 +21,47 @@ public class ChampiVerde extends PowerUp{
 		posX = x;
 		posY = y;
 		sprite = s;
-		hitbox = new Hitbox(x ,y,30 ,30);
+		hitbox = new Hitbox(0 ,0,30 ,30);
 	}
 	
 	public void moverse() {
-		if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;
+		if(mostrable){			
+			if(tocandoBloqueIzquierda) {
+				tocoParedIzquierda=true;
+				tocoParedDerecha=false;}
 			
-		if(!tocoParedIzquierda) {
-			moverIzq();			
-			hitbox.actualizar (posX, posY);
+			if(tocandoBloqueDerecha)
+				tocoParedDerecha=true;
+			
+			if(!tocoParedDerecha) {
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}
+			else {
+				tocoParedDerecha=true;
+				moverIzq();
+				hitbox.actualizar (posX, posY);
+			}	
+			
+			if (!tocandoBloqueAbajo) {
+		        posY=posY+3;}
+			
+			hitbox.actualizar (posX, posY);		
+			corregirPosEnColision();
 		}
-		else
-			 {
-			tocoParedIzquierda=true;
-			moverDer();
-			hitbox.actualizar (posX, posY);}				
-				
-		if (tocandoBloqueDerecha) {
-			tocoParedDerecha=true;
-			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-				}
-
-		if (!tocandoBloqueAbajo) 
-	        posY=posY+1;
 	
 	}
 	public void moverIzq() {
-		posX = posX-3;
+		posX = posX-2;
 	}
 	public void moverDer() {
-		posX = posX+3;
+		posX = posX+2;
+	}
+	public void corregirPosEnColision() {
+		if(tocandoBloqueIzquierda)  
+	    	posX=posX+1;	    		
+	    if(tocandoBloqueDerecha) 
+	    	posX=posX-1;	    
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -63,7 +73,10 @@ public class ChampiVerde extends PowerUp{
 	}
 
 	public void afectarPersonaje(Personaje p) {
-		p.getEstado().setPuntuacionChampiVerde();
+		p.colisionChampiVerde();
+		hitbox.actualizar(0, 0);
+		setMostrable(false);
+		hitbox.actualizar(0, 0);
 	}
 
 	public Sprite getSprite() {
@@ -84,12 +97,11 @@ public class ChampiVerde extends PowerUp{
 
 
 	public void setPosX(int x) {
-		
+		this.posX=x;
 	}
-
-
-	public void setPosY(int x) {
-		
+	
+	public void setPosY(int y) {
+		this.posY=y;
 	}
 
 	public boolean necesitaActualizarSprite() {

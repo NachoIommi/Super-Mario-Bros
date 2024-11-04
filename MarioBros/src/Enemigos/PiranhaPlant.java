@@ -136,11 +136,5 @@ public class PiranhaPlant extends Enemigo{
 	public EstadosDePiranhaPlant getEstadoActual() {
 		return estado;
 	}
-	
-	
-
-	
-	
-	
-	
+		
 }

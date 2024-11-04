@@ -220,7 +220,11 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 	
 	public void saltarSobreEnemigo() {
-	
+		if (saltandoSobreEnemigo ) {
+			velY = -3;
+			posY=posY-5;
+			saltando = true;
+		}
 	}
 	
 	public void colisionSuperChampi() {
@@ -243,6 +247,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 
 	
 	public void colisionChampiVerde() {
+		personaje.sumarVida();
 		setPuntuacionChampiVerde();
 	}
 

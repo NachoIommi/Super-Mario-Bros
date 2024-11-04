@@ -29,7 +29,7 @@ public class VisitorEntidad implements Visitor{
     
     public void visitarSuperChampi(SuperChampi s) {
     	s.afectarPersonaje(personaje);
-    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/marioCrece.wav");
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/agarrarSuperChampi.wav");
     }
     
     public void visitarEstrella(Estrella e) {
@@ -39,7 +39,7 @@ public class VisitorEntidad implements Visitor{
     
     public void visitarChampiVerde(ChampiVerde c) {
     	c.afectarPersonaje(personaje);
-    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/superChampi.wav");
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/agarrarChampiVerde.wav");
     }
     
     public void visitarBloqueDePregunta(BloqueDePregunta p) {

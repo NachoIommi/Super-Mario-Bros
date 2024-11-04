@@ -92,15 +92,18 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-        sprite = fabrica.getLakituPorDisparar();
+		GenerarSprite fabricaSprite;
+		
+		if(nivelActual.getJuego().getModoDeJuego() == 1) {
+			fabricaSprite = new GenerarSpriteOriginal();
+		}else {
+			fabricaSprite = new GenerarSpriteReemplazo();
+		}
+
+		
+        sprite = fabricaSprite.getLakituPorDisparar();
         cargarSprite(sprite);
         setSpriteActualizado(true);
-        
-        int posY = getPosY();
-
-        
-     
 	}
 	
 	public void setSpriteActualizado(boolean actualizada) {

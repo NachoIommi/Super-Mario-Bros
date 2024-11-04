@@ -120,7 +120,9 @@ public class Personaje extends Entidad{
     public void colisionEstrella() {
     	estado.colisionEstrella();
     }
-    
+    public void colisionChampiVerde() {
+    	estado.colisionChampiVerde();
+    }
     public void colisionVacio() {
     	estado.morir();
     	

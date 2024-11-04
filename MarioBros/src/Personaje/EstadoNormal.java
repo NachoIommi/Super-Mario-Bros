@@ -231,7 +231,7 @@ public class EstadoNormal extends EstadoDePersonaje {
     }
     
 	public void colisionChampiVerde() {
-		personaje.setVidas(personaje.getVidas()+1);
+		personaje.sumarVida();
 		setPuntuacionChampiVerde();
 	}
 

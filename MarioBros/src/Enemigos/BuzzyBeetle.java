@@ -104,7 +104,6 @@ public class BuzzyBeetle extends Enemigo{
     	sprite = fabricaSprite.getBuzzyBeetleRetraido();
     	cargarSprite(sprite);
     	setSpriteActualizado(true);
-    	System.out.println("actualice sprite :: buzzy");
     	
 	}
 	
