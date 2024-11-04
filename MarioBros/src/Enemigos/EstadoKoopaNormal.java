@@ -14,39 +14,20 @@ import Personaje.Personaje;
 
 public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
-	public double toleranciaAltura=20;
-	
-	//private KoopaTroopa koopa;
+	public double toleranciaAltura = 20;
 	
 	protected int posX;
 	protected int posY;	
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean mostrable;
-	protected boolean tocoParedIzquierda;
-    protected boolean tocoParedDerecha;
-    
+	
     protected Sprite sprite;
     protected Hitbox hitbox;
-    protected boolean recibirDano;
-    protected boolean murio;
 	
 	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
 		super(kt);
-		//koopa = kt;
 		posX = x;
 		posY = y;
 		sprite = s;
 		hitbox = new Hitbox(x ,y,30 ,30);
-        tocandoBloqueDerecha=false;
-	    tocandoBloqueIzquierda=false;
-	    tocandoBloqueAbajo=false;
-	    tocandoBloqueArriba=false;
-	    mostrable=true;	
-	    recibirDano=false;
-	    murio = false;
 	}
 	
 	// Setters
@@ -109,27 +90,6 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		posY = y;		
 	}
 	
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
@@ -168,9 +128,6 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	public void moverDer() {
 		posX=posX+1;
 	}
-	public void setKoopaTroopa(KoopaTroopa kt) {
-		koopa=kt;		
-	}
 
 	// Getters
 	public int getPosX() {
@@ -188,17 +145,4 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	public Sprite getSprite() {
 		return sprite;
 	}
-	
-	public boolean mostrable() {
-		return mostrable;
-	}
-	
-	public boolean murio() {
-		return murio;
-	}
-	
-	public KoopaTroopa getKoopaTroopa() {
-		return koopa;
-	}
-
 }

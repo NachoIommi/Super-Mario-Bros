@@ -12,45 +12,33 @@ import Personaje.Personaje;
 
 public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	
-	private KoopaTroopa kt;
 	protected int posX;
 	protected int posY;
-	protected boolean tocandoBloqueDerecha;
-	protected boolean tocandoBloqueIzquierda;
-	protected boolean tocandoBloqueAbajo;
-    protected boolean tocandoBloqueArriba;
-	protected boolean mostrable;
-	protected boolean tocoParedIzquierda;
-    protected boolean tocoParedDerecha;
+	
 	protected Sprite sprite;
 	protected Hitbox hitbox;
 	protected boolean saltoArriba;
-	protected boolean murio;
+	
 	
 	public EstadoKoopaRetraido(KoopaTroopa kt, Sprite s,int x,int y) {
 		super(kt);
 		posX = x;
 		posY = y;
-		this.kt	= kt;
+		
 		sprite = s;
 		hitbox = new Hitbox(x, y, 30, 30);
-		tocandoBloqueDerecha=false;
-	    tocandoBloqueIzquierda=false;
-	    tocandoBloqueAbajo=false;
-	    tocandoBloqueArriba=false;
-	    mostrable=true;	
+		
 	    saltoArriba=false;
-	    murio = false;
 	}
 	
 	// Setters
 	public void cambiarEstado() {
 		this.actualizarSpriteKoopaRetraido();
-        kt.setEstadoActual(new EstadoKoopaNormal(kt,sprite,posX,posY));  // Cambiar al estado extendido
+        koopa.setEstadoActual(new EstadoKoopaNormal(koopa,sprite,posX,posY));  // Cambiar al estado extendido
     }
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		saltoArriba=true;
+		saltoArriba = true;
 	}
 	
 	public void morir() {
@@ -93,27 +81,6 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		posY = y;
 	}
 	
-	public void setMostrable(boolean b) {
-		mostrable=b;
-	}
-	
-	public void setTocandoBloqueDerecha(boolean b) {
-		tocandoBloqueDerecha=b;
-	}
-
-	public void setTocandoBloqueIzquierda(boolean b) {
-		tocandoBloqueIzquierda=b;
-	}
-
-	public void setTocandoBloqueArriba(boolean b) {
-		tocandoBloqueArriba=b;
-	}
-
-
-	public void setTocandoBloqueAbajo(boolean b) {
-		tocandoBloqueAbajo=b;
-	}
-	
 	public void cargarSprite(Sprite s) {
 		sprite = s;
 	}
@@ -141,10 +108,6 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 		posX = posX+4;
 	}
 	
-	public void setKoopaTroopa(KoopaTroopa kt) {
-		this.kt = kt;
-	}
-	
 	// Getters
 	public int getPosX() {
 		return posX;
@@ -161,17 +124,4 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	public Sprite getSprite() {
 		return sprite;
 	}
-	
-	public boolean mostrable() {
-		return mostrable;
-	}
-
-	public boolean murio() {
-		return murio;
-	}
-	
-	public KoopaTroopa getKoopaTroopa() {
-		return kt;
-	}
-
 }

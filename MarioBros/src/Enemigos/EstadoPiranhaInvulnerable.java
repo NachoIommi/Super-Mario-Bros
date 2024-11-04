@@ -17,18 +17,13 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
-	protected boolean mostrable;
-	protected boolean entroTimer;
 	
-
     public EstadoPiranhaInvulnerable(PiranhaPlant p ,Sprite s,int x,int y) {
         super(p);
 		sprite = s;
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(0,0,0 ,0);
-		mostrable=true;
-		entroTimer=false;
     }
     
     // Setters
@@ -65,10 +60,6 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 		posY = y;
 	}
 	
-	public void setMostrable(boolean b) {
-		mostrable = b;
-	}
-	
 	public void cargarSprite(Sprite s) {
 		sprite=s;	
 	}
@@ -83,9 +74,7 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 		piranha.setSpriteActualizado(true);
 	}
     
-	public void setPiranhaPlant(PiranhaPlant p) {
-		piranha = p;
-	}
+	
 	
 	 private Sprite actualizarSpriteNormal() {
 		    GenerarSprite fabrica = new GenerarSpriteOriginal();
@@ -106,13 +95,5 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	
 	public Sprite getSprite() {
 		return sprite;
-	}
-	
-	public boolean mostrable() {
-		return mostrable;
-	}
-
-	public PiranhaPlant getPiranhaPlant() {
-		return piranha;
 	}	
 }
