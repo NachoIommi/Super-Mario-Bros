@@ -20,7 +20,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	public double toleranciaAltura=50;
 
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 
 	protected int vidas;
 	protected int monedas;
@@ -35,7 +35,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 
 	public EstadoDeFuego(Personaje p,Sprite s,int x,int y) {
 		super(p);
-		hitb = new Hitbox(x ,y-23,30 ,60);
+		hitbox = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
 		setPosY(y-23);
 		sprite = s;
@@ -96,24 +96,25 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    colisionDesliz(); 
 	    detenerFriccion();    
 	    posX += velX;
-	    saltar();
+	    saltar();	    
 	    gravedadSaltando();
 	    corregirPosEnColision();
 	    gravedad();
-	    detenerSalto();	    
+	    detenerSalto();
+	    saltarSobreEnemigo();
 	    posY += velY;
-	    hitb.actualizar((int) posX, (int) posY);
+	    hitbox.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
 
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitbox.actualizar(Math.round(posX), Math.round(posY));
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitb.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitbox.actualizar(Math.round(posX), Math.round(posY));
 	}
 	
 	public void saltar() {
@@ -367,16 +368,18 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
+	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
 
 	public void detenerFriccion() {
 		if (velX > 0 && !right) 
 	        velX -= 0.1f;  
-	    						//FRENA A MARIO FRICCIONADO
 	    if (velX < 0 && !left) 
-	        velX += 0.1f;  
+	        velX += 0.1f; 	    
+	    if (Math.abs(velX) < 0.1f) {
+	        velX = 0;
+	    }
 	}
 	
 	public void colisionDesliz() {
@@ -397,7 +400,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 	
 	public Hitbox getHitbox() {
-    	return hitb;
+    	return hitbox;
     }
 
 	public Sprite getSprite() {

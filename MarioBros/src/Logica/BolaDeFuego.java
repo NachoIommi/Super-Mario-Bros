@@ -39,7 +39,7 @@ public class BolaDeFuego extends Entidad{
 		//setSpriteActualizado(false);
 		//mostrable=true;
 	}
-	
+
 	public void moverse() {
 		if(direc==0) {
 			posX=posX+5;

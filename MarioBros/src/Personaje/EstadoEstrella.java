@@ -12,7 +12,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public double toleranciaAltura=50;
 	protected Sprite sprite;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 
 	protected int vidas;
 	protected int monedas;
@@ -26,7 +26,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	public EstadoEstrella(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
-		hitb = new Hitbox(x ,y-23,30 ,60);
+		hitbox = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
 		setPosY(y-23);
 		sprite = s;
@@ -70,30 +70,31 @@ public class EstadoEstrella extends EstadoDePersonaje {
         personaje.morir();
     }
 	
-	public void moverPersonaje() {	  
+	public void moverPersonaje() {	
 		moverDerecha();	    
 	    moverIzquierda(); 	    	    	
 	    colisionDesliz(); 
 	    detenerFriccion();    
 	    posX += velX;
-	    saltar();
+	    saltar();	    
 	    gravedadSaltando();
 	    corregirPosEnColision();
 	    gravedad();
-	    detenerSalto();	    
+	    detenerSalto();
+	    saltarSobreEnemigo();
 	    posY += velY;
-	    hitb.actualizar((int) posX, (int) posY);
+	    hitbox.actualizar((int) posX, (int) posY);
 	    actualizarSprite();
 	}
 
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitb.actualizar(Math.round(posX), Math.round(posY)); 
+	    hitbox.actualizar(Math.round(posX), Math.round(posY)); 
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitb.actualizar(Math.round(posX), Math.round(posY)); 
+	    hitbox.actualizar(Math.round(posX), Math.round(posY)); 
 	}
 	
 	public void saltar() {
@@ -375,7 +376,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	}
 	
 	public Hitbox getHitbox() {
-    	return hitb;
+    	return hitbox;
     }
 	
 	public Sprite getSprite() {

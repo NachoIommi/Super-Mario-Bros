@@ -81,31 +81,31 @@ public class VisitorBolaDeFuego implements Visitor{
 
 	@Override
 	public void visitarPiranhaPlant(PiranhaPlant p) {
-		// TODO Auto-generated method stub
+		p.morir();
 		
 	}
 
 	@Override
 	public void visitarLakitu(Lakitu l) {
-		// TODO Auto-generated method stub
+		l.morir();
 		
 	}
 
 	@Override
 	public void visitarSpiny(Spiny s) {
-		// TODO Auto-generated method stub
+		s.morir();
 		
 	}
 
 	@Override
 	public void visitarBuzzyBeetle(BuzzyBeetle b) {
-		// TODO Auto-generated method stub
+		b.morir();
 		
 	}
 
 	@Override
 	public void visitarGoomba(Goomba g) {
-		// TODO Auto-generated method stub
+		g.morir();
 		
 	}
 
