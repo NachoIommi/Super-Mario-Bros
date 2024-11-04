@@ -1,0 +1,137 @@
+package Logica;
+
+import java.util.ArrayList; 
+import java.util.List;
+
+import Enemigos.Enemigo;
+import Personaje.Personaje;
+import Plataformas.*;
+import PowerUps.PowerUp;
+
+public class HiloPersonaje extends Thread {
+
+    protected Juego juego; 
+    Personaje personaje;
+    List<Plataforma> plataformas;
+    List<Enemigo> enemigos;
+    List<PowerUp> powerUps;
+    protected VisitorEnemigo visitorEnemigo;
+    protected VisitorEnemigoAfectado visitorEnemigoAfectado;
+    protected VisitorEntidad visitorEntidad;
+    private volatile boolean enEjecucion;
+    
+    protected boolean tocoEnemigoDerecha;
+    protected boolean tocoEnemigoIzquierda;
+    double toleranciaAltura;
+    protected boolean tocoEnemigoAbajo;
+    
+    public HiloPersonaje(Juego juego) {
+        this.juego = juego;
+        personaje = juego.getPersonaje();
+        plataformas = juego.getPlataformas();
+        enemigos = juego.getEnemigos();
+        powerUps = juego.getPowerUps();    
+        visitorEnemigo = new VisitorEnemigo(personaje);
+        visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
+        visitorEntidad = new VisitorEntidad(personaje);
+    }
+  
+    public void detener() {
+    	enEjecucion = false;
+    }
+    public void run() {
+    	enEjecucion = true;
+        while (enEjecucion) {
+            try {
+                toleranciaAltura = personaje.getToleranciaAltura();
+            	List<Plataforma> copiaPlataformas = new ArrayList<Plataforma>(plataformas);
+                for(Plataforma p : copiaPlataformas) {
+                    if (personaje.getHitbox().intersects(p.getHitbox())) {
+                        personaje.setTocandoBloque(true);
+                        // COLISION PERSONAJE DEL LADO DERECHO
+                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&
+                            personaje.getHitbox().getX() < p.getHitbox().getX() &&
+                            Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) {
+                            personaje.setTocandoBloqueDerecha(true);
+                            personaje.setTocandoBloqueIzquierda(false);
+                        }  
+                        
+                        // COLISION PERSONAJE DEL LADO IZQUIERDO
+                        else if (personaje.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
+                                 personaje.getHitbox().getX() > p.getHitbox().getX() &&
+                                 Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) {
+                            personaje.setTocandoBloqueIzquierda(true);
+                            personaje.setTocandoBloqueDerecha(false);
+                        }
+                        
+                        // COLISION CON PISO
+                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY() &&
+                            personaje.getHitbox().getY() < p.getHitbox().getY()) {
+                            personaje.setTocandoBloqueAbajo(true);
+                            p.aceptarVisita(visitorEnemigo); 
+                        }
+                        // COLISION CON TECHO
+                        else if (personaje.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
+                                 personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY()) {
+                            personaje.setTocandoBloqueArriba(true);
+                            p.aceptarVisita(visitorEntidad);
+                        }
+                    }
+                }
+                List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
+                for(Enemigo e : copiaEnemigos) {
+                	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
+                           
+                		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
+                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
+                            personaje.getHitbox().getX() < e.getHitbox().getX() && Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                        		tocoEnemigoDerecha=true;
+                        		e.aceptarVisita(visitorEnemigo);
+                        }
+                        // Colisión desde la izquierda (jugador a la derecha del enemigo)
+                        else if (personaje.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
+                                 personaje.getHitbox().getX() > e.getHitbox().getX()&& Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                        	tocoEnemigoIzquierda=true;
+                            e.aceptarVisita(visitorEnemigo);
+                        }
+                        // (personaje arriba del enemigo)
+                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
+                                personaje.getHitbox().getY() < e.getHitbox().getY() ) 
+                            {
+                            	if(!tocoEnemigoDerecha && !tocoEnemigoIzquierda  ) {
+                            		
+                            		e.aceptarVisita(visitorEnemigoAfectado);
+                            		personaje.setTocandoBloqueAbajo(true);
+                            		personaje.setSaltandoSobreEnemigo(true);	
+                            	}
+                            }                       
+                        tocoEnemigoDerecha=false;
+                        tocoEnemigoIzquierda=false;
+                        tocoEnemigoAbajo=false;
+                	}
+                }
+                List<PowerUp> copiaPowerUps = new ArrayList<PowerUp>(powerUps);
+                for(PowerUp p : copiaPowerUps) {
+                	if(personaje.getHitbox().intersects(p.getHitbox())) {
+                		p.aceptarVisita(visitorEntidad);}
+                	
+                }
+
+                personaje.moverPersonaje();
+
+                // Reiniciar estado de colisiones
+                personaje.setTocandoBloque(false);
+                personaje.setTocandoBloqueDerecha(false);
+                personaje.setTocandoBloqueIzquierda(false);
+                personaje.setTocandoBloqueAbajo(false);
+                personaje.setTocandoBloqueArriba(false);
+                personaje.setSaltandoSobreEnemigo(false);
+                
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+}
