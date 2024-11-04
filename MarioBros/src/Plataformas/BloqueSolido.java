@@ -56,11 +56,9 @@ public class BloqueSolido extends Plataforma{
 		return hitbox;
 	}
 
-
 	public void verificarCambioEstado() {
 	
 	}
-
 
 	public boolean necesitaActualizarSprite() {
 		return false;
@@ -69,6 +67,4 @@ public class BloqueSolido extends Plataforma{
 	public void setSpriteActualizado(boolean actualizada) {
 		
 	}
-
-	
 }

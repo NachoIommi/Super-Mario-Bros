@@ -37,9 +37,7 @@ public class BolaDeFuego extends Entidad{
 		tocandoBloqueIzquierda=false;
 		tocandoBloqueAbajo=false;
 		tocandoBloqueArriba=false;
-		direc=direccion;
-		//setSpriteActualizado(false);
-		//mostrable=true;
+		direc = direccion;
 	}
 	
 	public void moverse() {

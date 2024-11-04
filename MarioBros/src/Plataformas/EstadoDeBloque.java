@@ -1,6 +1,5 @@
 package Plataformas;
 
-import Fabricas.Sprite;
 import Logica.Visitor;
 import Personaje.Personaje;
 import PowerUps.PowerUp;

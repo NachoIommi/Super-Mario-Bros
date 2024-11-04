@@ -136,7 +136,6 @@ public class Personaje extends Entidad{
 	
 	public void actualizarSprite() {
 		estado.actualizarSprite();
-		//setSpriteActualizado(true);
 	}
 
 	public boolean getSaltando() {
@@ -317,7 +316,6 @@ public class Personaje extends Entidad{
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;
-		
 	}
 	
 	public void disparar() {

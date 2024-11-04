@@ -72,9 +72,7 @@ public class Tuberia extends Plataforma{
 		return false;
 	}
 
-	
 	public void setSpriteActualizado(boolean actualizada) {
 		
 	}
-
 }

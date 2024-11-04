@@ -29,36 +29,12 @@ public class HiloAnimaciones extends Thread{
 	    	enEjecucion = true;
 	    	while(enEjecucion) {
 	    		 
-	    		try {   
-	    			
-	    			/*if(personaje.getMuerto()) {
-	    				int posicionY = personaje.getPosY()	;
-	    				for (int i = 0; i < 45; i++) {
-	    		            personaje.setPosY(personaje.getPosY() - (i * 2));
-	    		            
-	    		            try {
-	    		                Thread.sleep(16);
-	    		            } catch (InterruptedException e) {
-	    		                e.printStackTrace();
-	    		            }
-	    		        }
-
-	    		        while (personaje.getPosY() < 500) {
-	    		            personaje.setPosY(personaje.getPosY() + 4);
-	    		            try {
-	    		                Thread.sleep(16);
-	    		            } catch (InterruptedException e) {
-	    		                e.printStackTrace();
-	    		            }
-	    		        }
-	    			}*/
-	    			
-	    			
+	    		try {   	    			
 	    			List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
 	                for(Enemigo enemigo : copiaEnemigos) {
 	                	if(enemigo.murio()) {
 	                		int posY = enemigo.getPosY();
-	                        // Animación de desplazamiento hacia arriba
+	                 
 	                        for (int i = 0; i < 30; i++) {
 	                        	enemigo.setPosY(posY - (i * 2));
 	                            try {
@@ -67,7 +43,7 @@ public class HiloAnimaciones extends Thread{
 	                                e.printStackTrace();
 	                            }
 	                        }
-	                        // Caída hacia la parte inferior de la ventana
+	                     
 	                        while (enemigo.getPosY() < ConstantesVistas.VENTANA_ALTO) {
 	                        	enemigo.setPosY(enemigo.getPosY() + 5);
 	                            try {
@@ -75,7 +51,7 @@ public class HiloAnimaciones extends Thread{
 	                            } catch (InterruptedException e) {
 	                                e.printStackTrace();
 	                            }
-	                        };
+	                        }
 	                	}
 	                }
 	                Thread.sleep(16);

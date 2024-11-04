@@ -32,7 +32,6 @@ public class Vacio extends Plataforma {
 	
 	public void afectarBola(BolaDeFuego b) {
 		b.explotar();
-		System.out.println("Bola colisiono con vacio");
 	}
 	
 	public void cargarSprite(Sprite s) {

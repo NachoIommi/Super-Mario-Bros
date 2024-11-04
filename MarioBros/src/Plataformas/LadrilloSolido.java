@@ -21,5 +21,4 @@ public class LadrilloSolido extends BloqueSolido{
 	public boolean cambioEstado() {
 		return false;
 	}
-
 }

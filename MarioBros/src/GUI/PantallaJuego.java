@@ -32,12 +32,12 @@ public class PantallaJuego extends JPanel {
 	
 	private ControladorVistas controladorVistas;
     private List<Enemigo> copiaEnemigos;
-    //
+    
     private List<BolaDeFuego> copiaBolas;
-    //
-    //List<Enemigo> copiaEnemigos = new CopyOnWriteArrayList<>();
+
     private List<Plataforma> copiaPlataformas;
     private List<PowerUp> copiaPowerUps;
+    
     private JScrollPane panelScrollNivel;
     private JLayeredPane panelNivel;
     private JLabel imagenFondo;
@@ -46,9 +46,11 @@ public class PantallaJuego extends JPanel {
     private JLabel vidas;
     private JLabel monedas;
     private JLabel bandera;
+    
     private Timer timerBandera;
     private Timer refrescarPantalla;
     private Personaje personaje;
+    
     private int posicionInicialX = 0;  
     private float maximoDerecha = 298.0f;
     private boolean banderaActualizada = false;
@@ -184,7 +186,6 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenBolas() {
-    	System.out.println("size copiabolas"+copiaBolas.size());
     	if(copiaBolas.size()>0) {
             for(BolaDeFuego bola : copiaBolas) {
             	if(bola.exploto()) {
@@ -404,7 +405,6 @@ public class PantallaJuego extends JPanel {
     } 
     
     public void actualizarImagenEnemigos(){
-    	//copiaEnemigos = controladorVistas.obtenerEnemigo();
     	if(!copiaEnemigos.isEmpty()) {
     		for(Enemigo enemigo : copiaEnemigos) {
         		if(enemigo.mostrable() && enemigo.necesitaActualizarSprite()) {   		

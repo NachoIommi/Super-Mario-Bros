@@ -25,8 +25,7 @@ public class BloqueGolpeado extends EstadoDeBloque{
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(x ,y,30 ,40);
-		golpesRestantes=g;	
-		
+		golpesRestantes = g;	
 	}
 	
 	public void recibirGolpe() {
@@ -44,47 +43,32 @@ public class BloqueGolpeado extends EstadoDeBloque{
 		return false;
 	}
 
-	@Override
 	public void soltarContenido() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void aceptarVisita(Visitor v) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public boolean mostrable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void recibirGolpe(Personaje p) {
-		// TODO Auto-generated method stub
-		
+				
 	}
 
-	@Override
 	public EstadoDeBloque getEstado() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public PowerUp getContenido() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void setContenido(PowerUp p) {
-		// TODO Auto-generated method stub
 		
 	}
-
 	
 }

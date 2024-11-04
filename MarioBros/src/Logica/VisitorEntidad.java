@@ -93,8 +93,5 @@ public class VisitorEntidad implements Visitor{
 	
 	public void visitarPantalla(Juego j) {
 		
-	}
-	
-	
-	
+	}	
 }

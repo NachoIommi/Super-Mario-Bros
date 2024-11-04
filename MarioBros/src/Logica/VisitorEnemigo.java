@@ -42,7 +42,7 @@ public class VisitorEnemigo implements Visitor {
     }
     
     public void visitarVacio(Vacio v) {
-    	
+    	v.afectarPersonaje(personaje);
     }
     
     public void visitarTuberia(Tuberia t) {
@@ -84,7 +84,4 @@ public class VisitorEnemigo implements Visitor {
 	public void visitarPantalla(Juego j) {
 		
 	}
-	
-
-
 }

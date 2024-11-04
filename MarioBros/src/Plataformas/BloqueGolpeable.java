@@ -1,7 +1,5 @@
 package Plataformas;
 
-
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,10 +30,10 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(x ,y,30 ,30);
-		contenido=p;
+		contenido = p;
 		golpesRestantes=golpes;	
 		if (golpes>1) {
-			bloqueMonedas=true;	
+			bloqueMonedas = true;	
 			contenido.getHitbox().actualizar(0, 0);
 		}
 	}
@@ -43,7 +41,6 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	public void soltarContenido() {
 		contenido.setPosX(posX);
 		contenido.setPosY(posY-30);	
-		System.out.println("visitado soltar contenido");
 		Musica.getMusica().reproducirSonido("Sonido/Sonidos/spawneaPowerUp.wav");
 		contenido.setMostrable(true);
 		
@@ -58,10 +55,9 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		}
 		
 		if(!bloqueMonedas) {
-			if(golpesRestantes!=1 ) {
+			if(golpesRestantes != 1 ) {
 				soltarContenido();
-				golpesRestantes--;
-				
+				golpesRestantes--;	
 			}
 			else {		
 				soltarContenido();
@@ -69,7 +65,8 @@ public class BloqueGolpeable extends EstadoDeBloque{
 				
 				EstadoDeBloque e = new BloqueGolpeado(bloque,fabricaSprite.getBloqueDePreguntaRoto(),posX,posY,0);
 				bloque.cambiarEstado(e);
-				bloque.setSprite(fabricaSprite.getBloqueDePreguntaRoto());}
+				bloque.setSprite(fabricaSprite.getBloqueDePreguntaRoto());
+			}
 		}
 		else {
 			if (golpesRestantes != 1) {
@@ -91,7 +88,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	                    }
 	                }
 	            };
-	            timer.scheduleAtFixedRate(animacionSubida, 0, 50); // Ejecuta cada 50 ms
+	            timer.scheduleAtFixedRate(animacionSubida, 0, 50); 
 	            p.setMonedas(1);
 	            p.setPuntuacion(5);
 	            golpesRestantes--;}
@@ -116,9 +113,10 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	            timer.scheduleAtFixedRate(animacionSubidaFinal, 0, 50);
 	            p.setMonedas(1);
 	            p.setPuntuacion(5);
-	            EstadoDeBloque e = new BloqueGolpeado(bloque, fabricaSprite.getBloqueDePreguntaRoto(), posX, posY, 0);
-	            bloque.cambiarEstado(e);
-	           // bloque.setSprite(fabrica.getBloqueDePreguntaRoto());
+	            
+	            EstadoDeBloque e = new BloqueGolpeado(bloque,fabricaSprite.getBloqueDePreguntaRoto(),posX,posY,0);
+				bloque.cambiarEstado(e);
+				bloque.setSprite(fabricaSprite.getBloqueDePreguntaRoto());
 	        }
 		}
 	}
@@ -132,33 +130,22 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	}
 
 	public void aceptarVisita(Visitor v) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public boolean mostrable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public EstadoDeBloque getEstado() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public PowerUp getContenido() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void setContenido(PowerUp p) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	
+	}	
 }

@@ -18,13 +18,13 @@ public class BloqueDePregunta extends BloqueSolido {
 	public BloqueDePregunta(Sprite sprite, int x, int y, PowerUp p , int golpes, Nivel nivelActual) {
 		super(sprite, x, y, nivelActual);
 		contenido = p;
-		golpesRestantes=golpes;
+		golpesRestantes = golpes;
 		estado= new BloqueGolpeable(this,sprite,x,y,p,golpes);
 		cambio=false;
 	}
 	
 	public void setSprite(Sprite s) {
-		sprite=s;
+		sprite = s;
 	}
 	
 	public void soltarContenido() {
@@ -62,5 +62,4 @@ public class BloqueDePregunta extends BloqueSolido {
 		this.estado = nuevoEstado;        
         cambio=true;
     }
-
 }
