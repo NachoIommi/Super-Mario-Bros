@@ -31,7 +31,7 @@ public class BuzzyBeetle extends Enemigo{
 	// Setters
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralBuzzyBeetle(this);
-		p.recibirDano();
+		
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
@@ -42,9 +42,10 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void morir() {
-		actualizarSprite();
+		
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
+		actualizarSprite();
 		
 	}
 	

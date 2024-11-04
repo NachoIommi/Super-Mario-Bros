@@ -42,7 +42,7 @@ public class PantallaRanking extends JPanel{
     }
     
     public void agregarImagen() {
-		String ruta = "imagenesOriginales/img/ranking.jpg";
+		String ruta = "imagenesOriginales/img/ranking.jpeg";
 		imagenInicio = new JLabel();
 		imagenInicio.setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
 		ImageIcon icono = new ImageIcon(ruta);

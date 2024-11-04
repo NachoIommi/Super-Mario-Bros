@@ -41,6 +41,7 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void morir() {
+		
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
 		actualizarSprite();
