@@ -1,5 +1,10 @@
 package Personaje;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import Enemigos.*;
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
@@ -41,41 +46,34 @@ public class EstadoNormal extends EstadoDePersonaje {
 	// Setters
 	public void morir() {
 		Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
-		GenerarSprite fabricaSprite;
-		
-        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
-            fabricaSprite = new GenerarSpriteOriginal();
-        } else {
-            fabricaSprite = new GenerarSpriteReemplazo();
-        }
-        
-    	sprite = fabricaSprite.getPersonajeNormalMuerto();
-    	personaje.cargarSprite(sprite);
-    	personaje.setSpriteActualizado(true);
-    	
-    	int posY = personaje.getPosY();
-
-        for (int i = 0; i < 45; i++) {
-            personaje.setPosY(posY - (i * 2));
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        while (personaje.getPosY() < 500) {
-            personaje.setPosY(personaje.getPosY() + 4);
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        //Musica.getMusica().reproducirMusica("Sonido/Canciones/muerte.wav");
-        personaje.morir();
+		personaje.setMuerto(true);
+		actualizarSprite();
+    	animacionMorir();
+    	personaje.morir();
     }
 	
+	public void animacionMorir() {
+			int posY = personaje.getPosY()	;
+			for (int i = 0; i < 45; i++) {
+	            personaje.setPosY(posY - (i * 2));
+	            
+	            try {
+	                Thread.sleep(16);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        while (personaje.getPosY() < 500) {
+	            personaje.setPosY(personaje.getPosY() + 4);
+	            try {
+	                Thread.sleep(16);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	}
+
 	public void moverPersonaje() {	
 		moverDerecha();	    
 	    moverIzquierda(); 	    	    	
@@ -160,24 +158,29 @@ public class EstadoNormal extends EstadoDePersonaje {
 	   
 	    Sprite nuevoSprite = sprite;
 	    
-	    if (right && velX > 0) {
-	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoDerecha();
-	    	
-	    } else if (left && velX > 0) {	
-	    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
-	    	 	        
-	    } else if (left && velX < 0) {
-	    	nuevoSprite = fabrica.getPersonajeNormalCorriendoIzquierda();
-	        
-	    } else if (right && velX < 0) {
-	    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoDerecha();
-     
-	    } else if (!left && !right) {
-	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
-	        
-	    }else if(velX==0) {
-	    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();		    
-	    }	    
+	    if(!personaje.getMuerto()) {
+	    	if (right && velX > 0) {
+		    	nuevoSprite = fabrica.getPersonajeNormalCorriendoDerecha();
+		    	
+		    } else if (left && velX > 0) {	
+		    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoIzquierda();
+		    	 	        
+		    } else if (left && velX < 0) {
+		    	nuevoSprite = fabrica.getPersonajeNormalCorriendoIzquierda();
+		        
+		    } else if (right && velX < 0) {
+		    	nuevoSprite = fabrica.getPersonajeNormalDerrapandoDerecha();
+	     
+		    } else if (!left && !right) {
+		    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
+		        
+		    }else if(velX==0) {
+		    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();		    
+		    }
+	    }else {
+	    	nuevoSprite = fabrica.getPersonajeNormalMuerto();
+	    }
+	   
 	   
 	    if(!personaje.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
 	    	personaje.cargarSprite(nuevoSprite);

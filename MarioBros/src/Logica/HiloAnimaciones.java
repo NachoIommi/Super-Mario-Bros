@@ -29,7 +29,31 @@ public class HiloAnimaciones extends Thread{
 	    	enEjecucion = true;
 	    	while(enEjecucion) {
 	    		 
-	    		try {   			
+	    		try {   
+	    			
+	    			/*if(personaje.getMuerto()) {
+	    				int posicionY = personaje.getPosY()	;
+	    				for (int i = 0; i < 45; i++) {
+	    		            personaje.setPosY(personaje.getPosY() - (i * 2));
+	    		            
+	    		            try {
+	    		                Thread.sleep(16);
+	    		            } catch (InterruptedException e) {
+	    		                e.printStackTrace();
+	    		            }
+	    		        }
+
+	    		        while (personaje.getPosY() < 500) {
+	    		            personaje.setPosY(personaje.getPosY() + 4);
+	    		            try {
+	    		                Thread.sleep(16);
+	    		            } catch (InterruptedException e) {
+	    		                e.printStackTrace();
+	    		            }
+	    		        }
+	    			}*/
+	    			
+	    			
 	    			List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
 	                for(Enemigo enemigo : copiaEnemigos) {
 	                	if(enemigo.murio()) {

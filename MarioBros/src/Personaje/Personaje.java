@@ -1,20 +1,20 @@
 package Personaje;
 
-import Logica.Entidad;   
+import java.util.Timer;
+import java.util.TimerTask;
+
+import Enemigos.BuzzyBeetle;
+import Enemigos.Goomba;
+import Enemigos.KoopaTroopa;
+import Enemigos.Lakitu;
+import Enemigos.PiranhaPlant;
+import Enemigos.Spiny;
+import Fabricas.Sprite;
+import Logica.Entidad;
 import Logica.Hitbox;
 import Logica.Musica;
 import Logica.Nivel;
 import Logica.Visitor;
-
-import java.awt.Image;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
-import Enemigos.*;
-import Fabricas.*;
 
 public class Personaje extends Entidad{
 	
@@ -52,9 +52,11 @@ public class Personaje extends Entidad{
 	private boolean invulnerable;
     protected int tiempoInvulnerable;
     protected static final int TIEMPO_INVULNERABILIDAD = 3000;
+    protected boolean muerto;
 	
 	public Personaje(Sprite sprite, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
+		muerto = false;
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;
@@ -183,12 +185,16 @@ public class Personaje extends Entidad{
         	nivelActual.reiniciarNivel();   
         	activarInvulnerabilidad();
         } else {
-        	nivelActual.perderJuego();
-        	
-        }
-        
-}
-
+        	nivelActual.perderJuego();	
+        } 
+	}
+	public void setMuerto(boolean muerto) {
+		this.muerto = muerto;
+	}
+	
+	public boolean getMuerto() {
+		return muerto;
+	}
     public void activarInvulnerabilidad() {
         if (!invulnerable) {
             invulnerable = true;
