@@ -1,5 +1,8 @@
 package Logica;
 
+import Fabricas.GenerarSprite;
+import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 
 public class BolaDeFuego extends Entidad{
@@ -7,21 +10,75 @@ public class BolaDeFuego extends Entidad{
 	protected Sprite sprite;
 	protected int posX;
 	protected int posY;
-	protected Hitbox hitb;
+	protected Hitbox hitbox;
 	protected int posXInicial;
+	protected int direc;
 	
-	public BolaDeFuego(Sprite sprite, int x, int y, Nivel nivelActual) {
+	protected boolean tocandoBloqueDerecha;
+	protected boolean tocandoBloqueIzquierda;
+	protected boolean tocandoBloqueAbajo;
+    protected boolean tocandoBloqueArriba;
+	protected boolean mostrable;
+	protected boolean tocoParedIzquierda;
+    protected boolean tocoParedDerecha;
+    protected boolean exploto =false;
+    protected boolean tocoEnemigo=false;
+	
+	public BolaDeFuego(Sprite sprite, int x, int y, Nivel nivelActual,int direccion) {
 		super(nivelActual);
 		posX = x;
 		posY = y;
 		this.sprite = sprite;
 		posXInicial=x;
+		hitbox = new Hitbox(x ,y,30 ,30);
+		tocandoBloqueDerecha=false;
+		tocandoBloqueIzquierda=false;
+		tocandoBloqueAbajo=false;
+		tocandoBloqueArriba=false;
+		direc=direccion;
+		//setSpriteActualizado(false);
+		//mostrable=true;
 	}
 	
 	public void moverse() {
-		posX=posX+1;
-		System.out.println("PosX BOla "+posX);
+		if(direc==0) {
+			posX=posX+5;
+			hitbox.actualizar (posX, posY);
+		}
+		else {
+			posX=posX-5;
+			hitbox.actualizar (posX, posY);
+			}
 	}
+	
+	public void explotar() {		
+		exploto=true;
+		hitbox = new Hitbox(0 ,0,0 ,0);
+	}
+	public boolean exploto() {
+		return exploto;
+	}
+	
+
+	public void setTocandoEnemigo(boolean b) {
+		explotar();
+	}
+	public void setTocandoBloqueDerecha(boolean b) {
+		explotar();
+	}
+
+	public void setTocandoBloqueIzquierda(boolean b) {
+		explotar();
+	}
+
+	public void setTocandoBloqueArriba(boolean b) {
+		tocandoBloqueArriba = b;
+	}
+
+	public void setTocandoBloqueAbajo(boolean b) {
+		tocandoBloqueAbajo = b;
+	}
+
 	
 	public void moverse2() {
 		
@@ -40,7 +97,7 @@ public class BolaDeFuego extends Entidad{
 	}
 
 	public Hitbox getHitbox() {
-		return hitb;
+		return hitbox;
 	}
 
 	public int getPosX() {
@@ -52,13 +109,29 @@ public class BolaDeFuego extends Entidad{
 	
 	@Override
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
-		return false;
+		return spriteActualizado;
 	}
-
-	@Override
+	
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
-		
+		spriteActualizado=actualizada;
+	}
+	
+	public void actualizarSprite() {
+        GenerarSprite fabricaSprite;
+        if(nivelActual.getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        }else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+
+        sprite = fabricaSprite.getVacio();
+        cargarSprite(sprite);
+        setSpriteActualizado(true);
+    }
+	public boolean mostrable() {
+		return mostrable;
+	}
+	public void setMostrable(boolean b) {
+		mostrable=b;
 	}
 }

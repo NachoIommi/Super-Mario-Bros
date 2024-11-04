@@ -106,12 +106,15 @@ public class PantallaJuego extends JPanel {
 	                		actualizarPosicionPuntuacion(0);
 	                		actualizarPosicionVidas(0);
 	                		actualizarPosicionMonedas(0);
-	                        actualizarPosBolas();	                		
+	                		
+	                        actualizarPosBolas();
+	                        
 	                        actualizarFondo(); 
 	                        actualizarImagenPersonaje();
 	                        actualizarImagenPlataformas();
 	                        actualizarImagenPowerUps();
-	                        actualizarImagenEnemigos();            
+	                        actualizarImagenEnemigos(); 
+	                        actualizarImagenBolas();
 	                	}
 	                    llegoAlFinal();
 	                }
@@ -153,8 +156,7 @@ public class PantallaJuego extends JPanel {
    
     //MOSTRAR LABELS 
     
-    public void mostrarBolas() {
-    	
+    public void mostrarBolas() {    	
     	if(copiaBolas.size()!=controladorVistas.obtenerBolas().size()){
     		copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
 		    if(!copiaBolas.isEmpty()){
@@ -182,14 +184,13 @@ public class PantallaJuego extends JPanel {
     }
     
     public void actualizarImagenBolas() {
+    	System.out.println("size copiabolas"+copiaBolas.size());
     	if(copiaBolas.size()>0) {
-	    	for(BolaDeFuego enemigo : copiaBolas) {   		
-		    	String ruta = enemigo.getSprite().getRutaImagen();
-		    	enemigo.setIcon(verificarExtension(ruta));
-		    	enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 15, 15);		
-		    	enemigo.setSpriteActualizado(false);
-	    	}
-    	}
+            for(BolaDeFuego bola : copiaBolas) {
+            	if(bola.exploto()) 
+            		bola.setVisible(false); 	
+            }
+        }
     }
 
     public void agregarImagenNivel() {

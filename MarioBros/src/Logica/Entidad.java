@@ -22,5 +22,4 @@ public abstract class Entidad extends JLabel{
 	public abstract Hitbox getHitbox();
 	public abstract boolean necesitaActualizarSprite();
 	public abstract void setSpriteActualizado(boolean actualizada);
-	
 }

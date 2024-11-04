@@ -31,6 +31,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected float velX;
 	protected float velY;
 	protected int alto;
+	protected int direc;
 
 	public EstadoDeFuego(Personaje p,Sprite s,int x,int y) {
 		super(p);
@@ -42,10 +43,14 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	}
 	
 	public void disparar() {
+		if(velX<0)
+			direc=1;// MIRANDO A IZQUIERDA
+		else direc=0;//MIRANDO A DERECHA
 		GenerarSprite fabrica = new GenerarSpriteOriginal();
     	sprite = fabrica.getBolaDeFuego();
-		BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX() , getPosY(), personaje.getNivelActual());
+		BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX() , getPosY()+31, personaje.getNivelActual(),direc);
 		personaje.getNivelActual().getJuego().agregarBola(bola);
+		System.out.println("dispare");
 	}
 	
 	// Setters
