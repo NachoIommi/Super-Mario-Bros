@@ -122,8 +122,9 @@ public class EstadoDeFuego extends EstadoDePersonaje {
     
 	public void recibirDano() {
 		if (!personaje.esInvulnerable()) {
-            personaje.morir();
-            personaje.activarInvulnerabilidad(); // Activa la invulnerabilidad
+			personaje.cambiarEstado(new EstadoSuperMario(personaje, sprite, personaje.getPosX(), personaje.getPosY()));
+            personaje.activarInvulnerabilidad();
+            System.out.println("EstadoSuperMario: Cambió a EstadoNormal y activó invulnerabilidad temporal");
         }
     }
 	
@@ -234,45 +235,27 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	public void colisionLateralGoomba(Goomba goomba) {
 		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Goomba");
+    	recibirDano();
     }
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Koopa");
+		recibirDano();
 	}
 	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
 		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Buzzy");
+		recibirDano();
 	}
 	public void colisionLateralLakitu(Lakitu lakitu) {
 		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision lakitu");
+		recibirDano();
 	}
 	public void colisionLateralSpiny(Spiny spiny) {
 		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision spiny");
+		recibirDano();
 	}
 	public void colisionLateralPiranha(PiranhaPlant piranha) {
 		velX=0;
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Piranha");
+		recibirDano();
 	}
 	
 	public void colisionVacio() {

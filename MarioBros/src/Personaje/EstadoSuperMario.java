@@ -233,56 +233,27 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public void colisionLateralGoomba(Goomba goomba) {
 		velX=0;
 		recibirDano();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Goomba");
     }
 	
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		velX=0;
 		recibirDano();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision koopa cambiando a mini mario");
-    	//PROGRAMAR INVULNERABILIDAD
 	}
 	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
 		velX=0;
 		recibirDano();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision buzzy beetle cambiando a mini mario");
-    	//PROGRAMAR INVULNERABILIDAD
 	}
 	public void colisionLateralLakitu(Lakitu lakitu) {
 		velX=0;
 		recibirDano();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision lakitu cambiando a mini mario");
-    	//PROGRAMAR INVULNERABILIDAD
 	}
 	public void colisionLateralSpiny(Spiny spiny) {
 		velX=0;
 		recibirDano();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision spiny cambiando a mini mario");
-    	//PROGRAMAR INVULNERABILIDAD
 	}
 	public void colisionLateralPiranha(PiranhaPlant piranha) {
 		velX=0;
 		recibirDano();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();	
-    	EstadoNormal e = new EstadoNormal(personaje,fabrica.getPersonajeNormalQuietoDerecha(),(int)posX,(int)posY);
-    	personaje.cambiarEstado(e);
-    	System.out.println("Colision Piranha cambiando a mini mario");
-    	//PROGRAMAR INVULNERABILIDAD
 	}
 	public void colisionVacio() {
 		morir();
