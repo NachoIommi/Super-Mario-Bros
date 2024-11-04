@@ -10,8 +10,8 @@ import PowerUps.*;
 public class VisitorEnemigo implements Visitor {
 	protected Personaje  personaje;
 	
-	public VisitorEnemigo(Personaje personaje) {
-        this.personaje = personaje;
+	public VisitorEnemigo(Personaje p) {
+        personaje = p;
     }
    
     public void visitarBolaDeFuego(BolaDeFuego b) {

@@ -7,6 +7,7 @@ import Enemigos.Lakitu;
 import Enemigos.PiranhaPlant;
 import Enemigos.Spiny;
 import Fabricas.Sprite;
+import Personaje.Personaje;
 import Plataformas.BloqueDePregunta;
 import Plataformas.LadrilloSolido;
 import Plataformas.Tuberia;
@@ -18,118 +19,98 @@ import PowerUps.Moneda;
 import PowerUps.SuperChampi;
 
 public class VisitorBolaDeFuego implements Visitor{
+	protected Personaje personaje;
 
-	@Override
+	public VisitorBolaDeFuego(Personaje p) {
+        personaje = p;
+    }
+
 	public void visitarBolaDeFuego(BolaDeFuego b) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void visitarMoneda(Moneda m) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
-	@Override
+	
 	public void visitarFlorDeFuego(FlorDeFuego f) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void visitarSuperChampi(SuperChampi s) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void visitarEstrella(Estrella e) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void visitarChampiVerde(ChampiVerde c) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void visitarBloqueDePregunta(BloqueDePregunta p) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void visitarLadrilloSolido(LadrilloSolido l) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void visitarVacio(Vacio v) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
-	@Override
+
 	public void visitarTuberia(Tuberia t) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void visitarPiranhaPlant(PiranhaPlant p) {
-		p.morir();
-		
-	}
-
-	@Override
-	public void visitarLakitu(Lakitu l) {
-		l.morir();
-		
-	}
-
-	@Override
-	public void visitarSpiny(Spiny s) {
-		s.morir();
-		
-	}
-
-	@Override
-	public void visitarBuzzyBeetle(BuzzyBeetle b) {
-		b.morir();
-		
-	}
-
-	@Override
 	public void visitarGoomba(Goomba g) {
 		g.morir();
-		
+		personaje.setPuntuacion(60);
 	}
-
-	@Override
 	public void visitarKoopaTroopa(KoopaTroopa k) {
 		k.morir();
-		
+		personaje.setPuntuacion(90);
+	}
+	
+	public void visitarPiranhaPlant(PiranhaPlant p) {
+		p.morir();
+		personaje.setPuntuacion(30);
 	}
 
-	@Override
+	public void visitarLakitu(Lakitu l) {
+		l.morir();
+		personaje.setPuntuacion(60);
+	}
+
+
+	public void visitarSpiny(Spiny s) {
+		s.morir();
+		personaje.setPuntuacion(60);
+	}
+
+	public void visitarBuzzyBeetle(BuzzyBeetle b) {
+		b.morir();
+		personaje.setPuntuacion(30);
+	}
+
 	public void visitarMusica(Musica m) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void visitarPantalla(Juego j) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void visitarSprite(Sprite s) {
-		// TODO Auto-generated method stub
 		
 	}
 

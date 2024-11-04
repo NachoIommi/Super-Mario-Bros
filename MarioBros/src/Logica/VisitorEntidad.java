@@ -10,8 +10,8 @@ public class VisitorEntidad implements Visitor{
 	protected Personaje personaje;
 	protected KoopaTroopa koopa;
 	
-	public VisitorEntidad(Personaje personaje) {
-        this.personaje = personaje;
+	public VisitorEntidad(Personaje p) {
+        personaje = p;
     }
 	
 	public void visitarBolaDeFuego(BolaDeFuego b) {   	

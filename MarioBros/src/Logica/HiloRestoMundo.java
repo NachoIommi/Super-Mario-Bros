@@ -30,7 +30,7 @@ public class HiloRestoMundo extends Thread {
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
         visitorEntidad = new VisitorEntidad(personaje);
-        visitorBolaDeFuego = new VisitorBolaDeFuego();
+        visitorBolaDeFuego = new VisitorBolaDeFuego(personaje);
     }
     public void detener() {
     	enEjecucion = false;
