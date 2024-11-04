@@ -30,7 +30,7 @@ public class HiloRestoMundo extends Thread {
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
         visitorEntidad = new VisitorEntidad(personaje);
-        visitorBolaDeFuego = new VisitorBolaDeFuego(personaje);
+        visitorBolaDeFuego = new VisitorBolaDeFuego(personaje,null);
     }
     public void detener() {
     	enEjecucion = false;
@@ -100,8 +100,7 @@ public class HiloRestoMundo extends Thread {
             		
             		e.setTocandoBloqueDerecha(false);
                     e.setTocandoBloqueIzquierda(false);
-                    e.setTocandoBloqueAbajo(false);
-		            			
+                    e.setTocandoBloqueAbajo(false);		            			
             		}
             	
             	for(PowerUp power : copiaPowerUp) {
@@ -168,8 +167,7 @@ public class HiloRestoMundo extends Thread {
 	                                     Math.abs(bola.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
 	                            {
 	                                bola.setTocandoBloqueIzquierda(true);
-	                               
-	                                
+     
 	             //                   System.out.println("power Colisión Izq");
 	                            }
 	
@@ -179,6 +177,8 @@ public class HiloRestoMundo extends Thread {
 	                    	    bola.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth()) 
 	                    	{
 	                    	    bola.setTocandoBloqueAbajo(true);
+	                    	    visitorBolaDeFuego.setBolaDeFuego(bola);
+	                    	    p.aceptarVisita(visitorBolaDeFuego);
 	              //      	    System.out.println("power Colisión piso");
 	                    	}
 	
@@ -193,13 +193,13 @@ public class HiloRestoMundo extends Thread {
             		 for(Enemigo e : copiaEnemigos) {
                      	if(bola.getHitbox().intersects(e.getHitbox())) {
                              if (bola.getHitbox().getX() + bola.getHitbox().getWidth() > e.getHitbox().getX() &&
-                                 bola.getHitbox().getX() < e.getHitbox().getX() && Math.abs(bola.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                                 bola.getHitbox().getX() < e.getHitbox().getX()) {
                             	 	bola.setTocandoEnemigo(true);
                              		e.aceptarVisita(visitorBolaDeFuego);
                              }
  
                              else if (bola.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
-                                      bola.getHitbox().getX() > e.getHitbox().getX()&& Math.abs(bola.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura)
+                                      bola.getHitbox().getX() > e.getHitbox().getX())
                              {
                             	 bola.setTocandoEnemigo(true);
                                  e.aceptarVisita(visitorBolaDeFuego);                                             

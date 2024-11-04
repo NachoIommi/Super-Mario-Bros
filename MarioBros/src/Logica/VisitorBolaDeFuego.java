@@ -20,10 +20,16 @@ import PowerUps.SuperChampi;
 
 public class VisitorBolaDeFuego implements Visitor{
 	protected Personaje personaje;
+	protected BolaDeFuego bola;
 
-	public VisitorBolaDeFuego(Personaje p) {
+	public VisitorBolaDeFuego(Personaje p,BolaDeFuego b) {
         personaje = p;
+        bola=b;
     }
+	
+	public void setBolaDeFuego(BolaDeFuego b) {
+		bola=b;
+	}
 
 	public void visitarBolaDeFuego(BolaDeFuego b) {
 		
@@ -63,7 +69,7 @@ public class VisitorBolaDeFuego implements Visitor{
 	}
 
 	public void visitarVacio(Vacio v) {
-	
+		v.afectarBola(bola);
 	}
 
 

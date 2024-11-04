@@ -1,5 +1,6 @@
 package Plataformas;
 import Fabricas.Sprite;
+import Logica.BolaDeFuego;
 import Logica.Hitbox;
 import Logica.Nivel;
 import Logica.Visitor;
@@ -27,7 +28,11 @@ public class Vacio extends Plataforma {
 	
 	public void afectarPersonaje(Personaje p) {
 		p.colisionVacio();
-		
+	}
+	
+	public void afectarBola(BolaDeFuego b) {
+		b.explotar();
+		System.out.println("Bola colisiono con vacio");
 	}
 	
 	public void cargarSprite(Sprite s) {
