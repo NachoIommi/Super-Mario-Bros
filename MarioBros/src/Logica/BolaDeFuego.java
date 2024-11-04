@@ -30,7 +30,7 @@ public class BolaDeFuego extends Entidad{
 		posY = y;
 		this.sprite = sprite;
 		posXInicial=x;
-		hitbox = new Hitbox(x ,y,30 ,30);
+		hitbox = new Hitbox(x ,y,15 ,15);
 		tocandoBloqueDerecha=false;
 		tocandoBloqueIzquierda=false;
 		tocandoBloqueAbajo=false;
