@@ -41,6 +41,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	public void soltarContenido() {
 		contenido.setPosX(posX);
 		contenido.setPosY(posY-30);	
+		contenido.getHitbox().actualizar(posX, posY-30);
 		Musica.getMusica().reproducirSonido("Sonido/Sonidos/spawneaPowerUp.wav");
 		contenido.setMostrable(true);
 		

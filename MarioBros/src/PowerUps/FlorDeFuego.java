@@ -30,16 +30,14 @@ public class FlorDeFuego extends PowerUp{
 	}
 	
 	public void cargarSprite(Sprite s) {
-		if (mostrable) {
-			sprite = s;
-	    }
+		
 	}
 
 	public void afectarPersonaje(Personaje p) {
-		if (mostrable) {
-	        p.getEstado().setPuntuacionFlorDeFuego();
-	        mostrable = false;  
-	    }
+		p.colisionFlorDeFuego();
+		hitbox.actualizar(0, 0);
+		setMostrable(false);
+		hitbox.actualizar(0, 0);
 	}
 
 	public Sprite getSprite() {
@@ -59,12 +57,12 @@ public class FlorDeFuego extends PowerUp{
 	}
 
 	public void setPosX(int x) {
-		
+		this.posX=x;
 	}
 
 
-	public void setPosY(int x) {
-		
+	public void setPosY(int y) {
+		this.posY=y;
 	}
 
 	public boolean necesitaActualizarSprite() {

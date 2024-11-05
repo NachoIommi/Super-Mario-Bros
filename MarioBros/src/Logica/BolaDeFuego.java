@@ -41,40 +41,42 @@ public class BolaDeFuego extends Entidad{
 	}
 	
 	public void moverse() {
-		if(direc==0) {
-			if(!tocandoBloqueAbajo && !subiendo) {
-				posY=posY+3;
-				posX=posX+5;
-				hitbox.actualizar (posX, posY);
+		if(!exploto) {
+			if(direc==0) {
+				if(!tocandoBloqueAbajo && !subiendo) {
+					posY=posY+3;
+					posX=posX+5;
+					hitbox.actualizar (posX, posY);
+				}
+				if(tocandoBloqueAbajo && subiendo) {
+					contador++;
+					posY=posY-3;
+					posX=posX+5;
+					hitbox.actualizar (posX, posY);
+					if(contador == 13) {
+		                contador = 0;
+		                subiendo = false; 
+		                tocandoBloqueAbajo=false;
+		            }
+				}				
 			}
-			if(tocandoBloqueAbajo && subiendo) {
-				contador++;
-				posY=posY-3;
-				posX=posX+5;
-				hitbox.actualizar (posX, posY);
-				if(contador == 13) {
-	                contador = 0;
-	                subiendo = false; 
-	                tocandoBloqueAbajo=false;
-	            }
-			}				
-		}
-		else {
-			if(!tocandoBloqueAbajo && !subiendo) {
-				posY=posY+3;
-				posX=posX-5;
-				hitbox.actualizar (posX, posY);
-			}
-			if(tocandoBloqueAbajo && subiendo) {
-				contador++;
-				posY=posY-3;
-				posX=posX-5;
-				hitbox.actualizar (posX, posY);
-				if(contador == 13) {
-	                contador = 0;
-	                subiendo = false; 
-	                tocandoBloqueAbajo=false;
-	            }				
+			else {
+				if(!tocandoBloqueAbajo && !subiendo) {
+					posY=posY+3;
+					posX=posX-5;
+					hitbox.actualizar (posX, posY);
+				}
+				if(tocandoBloqueAbajo && subiendo) {
+					contador++;
+					posY=posY-3;
+					posX=posX-5;
+					hitbox.actualizar (posX, posY);
+					if(contador == 13) {
+		                contador = 0;
+		                subiendo = false; 
+		                tocandoBloqueAbajo=false;
+		            }				
+				}
 			}
 		}
 	}

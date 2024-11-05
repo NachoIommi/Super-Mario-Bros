@@ -148,13 +148,13 @@ public class Nivel {
 				    			break;
 				    			
 				    		case 34:
-				    			PowerUp  f = fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY, this) ;
+				    			PowerUp  f = fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY-30, this) ;
 				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,f ,1, this));
 				    			juego.agregarPowerUp(f);
 				    			break;
 				    			
 				    		 case 35:
-				    			PowerUp  c = fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY, this);
+				    			PowerUp  c = fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY-30, this);
 					    		juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,c ,1, this));
 					    		juego.agregarPowerUp(c);
 				    			break;

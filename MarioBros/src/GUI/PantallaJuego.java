@@ -163,8 +163,7 @@ public class PantallaJuego extends JPanel {
         }  
     }
    
-    //MOSTRAR LABELS 
-    
+    //MOSTRAR LABEL   
     public void mostrarBolas() {    	
     	if(copiaBolas.size()!=controladorVistas.obtenerBolas().size()){
     		copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
@@ -180,6 +179,8 @@ public class PantallaJuego extends JPanel {
 			            bola.setIcon(iconoEscalado);
 			            bola.setBounds(bola.getPosX(), bola.getPosY(), 15,15);
 			            panelNivel.add(bola, Integer.valueOf(1));
+			            
+			            
 			    	}
     	}	
     }
@@ -197,7 +198,7 @@ public class PantallaJuego extends JPanel {
             for(BolaDeFuego bola : copiaBolas) {
             	if(bola.exploto()) {
             		bola.setVisible(false); 	
-            		controladorVistas.obtenerBolas().remove(bola);            	
+            		//controladorVistas.obtenerBolas().remove(bola);            	
             	}
             }
         }
