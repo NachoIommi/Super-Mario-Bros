@@ -2,8 +2,8 @@ package Personaje;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Enemigos.*;
 import Fabricas.GenerarSprite;
@@ -224,10 +224,26 @@ public class EstadoNormal extends EstadoDePersonaje {
     public void colisionEstrella() {
     	Musica.getMusica().reproducirMusica("Sonido/Canciones/marioEstrellaCancion.wav");
     	setPuntuacionEstrella();
-    	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
+    	
+    	GenerarSprite fabrica;
+		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			 fabrica = new GenerarSpriteOriginal();
+		} else {
+			 fabrica = new GenerarSpriteReemplazo();
+		}
+		
+		EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
-    	System.out.println("Colision con estrella hecha");
+    	
+    	Timer timer = new Timer();
+	    timer.schedule(new TimerTask() {
+	        public void run() {	
+	        	Musica.getMusica().reproducirMusica("Sonido/Canciones/soundtrackNivel-"+personaje.getNivelActual().getNivelActual()+".wav");
+	        	personaje.cambiarEstado(new EstadoNormal(personaje, fabrica.getPersonajeNormalQuietoDerecha(), personaje.getPosX(), personaje.getPosY()));
+		                   
+	        }
+	    }, 10000);
+
     }
     
 	public void colisionChampiVerde() {
