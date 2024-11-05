@@ -275,6 +275,7 @@ public abstract class GenerarSprite implements GeneradorDeEntidades{
 	public Sprite getEstrella() {
 		return new Sprite(rutaImagen + "/estrella.gif");
 	}
+	
 	public Sprite getEstrellaSpawneando() {
 		return new Sprite(rutaImagen + "/estrellaSpawneando.gif");
 	}

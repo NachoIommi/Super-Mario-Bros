@@ -12,17 +12,12 @@ public class GenerarLadrilloSolido implements GenerarPlataformas {
 		return new LadrilloSolido(sprite, x, y, nivelActual);
 	}
 
-	@Override
 	public Plataforma crearPlataforma(Sprite s, int x, int y, PowerUp p, int i, Nivel nivelActual) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Plataforma crearPlataforma(Sprite s, int x, int y, Enemigo p, Nivel nivelActual) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
 }

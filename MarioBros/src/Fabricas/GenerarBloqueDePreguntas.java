@@ -12,18 +12,12 @@ public class GenerarBloqueDePreguntas implements GenerarPlataformas{
 		return new BloqueDePregunta(sprite, x, y,p,i, nivelActual);
 	}
 
-	@Override
 	public Plataforma crearPlataforma(Sprite s, int x, int y, Nivel nivelActual) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Plataforma crearPlataforma(Sprite s, int x, int y, Enemigo p, Nivel nivelActual) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 	
 }

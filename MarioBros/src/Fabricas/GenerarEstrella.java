@@ -14,6 +14,4 @@ public class GenerarEstrella implements GenerarPowerUps{
 		return new Estrella(sprite, x, y, nivelActual);
 	}
 	
-	
-
 }
