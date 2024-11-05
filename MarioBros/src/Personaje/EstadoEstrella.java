@@ -23,6 +23,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	protected float velX;
 	protected float velY;
 	protected int alto;
+	protected boolean aterrice;
 
 	public EstadoEstrella(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
@@ -320,13 +321,21 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	
 	public void gravedad() {
 		if (!tocandoBloqueAbajo) {
-	        velY += 0.3;
+	        velY += 0.3;  // Gravedad
+	        aterrice=false;
 	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;       
+	            velY += 0.6;  //        
 	    } 
 	    else {
-	        velY = 0;  
-	        saltando = false;}
+	        velY = 0;
+	        saltando = false;
+	        if(!aterrice) {
+	        	setPosY(getPosY()-1);  //
+	             hitbox.actualizar((int) posX, (int) posY);
+	             aterrice = true;
+	        }
+	    
+	    }
 	}
 	
 	public void gravedadSaltando() {
@@ -346,7 +355,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0; 
 	        saltando = false; 
-	        setPosY(getPosY()+1);
+	        setPosY(getPosY()+3);
 	    }
 	}
 

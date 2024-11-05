@@ -31,6 +31,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected float velX;
 	protected float velY;
 	protected int alto;
+	protected boolean aterrice;
 
 	public EstadoSuperMario(Personaje p,Sprite s,int x,int y) {
 		super(p);
@@ -354,17 +355,30 @@ public class EstadoSuperMario extends EstadoDePersonaje {
             setPosX(getPosX()+1);
             velX = 0;
         }
+	    if(saltando && tocandoBloqueAbajo) {
+	    	setPosY(getPosY()-3);
+	    	saltando=false;
+		    	
+		}
 	}
 	
 	public void gravedad() {
 		if (!tocandoBloqueAbajo) {
 	        velY += 0.3;  // Gravedad
+	        aterrice=false;
 	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  // Aplicar un poco más de gravedad si está colisionando lateralmente en el aire        
+	            velY += 0.6;  //        
 	    } 
 	    else {
-	        velY = 0;  
-	        saltando = false;}
+	        velY = 0;
+	        saltando = false;
+	        if(!aterrice) {
+	        	setPosY(getPosY()-1);  //
+	             hitbox.actualizar((int) posX, (int) posY);
+	             aterrice = true;
+	        }
+	    
+	    }
 	}
 	
 	public void gravedadSaltando() {
@@ -384,7 +398,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+1); // Corrijo sacandolo si quedo dentro del bloque
+	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
 	
