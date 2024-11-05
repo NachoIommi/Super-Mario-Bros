@@ -49,8 +49,13 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 			if(velX<0)
 				direc=1;// MIRANDO A IZQUIERDA
 			else direc=0;//MIRANDO A DERECHA
-			GenerarSprite fabrica = new GenerarSpriteOriginal();
-	    	sprite = fabrica.getBolaDeFuego();
+			GenerarSprite fabricaSprite;
+	        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+	            fabricaSprite = new GenerarSpriteOriginal();
+	        }else {
+	            fabricaSprite = new GenerarSpriteReemplazo();
+	        }
+	    	sprite = fabricaSprite.getBolaDeFuego();
 			BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX()+10 , getPosY()+31, personaje.getNivelActual(),direc);
 			personaje.getNivelActual().getJuego().agregarBola(bola);
 			System.out.println("dispare");
