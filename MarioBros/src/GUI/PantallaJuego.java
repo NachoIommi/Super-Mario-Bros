@@ -32,6 +32,8 @@ public class PantallaJuego extends JPanel {
 	
 	private ControladorVistas controladorVistas;
     private List<Enemigo> copiaEnemigos;
+    private List<Enemigo> copiaEnemigosEnEjecucion;
+
     
     private List<BolaDeFuego> copiaBolas;
 
@@ -66,6 +68,8 @@ public class PantallaJuego extends JPanel {
         setFocusable(true);
         iniciarTimerRefresco();
         copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
+        copiaEnemigosEnEjecucion = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigosEnEjecucion());
+
         pantallaCorriendo = true;
     }
     
@@ -101,6 +105,7 @@ public class PantallaJuego extends JPanel {
 	            		if(personaje.getPosX() < imagenFondo.getWidth()-302) {
 	                		
 	            			mostrarBolas();
+	            			mostrarEnemigosEnEjecucion();
 	            			
 	                		actualizarPosicionPersonaje();
 	                		actualizarPosicionEnemigos();
@@ -110,12 +115,14 @@ public class PantallaJuego extends JPanel {
 	                		actualizarPosicionMonedas(0);
 	                		
 	                        actualizarPosBolas();
+	                        actualizarPosicionEnemigosEnEjecucion();
 	                        
 	                        actualizarFondo(); 
 	                        actualizarImagenPersonaje();
 	                        actualizarImagenPlataformas();
 	                        actualizarImagenPowerUps();
-	                        actualizarImagenEnemigos(); 
+	                        actualizarImagenEnemigos();
+	                        actualizarImagenEnemigosEnEjecucion();
 	                        actualizarImagenBolas();
 	                	}
 	                    llegoAlFinal();
@@ -220,8 +227,8 @@ public class PantallaJuego extends JPanel {
     }
     
     public void mostrarEnemigos() {
-    	//copiaEnemigos = new ArrayList<Enemigo>(controladorVistas.obtenerEnemigo());
-    	copiaEnemigos = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigo());
+    	copiaEnemigos = new ArrayList<Enemigo>(controladorVistas.obtenerEnemigo());
+    	//copiaEnemigos = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigo());
     	if (!copiaEnemigos.isEmpty()) {
     		for(Enemigo e : copiaEnemigos) {
         		e.setVisible(true);
@@ -232,6 +239,23 @@ public class PantallaJuego extends JPanel {
         	}
     	}
     	
+    }
+
+    
+    public void mostrarEnemigosEnEjecucion() {   
+    	if(copiaEnemigosEnEjecucion != null) {
+    		if(copiaEnemigosEnEjecucion.size() != controladorVistas.obtenerEnemigosEnEjecucion().size()){
+    			copiaEnemigosEnEjecucion = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigosEnEjecucion());
+    			if(!copiaEnemigosEnEjecucion.isEmpty()){
+    				Enemigo e = copiaEnemigosEnEjecucion.getLast();
+    				e.setVisible(true);
+    				String ruta = e.getSprite().getRutaImagen();
+    				e.setIcon(verificarExtension(ruta));
+    				e.setBounds(e.getPosX(), e.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
+    				panelNivel.add(e, Integer.valueOf(1));
+    			}
+    		}	
+    	}
     }
     
     public void mostrarPlataformas() {
@@ -244,6 +268,8 @@ public class PantallaJuego extends JPanel {
             panelNivel.add(p, Integer.valueOf(1));
     	}   	
     }  
+
+
     
     public void mostrarPowerUps() {
     	copiaPowerUps = new ArrayList<PowerUp>(controladorVistas.obtenerPowerUp());
@@ -364,6 +390,14 @@ public class PantallaJuego extends JPanel {
     	}
     }
     
+    public void actualizarPosicionEnemigosEnEjecucion() {
+    	if(!copiaEnemigosEnEjecucion.isEmpty()) {
+    		for(Enemigo enemigo : copiaEnemigosEnEjecucion) {
+        		enemigo.setLocation(enemigo.getPosX(), enemigo.getPosY());	
+        	}
+    	}
+    }
+    
     public void actualizarPosicionMonedas(int x) {
     	if(personaje != null) {
     		monedas.setBounds(monedas.getX()+x, 10, 150, 50);
@@ -405,6 +439,7 @@ public class PantallaJuego extends JPanel {
     } 
     
     public void actualizarImagenEnemigos(){
+    	//copiaEnemigos = controladorVistas.obtenerEnemigo();
     	if(!copiaEnemigos.isEmpty()) {
     		for(Enemigo enemigo : copiaEnemigos) {
         		if(enemigo.mostrable() && enemigo.necesitaActualizarSprite()) {   		
@@ -419,6 +454,24 @@ public class PantallaJuego extends JPanel {
     	}
     }
     
+    public void actualizarImagenEnemigosEnEjecucion(){
+    	
+    	if(!copiaEnemigosEnEjecucion.isEmpty()) {
+    		for(Enemigo enemigo : copiaEnemigosEnEjecucion) {
+        		if(enemigo.mostrable() && enemigo.necesitaActualizarSprite()) {   
+    	    		String ruta = enemigo.getSprite().getRutaImagen();
+    	    		enemigo.setIcon(verificarExtension(ruta));
+    	    		enemigo.setBounds(enemigo.getPosX(), enemigo.getPosY(), 30, 30);		
+    	    		enemigo.setSpriteActualizado(false);
+        		} else if (!enemigo.mostrable()){
+        			enemigo.setVisible(false);
+        		}	
+        	}
+    	}
+    	
+    }
+
+    
     public void actualizarListaEnemigos() {
     	if(copiaEnemigos.size() != controladorVistas.obtenerEnemigo().size() && !copiaEnemigos.isEmpty()) {
 			copiaEnemigos = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigo());
@@ -430,6 +483,7 @@ public class PantallaJuego extends JPanel {
             panelNivel.add(e1, Integer.valueOf(1));        	
         }
     }
+
     
     public void actualizarImagenPlataformas() {	
     	for (Plataforma plataforma : copiaPlataformas) {

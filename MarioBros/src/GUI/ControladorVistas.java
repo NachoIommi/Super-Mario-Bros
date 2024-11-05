@@ -185,6 +185,10 @@ public class ControladorVistas {
 		return juego.getEnemigos();
 	}
 	
+	public List<Enemigo> obtenerEnemigosEnEjecucion() {
+		return juego.getEnemigosEnEjecucion();
+	}
+	
 	public List<Plataforma> obtenerPlataforma() {
 		return juego.getPlataformas();
 	}

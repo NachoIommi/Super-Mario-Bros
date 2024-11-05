@@ -33,6 +33,7 @@ public class Juego {
 	protected int puntuacion;
 	
 	protected List<Enemigo> enemigos;
+	protected List<Enemigo> enemigosEnEjecucion;
 	protected List<Plataforma> plataformas;
 	protected List<PowerUp> powerUps;
 	protected List<BolaDeFuego> bolas;
@@ -48,6 +49,7 @@ public class Juego {
 		
 		personaje = null;
 		enemigos = new ArrayList<Enemigo>();
+		enemigosEnEjecucion = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUp>();
 		//
@@ -92,6 +94,7 @@ public class Juego {
 				powerUps.clear();
 				enemigos.clear();
 				plataformas.clear();
+				enemigosEnEjecucion.clear();
 	}
 	
 	public void iniciarSiguienteNivel() {
@@ -137,6 +140,7 @@ public class Juego {
 	    }
 	    reloj = new Reloj(); // Crear un nuevo reloj
 	    reloj.start();
+	    
 	}
 	
 	public void reiniciarNivel() {
@@ -149,7 +153,6 @@ public class Juego {
 		reseteo();
 		nivel = null;
 		controladorVistas.perderJuego();
-		//Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/gameOver.wav");
 	}
 	public void guardarPuntuacion() {
 		puntuacion = personaje.getPuntuacion();
@@ -192,7 +195,7 @@ public class Juego {
 	public Personaje getPersonaje() {
 		if(personaje == null) {
 			return null;
-		}else {
+		} else {
 			return personaje;
 		}
 		
@@ -200,6 +203,11 @@ public class Juego {
 	
 	public void agregarEnemigo(Enemigo e) {
 		enemigos.addLast(e);
+	}
+	
+	public void agregarEnemigoEnEjecucion(Enemigo e) {
+		enemigosEnEjecucion.addLast(e);
+		System.out.println("Tamano de enemigos en Ejecucion: "+enemigosEnEjecucion.size());
 	}
 	
 	public void agregarBola(BolaDeFuego b) {
@@ -211,6 +219,10 @@ public class Juego {
 	
 	public List<Enemigo> getEnemigos() {
 		return enemigos;
+	}
+	
+	public List<Enemigo> getEnemigosEnEjecucion(){
+		return enemigosEnEjecucion;
 	}
 	
 	public void agregarPlataforma(Plataforma e) {

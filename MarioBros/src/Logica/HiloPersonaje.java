@@ -14,6 +14,7 @@ public class HiloPersonaje extends Thread {
     Personaje personaje;
     List<Plataforma> plataformas;
     List<Enemigo> enemigos;
+    List<Enemigo> enemigosEnEjecucion;
     List<PowerUp> powerUps;
     protected VisitorEnemigo visitorEnemigo;
     protected VisitorEnemigoAfectado visitorEnemigoAfectado;
@@ -30,6 +31,7 @@ public class HiloPersonaje extends Thread {
         personaje = juego.getPersonaje();
         plataformas = juego.getPlataformas();
         enemigos = juego.getEnemigos();
+        enemigosEnEjecucion = juego.getEnemigosEnEjecucion();
         powerUps = juego.getPowerUps();    
         visitorEnemigo = new VisitorEnemigo(personaje);
         visitorEnemigoAfectado = new VisitorEnemigoAfectado(personaje);
@@ -110,6 +112,46 @@ public class HiloPersonaje extends Thread {
                         tocoEnemigoAbajo=false;
                 	}
                 }
+                
+                List<Enemigo> copiaEnemigosEnEjecucion = new ArrayList<Enemigo>(enemigosEnEjecucion);
+                for(Enemigo e : copiaEnemigosEnEjecucion) {
+                	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
+                           
+                		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
+                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
+                            personaje.getHitbox().getX() < e.getHitbox().getX() && Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                        		tocoEnemigoDerecha=true;
+                        		e.aceptarVisita(visitorEnemigo);
+            //            		System.out.println("enemigo lo tocan desde izquierda");
+                        }
+                        // Colisión desde la izquierda (jugador a la derecha del enemigo)
+                        else if (personaje.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
+                                 personaje.getHitbox().getX() > e.getHitbox().getX()&& Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura)
+                        {
+                        	tocoEnemigoIzquierda=true;
+                            e.aceptarVisita(visitorEnemigo);
+           //                 System.out.println("enemigo lo tocan desde derecha");
+                        }
+                        // (personaje arriba del enemigo)
+                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
+                                personaje.getHitbox().getY() < e.getHitbox().getY() ) 
+                            {
+                            	if(!tocoEnemigoDerecha && !tocoEnemigoIzquierda  ) {
+                            		
+                            		e.aceptarVisita(visitorEnemigoAfectado);
+            //                		System.out.println("Saltan sobre enemigo");
+                            		personaje.setTocandoBloqueAbajo(true);
+                            		personaje.setSaltandoSobreEnemigo(true);
+                            		
+                            		}
+                            }                       
+                        tocoEnemigoDerecha=false;
+                        tocoEnemigoIzquierda=false;
+                        tocoEnemigoAbajo=false;
+                        
+                	}
+                }
+
                 List<PowerUp> copiaPowerUps = new ArrayList<PowerUp>(powerUps);
                 for(PowerUp p : copiaPowerUps) {
                 	if(personaje.getHitbox().intersects(p.getHitbox())) {

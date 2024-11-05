@@ -27,10 +27,12 @@ public class Lakitu extends Enemigo{
 	protected int maxX;
 	private Timer spinyTimer;
 	private int distanciaConPersonaje = 250;
+	private static final long delayTimer = 1000;
 	private static final long intervaloSpiny = 5000;
+	protected boolean timerCorriendo;
 	
 	protected boolean direccionDerecha;
-	List<Enemigo> enemigosParaAgregar;
+	//List<Enemigo> enemigosParaAgregar;
 	
 	public Lakitu(Sprite s, int x, int y, Personaje p, Nivel nivelActual) {
 		super(nivelActual);
@@ -41,7 +43,8 @@ public class Lakitu extends Enemigo{
 		setSpriteActualizado(false);
 		personaje = p;
 		iniciarSpawningSpiny();
-		enemigosParaAgregar = new ArrayList<>();
+		//enemigosParaAgregar = new ArrayList<>();
+		timerCorriendo = false;
 	}
 	
 	public Lakitu(Sprite s, int x, int y, Nivel nivelActual) {
@@ -66,6 +69,7 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void morir() {
+		
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
 	}
@@ -92,18 +96,12 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabricaSprite;
-		
-		if(nivelActual.getJuego().getModoDeJuego() == 1) {
-			fabricaSprite = new GenerarSpriteOriginal();
-		}else {
-			fabricaSprite = new GenerarSpriteReemplazo();
-		}
-
-		
-        sprite = fabricaSprite.getLakituPorDisparar();
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+        sprite = fabrica.getLakituPorDisparar();
         cargarSprite(sprite);
         setSpriteActualizado(true);
+       
+     
 	}
 	
 	public void setSpriteActualizado(boolean actualizada) {
@@ -122,7 +120,7 @@ public class Lakitu extends Enemigo{
 	public void moverseLateralmente() {
 	    int limiteIzquierdo = Math.abs(maxX - distanciaConPersonaje); //Para caso lakitu al principio del nivel
 	    int limiteDerecho = maxX + distanciaConPersonaje;
-	    int velocidadLakitu = (personaje.getPosX() > maxX) ? 8 : 4; //mas rapido si mario avanzo
+	    int velocidadLakitu = (personaje.getPosX() > maxX) ? 10 : 4; //mas rapido si mario avanzo
 
 	    if (posX >= limiteDerecho) {
 	        direccionDerecha = false;
@@ -135,14 +133,20 @@ public class Lakitu extends Enemigo{
 	}
 	
 	private void iniciarSpawningSpiny() {
-        spinyTimer = new Timer();
-        spinyTimer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                lanzarSpiny();
-                
-            }
-        }, 0, intervaloSpiny); // arranca 2seg despues y repite cada 2 segundos
-    }
+	    if (spinyTimer != null) {
+	        detenerSpawningSpiny(); // Cancelar cualquier temporizador activo
+	    }
+	    
+	    spinyTimer = new Timer();
+	    spinyTimer.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+	            lanzarSpiny();
+	            System.out.println("Intentando lanzar Spiny");
+	        }
+	    }, delayTimer, intervaloSpiny);
+	    
+	    timerCorriendo = true;
+	}
 
 	private void lanzarSpiny() {
 		GenerarSprite fabricaSprite;
@@ -153,13 +157,18 @@ public class Lakitu extends Enemigo{
 		}
  
 		GenerarEnemigos fabricaSpiny = new GenerarSpiny();
-		Spiny nuevoSpiny = (Spiny) fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX - 60, posY + 60, nivelActual);
-		personaje.getNivelActual().getJuego().agregarEnemigo(nuevoSpiny);
+		Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);
+		personaje.getNivelActual().getJuego().agregarEnemigoEnEjecucion(nuevoSpiny);	
 
     }
 
 	public void detenerSpawningSpiny() {
-		spinyTimer.cancel();
+	    if (spinyTimer != null) {
+	        spinyTimer.cancel();
+	        spinyTimer.purge();
+	        spinyTimer = null; // Asegúrate de que el timer sea null después de detenerse
+	    }
+	    timerCorriendo = false;
 	}
 	
 	// Getters

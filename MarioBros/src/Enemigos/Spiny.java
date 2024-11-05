@@ -2,6 +2,7 @@ package Enemigos;
 
 import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
+import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
 import GUI.ConstantesVistas;
 import Logica.Hitbox;
@@ -15,6 +16,7 @@ public class Spiny extends Enemigo{
 	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
+	protected boolean caminando;
 	
 	public Spiny(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -23,6 +25,7 @@ public class Spiny extends Enemigo{
 		sprite = s;
 		hitbox = new Hitbox(x, y, 30, 30);
 		setSpriteActualizado(false);
+		caminando = false;
 	}
 	
 	// Setters	
@@ -33,13 +36,13 @@ public class Spiny extends Enemigo{
 	public void serAfectadoPorPersonaje(Personaje p) {
 		morir();
 		p.setPuntuacion(60);
-		murio = true;
 	}
 	
 	public void morir() {
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
-		
+		caminando = false;
+		actualizarSprite();
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -48,6 +51,8 @@ public class Spiny extends Enemigo{
 	
 	public void moverse() {
 		if(tocandoBloqueAbajo) {
+			caminando = true;
+			
 			if(tocandoBloqueIzquierda) 
 			tocoParedIzquierda=true;
 		
@@ -65,14 +70,14 @@ public class Spiny extends Enemigo{
 				tocoParedDerecha=true;
 				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
 			}
-			actualizarSpriteACaminando();
+			actualizarSprite();
+			
 		} else {
 			if (!tocandoBloqueAbajo) { 
 				posY=posY+2;
 			}
 		} 
 			
-			setSpriteActualizado(true);
 		hitbox.actualizar (posX, posY);	
 	}
 	
@@ -89,17 +94,29 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	sprite = fabrica.getSpinyMuerto();
-    	cargarSprite(sprite);
-    	setSpriteActualizado(true);
+		GenerarSprite fabricaSprite;
+		
+		if(nivelActual.getJuego().getModoDeJuego() == 1) {
+		    fabricaSprite = new GenerarSpriteOriginal();
+		} else {
+		    fabricaSprite = new GenerarSpriteReemplazo();
+		}
+		
+    	Sprite nuevoSprite = sprite;
+    		
+    		
+    	if(murio) {
+    		nuevoSprite = fabricaSprite.getSpinyMuerto();
+    	}
+    	if(caminando) {
+    		nuevoSprite = fabricaSprite.getSpinyCaminandoIzquierda();
+    	}
     	
-    	
-	}
-	
-	public void actualizarSpriteACaminando(){
-		 GenerarSprite fabrica = new GenerarSpriteOriginal();
-	     sprite = fabrica.getSpinyCaminandoDerecha();
+    	if(!getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	cargarSprite(nuevoSprite);
+	    	setSpriteActualizado(true);
+	    }
+
 	}
 	
 	public void setSpriteActualizado(boolean actualizada) {

@@ -12,6 +12,7 @@ public class HiloRestoMundo extends Thread {
     protected Juego juego; 
     List<Plataforma> plataforma;
     List<Enemigo> enemigo;
+    List<Enemigo> enemigosEnEjecucion;
     List<PowerUp> powerUp;
     List<BolaDeFuego> bolas;
     protected VisitorEnemigo visitorEnemigo;
@@ -24,6 +25,7 @@ public class HiloRestoMundo extends Thread {
         this.juego = juego;   
         plataforma = juego.getPlataformas();
         enemigo = juego.getEnemigos();
+        enemigosEnEjecucion = juego.getEnemigosEnEjecucion();
         powerUp = juego.getPowerUps();
         personaje = juego.getPersonaje();
         bolas = juego.getBolas();
@@ -43,8 +45,10 @@ public class HiloRestoMundo extends Thread {
             	List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigo);
             	List<Plataforma> copiaPlataforma = new ArrayList<Plataforma>(plataforma);
             	List<BolaDeFuego> copiaBolas = new ArrayList<BolaDeFuego>(bolas);
+            	List<Enemigo> copiaEnemigosEnEjecucion = new ArrayList<Enemigo>(enemigosEnEjecucion);
             	
             	for(Enemigo e : copiaEnemigos) {
+            		
             		for(Plataforma p : copiaPlataforma) {
             			if (e.getHitbox().intersects(p.getHitbox())) {
             				double toleranciaAltura = e.getToleranciaAltura();           				
@@ -63,10 +67,12 @@ public class HiloRestoMundo extends Thread {
 		            			if (e.getHitbox().getY() + e.getHitbox().getHeight() > p.getHitbox().getY() &&
 		                                e.getHitbox().getY() < p.getHitbox().getY()) {
 		                                e.setTocandoBloqueAbajo(true);
-		                            }		                         		                            
+		                        }		                         		                            
 		                }
-        				double toleranciaAltura = e.getToleranciaAltura();
-            			for(Enemigo otroE : copiaEnemigos) {
+            		}
+            			
+        			double toleranciaAltura = e.getToleranciaAltura();
+            		for(Enemigo otroE : copiaEnemigos) {
             				if (e.getHitbox().getX() + e.getHitbox().getWidth() > otroE.getHitbox().getX() &&
 	                                e.getHitbox().getX() < otroE.getHitbox().getX() &&
 	                                Math.abs(e.getHitbox().getY() - otroE.getHitbox().getY()) < toleranciaAltura) 
@@ -86,8 +92,30 @@ public class HiloRestoMundo extends Thread {
 	                            otroE.setTocandoBloqueDerecha(true);
                                 otroE.setTocandoBloqueIzquierda(false);
 	                        }
-            			}	         			
-            		}
+            			}
+            			
+            			for(Enemigo otroEj : copiaEnemigosEnEjecucion) {
+            				if (e.getHitbox().getX() + e.getHitbox().getWidth() > otroEj.getHitbox().getX() &&
+	                                e.getHitbox().getX() < otroEj.getHitbox().getX() &&
+	                                Math.abs(e.getHitbox().getY() - otroEj.getHitbox().getY()) < toleranciaAltura) 
+	                            {
+	                                e.setTocandoBloqueDerecha(true);
+	                                e.setTocandoBloqueIzquierda(false);                                
+	                                otroEj.setTocandoBloqueDerecha(false);
+	                                otroEj.setTocandoBloqueIzquierda(true);
+	                            } 
+            				
+	            			else if (e.getHitbox().getX() < otroEj.getHitbox().getX() + otroEj.getHitbox().getWidth() &&
+	                                 e.getHitbox().getX() > otroEj.getHitbox().getX() &&
+	                                 Math.abs(e.getHitbox().getY() - otroEj.getHitbox().getY()) < toleranciaAltura) 
+	                        {
+	                            e.setTocandoBloqueIzquierda(true);
+	                            e.setTocandoBloqueDerecha(false);
+	                            otroEj.setTocandoBloqueDerecha(true);
+                                otroEj.setTocandoBloqueIzquierda(false);
+	                        }
+            			}
+        
             		if(Math.abs(personaje.getPosX()-e.getPosX() )<600) {
             			e.moverse();
             		}
@@ -97,6 +125,89 @@ public class HiloRestoMundo extends Thread {
 	                    e.setTocandoBloqueIzquierda(false);
 	                    e.setTocandoBloqueAbajo(false);		            			
             	}
+            	
+            	for(Enemigo e : copiaEnemigosEnEjecucion) {
+            		for(Plataforma p : copiaPlataforma) {
+            			if (e.getHitbox().intersects(p.getHitbox())) {
+            				double toleranciaAltura = e.getToleranciaAltura();           				
+		            			if (e.getHitbox().getX() + e.getHitbox().getWidth() > p.getHitbox().getX() &&
+		                                e.getHitbox().getX() < p.getHitbox().getX() &&
+		                                Math.abs(e.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+		                            {
+		                                e.setTocandoBloqueDerecha(true);
+		                                e.setTocandoBloqueIzquierda(false);
+		                                //System.out.println("Colisión Der");
+		                            } 
+		            			else if (e.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
+		                                 e.getHitbox().getX() > p.getHitbox().getX() &&
+		                                 Math.abs(e.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+		                        {
+		                            e.setTocandoBloqueIzquierda(true);
+		                            e.setTocandoBloqueDerecha(false);
+		                            //System.out.println("Colisión Izq");
+		                        }
+		            			if (e.getHitbox().getY() + e.getHitbox().getHeight() > p.getHitbox().getY() &&
+		                                e.getHitbox().getY() < p.getHitbox().getY()) 
+		                            {
+		                                e.setTocandoBloqueAbajo(true);
+		                            }		                         		                            
+		                }
+            		}
+        			double toleranciaAltura = e.getToleranciaAltura();
+            		for(Enemigo otroEj : copiaEnemigosEnEjecucion) {
+            				if (e.getHitbox().getX() + e.getHitbox().getWidth() > otroEj.getHitbox().getX() &&
+	                                e.getHitbox().getX() < otroEj.getHitbox().getX() &&
+	                                Math.abs(e.getHitbox().getY() - otroEj.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+	                            {
+	                                e.setTocandoBloqueDerecha(true);
+	                                e.setTocandoBloqueIzquierda(false);                                
+	                                otroEj.setTocandoBloqueDerecha(false);
+	                                otroEj.setTocandoBloqueIzquierda(true);
+	                                //System.out.println("Colisión Der");
+	                            } 
+            				
+	            			else if (e.getHitbox().getX() < otroEj.getHitbox().getX() + otroEj.getHitbox().getWidth() &&
+	                                 e.getHitbox().getX() > otroEj.getHitbox().getX() &&
+	                                 Math.abs(e.getHitbox().getY() - otroEj.getHitbox().getY()) < toleranciaAltura) // Solo si están a la misma altura
+	                        {
+	                            e.setTocandoBloqueIzquierda(true);
+	                            e.setTocandoBloqueDerecha(false);
+	                            otroEj.setTocandoBloqueDerecha(true);
+                                otroEj.setTocandoBloqueIzquierda(false);
+	                            //System.out.println("Colisión Izq");
+	                        }
+         			}
+            		
+            		for(Enemigo otroE : copiaEnemigos) {
+        				if (e.getHitbox().getX() + e.getHitbox().getWidth() > otroE.getHitbox().getX() &&
+                                e.getHitbox().getX() < otroE.getHitbox().getX() &&
+                                Math.abs(e.getHitbox().getY() - otroE.getHitbox().getY()) < toleranciaAltura) 
+                            {
+                                e.setTocandoBloqueDerecha(true);
+                                e.setTocandoBloqueIzquierda(false);                                
+                                otroE.setTocandoBloqueDerecha(false);
+                                otroE.setTocandoBloqueIzquierda(true);
+                            } 
+        				
+            			else if (e.getHitbox().getX() < otroE.getHitbox().getX() + otroE.getHitbox().getWidth() &&
+                                 e.getHitbox().getX() > otroE.getHitbox().getX() &&
+                                 Math.abs(e.getHitbox().getY() - otroE.getHitbox().getY()) < toleranciaAltura) 
+                        {
+                            e.setTocandoBloqueIzquierda(true);
+                            e.setTocandoBloqueDerecha(false);
+                            otroE.setTocandoBloqueDerecha(true);
+                            otroE.setTocandoBloqueIzquierda(false);
+                        }
+        			}
+            		
+            		if(Math.abs(personaje.getPosX()-e.getPosX() )<600)
+            			e.moverse();
+            		
+            		e.setTocandoBloqueDerecha(false);
+                    e.setTocandoBloqueIzquierda(false);
+                    e.setTocandoBloqueAbajo(false); 			
+            	}
+
             	
             	for(PowerUp power : copiaPowerUp) {
             		if (power.mostrable()) {
@@ -163,7 +274,7 @@ public class HiloRestoMundo extends Thread {
 	                            else if (bola.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
 	                                     bola.getHitbox().getY() + bola.getHitbox().getHeight() > p.getHitbox().getY()) {
 	                            }          
-	            		}
+	            	 }
             		 for(Enemigo e : copiaEnemigos) {
                      	if(bola.getHitbox().intersects(e.getHitbox())) {
                              if (bola.getHitbox().getX() + bola.getHitbox().getWidth() > e.getHitbox().getX() &&
@@ -184,7 +295,28 @@ public class HiloRestoMundo extends Thread {
                                  		bola.setTocandoEnemigo(true);                                	                             		
                                  }                                                                              
                      	}
-                     }         		
+                     }
+            		 for(Enemigo e : copiaEnemigosEnEjecucion) {
+                      	if(bola.getHitbox().intersects(e.getHitbox())) {
+                              if (bola.getHitbox().getX() + bola.getHitbox().getWidth() > e.getHitbox().getX() &&
+                                  bola.getHitbox().getX() < e.getHitbox().getX()) {
+                             	 	bola.setTocandoEnemigo(true);
+                              		e.aceptarVisita(visitorBolaDeFuego);
+                              }
+  
+                              else if (bola.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
+                                       bola.getHitbox().getX() > e.getHitbox().getX()) {
+                             	 bola.setTocandoEnemigo(true);
+                                  e.aceptarVisita(visitorBolaDeFuego);                                             
+                              }
+    
+                              if (bola.getHitbox().getY() + bola.getHitbox().getHeight() > e.getHitbox().getY() &&
+                                      bola.getHitbox().getY() < e.getHitbox().getY() ) {                                	                                 		
+                                  		e.aceptarVisita(visitorBolaDeFuego);
+                                  		bola.setTocandoEnemigo(true);                                	                             		
+                                  }                                                                              
+                      	}
+                      }   
             		bola.moverse();
             	}
             
