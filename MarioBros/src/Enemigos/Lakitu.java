@@ -10,23 +10,21 @@ import Logica.Hitbox;
 import Logica.Nivel;
 import Logica.Visitor;
 import Personaje.Personaje;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Lakitu extends Enemigo{
 	
-	protected Personaje personaje;
 	protected Sprite sprite;
 	protected Hitbox hitbox;
+	protected Personaje personaje;
+	protected boolean direccionDerecha;
+	protected boolean lanzo;
+	protected int maxX;
 	protected int posX;
 	protected int posY;
+	protected int distanciaConPersonaje = 250;	
 	protected int toleranciaAltura = 0;
-	protected int maxX;
-	private int distanciaConPersonaje = 250;
-	public boolean lanzo;
-	
-	protected boolean direccionDerecha;
 	
 	public Lakitu(Sprite s, int x, int y, Personaje p, Nivel nivelActual) {
 		super(nivelActual);
@@ -48,6 +46,65 @@ public class Lakitu extends Enemigo{
 		setSpriteActualizado(false);
 	}	
 	
+	public void aceptarVisita(Visitor v) {
+		v.visitarLakitu(this);
+	}
+	
+	public void actualizarSprite() {
+		GenerarSprite fabrica = new GenerarSpriteOriginal();
+        sprite = fabrica.getLakituPorDisparar();
+        cargarSprite(sprite);
+        setSpriteActualizado(true);   
+	}
+	
+	public void moverse() {
+		actualizarPosicionConScroll();
+		moverseLateralmente();
+		lanzarSpiny();	
+	}
+	
+	public void actualizarPosicionConScroll() {
+	    int marioX = personaje.getPosX();
+	    if (marioX > maxX) {
+	        maxX = marioX; 
+	    }
+	    hitbox.actualizar(posX, posY);
+	}
+	
+	public void moverseLateralmente() {
+	    int limiteIzquierdo = Math.abs(maxX - distanciaConPersonaje); 
+	    int limiteDerecho = maxX + distanciaConPersonaje;
+	    int velocidadLakitu = (personaje.getPosX() > maxX) ? 10 : 4; 
+	    if (posX >= limiteDerecho) {
+	        direccionDerecha = false;
+	    } else if (posX <= limiteIzquierdo) {
+	        direccionDerecha = true;
+	    }
+	    posX += direccionDerecha ? velocidadLakitu : -velocidadLakitu;
+	    hitbox.actualizar(posX, posY);
+	}
+
+	private void lanzarSpiny() {
+        GenerarSprite fabricaSprite;
+        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+        if(nivelActual.getJuego().getReloj().getSegundos() % 5 == 0  && !lanzo) {
+            lanzo=true;
+            GenerarEnemigos fabricaSpiny = new GenerarSpiny();
+            Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);
+            personaje.getNivelActual().getJuego().agregarEnemigoEnEjecucion(nuevoSpiny);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    lanzo = false;
+                }
+            }, 3000);
+        }
+    }
+	
 	// Setters
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralLakitu(this);
@@ -59,22 +116,10 @@ public class Lakitu extends Enemigo{
 		murio = true;
 	}
 	
-	public void morir() {
-		
+	public void morir() {		
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
-	}
-	
-	public void aceptarVisita(Visitor v) {
-		v.visitarLakitu(this);
-	}
-	
-	public void moverse() {
-		actualizarPosicionConScroll();
-		moverseLateralmente();
-		lanzarSpiny();
-	
-	}
+	}	
 	
 	public void setPosX(int x) {
 		 posX = x;
@@ -88,64 +133,9 @@ public class Lakitu extends Enemigo{
 		sprite = s;
 	}
 	
-	public void actualizarSprite() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-        sprite = fabrica.getLakituPorDisparar();
-        cargarSprite(sprite);
-        setSpriteActualizado(true);          
-	}
-	
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado = actualizada;
 	}
-	
-	public void actualizarPosicionConScroll() {
-	    int marioX = personaje.getPosX();
-	    if (marioX > maxX) {
-	        maxX = marioX;   
-	    }
-	    hitbox.actualizar(posX, posY);
-	}
-	
-	public void moverseLateralmente() {
-	    int limiteIzquierdo = Math.abs(maxX - distanciaConPersonaje); 
-	    int limiteDerecho = maxX + distanciaConPersonaje;
-	    int velocidadLakitu = (personaje.getPosX() > maxX) ? 10 : 4;
-	    if (posX >= limiteDerecho) {
-	        direccionDerecha = false;
-	    } else if (posX <= limiteIzquierdo) {
-	        direccionDerecha = true;
-	    }
-	    if (direccionDerecha){
-	    	posX += velocidadLakitu;
-	    } else {
-	    	posX -= velocidadLakitu;
-	    }
-	    hitbox.actualizar(posX, posY);
-	}	
-
-	private void lanzarSpiny() {
-        GenerarSprite fabricaSprite;
-        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
-            fabricaSprite = new GenerarSpriteOriginal();
-        } else {
-            fabricaSprite = new GenerarSpriteReemplazo();
-        }       
-        int segundosReloj = nivelActual.getJuego().getReloj().getSegundos();        
-        int segundosIniciales = nivelActual.getJuego().getReloj().getSegundosIniciales();
-        if(segundosReloj < segundosIniciales && segundosReloj % 5 == 0  && !lanzo) {
-            lanzo=true;
-            GenerarEnemigos fabricaSpiny = new GenerarSpiny();
-            Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);
-            personaje.getNivelActual().getJuego().agregarEnemigoEnEjecucion(nuevoSpiny);
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                public void run() {
-                    lanzo = false;
-                }
-            }, 3000);
-        }
-    }
 	
 	// Getters
 	public int getPosX() {

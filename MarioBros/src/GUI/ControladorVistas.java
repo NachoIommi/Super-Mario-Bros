@@ -52,10 +52,12 @@ public class ControladorVistas {
         	 public void windowClosing(WindowEvent e) {
              	obtenerJuego().guardarPuntuacion();
              	int puntuacionGuardada = obtenerJuego().getPuntuacion();
-         		Jugador jugador = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),puntuacionGuardada);         		
+         		Jugador jugador = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),puntuacionGuardada);
+         		
          		if(pantallaPrincipal.obtenerNombreDeJugador().isEmpty()) {
          			jugador.setNombre("Jugador ");
-         		}         		
+         		}
+         		
              	guardarJugadorEnRanking(jugador); 
                  juego.cierreDeJuego(); 
              }
@@ -66,17 +68,18 @@ public class ControladorVistas {
 		Musica.getMusica().reproducirMusica("Sonido/Canciones/seleccionPersonaje.wav");
 		if(pantallaModoDeJuego == null) {
 			pantallaModoDeJuego = new PantallaModoDeJuego(this);
-		}		
+		}
+		
 		ventana.setContentPane(pantallaModoDeJuego);
 	}
-	
 	public void mostrarPantallaPerder() {
 		Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/gameOver.wav");
 		if(pantallaPerder == null) {
 			pantallaPerder = new PantallaPerder(this);
 		}
 		ventana.setContentPane(pantallaPerder);
-	}	
+	}
+	
 	
 	public void mostrarPantallaPrincipal() {
 		Musica.getMusica().reproducirMusica("Sonido/Canciones/menuPrincipal.wav");
@@ -96,22 +99,28 @@ public class ControladorVistas {
         }
         if(juego.getHiloRM().isAlive()) {
         	juego.getHiloRM().detener();
-        }        
-        juego.reseteo();		
+        }
+        
+        juego.reseteo();
+		
         if(pantallaJuego!=null) {
         	pantallaJuego = null;
         	pantallaVictoria = new PantallaVictoria(this);
-        }       
+        }
+        
 		ventana.setContentPane(pantallaVictoria);
 	}
 	
-	public void mostrarPantallaJuego() {		
+	public void mostrarPantallaJuego() {
+		
 		if(pantallaJuego == null) {
 			juego.cargarPrimerNivel();
 			juego.iniciarJuego();
 			pantallaJuego = new PantallaJuego(this);
-		}		
-		configurarEventosTeclado();		
+		}
+		
+		configurarEventosTeclado();
+		
 		ventana.setContentPane(pantallaJuego);
 	    ventana.revalidate();
 	    pantallaJuego.requestFocus();
@@ -128,12 +137,15 @@ public class ControladorVistas {
         if(pantallaJuego!=null) {
         	pantallaJuego.setPantallaCorriendo(false);
         	pantallaJuego = null;
-        	pantallaJuego = new PantallaJuego(this);       	
-        	configurarEventosTeclado();       	
+        	pantallaJuego = new PantallaJuego(this);
+        	
+        	configurarEventosTeclado();
+        	
         	ventana.setContentPane(pantallaJuego);
     	    ventana.revalidate();
     	    pantallaJuego.requestFocus();
-        }     
+        }
+       
 	}
 	
 	public void perderJuego() {
@@ -171,13 +183,13 @@ public class ControladorVistas {
 	public Juego obtenerJuego() {
 		return juego;
 	}
-	
 	public Personaje obtenerPersonaje() {
 		if(juego.getPersonaje() == null) {
 			return null;
 		}else {
 			return juego.getPersonaje();
-		}		
+		}
+		
 	}
 	
 	public List<Enemigo> obtenerEnemigo() {
@@ -195,14 +207,14 @@ public class ControladorVistas {
 	public List<PowerUp> obtenerPowerUp() {
 		return juego.getPowerUps();
 	}
-	
 	public List<BolaDeFuego> obtenerBolas(){
 		return juego.getBolas();
 	}
 	
 	public void guardarJugadorEnRanking(Jugador jugador) {
 	    if(jugador != null) {
-	    	juego.getRanking().addJugador(jugador);	    	
+	    	juego.getRanking().addJugador(jugador);
+	    	
 	    } 
 	}
 	
@@ -228,7 +240,6 @@ public class ControladorVistas {
                     		break;
                     }
 	            }
-	        	
 	            public void keyReleased(KeyEvent k) {
                 	int keyCode = k.getKeyCode(); 
                     switch(keyCode) {
@@ -249,5 +260,4 @@ public class ControladorVistas {
 	        });
 	    }
 	}
-	
 }
