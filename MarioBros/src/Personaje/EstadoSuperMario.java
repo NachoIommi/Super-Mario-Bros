@@ -41,9 +41,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		sprite = s;
 	    alto = 60;
 	}
-	public EstadoSuperMario(Personaje p) {
-		super(p);
-	}
 	// Setters
 	  public void morir() {
 		  Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
