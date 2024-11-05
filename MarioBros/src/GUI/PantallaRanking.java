@@ -86,11 +86,6 @@ public class PantallaRanking extends JPanel{
 	    });   
 	}
     
-    public void refrescar() {
- 	   	revalidate();
-        repaint();
-    }
-    
     public void mostrarRanking() {
     	JLabel[] labelJugadores = new JLabel[5];
     	JLabel ranking = new JLabel("RANKING");
@@ -123,8 +118,12 @@ public class PantallaRanking extends JPanel{
             Jugador jugador = topCinco.get(i);
             labelJugadores[i].setText(jugador.getNombre() + " " + jugador.getPuntaje());
         }
-        revalidate(); 
-        repaint();    
+        refrescar();   
+    }
+    
+    public void refrescar() {
+ 	   	revalidate();
+        repaint();
     }
 
 }

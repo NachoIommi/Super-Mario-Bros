@@ -25,7 +25,6 @@ public class PantallaPerder extends JPanel {
 		this.setSize(800,600);
 		this.setLayout(null);
 		this.setVisible(true);
-		agregarBotonReiniciar();
 		agregarImagen();
 	}
 	public void agregarImagen() {
@@ -37,41 +36,5 @@ public class PantallaPerder extends JPanel {
 		Icon iconoEscalado = new ImageIcon(imagenAgrandada);
 		imagenPerder.setIcon(iconoEscalado);
 		this.add(imagenPerder);
-	}
-	
-	public void agregarBotonReiniciar() {
-        botonReiniciar = new JButton("Reiniciar");
-        botonReiniciar.setBounds(-15, 20, 240, 50);  // Ajusta el tamaño según la fuente que uses
-        botonReiniciar.setVisible(true);
-        // Configura una fuente personalizada
-        botonReiniciar.setFont(new Font("Arial", Font.BOLD, 16));  // Cambia "Arial" y el tamaño a tu gusto
-        botonReiniciar.setForeground(Color.BLACK);  // Color de texto en negro
-        try {
-            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(marioFuente);
-            botonReiniciar.setFont(marioFuente);
-            botonReiniciar.setForeground(Color.WHITE);
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-        }
-        
-        botonReiniciar.setOpaque(false);  // Fondo transparente
-        botonReiniciar.setContentAreaFilled(false);  // Sin relleno
-        botonReiniciar.setBorderPainted(false);  // Sin borde
-        botonReiniciar.setFocusPainted(false);  // Sin borde de enfoque
-        
-        registrarOyenteBotonReiniciar();
-        add(botonReiniciar);
-    }
-    
-    public void registrarOyenteBotonReiniciar() {
-		botonReiniciar.addActionListener(new ActionListener(){
-	        public void actionPerformed(ActionEvent e) {
-	        	System.out.println("volvi"); 
-	        	controladorVistas.mostrarPantallaModoDeJuego();
-	        }
-	    });   
-	}
-	
+	}	
 }
