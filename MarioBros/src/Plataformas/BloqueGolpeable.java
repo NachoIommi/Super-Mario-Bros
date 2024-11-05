@@ -45,6 +45,8 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		Musica.getMusica().reproducirSonido("Sonido/Sonidos/spawneaPowerUp.wav");
 		contenido.setMostrable(true);
 		
+		contenido.setSpriteActualizado(true);
+		
 	}
 
 	public void recibirGolpe(Personaje p) {

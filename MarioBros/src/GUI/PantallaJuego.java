@@ -117,6 +117,8 @@ public class PantallaJuego extends JPanel {
 	                        actualizarPosBolas();
 	                        actualizarPosicionEnemigosEnEjecucion();
 	                        
+	                        actualizarPosicionPowerUp();
+	                        
 	                        actualizarFondo(); 
 	                        actualizarImagenPersonaje();
 	                        actualizarImagenPlataformas();
@@ -428,6 +430,14 @@ public class PantallaJuego extends JPanel {
     	}	
     }
     
+    public void actualizarPosicionPowerUp() {
+    	if(!copiaPowerUps.isEmpty()) {
+    		for(PowerUp p : copiaPowerUps) {
+        		p.setLocation(p.getPosX(), p.getPosY());	
+        	}
+    	}
+    }
+    
     // ACTUALIZAR IMAGENES
     
     public void actualizarImagenPersonaje() {
@@ -500,19 +510,20 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarImagenPowerUps() {
     	for(PowerUp powerUp : copiaPowerUps) {
-    		if(powerUp.mostrable()) {   			
+    		if( powerUp.mostrable() && powerUp.necesitaActualizarSprite()) {   			
 	    		powerUp.setVisible(true);
 	    		String ruta = powerUp.getSprite().getRutaImagen();
 	    		powerUp.setIcon(verificarExtension(ruta));
 	    		powerUp.setBounds(powerUp.getPosX(), powerUp.getPosY(), 30, 30);
+	    		powerUp.setSpriteActualizado(false);
     		}
     		else 
-    			powerUp.setVisible(false);
+    			if(!powerUp.mostrable())
+    				powerUp.setVisible(false);
     	}
     }
     
-    public void actualizarImagenBandera() {
-    	
+    public void actualizarImagenBandera() {    	
     	String ruta;
     	bandera = new JLabel();
     	if(controladorVistas.obtenerJuego().getModoDeJuego() == 1) {

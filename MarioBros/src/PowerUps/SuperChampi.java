@@ -106,10 +106,11 @@ public class SuperChampi extends PowerUp{
 	}
 
 	public boolean necesitaActualizarSprite() {
-		return false;
+		return spriteActualizado;
 	}
 
+
 	public void setSpriteActualizado(boolean actualizada) {
-		
+		spriteActualizado=actualizada;
 	}
 }

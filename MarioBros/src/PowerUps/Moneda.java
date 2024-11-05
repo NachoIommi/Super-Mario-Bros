@@ -17,6 +17,7 @@ public class Moneda extends PowerUp{
 		sprite = s;
 		hitbox = new Hitbox(x , y, 30, 30);
 		mostrable = true;
+		setSpriteActualizado(true);
 	}
 	
 	public void moverse() {
@@ -52,11 +53,12 @@ public class Moneda extends PowerUp{
 	}
 
 	public boolean necesitaActualizarSprite() {
-		return false;
+		return spriteActualizado;
 	}
 
+
 	public void setSpriteActualizado(boolean actualizada) {
-		
+		spriteActualizado=actualizada;
 	}
 
 	public void afectarPersonaje(Personaje p) {
@@ -71,4 +73,5 @@ public class Moneda extends PowerUp{
 	public void cargarSprite(Sprite s) {
 		
 	}
+	
 }

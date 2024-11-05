@@ -37,6 +37,9 @@ public class FlorDeFuego extends PowerUp{
 		p.colisionFlorDeFuego();
 		hitbox.actualizar(0, 0);
 		setMostrable(false);
+		
+		setSpriteActualizado(false);
+		
 		hitbox.actualizar(0, 0);
 	}
 
@@ -66,11 +69,11 @@ public class FlorDeFuego extends PowerUp{
 	}
 
 	public boolean necesitaActualizarSprite() {
-		return false;
+		return spriteActualizado;
 	}
 
 
 	public void setSpriteActualizado(boolean actualizada) {
-		
+		spriteActualizado=actualizada;
 	}
 }

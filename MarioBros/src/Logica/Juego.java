@@ -95,6 +95,7 @@ public class Juego {
 				enemigos.clear();
 				plataformas.clear();
 				enemigosEnEjecucion.clear();
+				bolas.clear();
 	}
 	
 	public void iniciarSiguienteNivel() {

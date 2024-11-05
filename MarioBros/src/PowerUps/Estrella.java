@@ -109,11 +109,11 @@ public class Estrella extends PowerUp{
 
 	
 	public boolean necesitaActualizarSprite() {
-		return false;
+		return spriteActualizado;
 	}
 
-	
+
 	public void setSpriteActualizado(boolean actualizada) {
-		
+		spriteActualizado=actualizada;
 	}
 }
