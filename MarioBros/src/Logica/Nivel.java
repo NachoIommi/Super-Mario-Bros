@@ -237,16 +237,17 @@ public class Nivel {
 		if(personaje != null) {
 			int vidas = personaje.getVidas(); 
 			int puntuacion = personaje.getPuntuacion();
+			int monedas = personaje.getMonedas();
 			juego.reseteo();
 			cargarNivel(getNivelActual());
 			 
 			if (vidas > 0) { 
 		        personaje.setVidas(vidas); 
-		        personaje.setPuntuacion(puntuacion);       
+		        personaje.setPuntuacion(puntuacion);  
+		        personaje.setMonedas(monedas);
 			}
 			juego.reiniciarNivel(); 
 		}
-		
 	}
 
 	public Juego getJuego() {
@@ -260,7 +261,5 @@ public class Nivel {
 		juego.perderJuego();
 	}
 
-
-	//ver tema RELOJ
 
 }

@@ -254,7 +254,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	}
 
 	public void colisionMoneda() {
-		setPuntuacionMoneda();
+		setPuntuacionMoneda();			
 	}
 	
 	public void colisionLateralGoomba(Goomba goomba) {

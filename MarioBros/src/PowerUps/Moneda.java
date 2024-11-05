@@ -63,7 +63,13 @@ public class Moneda extends PowerUp{
 
 	public void afectarPersonaje(Personaje p) {
 		p.setPuntuacion(5);
-		p.setMonedas(1);
+		if(p.getMonedas()<99) {
+			p.setMonedas(1);
+		}else {
+			p.setMonedas(-99);
+			p.sumarVida();
+		}
+		
 		hitbox.actualizar(0, 0);
 		setMostrable(false);
 		hitbox.actualizar(0, 0);
