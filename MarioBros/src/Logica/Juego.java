@@ -102,8 +102,7 @@ public class Juego {
 		reseteo();
 		nivel.ganarJuego();
 		System.out.println("cargando nivel: " + getNivel().getNivelActual());
-		System.out.println();
-		
+		System.out.println();		
 		iniciarJuego();
 	}
 	public ControladorVistas getControladorVistas() {
@@ -156,7 +155,8 @@ public class Juego {
 		controladorVistas.perderJuego();
 	}
 	public void guardarPuntuacion() {
-		puntuacion = personaje.getPuntuacion();
+		if(personaje!=null)
+			puntuacion = personaje.getPuntuacion();
 	}
 	public int getPuntuacion() {
 		return puntuacion;

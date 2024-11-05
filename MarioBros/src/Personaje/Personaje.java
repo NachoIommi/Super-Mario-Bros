@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Enemigos.BuzzyBeetle;
+import Enemigos.EstadoKoopaRetraido;
 import Enemigos.Goomba;
 import Enemigos.KoopaTroopa;
 import Enemigos.Lakitu;

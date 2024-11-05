@@ -36,19 +36,19 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
         koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  // Cambiar al estado extendido
     }
 	
-	public void serAfectadoPorPersonaje(Personaje p) {
+	public void serAfectadoPorPersonaje(Personaje p) {		
 	    recibirDano = true;
 	    cambiarEstado();
 	    Timer timer = new Timer();
 	    timer.schedule(new TimerTask() {
 	        public void run() {	
-	        	
 		        koopa.setEstadoActual(new EstadoKoopaNormal(koopa, actualizarSpriteNormal(), koopa.getX(), koopa.getY()));
 		        koopa.setSpriteActualizado(true);	            
 	        }
 	    }, 10000); // 10 segundos en milisegundos
 	    
 	}
+	
 	public void morir() {
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;

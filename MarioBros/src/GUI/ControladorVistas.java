@@ -87,9 +87,7 @@ public class ControladorVistas {
 	}
 	
 	public void mostrarPantallaVictoria() {
-		
-		
-		
+		juego.guardarPuntuacion();
 		if (juego.getHiloPersonaje().isAlive()) {
             juego.getHiloPersonaje().detener();
         }
