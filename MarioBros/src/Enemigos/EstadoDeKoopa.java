@@ -61,7 +61,6 @@ public abstract class EstadoDeKoopa {
 	}
 	public abstract void cargarSprite(Sprite s);
 	public abstract void actualizarSprite();
-	public abstract void actualizarSpriteKoopaRetraido();
 	
 	public void setKoopaTroopa(KoopaTroopa kt) {
 		koopa = kt;		

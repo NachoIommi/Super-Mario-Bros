@@ -34,7 +34,8 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	
 	// Setters
 	public void cambiarEstado() {
-		this.actualizarSpriteKoopaRetraido();
+		
+		actualizarSprite();
         koopa.setEstadoActual(new EstadoKoopaNormal(koopa,sprite,posX,posY));  // Cambiar al estado extendido
     }
 	
@@ -88,24 +89,23 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 
 	public void actualizarSprite() {
 		GenerarSprite fabricaSprite;
-		
+		Sprite nuevoSprite = sprite;
         if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
             fabricaSprite = new GenerarSpriteOriginal();
         } else {
             fabricaSprite = new GenerarSpriteReemplazo();
         }
 		
-		sprite = fabricaSprite.getKoopaTroopaMuerto();
-		cargarSprite(sprite);
-		koopa.setSpriteActualizado(true);
+        if(!murio) {
+        	nuevoSprite = fabricaSprite.getKoopaTroopaRetraido();
+        }else{
+        	nuevoSprite = fabricaSprite.getKoopaTroopaMuerto();
+        }
 		
-	}
-	
-	public void actualizarSpriteKoopaRetraido() {
-		GenerarSprite fabrica = new GenerarSpriteOriginal();
-		sprite = fabrica.getKoopaTroopaRetraido();		
-		cargarSprite(sprite);
-		koopa.setSpriteActualizado(true);
+        if(!koopa.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	koopa.cargarSprite(nuevoSprite);
+	    	koopa.setSpriteActualizado(true);
+	    }		
 	}
 	
 	public void moverIzq() {

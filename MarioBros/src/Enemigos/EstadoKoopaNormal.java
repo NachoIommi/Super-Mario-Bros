@@ -32,7 +32,15 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
 	// Setters
 	public void cambiarEstado() {
-		this.actualizarSpriteKoopaRetraido();
+		GenerarSprite fabricaSprite;		
+        if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }	       
+        sprite = fabricaSprite.getKoopaTroopaRetraido();
+        cargarSprite(sprite);
+        koopa.setSpriteActualizado(true);
         koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  // Cambiar al estado extendido
     }
 	
@@ -42,7 +50,13 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	    Timer timer = new Timer();
 	    timer.schedule(new TimerTask() {
 	        public void run() {	
-		        koopa.setEstadoActual(new EstadoKoopaNormal(koopa, actualizarSpriteNormal(), koopa.getX(), koopa.getY()));
+	        	GenerarSprite fabrica;
+	    		if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
+	    			 fabrica = new GenerarSpriteOriginal();
+	    		} else {
+	    			 fabrica = new GenerarSpriteReemplazo();
+	    		}
+		        koopa.setEstadoActual(new EstadoKoopaNormal(koopa, fabrica.getKoopaTroopa(), koopa.getX(), koopa.getY()));
 		        koopa.setSpriteActualizado(true);	            
 	        }
 	    }, 10000); // 10 segundos en milisegundos
@@ -96,43 +110,23 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
 	public void actualizarSprite() {
 		GenerarSprite fabricaSprite;
-		
+		Sprite nuevoSprite = sprite;		
         if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
             fabricaSprite = new GenerarSpriteOriginal();
         } else {
             fabricaSprite = new GenerarSpriteReemplazo();
+        }	
+        
+        if(!murio) {
+        	nuevoSprite = fabricaSprite.getKoopaTroopa();
+        }else {
+        	nuevoSprite = fabricaSprite.getKoopaTroopaMuerto();
         }
-		
-		sprite = fabricaSprite.getKoopaTroopaMuerto();
-		cargarSprite(sprite);
-		koopa.setSpriteActualizado(true);
-		
-		
-	}
 	
-	private Sprite actualizarSpriteNormal() {
-	    GenerarSprite fabricaSprite;
-	    
-	    if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
-            fabricaSprite = new GenerarSpriteOriginal();
-        } else {
-            fabricaSprite = new GenerarSpriteReemplazo();
-        }
-	    return fabricaSprite.getKoopaTroopa(); 
-	}
-	
-	public void actualizarSpriteKoopaRetraido() {
-		GenerarSprite fabricaSprite;
-		
-        if(koopa.getNivelActual().getJuego().getModoDeJuego() == 1) {
-            fabricaSprite = new GenerarSpriteOriginal();
-        } else {
-            fabricaSprite = new GenerarSpriteReemplazo();
-        }
-		
-		sprite = fabricaSprite.getKoopaTroopaRetraido();
-		cargarSprite(sprite);
-		koopa.setSpriteActualizado(true);
+        if(!koopa.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
+	    	cargarSprite(nuevoSprite);
+	    	koopa.setSpriteActualizado(true);
+	    }		
 	}
 	
 	public void moverIzq() {
