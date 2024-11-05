@@ -12,14 +12,12 @@ import Logica.Visitor;
 import Personaje.Personaje;
 
 public class Goomba extends Enemigo{
-	
-	public double toleranciaAltura=20;
+		
 	protected Sprite sprite;
 	protected Hitbox hitbox;
-
+	protected int toleranciaAltura=20;
 	protected int posX;
-	protected int posY;
-	
+	protected int posY;	
 
 	public Goomba(Sprite s,int x,int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -29,6 +27,7 @@ public class Goomba extends Enemigo{
         hitbox = new Hitbox(x ,y,30 ,30);
 	    setSpriteActualizado(false);
 	}
+	
 	// Setters
 	public void afectarPersonaje(Personaje p) {	
 		p.colisionLateralGoomba(this);
@@ -52,32 +51,24 @@ public class Goomba extends Enemigo{
 	
 	public void moverse() {
 		if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;
-		
+			tocoParedIzquierda=true;		
 		if(!tocoParedIzquierda) {
 			moverIzq();			
-			hitbox.actualizar (posX, posY);
-			
+			hitbox.actualizar (posX, posY);			
 		} else {
 			tocoParedIzquierda=true;
 			moverDer();
 			hitbox.actualizar (posX, posY);
-		}
-						
+		}						
 		if (tocandoBloqueDerecha) {
 			tocoParedDerecha=true;
 			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
 		}
-
 		hitbox.actualizar (posX, posY);		
-	
-
 		if (!tocandoBloqueAbajo) 
-	        posY=posY+1;
-		
+	        posY=posY+1;		
 		hitbox.actualizar (posX, posY);		
 	}
-
 	
 	public void moverIzq() {
 		posX=posX-1;
@@ -100,14 +91,12 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabricaSprite;
-		
+		GenerarSprite fabricaSprite;		
 		if(nivelActual.getJuego().getModoDeJuego() == 1) {
 			fabricaSprite = new GenerarSpriteOriginal();
 		}else {
 			fabricaSprite = new GenerarSpriteReemplazo();
 		}
-
     	sprite = fabricaSprite.getGoombaMuerto();
     	cargarSprite(sprite);
     	setSpriteActualizado(true);
@@ -135,7 +124,7 @@ public class Goomba extends Enemigo{
 	}
 
 	public int getToleranciaAltura() {
-		return (int)toleranciaAltura;
+		return toleranciaAltura;
 	}
 	
 	public boolean necesitaActualizarSprite() {

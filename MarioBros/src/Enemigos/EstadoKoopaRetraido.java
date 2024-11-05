@@ -13,28 +13,23 @@ import Personaje.Personaje;
 
 public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	
-	protected int posX;
-	protected int posY;
-	
 	protected Sprite sprite;
 	protected Hitbox hitbox;
 	protected boolean saltoArriba;
-	
+	protected int posX;
+	protected int posY;
 	
 	public EstadoKoopaRetraido(KoopaTroopa kt, Sprite s,int x,int y) {
 		super(kt);
 		posX = x;
-		posY = y;
-		
+		posY = y;		
 		sprite = s;
-		hitbox = new Hitbox(x, y, 30, 30);
-		
+		hitbox = new Hitbox(x, y, 30, 30);		
 	    saltoArriba=false;
 	}
 	
 	// Setters
 	public void cambiarEstado() {
-		
 		actualizarSprite();
         koopa.setEstadoActual(new EstadoKoopaNormal(koopa,sprite,posX,posY));  // Cambiar al estado extendido
     }
@@ -49,11 +44,9 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	}
 	
 	public void moverse() {
-		if(saltoArriba) {
-			
+		if(saltoArriba) {			
 			if(tocandoBloqueIzquierda) 
-				tocoParedIzquierda=true;
-				
+				tocoParedIzquierda=true;				
 			if(!tocoParedIzquierda) {
 				moverIzq();			
 				hitbox.actualizar (posX, posY);
@@ -67,12 +60,10 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 			if (tocandoBloqueDerecha) {
 				tocoParedDerecha=true;
 				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-					}
-	
+					}	
 			if (!tocandoBloqueAbajo) 
 		        posY=posY+1;
-		}
-		
+		}		
 	}
 	
 	public void setPosX(int x) {
@@ -94,14 +85,12 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
             fabricaSprite = new GenerarSpriteOriginal();
         } else {
             fabricaSprite = new GenerarSpriteReemplazo();
-        }
-		
+        }		
         if(!murio) {
         	nuevoSprite = fabricaSprite.getKoopaTroopaRetraido();
         }else{
         	nuevoSprite = fabricaSprite.getKoopaTroopaMuerto();
-        }
-		
+        }		
         if(!koopa.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
 	    	koopa.cargarSprite(nuevoSprite);
 	    	koopa.setSpriteActualizado(true);
@@ -131,4 +120,5 @@ public class EstadoKoopaRetraido extends EstadoDeKoopa{
 	public Sprite getSprite() {
 		return sprite;
 	}
+	
 }

@@ -44,10 +44,12 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		if(desplazado<30 && subiendo) {
 			posY = posY - 1; 	         
 	        desplazado++;
-	        hitbox.actualizar(posX+1, posY);}
+	        hitbox.actualizar(posX+1, posY);
+	    }
 		
 		if(desplazado==30) {
-			subiendo =false;}
+			subiendo =false;
+		}
 		
 		if(!subiendo && !entroTimer){
 			entroTimer=true;
@@ -57,14 +59,14 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		        	bajando=true;
 		        	entroTimer=false;
 		        }
-		    }, 2000);
-		    
+		    }, 2000);		    
 		}
 		
 		if(bajando && desplazado!=0) {			
 			posY=posY+1;				
 		    desplazado--;
-		    hitbox.actualizar(posX+1, posY); }
+		    hitbox.actualizar(posX+1, posY); 
+		}
 		
 		if(bajando && desplazado==0) {
 			subiendo=true;
@@ -73,9 +75,8 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 			cambiarEstado();
 		}	
 	}
-	
-	// Setters
-	 public void cambiarEstado() {
+		
+	public void cambiarEstado() {
 		actualizarSprite();
 		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,sprite, posX, posY));	
 	 }
@@ -90,6 +91,23 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 		actualizarSprite();
 	}
 	
+	public void actualizarSprite() {
+		GenerarSprite fabrica;		
+		if(piranha.getNivelActual().getJuego().getModoDeJuego() == 1) {
+			fabrica = new GenerarSpriteOriginal();
+		}else {
+			fabrica = new GenerarSpriteReemplazo();
+		}		
+		if(!muerto) {
+			sprite = fabrica.getPiranhaPlant();
+		} else {
+			sprite = fabrica.getPiranhaPlantMuerta();
+		}
+		cargarSprite(sprite);
+		piranha.setSpriteActualizado(true);
+	}
+	
+	// Setters
 	public void setPosX(int x) {
 		posX = x;
 	}
@@ -100,28 +118,6 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	
 	public void cargarSprite(Sprite s) {
 		sprite = s;	
-	}
-	
-	public void actualizarSprite() {
-		GenerarSprite fabrica;
-		
-		if(piranha.getNivelActual().getJuego().getModoDeJuego() == 1) {
-			fabrica = new GenerarSpriteOriginal();
-		}else {
-			fabrica = new GenerarSpriteReemplazo();
-		}
-		
-		if(!muerto) {
-			sprite = fabrica.getPiranhaPlant();
-		} else {
-			sprite = fabrica.getPiranhaPlantMuerta();
-		}
-		cargarSprite(sprite);
-		piranha.setSpriteActualizado(true);
-	}
-	
-	public void actualizarSpriteCambioDeEstado() {
-
 	}
 	
 	// Getters
@@ -140,4 +136,5 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	public Sprite getSprite() {
 		return sprite;
 	}
+
 }

@@ -1,7 +1,5 @@
 package Enemigos;
 
-import javax.swing.Timer;
-
 import Fabricas.Sprite;
 import Logica.Hitbox;
 import Logica.Nivel;
@@ -13,10 +11,11 @@ public class PiranhaPlant extends Enemigo{
 	private EstadosDePiranhaPlant estado;
 	protected Sprite sprite;
 	protected Hitbox hitbox;
-	protected int posX;
-	protected int posY;
 	protected boolean mostrable;
 	protected boolean murio;
+	protected int posX;
+	protected int posY;
+	protected int toleranciaAltura = 0;
 	
 	public PiranhaPlant(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -28,6 +27,7 @@ public class PiranhaPlant extends Enemigo{
 		setSpriteActualizado(false);
 		murio = false;		
 	}
+	
 	// Setters
 	public void cambiarEstado() {
         estado.cambiarEstado();
@@ -70,7 +70,6 @@ public class PiranhaPlant extends Enemigo{
 	public void setTocandoBloqueDerecha(boolean b) {
 		
 	}
-
 
 	public void setTocandoBloqueIzquierda(boolean b) {
 		
@@ -122,7 +121,7 @@ public class PiranhaPlant extends Enemigo{
 	}
 	
 	public int getToleranciaAltura() {
-		return 0;
+		return toleranciaAltura;
 	}
 	
 	public boolean murio() {

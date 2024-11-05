@@ -14,13 +14,10 @@ import Personaje.Personaje;
 
 public class EstadoKoopaNormal extends EstadoDeKoopa {
 	
-	public double toleranciaAltura = 20;
-	
-	protected int posX;
-	protected int posY;	
-	
-    protected Sprite sprite;
+	protected Sprite sprite;
     protected Hitbox hitbox;
+	protected int posX;
+	protected int posY;	   
 	
 	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
 		super(kt);
@@ -41,7 +38,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
         sprite = fabricaSprite.getKoopaTroopaRetraido();
         cargarSprite(sprite);
         koopa.setSpriteActualizado(true);
-        koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  // Cambiar al estado extendido
+        koopa.setEstadoActual(new EstadoKoopaRetraido(koopa,sprite,posX,posY));  
     }
 	
 	public void serAfectadoPorPersonaje(Personaje p) {		
@@ -59,8 +56,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 		        koopa.setEstadoActual(new EstadoKoopaNormal(koopa, fabrica.getKoopaTroopa(), koopa.getX(), koopa.getY()));
 		        koopa.setSpriteActualizado(true);	            
 	        }
-	    }, 10000); // 10 segundos en milisegundos
-	    
+	    }, 10000);     
 	}
 	
 	public void morir() {
@@ -69,36 +65,34 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	public void moverse() {
-		if(!recibirDano) {
-		
-		if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;
+		if(!recibirDano) {		
+			if(tocandoBloqueIzquierda) 
+				tocoParedIzquierda=true;				
+			if(!tocoParedIzquierda) {
+				moverIzq();			
+				hitbox.actualizar (posX, posY);
+			}
+			else{
+				tocoParedIzquierda=true;
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}									
+			if (tocandoBloqueDerecha) {
+				tocoParedDerecha=true;
+				tocoParedIzquierda=false;				
+			}	
+			if (!tocandoBloqueAbajo) {
+				posY=posY+1;
+			}
+		        
 			
-		if(!tocoParedIzquierda) {
-			moverIzq();			
-			hitbox.actualizar (posX, posY);
-		}
-		else
-			 {
-			tocoParedIzquierda=true;
-			moverDer();
-			hitbox.actualizar (posX, posY);}				
-				
-		if (tocandoBloqueDerecha) {
-			tocoParedDerecha=true;
-			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-				}
-
-		if (!tocandoBloqueAbajo) 
-	        posY=posY+1;
-		
-			hitbox.actualizar (posX, posY);	}			
+				hitbox.actualizar (posX, posY);	
+		}			
 	}
 	
 	public void setPosX(int x) {
 		posX = x;		
 	}
-
 	
 	public void setPosY(int y) {
 		posY = y;		
@@ -115,14 +109,12 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
             fabricaSprite = new GenerarSpriteOriginal();
         } else {
             fabricaSprite = new GenerarSpriteReemplazo();
-        }	
-        
+        }	       
         if(!murio) {
         	nuevoSprite = fabricaSprite.getKoopaTroopa();
         }else {
         	nuevoSprite = fabricaSprite.getKoopaTroopaMuerto();
-        }
-	
+        }	
         if(!koopa.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
 	    	cargarSprite(nuevoSprite);
 	    	koopa.setSpriteActualizado(true);
@@ -132,6 +124,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	public void moverIzq() {
 		posX=posX-1;
 	}
+	
 	public void moverDer() {
 		posX=posX+1;
 	}
@@ -152,4 +145,5 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	public Sprite getSprite() {
 		return sprite;
 	}
+	
 }

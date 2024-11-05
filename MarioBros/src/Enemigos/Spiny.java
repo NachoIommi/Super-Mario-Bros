@@ -16,6 +16,7 @@ public class Spiny extends Enemigo{
 	protected Hitbox hitbox;
 	protected int posX;
 	protected int posY;
+	protected int toleranciaAltura = 15;
 	protected boolean caminando;
 	
 	public Spiny(Sprite s, int x, int y, Nivel nivelActual) {
@@ -26,6 +27,32 @@ public class Spiny extends Enemigo{
 		hitbox = new Hitbox(x, y, 30, 30);
 		setSpriteActualizado(false);
 		caminando = false;
+	}
+	
+	public void moverse() {
+		if(tocandoBloqueAbajo) {
+			caminando = true;			
+			if(tocandoBloqueIzquierda) 
+			tocoParedIzquierda=true;		
+			if(!tocoParedIzquierda) {
+				moverIzq();			
+				hitbox.actualizar (posX, posY);			
+			} else {
+				tocoParedIzquierda=true;
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}						
+			if (tocandoBloqueDerecha) {
+				tocoParedDerecha=true;
+				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+			}
+			actualizarSprite();			
+		} else {
+			if (!tocandoBloqueAbajo) { 
+				posY=posY+2;
+			}
+		} 			
+		hitbox.actualizar (posX, posY);	
 	}
 	
 	// Setters	
@@ -47,39 +74,7 @@ public class Spiny extends Enemigo{
 	
 	public void aceptarVisita(Visitor v) {
 		v.visitarSpiny(this);
-	}
-	
-	public void moverse() {
-		if(tocandoBloqueAbajo) {
-			caminando = true;
-			
-			if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;
-		
-			if(!tocoParedIzquierda) {
-				moverIzq();			
-				hitbox.actualizar (posX, posY);
-			
-			} else {
-				tocoParedIzquierda=true;
-				moverDer();
-				hitbox.actualizar (posX, posY);
-			}
-						
-			if (tocandoBloqueDerecha) {
-				tocoParedDerecha=true;
-				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-			}
-			actualizarSprite();
-			
-		} else {
-			if (!tocandoBloqueAbajo) { 
-				posY=posY+2;
-			}
-		} 
-			
-		hitbox.actualizar (posX, posY);	
-	}
+	}	
 	
 	public void setPosX(int x) {
 		 posX = x;
@@ -94,29 +89,23 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabricaSprite;
-		
+		GenerarSprite fabricaSprite;		
 		if(nivelActual.getJuego().getModoDeJuego() == 1) {
 		    fabricaSprite = new GenerarSpriteOriginal();
 		} else {
 		    fabricaSprite = new GenerarSpriteReemplazo();
 		}
-		
-    	Sprite nuevoSprite = sprite;
-    		
-    		
+    	Sprite nuevoSprite = sprite;	
     	if(murio) {
     		nuevoSprite = fabricaSprite.getSpinyMuerto();
     	}
     	if(caminando) {
     		nuevoSprite = fabricaSprite.getSpinyCaminandoIzquierda();
-    	}
-    	
+    	}   	
     	if(!getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
 	    	cargarSprite(nuevoSprite);
 	    	setSpriteActualizado(true);
 	    }
-
 	}
 	
 	public void setSpriteActualizado(boolean actualizada) {
@@ -156,7 +145,7 @@ public class Spiny extends Enemigo{
 	}
 
 	public int getToleranciaAltura() {
-		return 15;
+		return toleranciaAltura;
 	}
 	
 	public boolean necesitaActualizarSprite() {
