@@ -18,7 +18,7 @@ import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
-public class EstadoDeFuego extends EstadoDePersonaje {
+public class EstadoDeFuego extends EstadoSuperMario {
 	
 	public double toleranciaAltura=50;
 
@@ -38,7 +38,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	protected boolean puedeDisparar;
 	protected boolean aterrice;
 
-	public EstadoDeFuego(Personaje p,Sprite s,int x,int y) {
+	public EstadoDeFuego(Personaje p,Sprite s,int x,int y){
 		super(p);
 		hitbox = new Hitbox(x ,y-23,30 ,60);
 		setPosX(x);
