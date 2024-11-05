@@ -64,13 +64,14 @@ public class PantallaJuego extends JPanel {
         this.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ANCHO));
         setLayout(null);
         agregarPanelNivel();  
-        eventosTeclado();
+        
         setFocusable(true);
         iniciarTimerRefresco();
         copiaBolas= new CopyOnWriteArrayList<>(controladorVistas.obtenerBolas());
         copiaEnemigosEnEjecucion = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigosEnEjecucion());
 
         pantallaCorriendo = true;
+        //ontroladorVistas.configurarEventosTeclado();
     }
     
     public void agregarPanelNivel() {
@@ -412,8 +413,7 @@ public class PantallaJuego extends JPanel {
     	if(personaje != null) {
     		vidas.setText("<html><div style='text-align: center;'>Vidas<br>" + personaje.getVidas()+ "</div></html>");
         	vidas.setBounds(vidas.getX()+x, 10, 150, 50);
-    	}
-    	
+    	}   	
     }
     
     public void actualizarPosicionPuntuacion(int x) {
@@ -465,8 +465,7 @@ public class PantallaJuego extends JPanel {
     	}
     }
     
-    public void actualizarImagenEnemigosEnEjecucion(){
-    	
+    public void actualizarImagenEnemigosEnEjecucion(){    	
     	if(!copiaEnemigosEnEjecucion.isEmpty()) {
     		for(Enemigo enemigo : copiaEnemigosEnEjecucion) {
         		if(enemigo.mostrable() && enemigo.necesitaActualizarSprite()) {   
@@ -478,10 +477,8 @@ public class PantallaJuego extends JPanel {
         			enemigo.setVisible(false);
         		}	
         	}
-    	}
-    	
+    	} 	
     }
-
     
     public void actualizarListaEnemigos() {
     	if(copiaEnemigos.size() != controladorVistas.obtenerEnemigo().size() && !copiaEnemigos.isEmpty()) {
@@ -494,7 +491,6 @@ public class PantallaJuego extends JPanel {
             panelNivel.add(e1, Integer.valueOf(1));        	
         }
     }
-
     
     public void actualizarImagenPlataformas() {	
     	for (Plataforma plataforma : copiaPlataformas) {
@@ -561,49 +557,6 @@ public class PantallaJuego extends JPanel {
     	}    	
     }
  
-    public void eventosTeclado() {
-    	if(!nivelGanado && personaje != null) {
-    		addKeyListener(new KeyAdapter() {
-                public void keyPressed(KeyEvent k) {
-                    int keyCode = k.getKeyCode(); 
-                    switch(keyCode) {
-                    	case(KeyEvent.VK_D):
-                    		personaje.setRight(true);
-                    		break;
-                    	case(KeyEvent.VK_A):
-                    		personaje.setLeft(true);
-                    		break;		
-                    	case(KeyEvent.VK_W):
-                    		personaje.setJump(true);
-                    		break;
-                    	case(KeyEvent.VK_SPACE):
-                    		personaje.disparar();
-                    		personaje.setPuedeDisparar(false);
-                    		break;
-                    }
-                }
-                public void keyReleased(KeyEvent k) {
-                	int keyCode = k.getKeyCode(); 
-                    switch(keyCode) {
-                	case(KeyEvent.VK_D):
-                		personaje.setRight(false);               	
-                		break;
-                	case(KeyEvent.VK_A):
-                		personaje.setLeft(false);               	
-                		break;		
-                	case(KeyEvent.VK_W):
-                		personaje.setJump(false); 
-                		break;
-                	case(KeyEvent.VK_SPACE):
-                		personaje.setPuedeDisparar(true);
-                		break;
-                }     	
-                }
-            });
-    	}
-    	refrescar();	
-    }
- 
     public ImageIcon verificarExtensionPersonaje(String ruta) {
     	 ImageIcon iconoEscalado;
     	 if(personaje.getHitbox().getHeight()>= ConstantesVistas.PERSONAJE_SUPER_TAMANO_ALTO) {
@@ -633,19 +586,18 @@ public class PantallaJuego extends JPanel {
      }
     
     public ImageIcon verificarExtension(String ruta) {
-    	 ImageIcon iconoEscalado;
-        
-        if(ruta.toLowerCase().endsWith(".gif")) {
+    	 ImageIcon iconoEscalado;        
+    	 if(ruta.toLowerCase().endsWith(".gif")) {
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image gifImage = icono.getImage();
             Image gifAgrandado = gifImage.getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(gifAgrandado);
-        }else{
+    	 }else{
             ImageIcon icono = new ImageIcon(getClass().getResource(ruta));
             Image imagenEscalada = icono.getImage().getScaledInstance(ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ALTO, Image.SCALE_DEFAULT);
             iconoEscalado = new ImageIcon(imagenEscalada);
-        }
-        return iconoEscalado;
+    	 }
+    	 return iconoEscalado;
     }
  
     public void refrescar() {
