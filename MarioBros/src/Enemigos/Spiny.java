@@ -4,7 +4,6 @@ import Fabricas.GenerarSprite;
 import Fabricas.GenerarSpriteOriginal;
 import Fabricas.GenerarSpriteReemplazo;
 import Fabricas.Sprite;
-import GUI.ConstantesVistas;
 import Logica.Hitbox;
 import Logica.Nivel;
 import Logica.Visitor;
@@ -14,10 +13,10 @@ public class Spiny extends Enemigo{
 	
 	protected Sprite sprite;
 	protected Hitbox hitbox;
+	protected boolean caminando;
 	protected int posX;
 	protected int posY;
-	protected int toleranciaAltura = 15;
-	protected boolean caminando;
+	
 	
 	public Spiny(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -29,39 +28,13 @@ public class Spiny extends Enemigo{
 		caminando = false;
 	}
 	
-	public void moverse() {
-		if(tocandoBloqueAbajo) {
-			caminando = true;			
-			if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;		
-			if(!tocoParedIzquierda) {
-				moverIzq();			
-				hitbox.actualizar (posX, posY);			
-			} else {
-				tocoParedIzquierda=true;
-				moverDer();
-				hitbox.actualizar (posX, posY);
-			}						
-			if (tocandoBloqueDerecha) {
-				tocoParedDerecha=true;
-				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
-			}
-			actualizarSprite();			
-		} else {
-			if (!tocandoBloqueAbajo) { 
-				posY=posY+2;
-			}
-		} 			
-		hitbox.actualizar (posX, posY);	
-	}
-	
 	// Setters	
 	public void afectarPersonaje(Personaje p) {
 		p.colisionLateralSpiny(this);
 	}
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
-		morir();
+		p.colisionLateralSpiny(this);
 		p.setPuntuacion(60);
 	}
 	
@@ -74,7 +47,39 @@ public class Spiny extends Enemigo{
 	
 	public void aceptarVisita(Visitor v) {
 		v.visitarSpiny(this);
-	}	
+	}
+	
+	public void moverse() {
+		if(tocandoBloqueAbajo) {
+			caminando = true;
+			
+			if(tocandoBloqueIzquierda) 
+			tocoParedIzquierda=true;
+		
+			if(!tocoParedIzquierda) {
+				moverIzq();			
+				hitbox.actualizar (posX, posY);
+			
+			} else {
+				tocoParedIzquierda=true;
+				moverDer();
+				hitbox.actualizar (posX, posY);
+			}
+						
+			if (tocandoBloqueDerecha) {
+				tocoParedDerecha=true;
+				tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+			}
+			actualizarSprite();
+			
+		} else {
+			if (!tocandoBloqueAbajo) { 
+				posY=posY+2;
+			}
+		} 
+			
+		hitbox.actualizar (posX, posY);	
+	}
 	
 	public void setPosX(int x) {
 		 posX = x;
@@ -89,13 +94,13 @@ public class Spiny extends Enemigo{
 	}
 	
 	public void actualizarSprite() {
-		GenerarSprite fabricaSprite;		
+		GenerarSprite fabricaSprite;	
 		if(nivelActual.getJuego().getModoDeJuego() == 1) {
 		    fabricaSprite = new GenerarSpriteOriginal();
 		} else {
 		    fabricaSprite = new GenerarSpriteReemplazo();
-		}
-    	Sprite nuevoSprite = sprite;	
+		}		
+    	Sprite nuevoSprite = sprite;   		
     	if(murio) {
     		nuevoSprite = fabricaSprite.getSpinyMuerto();
     	}
@@ -118,10 +123,6 @@ public class Spiny extends Enemigo{
 	public void moverDer() {
 		posX = posX+2;
 	}
-	
-	public void spawnear() {
-        moverse();
-    }
 
 	// Getters
 	public int getPosX() {
@@ -145,7 +146,7 @@ public class Spiny extends Enemigo{
 	}
 
 	public int getToleranciaAltura() {
-		return toleranciaAltura;
+		return 15;
 	}
 	
 	public boolean necesitaActualizarSprite() {
@@ -155,4 +156,5 @@ public class Spiny extends Enemigo{
 	public boolean getTocandoAbajo() {
 		return tocandoBloqueAbajo;
 	}
+	
 }

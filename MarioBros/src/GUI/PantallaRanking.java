@@ -24,11 +24,11 @@ import java.awt.event.ActionListener;
 
 
 public class PantallaRanking extends JPanel{
+	
 	protected ControladorVistas controladorVistas;
 	protected JLabel imagenInicio;
 	protected JButton botonVolver;
-	protected JTextField ranking;
-	
+	protected JTextField ranking;	
 
     public PantallaRanking(ControladorVistas controladorVistas) {
     	this.controladorVistas = controladorVistas;
@@ -54,11 +54,10 @@ public class PantallaRanking extends JPanel{
     
     public void agregarBotonVolver() {
         botonVolver = new JButton("Volver");
-        botonVolver.setBounds(440, 8, 140, 50);  // Ajusta el tamaño según la fuente que uses
+        botonVolver.setBounds(440, 8, 140, 50); 
         botonVolver.setVisible(true);
-        // Configura una fuente personalizada
-        botonVolver.setFont(new Font("Arial", Font.BOLD, 16));  // Cambia "Arial" y el tamaño a tu gusto
-        botonVolver.setForeground(Color.BLACK);  // Color de texto en negro
+        botonVolver.setFont(new Font("Arial", Font.BOLD, 16));
+        botonVolver.setForeground(Color.BLACK); 
         try {
             Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -69,10 +68,10 @@ public class PantallaRanking extends JPanel{
             e.printStackTrace();
         }
         
-        botonVolver.setOpaque(false);  // Fondo transparente
-        botonVolver.setContentAreaFilled(false);  // Sin relleno
-        botonVolver.setBorderPainted(false);  // Sin borde
-        botonVolver.setFocusPainted(false);  // Sin borde de enfoque
+        botonVolver.setOpaque(false);  
+        botonVolver.setContentAreaFilled(false); 
+        botonVolver.setBorderPainted(false);  
+        botonVolver.setFocusPainted(false); 
         
         registrarOyenteBotonVolver();
         add(botonVolver);
@@ -112,7 +111,6 @@ public class PantallaRanking extends JPanel{
                 label.setFont(marioFuente);
                 label.setForeground(Color.WHITE);
             }
-
             ranking.setFont(marioFuente.deriveFont(22f));
             ranking.setForeground(Color.WHITE);
         } catch (FontFormatException | IOException e) {

@@ -28,7 +28,6 @@ public class PantallaPrincipal extends JPanel{
 		agregarNombre();
 		agregarBotonIngresarNombre();
 		agregarBotonVerRanking();
-		agregarModosDeJuego();
 		agregarImagen();
 		nombreJugador = " ";
 	}
@@ -70,8 +69,8 @@ public class PantallaPrincipal extends JPanel{
         botonVerRanking.setBounds(150, 355, 300, 20);  
         botonVerRanking.setVisible(true);
         
-        botonVerRanking.setFont(new Font("Arial", Font.BOLD, 16));  // Cambia "Arial" y el tamaño a tu gusto
-        botonVerRanking.setForeground(Color.BLACK);  // Color de texto en negro
+        botonVerRanking.setFont(new Font("Arial", Font.BOLD, 16));  
+        botonVerRanking.setForeground(Color.BLACK);  
         try {
             Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -97,20 +96,16 @@ public class PantallaPrincipal extends JPanel{
 	    ingresarNombre.setBorder(null);
 	    ingresarNombre.setBackground(Color.WHITE);
 
-	    // Agregar ActionListener para detectar cuando se presiona "Enter"
 	    ingresarNombre.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            // Verificar que el nombre no esté vacío antes de cambiar de pantalla
 	            if (!ingresarNombre.getText().trim().isEmpty()) {
-	                controladorVistas.guardarJugadorEnRanking(new Jugador(ingresarNombre.getText(), 0));  // Guardar el nombre
-	                controladorVistas.mostrarPantallaJuego();  // Cambiar a la pantalla de juego
+	                controladorVistas.guardarJugadorEnRanking(new Jugador(ingresarNombre.getText(), 0)); 
+	                controladorVistas.mostrarPantallaJuego();
 	            }
 	        }
 	    });
 	    this.add(ingresarNombre);
 	}
-	
-
 	
 	public void registrarOyenteBotonNombre() {
 	    botonIngresarNombre.addActionListener(new ActionListener(){
@@ -120,6 +115,7 @@ public class PantallaPrincipal extends JPanel{
 	        }
 	    });   
 	}
+	
 	public void registrarOyenteBotonVerRanking() {
 	    botonVerRanking.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e) {
@@ -127,12 +123,9 @@ public class PantallaPrincipal extends JPanel{
 	        }
 	    });   
 	}
+	
 	public String obtenerNombreDeJugador() {
 		return ingresarNombre.getText();
-	}
-	
-	public void agregarModosDeJuego() {
-		
 	}
 	
 }

@@ -28,6 +28,7 @@ public class PantallaPerder extends JPanel {
 		agregarBotonReiniciar();
 		agregarImagen();
 	}
+	
 	public void agregarImagen() {
 		imagenPerder = new JLabel();
 		imagenPerder.setSize(600, 500);
@@ -41,11 +42,10 @@ public class PantallaPerder extends JPanel {
 	
 	public void agregarBotonReiniciar() {
         botonReiniciar = new JButton("Reiniciar");
-        botonReiniciar.setBounds(-15, 20, 240, 50);  // Ajusta el tamaño según la fuente que uses
+        botonReiniciar.setBounds(-15, 20, 240, 50); 
         botonReiniciar.setVisible(true);
-        // Configura una fuente personalizada
-        botonReiniciar.setFont(new Font("Arial", Font.BOLD, 16));  // Cambia "Arial" y el tamaño a tu gusto
-        botonReiniciar.setForeground(Color.BLACK);  // Color de texto en negro
+        botonReiniciar.setFont(new Font("Arial", Font.BOLD, 16));  
+        botonReiniciar.setForeground(Color.BLACK); 
         try {
             Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -56,10 +56,10 @@ public class PantallaPerder extends JPanel {
             e.printStackTrace();
         }
         
-        botonReiniciar.setOpaque(false);  // Fondo transparente
-        botonReiniciar.setContentAreaFilled(false);  // Sin relleno
-        botonReiniciar.setBorderPainted(false);  // Sin borde
-        botonReiniciar.setFocusPainted(false);  // Sin borde de enfoque
+        botonReiniciar.setOpaque(false);  
+        botonReiniciar.setContentAreaFilled(false); 
+        botonReiniciar.setBorderPainted(false);  
+        botonReiniciar.setFocusPainted(false); 
         
         registrarOyenteBotonReiniciar();
         add(botonReiniciar);
