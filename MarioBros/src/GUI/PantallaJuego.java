@@ -138,11 +138,11 @@ public class PantallaJuego extends JPanel {
     }
     
     public void llegoAlFinal() {
-        if (personaje != null && personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 302 && !nivelGanado) {
+        if (personaje != null && personaje.getPosX() >= imagenFondo.getIcon().getIconWidth() - 330 && !nivelGanado) {
         	nivelGanado = true;
         	if(!banderaActualizada) {
+        		banderaActualizada = true;
         		actualizarImagenBandera();
-                banderaActualizada = true;
                 personaje.tocarBandera();
         	}      	           
             if (timerBandera != null && timerBandera.isRunning()) {
@@ -295,7 +295,7 @@ public class PantallaJuego extends JPanel {
     	Image imagenEscalada = icono.getImage().getScaledInstance(45, 300, Image.SCALE_DEFAULT);
     	ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
     	bandera.setIcon(iconoEscalado);
-    	bandera.setBounds(imagenFondo.getWidth()-302, 130, 45, 300);
+    	bandera.setBounds(imagenFondo.getWidth()-330, 130, 45, 300);
     
     	panelNivel.add(bandera, Integer.valueOf(1));
     }
@@ -525,7 +525,6 @@ public class PantallaJuego extends JPanel {
     
     public void actualizarImagenBandera() {    	
     	String ruta;
-    	bandera = new JLabel();
     	if(controladorVistas.obtenerJuego().getModoDeJuego() == 1) {
     		ruta = "/spritesOriginales/banderaBajando.gif";
     	}else {
@@ -540,10 +539,7 @@ public class PantallaJuego extends JPanel {
     }
     
     // COMANDOS UTILES
-    public void moverFondo(int velocidad) {
-    	int mitadAnchoVentana = panelScrollNivel.getViewport().getWidth() / 2;
-    	
-        
+    public void moverFondo(int velocidad) {   	       
         if (maximoDerecha <= (imagenFondo.getIcon().getIconWidth() - 320) && personaje.getVelX()>=0) {
             panelScrollNivel.getHorizontalScrollBar().setValue(panelScrollNivel.getHorizontalScrollBar().getValue()+velocidad);
             actualizarPosicionReloj(velocidad);
