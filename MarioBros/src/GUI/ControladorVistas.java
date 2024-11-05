@@ -47,14 +47,18 @@ public class ControladorVistas {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
         ventana.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-        		Jugador jugador = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),obtenerJuego().getPuntuacion());
-        		if(pantallaPrincipal.obtenerNombreDeJugador().isEmpty()) {
-        			jugador.setNombre("Jugador ");
-        		}
-            	guardarJugadorEnRanking(jugador); 
-                juego.cierreDeJuego(); 
-            }
+        	 public void windowClosing(WindowEvent e) {
+             	obtenerJuego().guardarPuntuacion();
+             	int puntuacionGuardada = obtenerJuego().getPuntuacion();
+         		Jugador jugador = new Jugador(pantallaPrincipal.obtenerNombreDeJugador(),puntuacionGuardada);
+         		
+         		if(pantallaPrincipal.obtenerNombreDeJugador().isEmpty()) {
+         			jugador.setNombre("Jugador ");
+         		}
+         		
+             	guardarJugadorEnRanking(jugador); 
+                 juego.cierreDeJuego(); 
+             }
         });
 	}
 	
