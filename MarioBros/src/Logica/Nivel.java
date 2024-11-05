@@ -96,7 +96,6 @@ public class Nivel {
 			if(i>0) {
 				 vidas = personaje.getVidas();
 				 puntuacion = personaje.getPuntuacion();
-				 System.out.println("moendas de mario "+personaje.getMonedas());
 				 monedas = personaje.getMonedas();
 			 }
 			 setNivelActual(i);	
