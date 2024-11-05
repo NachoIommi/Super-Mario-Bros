@@ -92,10 +92,12 @@ public class Nivel {
 		try {
 			int vidas = 3;
 			int puntuacion = 0;
-
+			int monedas = 0;
 			if(i>0) {
 				 vidas = personaje.getVidas();
 				 puntuacion = personaje.getPuntuacion();
+				 System.out.println("moendas de mario "+personaje.getMonedas());
+				 monedas = personaje.getMonedas();
 			 }
 			 setNivelActual(i);	
 			 String ruta = "Niveles" + File.separator + "nivel-"+getNivelActual()+".txt";
@@ -228,6 +230,7 @@ public class Nivel {
 			//setNivelActual(i);
 			 personaje.setVidas(vidas);
 			 personaje.setPuntuacion(puntuacion);
+			 personaje.setMonedas(monedas);
 		}catch(IOException | NumberFormatException e) {
 				System.out.println(e.getMessage());}
 	}

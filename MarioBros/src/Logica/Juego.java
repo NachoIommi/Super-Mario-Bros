@@ -26,6 +26,7 @@ public class Juego {
 	protected Personaje personaje;
 	protected Ranking ranking;
 	protected int puntuacion;
+	protected int monedas;
 	
 	protected List<Enemigo> enemigos;
 	protected List<Enemigo> enemigosEnEjecucion;
