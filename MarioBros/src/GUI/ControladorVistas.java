@@ -149,7 +149,7 @@ public class ControladorVistas {
 		}
 	}
 	
-	public void iniciarSiguienteNivel() {
+	public synchronized void iniciarSiguienteNivel() {
 		
 		if (juego.getHiloPersonaje().isAlive()) {
             juego.getHiloPersonaje().detener();
@@ -162,13 +162,17 @@ public class ControladorVistas {
         }
         
         juego.iniciarSiguienteNivel();
-		
-        if(pantallaJuego!=null) {
-        	pantallaJuego = null;
-        	pantallaJuego = new PantallaJuego(this);
-        	mostrarPantallaJuego();
-        }
-	
+
+        Timer timer = new Timer(1000, e -> {
+            if (pantallaJuego != null) {
+                pantallaJuego = null;
+                pantallaJuego = new PantallaJuego(this);
+                mostrarPantallaJuego();
+            }
+        });
+        timer.setRepeats(false); 
+        timer.start();
+
 	}
 	
 	public Juego obtenerJuego() {

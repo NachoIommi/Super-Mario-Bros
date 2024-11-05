@@ -3,16 +3,13 @@ package Logica;
 import java.io.BufferedReader; 
 import java.io.File;
 
-import Personaje.*;
 import java.io.FileReader;
 import java.io.IOException;
 
 import Enemigos.Enemigo;
 import Fabricas.*;
-import GUI.PantallaPerder;
 import Personaje.Personaje;
 import Plataformas.Plataforma;
-import PowerUps.Moneda;
 import PowerUps.PowerUp;
 
 public class Nivel {
@@ -235,13 +232,6 @@ public class Nivel {
 				System.out.println(e.getMessage());}
 	}
 	
-	public void perderVida(Personaje p){
-		if(p.getVidas() != 1){
-			reiniciarNivel();
-		}
-		else
-			perderJuego();
-	}
 
 	public void reiniciarNivel() {
 		if(personaje != null) {

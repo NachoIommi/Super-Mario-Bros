@@ -3,17 +3,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import Enemigos.Enemigo;
 import GUI.ControladorVistas;
 import Launcher.Launcher;
@@ -97,11 +92,10 @@ public class Juego {
 				bolas.clear();
 	}
 	
-	public void iniciarSiguienteNivel() {
+	public synchronized void iniciarSiguienteNivel() {
+		System.out.println("iniciarSiguienteNivel :: Juego");
 		reseteo();
-		nivel.ganarJuego();
-		System.out.println("cargando nivel: " + getNivel().getNivelActual());
-		System.out.println();		
+		nivel.ganarJuego();		
 		iniciarJuego();
 	}
 	public ControladorVistas getControladorVistas() {
@@ -148,6 +142,7 @@ public class Juego {
 	}
 	
 	public void perderJuego() {
+		System.out.println("perderJuego :: Juego");
 		guardarPuntuacion();
 		reseteo();
 		nivel = null;
