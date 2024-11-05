@@ -25,6 +25,7 @@ public class VisitorEntidad implements Visitor{
     
     public void visitarFlorDeFuego(FlorDeFuego f) {
     	f.afectarPersonaje(personaje);
+    	Musica.getMusica().reproducirSonido("Sonido/Sonidos/agarrarFlorDeFuego.wav");
     }
     
     public void visitarSuperChampi(SuperChampi s) {
@@ -34,7 +35,6 @@ public class VisitorEntidad implements Visitor{
     
     public void visitarEstrella(Estrella e) {
     	e.afectarPersonaje(personaje);
-    	
     }
     
     public void visitarChampiVerde(ChampiVerde c) {

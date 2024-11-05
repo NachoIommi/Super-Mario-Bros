@@ -81,7 +81,6 @@ public class PantallaRanking extends JPanel{
     public void registrarOyenteBotonVolver() {
 		botonVolver.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e) {
-	        	System.out.println("volvi");
 	            controladorVistas.mostrarPantallaPrincipal(); 
 	        }
 	    });   

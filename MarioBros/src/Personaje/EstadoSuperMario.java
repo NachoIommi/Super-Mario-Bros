@@ -118,7 +118,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (!personaje.esInvulnerable()) {
 			personaje.cambiarEstado(new EstadoNormal(personaje, sprite, personaje.getPosX(), personaje.getPosY()));
             personaje.activarInvulnerabilidad();
-            System.out.println("EstadoSuperMario: Cambió a EstadoNormal y activó invulnerabilidad temporal");
+           
         }
     }
 	
@@ -213,7 +213,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
     	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(),(int)posX,(int)posY);
     	personaje.cambiarEstado(e);
-    	System.out.println("Colision con flor de fuego hecha");
+    	
     }
     
     public void colisionEstrella() {
@@ -277,7 +277,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 	public void colisionVacio() {
 		morir();
-		System.out.println("MORIR X VACIO SUPERMARIO");
+		
 	}
 
 	public void romperLadrilloSolido(LadrilloSolido l) {

@@ -27,9 +27,7 @@ public class Lakitu extends Enemigo{
 	protected int maxX;
 	private Timer spinyTimer;
 	private int distanciaConPersonaje = 250;
-	private static final long delayTimer = 1000;
-	private static final long intervaloSpiny = 5000;
-	protected boolean timerCorriendo;
+	public boolean lanzo;
 	
 	protected boolean direccionDerecha;
 	//List<Enemigo> enemigosParaAgregar;
@@ -42,9 +40,9 @@ public class Lakitu extends Enemigo{
 		hitbox = new Hitbox(x, y, 30, 30);
 		setSpriteActualizado(false);
 		personaje = p;
-		iniciarSpawningSpiny();
+		lanzo = false;
+		//iniciarSpawningSpiny();
 		//enemigosParaAgregar = new ArrayList<>();
-		timerCorriendo = false;
 	}
 	
 	public Lakitu(Sprite s, int x, int y, Nivel nivelActual) {
@@ -81,6 +79,8 @@ public class Lakitu extends Enemigo{
 	public void moverse() {
 		actualizarPosicionConScroll();
 		moverseLateralmente();
+		lanzarSpiny();
+	
 	}
 	
 	public void setPosX(int x) {
@@ -132,44 +132,28 @@ public class Lakitu extends Enemigo{
 	    hitbox.actualizar(posX, posY);
 	}
 	
-	private void iniciarSpawningSpiny() {
-	    if (spinyTimer != null) {
-	        detenerSpawningSpiny(); // Cancelar cualquier temporizador activo
-	    }
-	    
-	    spinyTimer = new Timer();
-	    spinyTimer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            lanzarSpiny();
-	            System.out.println("Intentando lanzar Spiny");
-	        }
-	    }, delayTimer, intervaloSpiny);
-	    
-	    timerCorriendo = true;
-	}
 
 	private void lanzarSpiny() {
-		GenerarSprite fabricaSprite;
-		if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
-		    fabricaSprite = new GenerarSpriteOriginal();
-		} else {
-		    fabricaSprite = new GenerarSpriteReemplazo();
-		}
- 
-		GenerarEnemigos fabricaSpiny = new GenerarSpiny();
-		Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);
-		personaje.getNivelActual().getJuego().agregarEnemigoEnEjecucion(nuevoSpiny);	
+        GenerarSprite fabricaSprite;
+        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
+            fabricaSprite = new GenerarSpriteOriginal();
+        } else {
+            fabricaSprite = new GenerarSpriteReemplazo();
+        }
+        if(nivelActual.getJuego().getReloj().getSegundos() % 5 == 0  && !lanzo) {
+            lanzo=true;
+            GenerarEnemigos fabricaSpiny = new GenerarSpiny();
+            Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);
+            personaje.getNivelActual().getJuego().agregarEnemigoEnEjecucion(nuevoSpiny);
 
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    lanzo = false;
+                }
+            }, 3000);
+        }
     }
-
-	public void detenerSpawningSpiny() {
-	    if (spinyTimer != null) {
-	        spinyTimer.cancel();
-	        spinyTimer.purge();
-	        spinyTimer = null; // Asegúrate de que el timer sea null después de detenerse
-	    }
-	    timerCorriendo = false;
-	}
 	
 	// Getters
 	public int getPosX() {

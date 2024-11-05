@@ -318,7 +318,7 @@ public class HiloRestoMundo extends Thread {
                       	}
                       }   
             		bola.moverse();
-            		System.out.println("Pos x Bola"+bola.getPosX());
+            		
             	}
             
                 Thread.sleep(16);

@@ -156,7 +156,7 @@ public class Spiny extends Enemigo{
 	}
 
 	public int getToleranciaAltura() {
-		return 0;
+		return 15;
 	}
 	
 	public boolean necesitaActualizarSprite() {

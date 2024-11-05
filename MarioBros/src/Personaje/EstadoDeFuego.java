@@ -61,7 +61,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	    	sprite = fabricaSprite.getBolaDeFuego();
 			BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX()+10 , getPosY()+31, personaje.getNivelActual(),direc);
 			personaje.getNivelActual().getJuego().agregarBola(bola);
-			System.out.println("dispare");
+			
 		}
 	}
 	
@@ -149,7 +149,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		if (!personaje.esInvulnerable()) {
 			personaje.cambiarEstado(new EstadoSuperMario(personaje, sprite, personaje.getPosX(), personaje.getPosY()));
             personaje.activarInvulnerabilidad();
-            System.out.println("EstadoSuperMario: Cambió a EstadoNormal y activó invulnerabilidad temporal");
+            
         }
     }
 	
