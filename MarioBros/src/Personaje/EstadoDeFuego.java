@@ -18,7 +18,7 @@ import Logica.Visitor;
 import Plataformas.BloqueGolpeable;
 import Plataformas.LadrilloSolido;
 
-public class EstadoDeFuego extends EstadoDePersonaje {
+public class EstadoDeFuego extends EstadoSuperMario {
 	
 	public double toleranciaAltura=50;
 
@@ -51,8 +51,8 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	public void disparar() {
 		if(puedeDisparar) {
 			if(velX<0)
-				direc=1;// MIRANDO A IZQUIERDA
-			else direc=0;//MIRANDO A DERECHA
+				direc=1;
+			else direc=0;
 			GenerarSprite fabricaSprite;
 	        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
 	            fabricaSprite = new GenerarSpriteOriginal();
@@ -326,7 +326,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		    } 
 			else 
 		        velX = 0;       	    
-			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
+			if(tocandoBloqueDerecha) 
 				setPosX(getPosX()-3);
 			}
 	}
@@ -339,7 +339,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 		    } 			
 			else 
 				velX = 0;				
-			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
+			if(tocandoBloqueIzquierda) 
 				setPosX(getPosX()+3);
 		}		
 	}
@@ -383,7 +383,7 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	public void gravedad() {
 		if (!tocandoBloqueAbajo) {
-	        velY += 0.3;  // Gravedad
+	        velY += 0.3; 
 	        aterrice=false;
 	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
 	            velY += 0.6;  //        
@@ -415,9 +415,9 @@ public class EstadoDeFuego extends EstadoDePersonaje {
 	
 	public void detenerSalto() {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
-	        velY = 0;  // Detiene el movimiento hacia arriba
-	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
+	        velY = 0;  
+	        saltando = false;  
+	        setPosY(getPosY()+3); 
 	    }
 	}
 
