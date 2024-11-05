@@ -257,6 +257,7 @@ public class Nivel {
 	}
 	public void ganarJuego(){
 		cargarNivel(getNivelActual()+1);
+		System.out.println("gane juego");
 	}
 
 	public void perderJuego() {

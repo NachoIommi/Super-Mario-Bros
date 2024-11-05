@@ -3,6 +3,8 @@ package GUI;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -67,6 +69,7 @@ public class ControladorVistas {
 		if(pantallaModoDeJuego == null) {
 			pantallaModoDeJuego = new PantallaModoDeJuego(this);
 		}
+		
 		ventana.setContentPane(pantallaModoDeJuego);
 	}
 	public void mostrarPantallaPerder() {
@@ -116,6 +119,8 @@ public class ControladorVistas {
 			pantallaJuego = new PantallaJuego(this);
 		}
 		
+		configurarEventosTeclado();
+		
 		ventana.setContentPane(pantallaJuego);
 	    ventana.revalidate();
 	    pantallaJuego.requestFocus();
@@ -127,13 +132,15 @@ public class ControladorVistas {
 		}
 		ventana.setContentPane(pantallaRanking);
 	}
-		
 	
 	public void reiniciarNivel() {
         if(pantallaJuego!=null) {
         	pantallaJuego.setPantallaCorriendo(false);
         	pantallaJuego = null;
         	pantallaJuego = new PantallaJuego(this);
+        	
+        	configurarEventosTeclado();
+        	
         	ventana.setContentPane(pantallaJuego);
     	    ventana.revalidate();
     	    pantallaJuego.requestFocus();
@@ -149,8 +156,7 @@ public class ControladorVistas {
 		}
 	}
 	
-	public synchronized void iniciarSiguienteNivel() {
-		
+	public synchronized void iniciarSiguienteNivel() {		
 		if (juego.getHiloPersonaje().isAlive()) {
             juego.getHiloPersonaje().detener();
         }
@@ -172,7 +178,6 @@ public class ControladorVistas {
         });
         timer.setRepeats(false); 
         timer.start();
-
 	}
 	
 	public Juego obtenerJuego() {
@@ -211,5 +216,48 @@ public class ControladorVistas {
 	    	juego.getRanking().addJugador(jugador);
 	    	
 	    } 
+	}
+	
+	public void configurarEventosTeclado() {
+	    if ( obtenerPersonaje() != null ) {
+	    	Personaje personaje=obtenerPersonaje();	    	
+	        pantallaJuego.addKeyListener(new KeyAdapter() {
+	        	public void keyPressed(KeyEvent k) {
+                    int keyCode = k.getKeyCode(); 
+                    switch(keyCode) {
+                    	case(KeyEvent.VK_D):
+                    		personaje.setRight(true);
+                    		break;
+                    	case(KeyEvent.VK_A):
+                    		personaje.setLeft(true);
+                    		break;		
+                    	case(KeyEvent.VK_W):
+                    		personaje.setJump(true);
+                    		break;
+                    	case(KeyEvent.VK_SPACE):
+                    		personaje.disparar();
+                    		personaje.setPuedeDisparar(false);
+                    		break;
+                    }
+	            }
+	            public void keyReleased(KeyEvent k) {
+                	int keyCode = k.getKeyCode(); 
+                    switch(keyCode) {
+                	case(KeyEvent.VK_D):
+                		personaje.setRight(false);               	
+                		break;
+                	case(KeyEvent.VK_A):
+                		personaje.setLeft(false);               	
+                		break;		
+                	case(KeyEvent.VK_W):
+                		personaje.setJump(false); 
+                		break;
+                	case(KeyEvent.VK_SPACE):
+                		personaje.setPuedeDisparar(true);
+                		break;
+	                }
+	            }
+	        });
+	    }
 	}
 }
