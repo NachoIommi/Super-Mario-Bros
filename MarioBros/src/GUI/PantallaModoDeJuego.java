@@ -64,7 +64,6 @@ public class PantallaModoDeJuego extends JPanel{
 	public void registrarOyenteBotonModoMario() {
 		botonModoMario.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e) {
-	        	System.out.println("hola");
 	        	controladorVistas.juego.setModoDeJuego(1);
 	            controladorVistas.mostrarPantallaPrincipal();
 	        }
@@ -74,7 +73,6 @@ public class PantallaModoDeJuego extends JPanel{
 	public void registrarOyenteBotonModoSonic() {
 		botonModoSonic.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e) {
-	        	System.out.println("hola");
 	        	controladorVistas.juego.setModoDeJuego(2);
 	            controladorVistas.mostrarPantallaPrincipal(); 
 	        }

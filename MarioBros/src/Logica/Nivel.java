@@ -92,7 +92,6 @@ public class Nivel {
 	}
 
 	public void cargarNivel(int i) {
-		System.out.println("cargando nivel "+ i);
 		try {
 			int vidas = 3;
 			int puntuacion = 0;
@@ -221,8 +220,7 @@ public class Nivel {
 				    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
 				        break;*/ //El case 100 se debe parsear? 
 				        
-				    default:
-				        System.out.println("Tipo no válido");
+				    default:				        
 				        break;
 				}
 				contenido = lectura.readLine(); //Leo prox renglon del txt

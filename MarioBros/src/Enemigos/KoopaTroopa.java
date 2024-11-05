@@ -49,12 +49,12 @@ public class KoopaTroopa extends Enemigo{
 	}
 	
 	public void setPosX(int x) {
-		 posX = x;
-	}
-	
-	public void setPosY(int y) {
-		 posY = y;
-	}
+        estado.setPosX(x);
+   }
+
+   public void setPosY(int y) {
+       estado.setPosY(y);
+}
 	
 	public void setMostrable(boolean b) {
 		estado.setMostrable(b);

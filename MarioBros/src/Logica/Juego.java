@@ -72,7 +72,6 @@ public class Juego {
 			nivel = new Nivel(300,this);
 		}
 		nivel.cargarNivel(0);
-		System.out.println(enemigos.toString());
 	}
 	
 	public void reseteo() {
@@ -208,7 +207,6 @@ public class Juego {
 	
 	public void agregarEnemigoEnEjecucion(Enemigo e) {
 		enemigosEnEjecucion.addLast(e);
-		System.out.println("Tamano de enemigos en Ejecucion: "+enemigosEnEjecucion.size());
 	}
 	
 	public void agregarBola(BolaDeFuego b) {

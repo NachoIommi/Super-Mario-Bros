@@ -54,7 +54,7 @@ public class PantallaRanking extends JPanel{
     
     public void agregarBotonVolver() {
         botonVolver = new JButton("Volver");
-        botonVolver.setBounds(-15, 20, 140, 50);  // Ajusta el tamaño según la fuente que uses
+        botonVolver.setBounds(440, 8, 140, 50);  // Ajusta el tamaño según la fuente que uses
         botonVolver.setVisible(true);
         // Configura una fuente personalizada
         botonVolver.setFont(new Font("Arial", Font.BOLD, 16));  // Cambia "Arial" y el tamaño a tu gusto
@@ -88,7 +88,7 @@ public class PantallaRanking extends JPanel{
 	}
     
     public void refrescar() {
- 	   revalidate();
+ 	   	revalidate();
         repaint();
     }
     
