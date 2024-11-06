@@ -20,7 +20,7 @@ import Plataformas.LadrilloSolido;
 
 public class EstadoDeFuego extends EstadoSuperMario {
 	
-	public double toleranciaAltura=50;
+	public double toleranciaAltura = 50;
 
 	protected Sprite sprite;
 	protected Hitbox hitbox;
@@ -40,27 +40,30 @@ public class EstadoDeFuego extends EstadoSuperMario {
 
 	public EstadoDeFuego(Personaje p,Sprite s,int x,int y){
 		super(p);
-		hitbox = new Hitbox(x ,y-23,30 ,60);
+		hitbox = new Hitbox(x, y-23, 30, 60);
 		setPosX(x);
-		setPosY(y-23);
+		setPosY(y - 23);
 		sprite = s;
 	    alto = 60;
-	    puedeDisparar=true;
+	    puedeDisparar = true;
 	}
 	
 	public void disparar() {
 		if(puedeDisparar) {
-			if(velX<0)
-				direc=1;// MIRANDO A IZQUIERDA
-			else direc=0;//MIRANDO A DERECHA
+			if(velX<0) {
+				direc = 1; // MIRANDO A IZQUIERDA
+			} else {
+				direc = 0; //MIRANDO A DERECHA
+			}
+			
 			GenerarSprite fabricaSprite;
 	        if(personaje.getNivelActual().getJuego().getModoDeJuego() == 1) {
 	            fabricaSprite = new GenerarSpriteOriginal();
-	        }else {
+	        } else {
 	            fabricaSprite = new GenerarSpriteReemplazo();
 	        }
 	    	sprite = fabricaSprite.getBolaDeFuego();
-			BolaDeFuego bola = new BolaDeFuego(sprite ,getPosX()+10 , getPosY()+31, personaje.getNivelActual(),direc);
+			BolaDeFuego bola = new BolaDeFuego(sprite, getPosX()+10, getPosY()+31, personaje.getNivelActual(), direc);
 			personaje.getNivelActual().getJuego().agregarBola(bola);
 			
 		}
@@ -70,7 +73,7 @@ public class EstadoDeFuego extends EstadoSuperMario {
 		return puedeDisparar;
 	}
 	public void setPuedeDisparar(boolean b) {
-		puedeDisparar=b;
+		puedeDisparar = b;
 	}
 	
 	// Setters
@@ -150,7 +153,6 @@ public class EstadoDeFuego extends EstadoSuperMario {
 		if (!personaje.esInvulnerable()) {
 			personaje.cambiarEstado(new EstadoSuperMario(personaje, sprite, personaje.getPosX(), personaje.getPosY()));
             personaje.activarInvulnerabilidad();
-            
         }
     }
 	
@@ -210,7 +212,7 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	    } else if (!left && !right) {
 	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoDerecha();
 	        
-	    }else if(velX==0) {
+	    } else if(velX==0) {
 	    	nuevoSprite = fabrica.getMarioFlorDeFuegoQuietoIzquierda();		    
 	    }	    
 	   
@@ -231,7 +233,7 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
-			posY=posY-5;
+			posY = posY - 5;
 			saltando = true;
 		}
 	}
@@ -251,7 +253,7 @@ public class EstadoDeFuego extends EstadoSuperMario {
 			 fabrica = new GenerarSpriteReemplazo();
 		}
 		
-		EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
+		EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(), (int)posX, (int)posY);
     	personaje.cambiarEstado(e);
     	
     	Timer timer = new Timer();
@@ -281,27 +283,27 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	}
 	
 	public void colisionLateralGoomba(Goomba goomba) {
-		velX=0;
+		velX = 0;
     	recibirDano();
     }
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralLakitu(Lakitu lakitu) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralSpiny(Spiny spiny) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralPiranha(PiranhaPlant piranha) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	
@@ -321,46 +323,57 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	public void moverIzquierda() {
 		if (left) {
 			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-		        if (velX > -5)
+		        if (velX > -5) {
 		            velX -= 0.1f; 
-		    } 
-			else 
-		        velX = 0;       	    
-			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()-3);
+		        }
+		    } else {
+		        velX = 0;   
+		    }
+			
+			if(tocandoBloqueDerecha) //Caso que este deslizando en velocidad contraria
+				setPosX(getPosX() - 3);
 			}
 	}
 	
 	public void moverDerecha() {
 		if (right) {
 			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-		        if (velX < 5)
+		        if (velX < 5) {
 		            velX += 0.1f;
-		    } 			
-			else 
-				velX = 0;				
-			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()+3);
+		        }
+		    } else {
+				velX = 0;	
+		    }
+			
+			if(tocandoBloqueIzquierda) { //Caso que este deslizando en velocidad contraria
+				setPosX(getPosX() + 3);
+			}
 		}		
 	}
 
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
-	    	setPosX(getPosX()+1);	    		
+	    	setPosX(getPosX()+1);
+		
 	    if(tocandoBloqueDerecha) 
 	    	setPosX(getPosX()-1);
+	    
 	    if(tocandoBloqueIzquierda &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()+1);    	    
+	    	setPosX(getPosX()+1);
+	    
 	    if(tocandoBloqueDerecha &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()-1);	     
+	    	setPosX(getPosX()-1);
+	    
 	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
 	    	setPosX(getPosX()+1);
 	    	velY += 0.3;
 	    }
+	    
 	    if(tocandoBloqueDerecha && !tocandoBloqueAbajo) {
 	    	setPosX(getPosX()-1);
 	    	velY += 0.3;
 	    }
+	    
 	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
 	    	setPosX(getPosX()+1);
 	    	saltando = true;
@@ -368,6 +381,7 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	        tocandoBloqueIzquierda=false;
 	        velY = -4; 
 	    }
+	    
 	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
 	    	setPosX(getPosX()-1);
 	    	saltando = true;
@@ -375,6 +389,7 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	        tocandoBloqueDerecha=false;
 	        velY = -4;
 	    }
+	    
 	    if(posX <= personaje.getMin()) {
             setPosX(getPosX()+1);
             velX = 0;
@@ -385,14 +400,14 @@ public class EstadoDeFuego extends EstadoSuperMario {
 		if (!tocandoBloqueAbajo) {
 	        velY += 0.3;  // Gravedad
 	        aterrice=false;
-	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  //        
-	    } 
-	    else {
+	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) { 
+	            velY += 0.6;        
+	        }
+	    } else {
 	        velY = 0;
 	        saltando = false;
 	        if(!aterrice) {
-	        	setPosY(getPosY()-1);  //
+	        	setPosY(getPosY() - 1);
 	             hitbox.actualizar((int) posX, (int) posY);
 	             aterrice = true;
 	        }
@@ -403,11 +418,11 @@ public class EstadoDeFuego extends EstadoSuperMario {
 	public void gravedadSaltando() {
 		if (saltando) {
 	        if (jump && velY > -5.5 && !tocandoBloqueArriba) {
-	            velY -= 0.4f;  // ALTURA DEL SALTO
-	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
-	            	velY=0;	            
-	        } 
-	        else {
+	            velY -= 0.4f;  // Altura del salto
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda) {
+	            	velY=0;	  
+	            }
+	        } else {
 	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
 	        }
 	    }
@@ -417,18 +432,19 @@ public class EstadoDeFuego extends EstadoSuperMario {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
+	        setPosY(getPosY() + 3); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
 
 	public void detenerFriccion() {
 		if (velX > 0 && !right) 
 	        velX -= 0.1f;  
+		
 	    if (velX < 0 && !left) 
-	        velX += 0.1f; 	    
-	    if (Math.abs(velX) < 0.1f) {
+	        velX += 0.1f; 
+	    
+	    if (Math.abs(velX) < 0.1f) 
 	        velX = 0;
-	    }
 	}
 	
 	public void colisionDesliz() {

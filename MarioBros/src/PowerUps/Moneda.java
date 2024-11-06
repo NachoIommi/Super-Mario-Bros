@@ -56,7 +56,6 @@ public class Moneda extends PowerUp{
 		return spriteActualizado;
 	}
 
-
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado=actualizada;
 	}

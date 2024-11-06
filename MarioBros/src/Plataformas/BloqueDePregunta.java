@@ -19,7 +19,7 @@ public class BloqueDePregunta extends BloqueSolido {
 		super(sprite, x, y, nivelActual);
 		contenido = p;
 		golpesRestantes = golpes;
-		estado= new BloqueGolpeable(this,sprite,x,y,p,golpes);
+		estado = new BloqueGolpeable(this,sprite,x,y,p,golpes);
 		cambio=false;
 	}
 	
@@ -59,7 +59,7 @@ public class BloqueDePregunta extends BloqueSolido {
 	}
 	
 	public void cambiarEstado(EstadoDeBloque nuevoEstado) {
-		this.estado = nuevoEstado;        
+		estado = nuevoEstado;        
         cambio=true;
     }
 }

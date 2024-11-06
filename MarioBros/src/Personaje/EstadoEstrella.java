@@ -27,7 +27,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 
 	public EstadoEstrella(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
-		hitbox = new Hitbox(x ,y-23,30 ,60);
+		hitbox = new Hitbox(x, y-23, 30, 60);
 		setPosX(x);
 		setPosY(y-23);
 		sprite = s;
@@ -169,7 +169,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	    } else if (!left && !right) {
 	    	nuevoSprite = fabrica.getMarioEstrellaQuietoDerecha();
 	        
-	    }else if(velX==0) {
+	    } else if(velX==0) {
 	    	nuevoSprite = fabrica.getMarioEstrellaQuietoIzquierda();		    
 	    }	    
 	   
@@ -191,8 +191,8 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
-			posY=posY-5;
-			saltando=true;
+			posY = posY - 5;
+			saltando = true;
 		}
 	}
 
@@ -259,62 +259,74 @@ public class EstadoEstrella extends EstadoDePersonaje {
 	public void moverIzquierda() {
 		if (left) {
 			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-		        if (velX > -5)
+		        if (velX > -5) {
 		            velX -= 0.1f; 
-		    } 
-			else 
-		        velX = 0;       	    
+		        }
+		    } else {
+		        velX = 0;
+		    }
+			
 			if(tocandoBloqueDerecha) 
-				setPosX(getPosX()-3);
+				setPosX(getPosX() - 3);
 			}
 	}
 	
 	public void moverDerecha() {
 		if (right) {
 			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-		        if (velX < 5)
+		        if (velX < 5) {
 		            velX += 0.1f;
-		    } 			
-			else 
-				velX = 0;				
+		        }
+		    } else {
+				velX = 0;	
+		    }
+			
 			if(tocandoBloqueIzquierda) 
-				setPosX(getPosX()+3);
+				setPosX(getPosX() + 3);
 		}		
 	}	
 	
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
-	    	setPosX(getPosX()+1);	    		
+	    	setPosX(getPosX()+1);
+		
 	    if(tocandoBloqueDerecha) 
 	    	setPosX(getPosX()-1);
+	    
 	    if(tocandoBloqueIzquierda &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()+1);    	    
+	    	setPosX(getPosX()+1);
+	    
 	    if(tocandoBloqueDerecha &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()-1);	     
+	    	setPosX(getPosX()-1);
+	    
 	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
 	    	setPosX(getPosX()+1);
 	    	velY += 0.3;
 	    }
+	    
 	    if(tocandoBloqueDerecha && !tocandoBloqueAbajo) {
 	    	setPosX(getPosX()-1);
 	    	velY += 0.3;
 	    }
+	    
 	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()+1);
+	    	setPosX(getPosX() + 1);
 	    	saltando = true;
 	        tocandoBloqueAbajo = false;
 	        tocandoBloqueIzquierda=false;
 	        velY = -4; 
 	    }
+	    
 	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
 	    	saltando = true;
 	        tocandoBloqueAbajo = false;
 	        tocandoBloqueDerecha=false;
 	        velY = -4;
 	    }
+	    
 	    if(posX <= personaje.getMin()) {
-            setPosX(getPosX()+1);
+            setPosX(getPosX() + 1);
             velX = 0;
         }
 	}
@@ -323,18 +335,18 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		if (!tocandoBloqueAbajo) {
 	        velY += 0.3;  // Gravedad
 	        aterrice=false;
-	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  //        
-	    } 
-	    else {
+	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) {
+	            velY += 0.6;       
+	        }
+	        
+	    } else {
 	        velY = 0;
 	        saltando = false;
 	        if(!aterrice) {
-	        	setPosY(getPosY()-1);  //
+	        	setPosY(getPosY() - 1);
 	             hitbox.actualizar((int) posX, (int) posY);
 	             aterrice = true;
 	        }
-	    
 	    }
 	}
 	
@@ -342,10 +354,10 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		if (saltando) {
 	        if (jump && velY > -5.5 && !tocandoBloqueArriba) {
 	            velY -= 0.4f;  // ALTURA DEL SALTO
-	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
-	            	velY=0;	            
-	        } 
-	        else {
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda) {
+	            	velY = 0;	 
+	            }
+	        } else {
 	            saltando = false;  
 	        }
 	    }
@@ -355,7 +367,7 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0; 
 	        saltando = false; 
-	        setPosY(getPosY()+3);
+	        setPosY(getPosY() + 3);
 	    }
 	}
 
@@ -420,7 +432,6 @@ public class EstadoEstrella extends EstadoDePersonaje {
 		return false;
 	}
 
-	@Override
 	public void setPuedeDisparar(boolean b) {		
 	}
 }

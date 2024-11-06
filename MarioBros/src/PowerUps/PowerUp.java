@@ -49,7 +49,6 @@ public abstract class PowerUp extends Entidad{
 		tocandoBloqueArriba = b;
 	}
 
-
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo = b;
 	}

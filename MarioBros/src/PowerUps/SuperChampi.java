@@ -10,12 +10,12 @@ public class SuperChampi extends PowerUp{
 	
 	protected int posX;
 	protected int posY;
+	protected Sprite sprite;
+	protected Hitbox hitbox;
 	
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
     protected boolean cayendo;
-	protected Sprite sprite;
-	protected Hitbox hitbox;
 	
 	public SuperChampi(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -51,14 +51,16 @@ public class SuperChampi extends PowerUp{
 			hitbox.actualizar (posX, posY);		
 			corregirPosEnColision();
 		}
-		
 	}
+	
 	public void moverIzq() {
 		posX = posX-2;
 	}
+	
 	public void moverDer() {
 		posX = posX+2;
 	}
+	
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
 	    	posX=posX+1;	    		
@@ -108,7 +110,6 @@ public class SuperChampi extends PowerUp{
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
-
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado=actualizada;

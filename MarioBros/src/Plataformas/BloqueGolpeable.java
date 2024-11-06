@@ -43,7 +43,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 			Musica.getMusica().reproducirSonido("Sonido/Sonidos/agarrarMoneda.wav");
 			contenido.setMostrable(true);		
 			contenido.setSpriteActualizado(true);		
-		}else {
+		} else {
 			contenido.setPosX(posX);
 			contenido.setPosY(posY-30);	
 			contenido.getHitbox().actualizar(posX, posY-30);
@@ -57,7 +57,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 		GenerarSprite fabricaSprite = null;
 		if(bloque.getNivelActual().getJuego().getModoDeJuego() == 1) {
 			fabricaSprite = new GenerarSpriteOriginal();
-		}else {
+		} else {
 			fabricaSprite = new GenerarSpriteReemplazo();
 		}
 		
@@ -65,8 +65,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 			if(golpesRestantes != 1 ) {
 				soltarContenido();
 				golpesRestantes--;	
-			}
-			else {		
+			} else {		
 				soltarContenido();
 				golpesRestantes--;
 				
@@ -74,8 +73,7 @@ public class BloqueGolpeable extends EstadoDeBloque{
 				bloque.cambiarEstado(e);
 				bloque.setSprite(fabricaSprite.getBloqueDePreguntaRoto());
 			}
-		}
-		else {
+		} else {
 			if (golpesRestantes != 1) {
 	            soltarContenido();
 	            // Animación de movimiento ascendente
@@ -98,9 +96,9 @@ public class BloqueGolpeable extends EstadoDeBloque{
 	            timer.scheduleAtFixedRate(animacionSubida, 0, 50); 
 	            p.setMonedas(1);
 	            p.setPuntuacion(5);
-	            golpesRestantes--;}
-			
-			else {	     
+	            golpesRestantes--;
+	            
+			} else {	     
 				soltarContenido();
 	            Timer timer = new Timer();
 	            TimerTask animacionSubidaFinal = new TimerTask() {

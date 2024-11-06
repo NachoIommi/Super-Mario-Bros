@@ -19,7 +19,7 @@ public class Tuberia extends Plataforma{
 		posX = x;
 		posY = y;
 		sprite = s;
-		hitbox = new Hitbox(x-5, y, 40,30);
+		hitbox = new Hitbox(x-5, y, 40, 30);
 	}
 	
 	public Tuberia(Sprite s, int x,int y, Nivel nivelActual) {
@@ -27,7 +27,7 @@ public class Tuberia extends Plataforma{
 		posX = x;
 		posY = y;
 		sprite = s;
-		hitbox = new Hitbox(x , y, 30,30);
+		hitbox = new Hitbox(x , y, 30, 30);
 	}
 
 	public Sprite getSprite() {

@@ -60,18 +60,16 @@ public class FlorDeFuego extends PowerUp{
 	}
 
 	public void setPosX(int x) {
-		this.posX=x;
+		posX=x;
 	}
 
-
 	public void setPosY(int y) {
-		this.posY=y;
+		posY=y;
 	}
 
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
-
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado=actualizada;

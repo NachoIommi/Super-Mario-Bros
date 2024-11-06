@@ -59,19 +59,16 @@ public class Vacio extends Plataforma {
 
 	
 	public void verificarCambioEstado() {
-		// TODO Auto-generated method stub
 		
 	}
 
 
 	public boolean necesitaActualizarSprite() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 
 	public void setSpriteActualizado(boolean actualizada) {
-		// TODO Auto-generated method stub
 		
 	}
 

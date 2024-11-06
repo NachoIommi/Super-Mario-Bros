@@ -43,12 +43,12 @@ public class Personaje extends Entidad{
     protected boolean saltandoSobreEnemigo;
 	
 	protected int velX;
-	protected int gravedad=1;
+	protected int gravedad = 1;
 	protected int velY;
 	protected int velSalto = -50;
 	
-	protected int tiempoSaltando=0;
-	protected final int maxTiempoSalto=20;
+	protected int tiempoSaltando = 0;
+	protected final int maxTiempoSalto = 20;
 	
 	private boolean invulnerable;
     protected int tiempoInvulnerable;
@@ -61,20 +61,21 @@ public class Personaje extends Entidad{
         vidas = 3;        
         monedas = 0;      
         puntuacion = 0;
-        estado = new EstadoNormal(this ,sprite, x ,y); 
+        estado = new EstadoNormal(this, sprite, x, y); 
         direccionDelPersonaje = 0;
         posX = x;
         posY = y;
-        tocandoBloque=false;
-        tocandoBloqueDerecha=false;
-        tocandoBloqueIzquierda=false;
-        tocandoBloqueAbajo=false;
-        tocandoBloqueArriba=false;
-        saltandoSobreEnemigo=false;
-        saltando=false;  
-        alto=30;
+        tocandoBloque = false;
+        tocandoBloqueDerecha = false;
+        tocandoBloqueIzquierda = false;
+        tocandoBloqueAbajo = false;
+        tocandoBloqueArriba = false;
+        saltandoSobreEnemigo = false;
+        saltando = false;  
+        alto = 30;
         setSpriteActualizado(false);
     }
+	
 	public void setRight(boolean b){
 		estado.setRight(b);
 	}
@@ -98,18 +99,23 @@ public class Personaje extends Entidad{
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
 		estado.colisionLateralKoopa(koopaTroopa);
 	}
+	
 	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
 		estado.colisionLateralBuzzyBeetle(buzzy);
 	}
+	
 	public void colisionLateralLakitu(Lakitu lakitu) {
 		estado.colisionLateralLakitu(lakitu);
 	}
+	
 	public void colisionLateralSpiny(Spiny spiny) {
 		estado.colisionLateralSpiny(spiny);
 	}
+	
 	public void colisionLateralPiranha(PiranhaPlant piranha) {
 		estado.colisionLateralPiranha(piranha);
 	}
+	
 	public void colisionSuperChampi() {
 		estado.colisionSuperChampi();
 	}
@@ -121,12 +127,13 @@ public class Personaje extends Entidad{
     public void colisionEstrella() {
     	estado.colisionEstrella();
     }
+    
     public void colisionChampiVerde() {
     	estado.colisionChampiVerde();
     }
+    
     public void colisionVacio() {
     	estado.morir();
-    	
 	}
 	
 	public int getAlto() {
@@ -158,7 +165,7 @@ public class Personaje extends Entidad{
 	}
 	
 	public void setTocandoBloque(boolean tocando) {
-		tocandoBloque=tocando;
+		tocandoBloque = tocando;
 	}
 	
 	public void setTocandoBloqueDerecha(boolean b) {
@@ -190,6 +197,7 @@ public class Personaje extends Entidad{
         	nivelActual.perderJuego();	
         } 
 	}
+	
 	public void setMuerto(boolean muerto) {
 		this.muerto = muerto;
 	}
@@ -209,6 +217,7 @@ public class Personaje extends Entidad{
             }, 3000);
         }
     }
+    
     public boolean esInvulnerable() {
         return invulnerable;
     }
@@ -253,7 +262,6 @@ public class Personaje extends Entidad{
     public void setMonedas(int n){
         monedas += n;
     }
-
     
     public int getPuntuacion(){
         return puntuacion;
@@ -281,7 +289,6 @@ public class Personaje extends Entidad{
     public void setEstado(EstadoDePersonaje nuevoEstado){
         this.estado = nuevoEstado;
     }
-
     
 	public void cargarSprite(Sprite s) {
 		estado.cargarSprite(s);
@@ -290,16 +297,18 @@ public class Personaje extends Entidad{
 	public Sprite getSprite() {
 		return estado.getSprite();
 	}
+	
 	public int getPosX() {
 		return estado.getPosX();
 	}
+	
 	public int getPosY() {
 		return estado.getPosY();
 	}
 	
 	public void actualizarMin() {
-		if(estado.getVelX()>=0)
-			min+=estado.getVelX();
+		if(estado.getVelX() >= 0)
+			min += estado.getVelX();
 	}
 	
 	public float getMin() {
@@ -313,6 +322,7 @@ public class Personaje extends Entidad{
 	public void setPosY(int y) {
 		estado.setPosY(y);
 	}
+	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
@@ -324,9 +334,11 @@ public class Personaje extends Entidad{
 	public void disparar() {
 		estado.disparar();
 	}
+	
 	public boolean puedeDisparar() {
 		return estado.puedeDisparar();
 	}
+	
 	public void setPuedeDisparar(boolean b) {
 		estado.setPuedeDisparar(b);
 	}

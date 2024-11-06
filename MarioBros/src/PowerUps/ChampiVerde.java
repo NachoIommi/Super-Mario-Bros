@@ -10,11 +10,12 @@ public class ChampiVerde extends PowerUp{
 	
 	protected int posX;
 	protected int posY;
+	protected Sprite sprite;
+	protected Hitbox hitbox;
 	
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
-	protected Sprite sprite;
-	protected Hitbox hitbox;
+	
 	
 	public ChampiVerde(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -95,13 +96,12 @@ public class ChampiVerde extends PowerUp{
 		return hitbox;
 	}
 
-
 	public void setPosX(int x) {
-		this.posX=x;
+		posX = x;
 	}
 	
 	public void setPosY(int y) {
-		this.posY=y;
+		posY = y;
 	}
 
 	public boolean necesitaActualizarSprite() {

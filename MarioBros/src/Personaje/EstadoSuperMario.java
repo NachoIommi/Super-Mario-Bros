@@ -33,17 +33,19 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	protected int alto;
 	protected boolean aterrice;
 
-	public EstadoSuperMario(Personaje p,Sprite s,int x,int y) {
+	public EstadoSuperMario(Personaje p, Sprite s, int x, int y) {
 		super(p);
-		hitbox = new Hitbox(x ,y-23,30 ,60);
+		hitbox = new Hitbox(x, y-23, 30, 60);
 		setPosX(x);
 		setPosY(y-23);
 		sprite = s;
 	    alto = 60;
 	}
+	
 	public EstadoSuperMario(Personaje p) {
 		super(p);
 	}
+	
 	// Setters
 	  public void morir() {
 		  Musica.getMusica().reproducirMusicaSinLoop("Sonido/Canciones/muerte.wav");
@@ -100,12 +102,12 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitbox.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitbox.actualizar(Math.round(posX), Math.round(posY));
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitbox.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitbox.actualizar(Math.round(posX), Math.round(posY));
 	}
 	
 
@@ -122,7 +124,6 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (!personaje.esInvulnerable()) {
 			personaje.cambiarEstado(new EstadoNormal(personaje, sprite, personaje.getPosX(), personaje.getPosY()));
             personaje.activarInvulnerabilidad();
-           
         }
     }
 	
@@ -182,7 +183,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	    } else if (!left && !right) {
 	    	nuevoSprite = fabrica.getSuperMario();
 	        
-	    }else if(velX==0) {
+	    } else if(velX==0) {
 	    	nuevoSprite = fabrica.getSuperMarioQuietoIzquierda();		    
 	    }	    
 	   
@@ -203,8 +204,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
-			posY=posY-5;
-			saltando=true;
+			posY = posY - 5;
+			saltando = true;
 		}
 	}
 	
@@ -215,9 +216,8 @@ public class EstadoSuperMario extends EstadoDePersonaje {
     public void colisionFlorDeFuego() {
     	setPuntuacionFlorDeFuego();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(),(int)posX,(int)posY);
+    	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(), (int)posX, (int)posY);
     	personaje.cambiarEstado(e);
-    	
     }
     
     public void colisionEstrella() {
@@ -231,15 +231,14 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 			 fabrica = new GenerarSpriteReemplazo();
 		}
 		
-		EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(),(int)posX,(int)posY);
+		EstadoEstrella e = new EstadoEstrella(personaje,fabrica.getMarioEstrellaQuietoDerecha(), (int)posX, (int)posY);
     	personaje.cambiarEstado(e);
     	
     	Timer timer = new Timer();
 	    timer.schedule(new TimerTask() {
 	        public void run() {	
 	        	Musica.getMusica().reproducirMusica("Sonido/Canciones/soundtrackNivel-"+personaje.getNivelActual().getNivelActual()+".wav");
-	        	personaje.cambiarEstado(new EstadoSuperMario(personaje, fabrica.getPersonajeNormalQuietoDerecha(), personaje.getPosX(), personaje.getPosY()));
-		                   
+	        	personaje.cambiarEstado(new EstadoSuperMario(personaje, fabrica.getPersonajeNormalQuietoDerecha(), personaje.getPosX(), personaje.getPosY()));     
 	        }
 	    }, 10000);
 
@@ -255,28 +254,28 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	}
 
 	public void colisionLateralGoomba(Goomba goomba) {
-		velX=0;
+		velX = 0;
 		recibirDano();
     }
 	
 	public void colisionLateralKoopa(KoopaTroopa koopaTroopa) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralBuzzyBeetle(BuzzyBeetle buzzy) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralLakitu(Lakitu lakitu) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralSpiny(Spiny spiny) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionLateralPiranha(PiranhaPlant piranha) {
-		velX=0;
+		velX = 0;
 		recibirDano();
 	}
 	public void colisionVacio() {
@@ -297,13 +296,16 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (left) {
 			actualizarSprite();
 			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-		        if (velX > -5)
+		        if (velX > -5) {
 		            velX -= 0.1f; 
-		    } 
-			else 
-		        velX = 0;       	    
+		        }
+		        
+		    } else {
+		        velX = 0; 
+			}
+			
 			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()-3);
+				setPosX(getPosX() - 3);
 			}
 		
 	}
@@ -312,75 +314,80 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (right) {
 			actualizarSprite();
 			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-		        if (velX < 5)
+		        if (velX < 5) {
 		            velX += 0.1f;
-		    } 			
-			else 
-				velX = 0;				
+		        }
+		    } else {
+				velX = 0;	
+			}
+			
 			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()+3);
+				setPosX(getPosX() + 3);
 		}		
 		 
 	}
 	
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
-	    	setPosX(getPosX()+1);	    		
+	    	setPosX(getPosX() + 1);	    		
 	    if(tocandoBloqueDerecha) 
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
 	    if(tocandoBloqueIzquierda &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()+1);    	    
+	    	setPosX(getPosX() + 1);    	    
 	    if(tocandoBloqueDerecha &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()-1);	     
+	    	setPosX(getPosX() - 1);	     
 	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
-	    	setPosX(getPosX()+1);
+	    	setPosX(getPosX() + 1);
 	    	velY += 0.3;
 	    }
+	    
 	    if(tocandoBloqueDerecha && !tocandoBloqueAbajo) {
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
 	    	velY += 0.3;
 	    }
+	    
 	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()+1);
+	    	setPosX(getPosX() + 1);
 	    	saltando = true;
 	        tocandoBloqueAbajo = false;
-	        tocandoBloqueIzquierda=false;
+	        tocandoBloqueIzquierda = false;
 	        velY = -4; 
 	    }
+	    
 	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
 	    	saltando = true;
 	        tocandoBloqueAbajo = false;
-	        tocandoBloqueDerecha=false;
+	        tocandoBloqueDerecha = false;
 	        velY = -4;
 	    }
+	    
 	    if(posX <= personaje.getMin()) {
-            setPosX(getPosX()+1);
+            setPosX(getPosX() + 1);
             velX = 0;
         }
+	    
 	    if(saltando && tocandoBloqueAbajo) {
-	    	setPosY(getPosY()-3);
-	    	saltando=false;
-		    	
+	    	setPosY(getPosY() - 3);
+	    	saltando = false;
 		}
 	}
 	
 	public void gravedad() {
 		if (!tocandoBloqueAbajo) {
 	        velY += 0.3;  // Gravedad
-	        aterrice=false;
-	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  //        
-	    } 
-	    else {
+	        aterrice = false;
+	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) {
+	            velY += 0.6;      
+	        }
+	    } else {
 	        velY = 0;
 	        saltando = false;
 	        if(!aterrice) {
-	        	setPosY(getPosY()-1);  //
+	        	setPosY(getPosY()-1);
 	             hitbox.actualizar((int) posX, (int) posY);
 	             aterrice = true;
 	        }
-	    
 	    }
 	}
 	
@@ -388,10 +395,10 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (saltando) {
 	        if (jump && velY > -5.5 && !tocandoBloqueArriba) {
 	            velY -= 0.4f;  // ALTURA DEL SALTO
-	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
-	            	velY=0;	            
-	        } 
-	        else {
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda) {
+	            	velY = 0;	  
+	            }
+	        } else {
 	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
 	        }
 	    }
@@ -401,7 +408,7 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
+	        setPosY(getPosY() + 3); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
 	
@@ -464,9 +471,11 @@ public class EstadoSuperMario extends EstadoDePersonaje {
 	
 	public void disparar() {		
 	}
+	
 	public boolean puedeDisparar() {
 		return false;
 	}
+	
 	public void setPuedeDisparar(boolean b) {		
 	}
 }

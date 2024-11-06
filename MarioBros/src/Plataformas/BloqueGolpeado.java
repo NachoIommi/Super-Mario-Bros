@@ -29,6 +29,7 @@ public class BloqueGolpeado extends EstadoDeBloque{
 	}
 	
 	public void recibirGolpe() {
+		
 	}
 	
 	public BloqueDePregunta getBloque() {

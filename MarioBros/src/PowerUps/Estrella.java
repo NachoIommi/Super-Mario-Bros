@@ -55,16 +55,17 @@ public class Estrella extends PowerUp{
 	public void moverIzq() {
 		posX = posX-2;
 	}
+	
 	public void moverDer() {
 		posX = posX+2;
 	}
+	
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
 	    	posX=posX+1;	    		
 	    if(tocandoBloqueDerecha) 
 	    	posX=posX-1;	    
 	}
-	
 	
 	public void aceptarVisita(Visitor v) {
 		v.visitarEstrella(this);
@@ -97,21 +98,17 @@ public class Estrella extends PowerUp{
 		return hitbox;
 	}
 
-	
 	public void setPosX(int x) {
 		posX = x;
 	}
-
 	
 	public void setPosY(int y) {
 		posY = y;
 	}
 
-	
 	public boolean necesitaActualizarSprite() {
 		return spriteActualizado;
 	}
-
 
 	public void setSpriteActualizado(boolean actualizada) {
 		spriteActualizado=actualizada;

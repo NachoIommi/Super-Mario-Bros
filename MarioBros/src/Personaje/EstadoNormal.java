@@ -35,7 +35,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	protected boolean aterrice;
 	
-	
 	public EstadoNormal(Personaje personaje,Sprite s,int x,int y) {
 		super(personaje);
 		hitbox = new Hitbox(x ,y,30 ,40);
@@ -95,12 +94,12 @@ public class EstadoNormal extends EstadoDePersonaje {
 	
 	public void setPosX(int x) {
 	    this.posX = x;
-	    hitbox.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitbox.actualizar(Math.round(posX), Math.round(posY));
 	}
 
 	public void setPosY(int y) {
 	    this.posY = y;
-	    hitbox.actualizar(Math.round(posX), Math.round(posY));  // Actualizar la hitbox después de ajustar la posición
+	    hitbox.actualizar(Math.round(posX), Math.round(posY));
 	}
 	
 	public void saltar() {
@@ -176,10 +175,10 @@ public class EstadoNormal extends EstadoDePersonaje {
 		    } else if (!left && !right) {
 		    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();
 		        
-		    }else if(velX==0) {
+		    } else if(velX==0) {
 		    	nuevoSprite = fabrica.getPersonajeNormalQuietoDerecha();		    
 		    }
-	    }else {
+	    } else {
 	    	nuevoSprite = fabrica.getPersonajeNormalMuerto();
 	    }
 	   
@@ -201,7 +200,7 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void saltarSobreEnemigo() {
 		if (saltandoSobreEnemigo ) {
 			velY = -3;
-			posY=posY-5;
+			posY = posY - 5;
 			saltando=true;
 		}
 	}
@@ -209,18 +208,16 @@ public class EstadoNormal extends EstadoDePersonaje {
 	public void colisionSuperChampi() {
     	setPuntuacionSuperChampi();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(),(int)posX,(int)posY);
+    	EstadoSuperMario e = new EstadoSuperMario(personaje,fabrica.getSuperMario(), (int)posX, (int)posY);
     	personaje.cambiarEstado(e);
     	personaje.setPuntuacion(20);
-    	
     }
     
     public void colisionFlorDeFuego() {
     	setPuntuacionFlorDeFuego();
     	GenerarSprite fabrica = new GenerarSpriteOriginal();
-    	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(),(int)posX,(int)posY);
+    	EstadoDeFuego e = new EstadoDeFuego(personaje,fabrica.getMarioFlorDeFuegoQuietoDerecha(), (int)posX, (int)posY);
     	personaje.cambiarEstado(e);
-    
     }
     
     public void colisionEstrella() {
@@ -298,65 +295,72 @@ public class EstadoNormal extends EstadoDePersonaje {
 		if (right) {
 			actualizarSprite();
 			if (posX < 3300 && !tocandoBloqueDerecha && posX > personaje.getMin() ) {
-		        if (velX < 5)
+		        if (velX < 5) {
 		            velX += 0.1f;
-		    } 			
-			else 
-				velX = 0;				
+		        }
+		    } else {
+				velX = 0;	
+		    }
 			if(tocandoBloqueIzquierda) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()+3);
+				setPosX(getPosX() + 3);
 		}		
-		 
 	}
 	
 	public void moverIzquierda() {
 		if (left) {
 			actualizarSprite();
 			if (posX > personaje.getMin() && !tocandoBloqueIzquierda) {
-		        if (velX > -5)
-		            velX -= 0.1f; 
-		    } 
-			else 
-		        velX = 0;       	    
+		        if (velX > -5) {
+		            velX -= 0.1f;
+		        }
+		    } else {
+		        velX = 0;    
+		    }
 			if(tocandoBloqueDerecha) //caso que este deslizando en velocidad contraria
-				setPosX(getPosX()-3);
-			}
-		
+				setPosX(getPosX() - 3);
+		}
+
 	}
 
 	public void corregirPosEnColision() {
 		if(tocandoBloqueIzquierda)  
-	    	setPosX(getPosX()+1);	    		
+	    	setPosX(getPosX() + 1);
+		
 	    if(tocandoBloqueDerecha) 
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
+	    
 	    if(tocandoBloqueIzquierda &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()+1);    	    
+	    	setPosX(getPosX() + 1);  
+	    
 	    if(tocandoBloqueDerecha &&tocandoBloqueArriba) 
-	    	setPosX(getPosX()-1);	     
+	    	setPosX(getPosX() - 1);
+	    
 	    if(tocandoBloqueIzquierda &&!tocandoBloqueAbajo) {
-	    	setPosX(getPosX()+1);
+	    	setPosX(getPosX() + 1);
 	    	velY += 0.3;
 	    }
+	    
 	    if(tocandoBloqueDerecha && !tocandoBloqueAbajo) {
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
 	    	velY += 0.3;
 	    }
+	    
 	    while(jump && tocandoBloqueIzquierda && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()+1);
+	    	setPosX(getPosX() + 1);
 	    	saltando = true;
 	        tocandoBloqueAbajo = false;
-	        tocandoBloqueIzquierda=false;
+	        tocandoBloqueIzquierda = false;
 	        velY = -4; 
 	    }
 	    while(jump && tocandoBloqueDerecha && !tocandoBloqueArriba) {
-	    	setPosX(getPosX()-1);
+	    	setPosX(getPosX() - 1);
 	    	saltando = true;
 	        tocandoBloqueAbajo = false;
-	        tocandoBloqueDerecha=false;
+	        tocandoBloqueDerecha = false;
 	        velY = -4;
 	    }
 	    if(posX <= personaje.getMin()) {
-            setPosX(getPosX()+1);
+            setPosX(getPosX() + 1);
             velX = 0;
         }    
 	}
@@ -366,17 +370,16 @@ public class EstadoNormal extends EstadoDePersonaje {
 	        velY += 0.3;  // Gravedad
 	        aterrice=false;
 	        if (tocandoBloqueIzquierda || tocandoBloqueDerecha) 
-	            velY += 0.6;  //        
+	            velY += 0.6;      
 	    } 
 	    else {
 	        velY = 0;
 	        saltando = false;
 	        if(!aterrice) {
-	        	setPosY(getPosY()-1);  //
+	        	setPosY(getPosY() - 1);
 	             hitbox.actualizar((int) posX, (int) posY);
 	             aterrice = true;
 	        }
-	    
 	    }
 	}
 	
@@ -384,10 +387,10 @@ public class EstadoNormal extends EstadoDePersonaje {
 		if (saltando) {
 	        if (jump && velY > -5.5 && !tocandoBloqueArriba) {
 	            velY -= 0.4f;  // ALTURA DEL SALTO
-	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda)
-	            	velY=0;	            
-	        } 
-	        else {
+	            if(tocandoBloqueArriba || tocandoBloqueDerecha || tocandoBloqueIzquierda) {
+	            	velY = 0;	            
+	            }
+	        } else {
 	            saltando = false;  // NO ALTURA MAXIMA O NO JUMP PRESIONADO
 	        }
 	    }
@@ -397,14 +400,14 @@ public class EstadoNormal extends EstadoDePersonaje {
 		if (tocandoBloqueArriba && !tocandoBloqueAbajo) {
 	        velY = 0;  // Detiene el movimiento hacia arriba
 	        saltando = false;  // Evita que siga intentando saltar
-	        setPosY(getPosY()+3); // Corrijo sacandolo si quedo dentro del bloque
+	        setPosY(getPosY() + 3); // Corrijo sacandolo si quedo dentro del bloque
 	    }
 	}
 	
 	public void detenerFriccion() {
 		if (velX > 0 && !right) 
 	        velX -= 0.1f;  
-	    						//FRENA A MARIO FRICCIONADO
+		
 	    if (velX < 0 && !left) 
 	        velX += 0.1f; 
 	    
@@ -450,7 +453,6 @@ public class EstadoNormal extends EstadoDePersonaje {
 		return toleranciaAltura;
 	}
 	
-	
 	public int getAlto() {
 		return alto;
 	}
@@ -461,9 +463,11 @@ public class EstadoNormal extends EstadoDePersonaje {
 
 	public void disparar() {		
 	}
+	
 	public boolean puedeDisparar() {
 		return false;
 	}
+	
 	public void setPuedeDisparar(boolean b) {		
 	}
 }

@@ -15,4 +15,5 @@ public abstract class Plataforma extends Entidad{
 	public abstract Sprite getSprite();
 	public abstract void aceptarVisita(Visitor v);
 	public abstract boolean cambioEstado();
+	
 }
