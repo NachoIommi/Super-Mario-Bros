@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -15,12 +16,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Logica.Jugador;
+
 public class PantallaVictoria extends JPanel{
 	
 	protected ControladorVistas controladorVistas;
 	protected JLabel imagenInicio;
 	protected JButton botonVerRanking;
-	protected JButton botonVolver;
 	
 	 public PantallaVictoria(ControladorVistas controladorVistas) {
 	    	this.controladorVistas = controladorVistas;
@@ -28,8 +30,8 @@ public class PantallaVictoria extends JPanel{
 			this.setLayout(null);
 			this.setVisible(true);
 			this.setBackground(Color.BLACK);
-			agregarBotonVolver();
-			agregarBotonVerRanking();
+			mostrarGanar();
+			mostrarRanking();
 			agregarImagen();
 	    }
 	 
@@ -42,69 +44,63 @@ public class PantallaVictoria extends JPanel{
 		Icon iconoEscalado = new ImageIcon(imagenEscalada);
 		imagenInicio.setIcon(iconoEscalado);
 		this.add(imagenInicio);
-	}
+	 }
 	 
-	 public void agregarBotonVerRanking() {
-	        botonVerRanking = new JButton("Ver Ranking");
-	        botonVerRanking.setBounds(330, 50, 300, 20);  
-	        botonVerRanking.setVisible(true);
-	        
-	        try {
-	            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
-	            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	            ge.registerFont(marioFuente);
-	            botonVerRanking.setFont(marioFuente);
-	            botonVerRanking.setForeground(Color.WHITE);
-	        } catch (FontFormatException | IOException e) {
-	            e.printStackTrace();
+	 public void mostrarRanking() {
+	    	JLabel[] labelJugadores = new JLabel[5];
+	    	JLabel ranking = new JLabel("RANKING");
+	        ranking.setBounds(30, 250, 350, 50); 
+	        ranking.setVisible(true); 
+	        add(ranking);
+	        for (int j = 0; j < labelJugadores.length; j++) {
+	            labelJugadores[j] = new JLabel(); 
+	            labelJugadores[j].setBounds(30, 280 + (j * 30), 350, 50); 
+	            labelJugadores[j].setVisible(true); 
+	            add(labelJugadores[j]); 
 	        }
 	        
-	        botonVerRanking.setOpaque(false);  
-	        botonVerRanking.setContentAreaFilled(false);  
-	        botonVerRanking.setBorderPainted(false);
-	        botonVerRanking.setFocusPainted(false);  
+	        try {
+	            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(12f);
+	            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	            ge.registerFont(marioFuente);
+	            for (JLabel label : labelJugadores) {
+	                label.setFont(marioFuente);
+	                label.setForeground(Color.WHITE);
+	            }
 
-	        registrarOyenteBotonVerRanking();
-	        this.add(botonVerRanking);
-	    }
-	 public void agregarBotonVolver() {
-	        botonVolver = new JButton("Volver");
-	        botonVolver.setBounds(440, 8, 140, 50);  
-	        botonVolver.setVisible(true);
-	   
-	        botonVolver.setFont(new Font("Arial", Font.BOLD, 16));  
-	        botonVolver.setForeground(Color.BLACK);  
-	        try {
-	            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(13f);
-	            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	            ge.registerFont(marioFuente);
-	            botonVolver.setFont(marioFuente);
-	            botonVolver.setForeground(Color.WHITE);
+	            ranking.setFont(marioFuente.deriveFont(22f));
+	            ranking.setForeground(Color.WHITE);
 	        } catch (FontFormatException | IOException e) {
 	            e.printStackTrace();
 	        }
-	        
-	        botonVolver.setOpaque(false); 
-	        botonVolver.setContentAreaFilled(false);
-	        botonVolver.setBorderPainted(false); 
-	        botonVolver.setFocusPainted(false); 
-	        
-	        registrarOyenteBotonVolver();
-	        add(botonVolver);
+	        List<Jugador> topCinco = controladorVistas.obtenerJuego().getRanking().mostrarTopCinco();
+	        for (int i = 0; i < topCinco.size() && i < labelJugadores.length; i++) {
+	            Jugador jugador = topCinco.get(i);
+	            labelJugadores[i].setText(jugador.getNombre() + " " + jugador.getPuntaje());
+	        }
+	        refrescar();   
 	    }
-	    
-	 public void registrarOyenteBotonVerRanking() {
-	    botonVerRanking.addActionListener(new ActionListener(){
-	        public void actionPerformed(ActionEvent e) {
-	            controladorVistas.mostrarPantallaRanking(); 
+	 
+	 public void mostrarGanar() {
+		 JLabel labelGanar = new JLabel("¡GANASTE!");
+	     labelGanar.setBounds(370, 100, 350, 50); 
+	     labelGanar.setVisible(true);
+	     add(labelGanar);
+	     
+	     try {
+	            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(12f);
+	            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	            ge.registerFont(marioFuente);
+	           
+	            labelGanar.setFont(marioFuente.deriveFont(24f));
+	            labelGanar.setForeground(Color.WHITE);
+	        } catch (FontFormatException | IOException e) {
+	            e.printStackTrace();
 	        }
-	    });   
-	}
-    public void registrarOyenteBotonVolver() {
-		botonVolver.addActionListener(new ActionListener(){
-	        public void actionPerformed(ActionEvent e) {
-	            controladorVistas.mostrarPantallaPrincipal(); 
-	        }
-	    });   
-	}
+	 }
+	 
+	 public void refrescar() {
+ 	   	revalidate();
+        repaint();
+	 }
 }
