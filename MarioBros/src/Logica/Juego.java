@@ -1,8 +1,10 @@
 package Logica;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
@@ -273,6 +275,9 @@ public class Juego {
 	            ranking = (Ranking) objectInputStream.readObject();
 	            System.out.println("Ranking cargado correctamente: ");
 	        }
+	        catch (EOFException |InvalidClassException e) {
+                System.out.println("Error: versión incompatible del archivo de ranking. Intenta borrar el archivo para solucionar el problema.");
+            }
 	    } catch (IOException | ClassNotFoundException | URISyntaxException e) {
 	        System.out.println("Error al cargar el ranking.");
 	        e.printStackTrace();
