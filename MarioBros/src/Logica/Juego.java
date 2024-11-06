@@ -18,7 +18,6 @@ import PowerUps.PowerUp;
 
 public class Juego {
 	
-	//protected Ranking ranking;
 	protected Reloj reloj;
 	protected Mundo mundos;
 	protected Nivel nivel;
@@ -48,9 +47,7 @@ public class Juego {
 		enemigosEnEjecucion = new ArrayList<Enemigo>();
 		plataformas = new ArrayList<Plataforma>();
 		powerUps = new ArrayList<PowerUp>();
-		//
 		bolas = new ArrayList<BolaDeFuego>();
-		//
 		ranking = cargarRanking();
 		
 	
@@ -71,11 +68,10 @@ public class Juego {
 	}
 	
 	public void reseteo() {
-		//reinicio todo, entidades e hilos
 				if(hilo.isAlive()) {
 					hilo.detener();
-					
 				}
+				
 				if(hiloRM.isAlive()) {
 					hiloRM.detener();
 				}
@@ -94,11 +90,11 @@ public class Juego {
 	}
 	
 	public synchronized void iniciarSiguienteNivel() {
-		System.out.println("iniciarSiguienteNivel :: Juego");
 		reseteo();
 		nivel.ganarJuego();		
 		iniciarJuego();
 	}
+	
 	public ControladorVistas getControladorVistas() {
 		return controladorVistas;
 		
@@ -110,20 +106,21 @@ public class Juego {
 	
 	public void iniciarJuego() {
 	    if (hilo != null && hilo.isAlive()) {
-	        hilo.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
+	        hilo.detener();
 	    }
-	    hilo = new HiloPersonaje(this); // Crear un nuevo hilo
+	    
+	    hilo = new HiloPersonaje(this);
 	    hilo.start();
 	    
 	    if (hiloRM != null && hiloRM.isAlive()) {
-	        hiloRM.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
+	        hiloRM.detener();
 	    }
 	    
 	    hiloRM = new HiloRestoMundo(this);
 	    hiloRM.start();
 	    
 	    if (hiloAnimaciones != null && hiloAnimaciones.isAlive()) {
-	        hiloAnimaciones.detener(); // Debes asegurarte de que el hilo tenga un método para detenerse adecuadamente.
+	        hiloAnimaciones.detener();
 	    }
 	    
 	    hiloAnimaciones = new HiloAnimaciones(this);
@@ -132,7 +129,8 @@ public class Juego {
 	    if (reloj != null && reloj.isAlive()) {
 	        reloj.detener();
 	    }
-	    reloj = new Reloj(); // Crear un nuevo reloj
+	    
+	    reloj = new Reloj();
 	    reloj.start();
 	    
 	}
@@ -143,19 +141,21 @@ public class Juego {
 	}
 	
 	public void perderJuego() {
-		System.out.println("perderJuego :: Juego");
 		guardarPuntuacion();
 		reseteo();
 		nivel = null;
 		controladorVistas.perderJuego();
 	}
+	
 	public void guardarPuntuacion() {
 		if(personaje!=null)
 			puntuacion = personaje.getPuntuacion();
 	}
+	
 	public int getPuntuacion() {
 		return puntuacion;
 	}
+	
 	public void seleccionarMundo(Mundo m) {
 		
 	}
@@ -282,7 +282,6 @@ public class Juego {
 	
 	public void cierreDeJuego() {
 	    try {
-	        // Obtener la ruta relativa del archivo dentro del paquete
 	        String relativePath = "score.tdp";
 	        FileOutputStream fileOutputStream = new FileOutputStream(new File(getClass().getClassLoader().getResource(relativePath).toURI()));
 	        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);

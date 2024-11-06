@@ -80,7 +80,13 @@ public class Lakitu extends Enemigo{
 	    } else if (posX <= limiteIzquierdo) {
 	        direccionDerecha = true;
 	    }
-	    posX += direccionDerecha ? velocidadLakitu : -velocidadLakitu;
+	    
+	    if (direccionDerecha){
+	    	posX += velocidadLakitu;
+	    } else {  	
+	    	posX -= velocidadLakitu;
+	    }
+	    
 	    hitbox.actualizar(posX, posY);
 	}
 
@@ -91,7 +97,8 @@ public class Lakitu extends Enemigo{
         } else {
             fabricaSprite = new GenerarSpriteReemplazo();
         }
-        if(nivelActual.getJuego().getReloj().getSegundos() % 5 == 0  && !lanzo) {
+        int segundosActuales = nivelActual.getJuego().getReloj().getSegundos();
+        if(segundosActuales < 299 && segundosActuales % 5 == 0  && !lanzo) {
             lanzo=true;
             GenerarEnemigos fabricaSpiny = new GenerarSpiny();
             Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);

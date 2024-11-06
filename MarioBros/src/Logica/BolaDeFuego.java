@@ -21,9 +21,9 @@ public class BolaDeFuego extends Entidad{
 	protected boolean mostrable;
 	protected boolean tocoParedIzquierda;
     protected boolean tocoParedDerecha;
-    protected boolean exploto =false;
-    protected boolean tocoEnemigo=false;
-    protected boolean subiendo=false;
+    protected boolean exploto = false;
+    protected boolean tocoEnemigo = false;
+    protected boolean subiendo = false;
     protected int contador;
 	
 	public BolaDeFuego(Sprite sprite, int x, int y, Nivel nivelActual,int direccion) {
@@ -31,50 +31,52 @@ public class BolaDeFuego extends Entidad{
 		posX = x;
 		posY = y;
 		this.sprite = sprite;
-		posXInicial=x;
-		hitbox = new Hitbox(x ,y,15 ,15);
-		tocandoBloqueDerecha=false;
-		tocandoBloqueIzquierda=false;
-		tocandoBloqueAbajo=false;
-		tocandoBloqueArriba=false;
+		posXInicial = x;
+		hitbox = new Hitbox(x, y, 15, 15);
+		tocandoBloqueDerecha = false;
+		tocandoBloqueIzquierda = false;
+		tocandoBloqueAbajo = false;
+		tocandoBloqueArriba = false;
 		direc = direccion;
 	}
 	
 	public void moverse() {
 		if(!exploto) {
-			if(direc==0) {
+			if(direc == 0) {
 				if(!tocandoBloqueAbajo && !subiendo) {
-					posY=posY+3;
-					posX=posX+5;
+					posY = posY + 3;
+					posX = posX + 5;
 					hitbox.actualizar (posX, posY);
 				}
+				
 				if(tocandoBloqueAbajo && subiendo) {
 					contador++;
-					posY=posY-3;
-					posX=posX+5;
+					posY = posY - 3;
+					posX = posX + 5;
 					hitbox.actualizar (posX, posY);
+					
 					if(contador == 13) {
 		                contador = 0;
 		                subiendo = false; 
-		                tocandoBloqueAbajo=false;
+		                tocandoBloqueAbajo = false;
 		            }
 				}				
-			}
-			else {
+			} else {
 				if(!tocandoBloqueAbajo && !subiendo) {
-					posY=posY+3;
-					posX=posX-5;
+					posY = posY + 3;
+					posX = posX - 5;
 					hitbox.actualizar (posX, posY);
 				}
+				
 				if(tocandoBloqueAbajo && subiendo) {
 					contador++;
-					posY=posY-3;
-					posX=posX-5;
+					posY = posY - 3;
+					posX = posX - 5;
 					hitbox.actualizar (posX, posY);
 					if(contador == 13) {
 		                contador = 0;
 		                subiendo = false; 
-		                tocandoBloqueAbajo=false;
+		                tocandoBloqueAbajo = false;
 		            }				
 				}
 			}
@@ -82,8 +84,8 @@ public class BolaDeFuego extends Entidad{
 	}
 	
 	public void explotar() {			
-		exploto=true;
-		hitbox = new Hitbox(0 ,0,0 ,0);
+		exploto = true;
+		hitbox = new Hitbox(0, 0, 0, 0);
 	}
 	public boolean exploto() {
 		return exploto;
@@ -106,7 +108,7 @@ public class BolaDeFuego extends Entidad{
 
 	public void setTocandoBloqueAbajo(boolean b) {
 		tocandoBloqueAbajo = b;
-		subiendo=true;
+		subiendo = true;
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -137,14 +139,14 @@ public class BolaDeFuego extends Entidad{
 	}
 	
 	public void setSpriteActualizado(boolean actualizada) {
-		spriteActualizado=actualizada;
+		spriteActualizado = actualizada;
 	}
 	
 	public void actualizarSprite() {
         GenerarSprite fabricaSprite;
         if(nivelActual.getJuego().getModoDeJuego() == 1) {
             fabricaSprite = new GenerarSpriteOriginal();
-        }else {
+        } else {
             fabricaSprite = new GenerarSpriteReemplazo();
         }
         sprite = fabricaSprite.getVacio();
@@ -156,6 +158,6 @@ public class BolaDeFuego extends Entidad{
 		return mostrable;
 	}
 	public void setMostrable(boolean b) {
-		mostrable=b;
+		mostrable = b;
 	}
 }

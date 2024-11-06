@@ -7,12 +7,12 @@ import javax.sound.sampled.LineUnavailableException;
 
 import java.io.File;
 
-public class Musica { //Actua como la clase singleton, musica = singleton aca
+public class Musica {
 
     private static Musica archivo = null;
     private Clip clipMusica, clipSonido;
 
-    private Musica() { // es privado para evitar instanciación externa
+    private Musica() {
     	 try {
              clipMusica = AudioSystem.getClip();
          } catch (LineUnavailableException e) {
@@ -20,7 +20,6 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
          }
     }
 
-    // Método estático para obtener la única instancia
     public static Musica getMusica() {
         if (archivo == null) {
             archivo = new Musica();
@@ -73,7 +72,7 @@ public class Musica { //Actua como la clase singleton, musica = singleton aca
     public void reiniciarMusica() {
         if (clipMusica != null) {
         	detenerMusica();
-            clipMusica.setFramePosition(0); // Reposicionar al inicio
+            clipMusica.setFramePosition(0);
             clipMusica.start();
         }
     }

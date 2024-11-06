@@ -24,27 +24,24 @@ public class VisitorBolaDeFuego implements Visitor{
 
 	public VisitorBolaDeFuego(Personaje p,BolaDeFuego b) {
         personaje = p;
-        bola=b;
+        bola = b;
     }
 	
 	public void setBolaDeFuego(BolaDeFuego b) {
-		bola=b;
+		bola = b;
 	}
 
 	public void visitarBolaDeFuego(BolaDeFuego b) {
 		
 	}
 
-
 	public void visitarMoneda(Moneda m) {
 	
 	}
-
 	
 	public void visitarFlorDeFuego(FlorDeFuego f) {
 		
 	}
-
 
 	public void visitarSuperChampi(SuperChampi s) {
 		
@@ -53,7 +50,6 @@ public class VisitorBolaDeFuego implements Visitor{
 	public void visitarEstrella(Estrella e) {
 		
 	}
-
 	
 	public void visitarChampiVerde(ChampiVerde c) {
 		
@@ -81,6 +77,7 @@ public class VisitorBolaDeFuego implements Visitor{
 		g.morir();
 		personaje.setPuntuacion(60);
 	}
+	
 	public void visitarKoopaTroopa(KoopaTroopa k) {
 		k.morir();
 		personaje.setPuntuacion(90);
@@ -96,7 +93,6 @@ public class VisitorBolaDeFuego implements Visitor{
 		personaje.setPuntuacion(60);
 	}
 
-
 	public void visitarSpiny(Spiny s) {
 		s.morir();
 		personaje.setPuntuacion(60);
@@ -111,7 +107,6 @@ public class VisitorBolaDeFuego implements Visitor{
 		
 	}
 
-
 	public void visitarPantalla(Juego j) {
 		
 	}
@@ -119,5 +114,4 @@ public class VisitorBolaDeFuego implements Visitor{
 	public void visitarSprite(Sprite s) {
 		
 	}
-
 }

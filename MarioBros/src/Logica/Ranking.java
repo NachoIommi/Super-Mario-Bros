@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Ranking implements Serializable{
+public class Ranking implements Serializable {
 
 	protected List<Jugador> jugadores;
 	protected List<Jugador> topCinco;

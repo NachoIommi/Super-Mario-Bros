@@ -1,6 +1,6 @@
 package Logica;
 
-public class Reloj extends Thread{
+public class Reloj extends Thread {
 	
 	protected int segundos;
 	private volatile boolean enEjecucion;
@@ -20,7 +20,7 @@ public class Reloj extends Thread{
 			try {
 				segundos--;
 				Thread.sleep(1000);
-			}catch (InterruptedException e) {
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

@@ -93,7 +93,7 @@ public class Nivel {
 			int vidas = 3;
 			int puntuacion = 0;
 			int monedas = 0;
-			if(i>0) {
+			if(i > 0) {
 				 vidas = personaje.getVidas();
 				 puntuacion = personaje.getPuntuacion();
 				 monedas = personaje.getMonedas();
@@ -107,19 +107,18 @@ public class Nivel {
 			 Musica.getMusica().reproducirMusica(rutaCancionNivel);
 			 while(contenido != null) {
 				
-				String [] partes = contenido.split("\\s+"); //Guardo en el array cada cadena separada
+				String [] partes = contenido.split("\\s+");
 				int tipoEntidad = Integer.parseInt(partes[0]);
 				int posX = Integer.parseInt(partes[1]);
 				int posY = Integer.parseInt(partes[2]);
-				int tipoPUp = 0; //considerando que ningun powerUp tiene asignado 0
-				if(partes.length == 4) {//Si tiene long cuatro, la cuarta posicion es el PUp contenido
+				int tipoPUp = 0;
+				if(partes.length == 4) {
 					tipoPUp = Integer.parseInt(partes[3]); 
 				}
 				switch (tipoEntidad) {
 				    case 0:
 				    	personaje = fabricaPersonaje.crearPersonaje(fabricaSprite.getPersonajeNormalQuietoDerecha(),posX,posY, this);
-				    	juego.agregarPersonaje(personaje);
-				        
+				    	juego.agregarPersonaje(personaje); 
 				    	break;
 				    case 1:
 				    	juego.agregarPlataforma(fabricaLadrilloSolido.crearPlataforma(fabricaSprite.getLadrilloSolido(), posX, posY, this));
@@ -129,7 +128,7 @@ public class Nivel {
 				    	{
 					    	case 31:
 				    			PowerUp m = fabricaMoneda.crearPowerUp(fabricaSprite.getMonedaSaltando(), posX, posY, this);
-				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,m ,5, this));
+				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY, m, 5, this));
 				    			juego.agregarPowerUp(m);
 				    			break;
 				    			
@@ -140,19 +139,19 @@ public class Nivel {
 				    			break;
 				    		case 33:
 				    			PowerUp  s = fabricaSuperChampi.crearPowerUp(fabricaSprite.getSuperChampi(), posX, posY-30, this) ;
-				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,s ,1, this));
+				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY, s, 1, this));
 				    			juego.agregarPowerUp(s);
 				    			break;
 				    			
 				    		case 34:
 				    			PowerUp  f = fabricaFlorDeFuego.crearPowerUp(fabricaSprite.getFlorDeFuego(), posX, posY-30, this) ;
-				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,f ,1, this));
+				    			juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY, f, 1, this));
 				    			juego.agregarPowerUp(f);
 				    			break;
 				    			
 				    		 case 35:
 				    			PowerUp  c = fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY-30, this);
-					    		juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY ,c ,1, this));
+					    		juego.agregarPlataforma(fabricaBloqueDePregunta.crearPlataforma(fabricaSprite.getBloqueDePregunta(), posX, posY, c, 1, this));
 					    		juego.agregarPowerUp(c);
 				    			break;
 				    			
@@ -163,15 +162,14 @@ public class Nivel {
 				    case 3:
 				    	juego.agregarPlataforma(fabricaBloqueSolido.crearPlataforma(fabricaSprite.getBloqueSolido(), posX, posY, this));
 				        break;
-				      
-				    case 4: //Tuberia con Piranha 
+				    case 4:
 				    	Enemigo e = fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY, this);
 				    	Plataforma p = fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY, e, this);
 				    	juego.agregarPlataforma(p); 
 				    	juego.agregarEnemigo(e);
 				        break;
-				    case 5://Tuberia sin Piranha 
-				    	juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY, this)); //Tuberia sin Piranha
+				    case 5:
+				    	juego.agregarPlataforma(fabricaTuberia.crearPlataforma(fabricaSprite.getTuberia(), posX, posY, this));
 				        break;
 				    case 6:
 				    	juego.agregarPlataforma(fabricaVacio.crearPlataforma(fabricaSprite.getVacio(), posX, posY, this));
@@ -194,10 +192,6 @@ public class Nivel {
 				    case 35:
 				    	juego.agregarPowerUp(fabricaChampiVerde.crearPowerUp(fabricaSprite.getChampiVerde(), posX, posY, this));
 				        break;
-				        /*
-				    case 61:
-				    	juego.agregarEnemigo(fabricaPiranhaPlant.crearEnemigo(fabricaSprite.getPiranhaPlant(), posX, posY));
-				        break;*/
 				    case 62:
 				    	juego.agregarEnemigo(fabricaLakitu.crearEnemigo(fabricaSprite.getLakitu(), posX, posY, juego.getPersonaje(), this));
 				        break;
@@ -212,26 +206,19 @@ public class Nivel {
 				        break;
 				    case 66:
 				    	juego.agregarEnemigo(fabricaKoopaTroopa.crearEnemigo(fabricaSprite.getKoopaTroopa(), posX, posY, this));
-				        break;
-				        
-				    /*case 100: 
-				    	fabricaBolaDeFuego.crearBolaDeFuego(posX, posY);
-				        break;*/ //El case 100 se debe parsear? 
-				        
+				        break;	        
 				    default:				        
 				        break;
 				}
-				contenido = lectura.readLine(); //Leo prox renglon del txt
+				contenido = lectura.readLine();
 				cargarSprite(fabricaSprite.getNivel(nivelActual));
-				
 			}
-			//setReloj();
-			//setNivelActual(i);
 			 personaje.setVidas(vidas);
 			 personaje.setPuntuacion(puntuacion);
 			 personaje.setMonedas(monedas);
-		}catch(IOException | NumberFormatException e) {
-				System.out.println(e.getMessage());}
+		} catch(IOException | NumberFormatException e) {
+				System.out.println(e.getMessage());
+		}
 	}
 	
 
@@ -248,6 +235,7 @@ public class Nivel {
 		        personaje.setPuntuacion(puntuacion);  
 		        personaje.setMonedas(monedas);
 			}
+			
 			juego.reiniciarNivel(); 
 		}
 	}
@@ -255,9 +243,9 @@ public class Nivel {
 	public Juego getJuego() {
 		return juego;
 	}
+	
 	public void ganarJuego(){
 		cargarNivel(getNivelActual()+1);
-		System.out.println("gane juego");
 	}
 
 	public void perderJuego() {

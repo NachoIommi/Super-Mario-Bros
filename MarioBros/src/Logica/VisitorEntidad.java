@@ -20,7 +20,6 @@ public class VisitorEntidad implements Visitor{
     public void visitarMoneda(Moneda m) {
     	m.afectarPersonaje(personaje);
     	Musica.getMusica().reproducirSonido("Sonido/Sonidos/agarrarMoneda.wav");
-    	
     }
     
     public void visitarFlorDeFuego(FlorDeFuego f) {

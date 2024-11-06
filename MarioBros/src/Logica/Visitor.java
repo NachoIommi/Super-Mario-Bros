@@ -28,6 +28,4 @@ public interface Visitor {
 	public void visitarPantalla(Juego j);
 	public void visitarSprite(Sprite s);
 
-	
-
 }
