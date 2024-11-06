@@ -47,61 +47,44 @@ public class HiloPersonaje extends Thread {
             try {
                 toleranciaAltura = personaje.getToleranciaAltura();
             	List<Plataforma> copiaPlataformas = new ArrayList<Plataforma>(plataformas);
+            	
                 for(Plataforma p : copiaPlataformas) {
                     if (personaje.getHitbox().intersects(p.getHitbox())) {
                         personaje.setTocandoBloque(true);
-                        // COLISION PERSONAJE DEL LADO DERECHO
-                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > p.getHitbox().getX() &&
-                            personaje.getHitbox().getX() < p.getHitbox().getX() &&
-                            Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) {
+                        
+                        if (colisionLadoDerecho(personaje,p)) {
                             personaje.setTocandoBloqueDerecha(true);
                             personaje.setTocandoBloqueIzquierda(false);
                         }  
-                        
-                        // COLISION PERSONAJE DEL LADO IZQUIERDO
-                        else if (personaje.getHitbox().getX() < p.getHitbox().getX() + p.getHitbox().getWidth() &&
-                                 personaje.getHitbox().getX() > p.getHitbox().getX() &&
-                                 Math.abs(personaje.getHitbox().getY() - p.getHitbox().getY()) < toleranciaAltura) {
+                        else if (colisionLadoIzquierdo(personaje,p)) {
                             personaje.setTocandoBloqueIzquierda(true);
                             personaje.setTocandoBloqueDerecha(false);
                         }
-                        
-                        // COLISION CON PISO
-                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY() &&
-                            personaje.getHitbox().getY() < p.getHitbox().getY()) {
+                        if (colisionPiso(personaje,p)) {
                             personaje.setTocandoBloqueAbajo(true);
                             p.aceptarVisita(visitorEnemigo); 
                         }
-                        // COLISION CON TECHO
-                        else if (personaje.getHitbox().getY() < p.getHitbox().getY() + p.getHitbox().getHeight() &&
-                                 personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > p.getHitbox().getY()) {
+                        else if (colisionTecho(personaje,p)) {
                             personaje.setTocandoBloqueArriba(true);
                             p.aceptarVisita(visitorEntidad);
                         }
                     }
                 }
                 List<Enemigo> copiaEnemigos = new ArrayList<Enemigo>(enemigos);
+                
                 for(Enemigo e : copiaEnemigos) {
                 	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
-                           
-                		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
-                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
-                            personaje.getHitbox().getX() < e.getHitbox().getX() && Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                        if (colisionDerechaEnemigo(personaje,e)) {
                         		tocoEnemigoDerecha=true;
                         		e.aceptarVisita(visitorEnemigo);
                         }
-                        // Colisión desde la izquierda (jugador a la derecha del enemigo)
-                        else if (personaje.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
-                                 personaje.getHitbox().getX() > e.getHitbox().getX()&& Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                        else if (colisionIzquierdaEnemigo(personaje,e)) {
                         	tocoEnemigoIzquierda=true;
                             e.aceptarVisita(visitorEnemigo);
                         }
-                        // (personaje arriba del enemigo)
-                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
-                                personaje.getHitbox().getY() < e.getHitbox().getY() ) 
+                        if (colisionArribaDeEnemigo(personaje,e)) 
                             {
                             	if(!tocoEnemigoDerecha && !tocoEnemigoIzquierda  ) {
-                            		
                             		e.aceptarVisita(visitorEnemigoAfectado);
                             		personaje.setTocandoBloqueAbajo(true);
                             		personaje.setSaltandoSobreEnemigo(true);	
@@ -114,53 +97,36 @@ public class HiloPersonaje extends Thread {
                 }
                 
                 List<Enemigo> copiaEnemigosEnEjecucion = new ArrayList<Enemigo>(enemigosEnEjecucion);
+                
                 for(Enemigo e : copiaEnemigosEnEjecucion) {
                 	if(!personaje.esInvulnerable() && personaje.getHitbox().intersects(e.getHitbox())) {
-                           
-                		 // Colisión desde la derecha (jugador a la izquierda del enemigo)
-                        if (personaje.getHitbox().getX() + personaje.getHitbox().getWidth() > e.getHitbox().getX() &&
-                            personaje.getHitbox().getX() < e.getHitbox().getX() && Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura) {
+                        if (colisionDerechaEnemigo(personaje,e)) {
                         		tocoEnemigoDerecha=true;
                         		e.aceptarVisita(visitorEnemigo);
-            //            		System.out.println("enemigo lo tocan desde izquierda");
                         }
-                        // Colisión desde la izquierda (jugador a la derecha del enemigo)
-                        else if (personaje.getHitbox().getX() < e.getHitbox().getX() + e.getHitbox().getWidth() &&
-                                 personaje.getHitbox().getX() > e.getHitbox().getX()&& Math.abs(personaje.getHitbox().getY() - e.getHitbox().getY()) < toleranciaAltura)
-                        {
+                        else if (colisionIzquierdaEnemigo(personaje,e)){
                         	tocoEnemigoIzquierda=true;
                             e.aceptarVisita(visitorEnemigo);
-           //                 System.out.println("enemigo lo tocan desde derecha");
                         }
-                        // (personaje arriba del enemigo)
-                        if (personaje.getHitbox().getY() + personaje.getHitbox().getHeight() > e.getHitbox().getY() &&
-                                personaje.getHitbox().getY() < e.getHitbox().getY() ) 
-                            {
-                            	if(!tocoEnemigoDerecha && !tocoEnemigoIzquierda  ) {
-                            		
+                        if (colisionArribaDeEnemigo(personaje,e)){
+                            	if(!tocoEnemigoDerecha && !tocoEnemigoIzquierda  ) {                            		
                             		e.aceptarVisita(visitorEnemigoAfectado);
-            //                		System.out.println("Saltan sobre enemigo");
                             		personaje.setTocandoBloqueAbajo(true);
                             		personaje.setSaltandoSobreEnemigo(true);
-                            		
-                            		}
+                            	}
                             }                       
                         tocoEnemigoDerecha=false;
                         tocoEnemigoIzquierda=false;
-                        tocoEnemigoAbajo=false;
-                        
+                        tocoEnemigoAbajo=false;                        
                 	}
                 }
-
                 List<PowerUp> copiaPowerUps = new ArrayList<PowerUp>(powerUps);
                 for(PowerUp p : copiaPowerUps) {
                 	if(personaje.getHitbox().intersects(p.getHitbox())) {
-                		p.aceptarVisita(visitorEntidad);}
-                	
+                		p.aceptarVisita(visitorEntidad);}               	
                 }
 
                 personaje.moverPersonaje();
-
                 // Reiniciar estado de colisiones
                 personaje.setTocandoBloque(false);
                 personaje.setTocandoBloqueDerecha(false);
@@ -175,5 +141,34 @@ public class HiloPersonaje extends Thread {
             }
         }
     }
-    
+    private boolean colisionLadoDerecho(Personaje pj , Plataforma plat) {
+    	return (pj.getHitbox().getX() + pj.getHitbox().getWidth() > plat.getHitbox().getX() &&
+    			pj.getHitbox().getX() < plat.getHitbox().getX() &&
+                Math.abs(pj.getHitbox().getY() - plat.getHitbox().getY()) < toleranciaAltura);    			
+    }
+    private boolean colisionLadoIzquierdo(Personaje pj , Plataforma plat) {
+    	return (pj.getHitbox().getX() < plat.getHitbox().getX() + plat.getHitbox().getWidth() &&
+                pj.getHitbox().getX() > plat.getHitbox().getX() &&
+                Math.abs(pj.getHitbox().getY() - plat.getHitbox().getY()) < toleranciaAltura);
+    }
+    private boolean colisionPiso(Personaje pj , Plataforma plat) {
+    	return (pj.getHitbox().getY() + pj.getHitbox().getHeight() > plat.getHitbox().getY() &&
+                pj.getHitbox().getY() < plat.getHitbox().getY());
+    }
+    private boolean colisionTecho(Personaje pj , Plataforma plat) {
+    	return (pj.getHitbox().getY() < plat.getHitbox().getY() + plat.getHitbox().getHeight() &&
+                pj.getHitbox().getY() + pj.getHitbox().getHeight() > plat.getHitbox().getY()) ;
+    }
+    private boolean colisionDerechaEnemigo(Personaje pj , Enemigo enem) {
+    	return (pj.getHitbox().getX() + pj.getHitbox().getWidth() > enem.getHitbox().getX() &&
+                pj.getHitbox().getX() < enem.getHitbox().getX() && Math.abs(pj.getHitbox().getY() - enem.getHitbox().getY()) < toleranciaAltura);
+    }
+    private boolean colisionIzquierdaEnemigo(Personaje pj , Enemigo enem) {
+    	return (pj.getHitbox().getX() < enem.getHitbox().getX() + enem.getHitbox().getWidth() &&
+                pj.getHitbox().getX() > enem.getHitbox().getX()&& Math.abs(pj.getHitbox().getY() - enem.getHitbox().getY()) < toleranciaAltura); 
+    }
+    private boolean colisionArribaDeEnemigo(Personaje pj , Enemigo enem) {
+    	return (pj.getHitbox().getY() + pj.getHitbox().getHeight() > enem.getHitbox().getY() &&
+                pj.getHitbox().getY() < enem.getHitbox().getY() );
+    }
 }
