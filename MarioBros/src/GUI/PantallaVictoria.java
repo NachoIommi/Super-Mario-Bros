@@ -52,12 +52,12 @@ public class PantallaVictoria extends JPanel{
 	    ranking.setVisible(true); 
 	    add(ranking);
 	    for (int j = 0; j < labelJugadores.length; j++) {
-	            labelJugadores[j] = new JLabel(); 
-	            labelJugadores[j].setBounds(30, 280 + (j * 30), 350, 50); 
-	            labelJugadores[j].setVisible(true); 
-	            add(labelJugadores[j]); 
+	        labelJugadores[j] = new JLabel(); 
+	        labelJugadores[j].setBounds(30, 280 + (j * 30), 350, 50); 
+	        labelJugadores[j].setVisible(true); 
+	        add(labelJugadores[j]); 
 	    }
-	        
+     
 	        try {
 	            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(12f);
 	            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -66,7 +66,6 @@ public class PantallaVictoria extends JPanel{
 	                label.setFont(marioFuente);
 	                label.setForeground(Color.WHITE);
 	            }
-
 	            ranking.setFont(marioFuente.deriveFont(22f));
 	            ranking.setForeground(Color.WHITE);
 	        } catch (FontFormatException | IOException e) {
