@@ -10,6 +10,8 @@ public class Ranking implements Serializable {
 	protected List<Jugador> jugadores;
 	protected List<Jugador> topCinco;
 	
+	private static final long serialVersionUID = -381887704080553893L;
+	
 	public Ranking() {
 		jugadores = new ArrayList<Jugador>();
 		topCinco = new ArrayList<Jugador>();

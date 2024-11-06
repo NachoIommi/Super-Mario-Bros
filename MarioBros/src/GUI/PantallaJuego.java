@@ -33,7 +33,6 @@ public class PantallaJuego extends JPanel {
 	private ControladorVistas controladorVistas;
     private List<Enemigo> copiaEnemigos;
     private List<Enemigo> copiaEnemigosEnEjecucion;
-
     
     private List<BolaDeFuego> copiaBolas;
 
@@ -71,7 +70,6 @@ public class PantallaJuego extends JPanel {
         copiaEnemigosEnEjecucion = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigosEnEjecucion());
 
         pantallaCorriendo = true;
-        //ontroladorVistas.configurarEventosTeclado();
     }
     
     public void agregarPanelNivel() {
@@ -222,7 +220,6 @@ public class PantallaJuego extends JPanel {
     public void mostrarPersonaje() {	
     	if(personaje == null) {
     		personaje = controladorVistas.obtenerPersonaje();
-            personaje.setVisible(true);
             String ruta = personaje.getSprite().getRutaImagen();
             personaje.setIcon(verificarExtension(ruta));
             personaje.setBounds(personaje.getPosX(), personaje.getPosY(), ConstantesVistas.ENTIDAD_TAMANO_ANCHO, ConstantesVistas.ENTIDAD_TAMANO_ANCHO);
@@ -232,7 +229,6 @@ public class PantallaJuego extends JPanel {
     
     public void mostrarEnemigos() {
     	copiaEnemigos = new ArrayList<Enemigo>(controladorVistas.obtenerEnemigo());
-    	//copiaEnemigos = new CopyOnWriteArrayList<>(controladorVistas.obtenerEnemigo());
     	if (!copiaEnemigos.isEmpty()) {
     		for(Enemigo e : copiaEnemigos) {
         		e.setVisible(true);
@@ -450,7 +446,6 @@ public class PantallaJuego extends JPanel {
     } 
     
     public void actualizarImagenEnemigos(){
-    	//copiaEnemigos = controladorVistas.obtenerEnemigo();
     	if(!copiaEnemigos.isEmpty()) {
     		for(Enemigo enemigo : copiaEnemigos) {
         		if(enemigo.mostrable() && enemigo.necesitaActualizarSprite()) {   		

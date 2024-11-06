@@ -168,16 +168,12 @@ public class ControladorVistas {
         }
         
         juego.iniciarSiguienteNivel();
-
-        Timer timer = new Timer(1000, e -> {
-            if (pantallaJuego != null) {
-                pantallaJuego = null;
-                pantallaJuego = new PantallaJuego(this);
-                mostrarPantallaJuego();
-            }
-        });
-        timer.setRepeats(false); 
-        timer.start();
+        
+        if (pantallaJuego != null) {
+            pantallaJuego = null;
+            pantallaJuego = new PantallaJuego(this);
+            mostrarPantallaJuego();
+        }
 	}
 	
 	public Juego obtenerJuego() {
