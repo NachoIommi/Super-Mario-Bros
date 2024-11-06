@@ -22,18 +22,17 @@ public class PantallaVictoria extends JPanel{
 	
 	protected ControladorVistas controladorVistas;
 	protected JLabel imagenInicio;
-	protected JButton botonVerRanking;
 	
 	 public PantallaVictoria(ControladorVistas controladorVistas) {
-	    	this.controladorVistas = controladorVistas;
-	    	this.setSize(600,500);
-			this.setLayout(null);
-			this.setVisible(true);
-			this.setBackground(Color.BLACK);
-			mostrarGanar();
-			mostrarRanking();
-			agregarImagen();
-	    }
+	    this.controladorVistas = controladorVistas;
+	    this.setSize(600,500);
+		this.setLayout(null);
+		this.setVisible(true);
+		this.setBackground(Color.BLACK);
+		mostrarGanar();
+		mostrarRanking();
+		agregarImagen();
+	}
 	 
 	 public void agregarImagen() {
 		String ruta = "imagenesOriginales/img/imagenVictoria.jpg";;
@@ -47,17 +46,17 @@ public class PantallaVictoria extends JPanel{
 	 }
 	 
 	 public void mostrarRanking() {
-	    	JLabel[] labelJugadores = new JLabel[5];
-	    	JLabel ranking = new JLabel("RANKING");
-	        ranking.setBounds(30, 250, 350, 50); 
-	        ranking.setVisible(true); 
-	        add(ranking);
-	        for (int j = 0; j < labelJugadores.length; j++) {
+	    JLabel[] labelJugadores = new JLabel[5];
+	    JLabel ranking = new JLabel("RANKING");
+	    ranking.setBounds(30, 250, 350, 50); 
+	    ranking.setVisible(true); 
+	    add(ranking);
+	    for (int j = 0; j < labelJugadores.length; j++) {
 	            labelJugadores[j] = new JLabel(); 
 	            labelJugadores[j].setBounds(30, 280 + (j * 30), 350, 50); 
 	            labelJugadores[j].setVisible(true); 
 	            add(labelJugadores[j]); 
-	        }
+	    }
 	        
 	        try {
 	            Font marioFuente = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/SuperMarioBros.2.ttf")).deriveFont(12f);

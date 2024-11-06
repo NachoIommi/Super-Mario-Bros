@@ -74,7 +74,14 @@ public class Lakitu extends Enemigo{
 	public void moverseLateralmente() {
 	    int limiteIzquierdo = Math.abs(maxX - distanciaConPersonaje); 
 	    int limiteDerecho = maxX + distanciaConPersonaje;
-	    int velocidadLakitu = (personaje.getPosX() > maxX) ? 10 : 4; 
+	    int velocidadLakitu;
+	    
+	    if(personaje.getPosX() > maxX) {
+	    	velocidadLakitu = 10;
+	    } else {
+	    	velocidadLakitu = 4;
+	    }
+	    
 	    if (posX >= limiteDerecho) {
 	        direccionDerecha = false;
 	    } else if (posX <= limiteIzquierdo) {
@@ -99,7 +106,7 @@ public class Lakitu extends Enemigo{
         }
         int segundosActuales = nivelActual.getJuego().getReloj().getSegundos();
         if(segundosActuales < 299 && segundosActuales % 5 == 0  && !lanzo) {
-            lanzo=true;
+            lanzo = true;
             GenerarEnemigos fabricaSpiny = new GenerarSpiny();
             Enemigo nuevoSpiny = fabricaSpiny.crearEnemigo(fabricaSprite.getSpinySpawneando(), posX, posY, nivelActual);
             personaje.getNivelActual().getJuego().agregarEnemigoEnEjecucion(nuevoSpiny);
@@ -124,7 +131,7 @@ public class Lakitu extends Enemigo{
 	}
 	
 	public void morir() {		
-		hitbox = new Hitbox(0 ,0,0 ,0);
+		hitbox = new Hitbox(0, 0, 0, 0);
 		murio = true;
 	}	
 	

@@ -27,58 +27,58 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	protected boolean muerto;
 	
 	
-	public EstadoPiranhaExtendida(PiranhaPlant p,Sprite s,int x,int y) {
+	public EstadoPiranhaExtendida(PiranhaPlant p, Sprite s, int x,  int y){
 		super(p);
 		sprite = s;
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(x+1, y, 28, 30);
 		
-		desplazado=0;
-		subiendo=true;
-		bajando=false;
+		desplazado = 0;
+		subiendo = true;
+		bajando = false;
 		muerto = false;
 	}
 	
 	public void moverse() {		
-		if(desplazado<30 && subiendo) {
+		if(desplazado < 30 && subiendo) {
 			posY = posY - 1; 	         
 	        desplazado++;
 	        hitbox.actualizar(posX+1, posY);
 	    }
 		
-		if(desplazado==30) {
-			subiendo =false;
+		if(desplazado == 30) {
+			subiendo = false;
 		}
 		
 		if(!subiendo && !entroTimer){
-			entroTimer=true;
+			entroTimer = true;
 			Timer timer = new Timer();
 		    timer.schedule(new TimerTask() {
 		        public void run() {		
-		        	bajando=true;
-		        	entroTimer=false;
+		        	bajando = true;
+		        	entroTimer = false;
 		        }
 		    }, 2000);		    
 		}
 		
 		if(bajando && desplazado!=0) {			
-			posY=posY+1;				
+			posY = posY +1 ;				
 		    desplazado--;
-		    hitbox.actualizar(posX+1, posY); 
+		    hitbox.actualizar(posX + 1, posY); 
 		}
 		
 		if(bajando && desplazado==0) {
-			subiendo=true;
-			bajando=false;
-			desplazado=0;
+			subiendo = true;
+			bajando = false;
+			desplazado = 0;
 			cambiarEstado();
 		}	
 	}
 		
 	public void cambiarEstado() {
 		actualizarSprite();
-		piranha.setEstadoActual(new EstadoPiranhaInvulnerable( piranha,sprite, posX, posY));	
+		piranha.setEstadoActual(new EstadoPiranhaInvulnerable(piranha, sprite, posX, posY));	
 	 }
 	
 	public void serAfectadoPorPersonaje(Personaje p) {
@@ -87,7 +87,7 @@ public class EstadoPiranhaExtendida extends EstadosDePiranhaPlant{
 	
 	public void morir() {   
 		muerto = true;
-		hitbox = new Hitbox(0 ,0,0 ,0);	
+		hitbox = new Hitbox(0, 0, 0, 0);	
 		actualizarSprite();
 	}
 	

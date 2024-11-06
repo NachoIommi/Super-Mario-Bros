@@ -37,6 +37,7 @@ public abstract class Enemigo extends Entidad{
 	public void setMostrable(boolean b) {
 		mostrable = b;
 	}
+	
 	public void setTocandoBloqueDerecha(boolean b) {
 		tocandoBloqueDerecha = b;
 	}
@@ -55,8 +56,8 @@ public abstract class Enemigo extends Entidad{
 	public abstract void cargarSprite(Sprite s);
 	public abstract void actualizarSprite();
 	public abstract void setSpriteActualizado(boolean actualizado);
-	// Getters
 	
+	// Getters
 	public Nivel getNivelActual() {
 		return nivelActual;
 	}
@@ -68,6 +69,7 @@ public abstract class Enemigo extends Entidad{
 	public boolean mostrable() {
 		return mostrable;
 	}
+	
 	public abstract int getToleranciaAltura();
 	
 	public boolean murio() {

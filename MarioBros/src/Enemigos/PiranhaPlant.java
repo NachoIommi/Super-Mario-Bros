@@ -19,7 +19,7 @@ public class PiranhaPlant extends Enemigo{
 	
 	public PiranhaPlant(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
-		estado = new EstadoPiranhaExtendida(this ,s, x ,y); 
+		estado = new EstadoPiranhaExtendida(this, s, x, y); 
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(x+15, y, 10, 30);

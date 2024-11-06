@@ -18,18 +18,18 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 	protected int posX;
 	protected int posY;
 	
-    public EstadoPiranhaInvulnerable(PiranhaPlant p ,Sprite s,int x,int y) {
+    public EstadoPiranhaInvulnerable(PiranhaPlant p , Sprite s, int x, int y) {
         super(p);
 		sprite = s;
 		posX = x;
 		posY = y;
-		hitbox = new Hitbox(0,0,0 ,0);
+		hitbox = new Hitbox(0, 0, 0, 0);
     }
     
     // Setters
     public void cambiarEstado() {
     	actualizarSpriteCambioDeEstado();
-		piranha.setEstadoActual(new EstadoPiranhaExtendida( piranha,sprite, posX, posY));	
+		piranha.setEstadoActual(new EstadoPiranhaExtendida(piranha, sprite, posX, posY));	
     }
     
     public void serAfectadoPorPersonaje(Personaje p) {
@@ -42,12 +42,12 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
     
     public void moverse() {   	
     	if(!entroTimer) {
-    		entroTimer=true;   	
+    		entroTimer = true;   	
 	    	Timer timer = new Timer();
 		    timer.schedule(new TimerTask() {
 		    	public void run() {		        	
 		    		cambiarEstado();
-		    		entroTimer=false;
+		    		entroTimer = false;
 	        }
 	    }, 3000);}
     }
@@ -73,7 +73,7 @@ public class EstadoPiranhaInvulnerable extends EstadosDePiranhaPlant {
 		
 		if(piranha.getNivelActual().getJuego().getModoDeJuego() == 1) {
 			fabrica = new GenerarSpriteOriginal();
-		}else {
+		} else {
 			fabrica = new GenerarSpriteReemplazo();
 		}
 

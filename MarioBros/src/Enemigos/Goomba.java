@@ -15,11 +15,11 @@ public class Goomba extends Enemigo{
 		
 	protected Sprite sprite;
 	protected Hitbox hitbox;
-	protected int toleranciaAltura=20;
+	protected int toleranciaAltura = 20;
 	protected int posX;
 	protected int posY;	
 
-	public Goomba(Sprite s,int x,int y, Nivel nivelActual) {
+	public Goomba(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
 		posX = x;
         posY = y;
@@ -40,7 +40,7 @@ public class Goomba extends Enemigo{
 	}
 	
 	public void morir() {	
-		hitbox = new Hitbox(0 ,0,0 ,0);
+		hitbox = new Hitbox(0, 0, 0, 0);
 		murio = true;
 		actualizarSprite();
 	}
@@ -51,27 +51,32 @@ public class Goomba extends Enemigo{
 	
 	public void moverse() {
 		if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;		
+			tocoParedIzquierda = true;	
+		
 		if(!tocoParedIzquierda) {
 			moverIzq();			
 			hitbox.actualizar (posX, posY);			
 		} else {
-			tocoParedIzquierda=true;
+			tocoParedIzquierda = true;
 			moverDer();
 			hitbox.actualizar (posX, posY);
-		}						
+		}	
+		
 		if (tocandoBloqueDerecha) {
-			tocoParedDerecha=true;
-			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+			tocoParedDerecha = true;
+			tocoParedIzquierda = false;
 		}
-		hitbox.actualizar (posX, posY);		
+		
+		hitbox.actualizar (posX, posY);	
+		
 		if (!tocandoBloqueAbajo) 
-	        posY=posY+1;		
+	        posY = posY + 1;
+		
 		hitbox.actualizar (posX, posY);		
 	}
 	
 	public void moverIzq() {
-		posX=posX-1;
+		posX = posX - 1;
 	}
 	
 	public void moverDer() {
@@ -94,7 +99,7 @@ public class Goomba extends Enemigo{
 		GenerarSprite fabricaSprite;		
 		if(nivelActual.getJuego().getModoDeJuego() == 1) {
 			fabricaSprite = new GenerarSpriteOriginal();
-		}else {
+		} else {
 			fabricaSprite = new GenerarSpriteReemplazo();
 		}
     	sprite = fabricaSprite.getGoombaMuerto();

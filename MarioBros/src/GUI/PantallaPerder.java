@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 public class PantallaPerder extends JPanel {
 	protected ControladorVistas controladorVistas;
 	protected JLabel imagenPerder;
-	protected JButton botonReiniciar;
 	
 	public PantallaPerder(ControladorVistas controladorVistas) {
 		this.controladorVistas = controladorVistas;

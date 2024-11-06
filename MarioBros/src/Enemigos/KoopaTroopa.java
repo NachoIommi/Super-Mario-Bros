@@ -14,9 +14,9 @@ public class KoopaTroopa extends Enemigo{
 	protected int posY;
 	protected int toleranciaAltura = 20;
 	
-	public KoopaTroopa(Sprite s, int x,int y, Nivel nivelActual) {
+	public KoopaTroopa(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
-		estado = new EstadoKoopaNormal(this ,s, x ,y); 
+		estado = new EstadoKoopaNormal(this, s, x ,y); 
 		posX = x;
 		posY = y;
 		hitbox = new Hitbox(x, y, 30, 30);
@@ -61,7 +61,6 @@ public class KoopaTroopa extends Enemigo{
    }
 	
 	// GETTERS
-   
    public EstadoDeKoopa getEstadoActual() {
 		return estado;
    }

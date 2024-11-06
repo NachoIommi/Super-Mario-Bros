@@ -17,7 +17,6 @@ public class GenerarBloqueSolido implements GenerarPlataformas {
 	}
 
 	public Plataforma crearPlataforma(Sprite s, int x, int y, Enemigo p, Nivel nivelActual) {
-
 		return null;
 	}
 	

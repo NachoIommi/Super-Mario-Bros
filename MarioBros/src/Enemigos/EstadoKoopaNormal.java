@@ -19,12 +19,12 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	protected int posX;
 	protected int posY;	   
 	
-	public EstadoKoopaNormal(KoopaTroopa kt,Sprite s,int x,int y) {
+	public EstadoKoopaNormal(KoopaTroopa kt, Sprite s, int x, int y) {
 		super(kt);
 		posX = x;
 		posY = y;
 		sprite = s;
-		hitbox = new Hitbox(x ,y,30 ,30);
+		hitbox = new Hitbox(x, y, 30, 30);
 	}
 	
 	// Setters
@@ -60,33 +60,32 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	public void morir() {
-		hitbox = new Hitbox(0 ,0,0 ,0);
+		hitbox = new Hitbox(0, 0, 0, 0);
 		murio = true;
 	}
 	
 	public void moverse() {
 		if(!recibirDano) {		
 			if(tocandoBloqueIzquierda) 
-				tocoParedIzquierda=true;				
+				tocoParedIzquierda = true;
+			
 			if(!tocoParedIzquierda) {
 				moverIzq();			
 				hitbox.actualizar (posX, posY);
-			}
-			else{
+			} else {
 				tocoParedIzquierda=true;
 				moverDer();
 				hitbox.actualizar (posX, posY);
-			}									
+			}
+			
 			if (tocandoBloqueDerecha) {
-				tocoParedDerecha=true;
-				tocoParedIzquierda=false;				
+				tocoParedDerecha = true;
+				tocoParedIzquierda = false;				
 			}	
 			if (!tocandoBloqueAbajo) {
-				posY=posY+1;
-			}
-		        
-			
-				hitbox.actualizar (posX, posY);	
+				posY = posY + 1;
+			}   	
+			hitbox.actualizar (posX, posY);	
 		}			
 	}
 	
@@ -112,7 +111,7 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
         }	       
         if(!murio) {
         	nuevoSprite = fabricaSprite.getKoopaTroopa();
-        }else {
+        } else {
         	nuevoSprite = fabricaSprite.getKoopaTroopaMuerto();
         }	
         if(!koopa.getSprite().getRutaImagen().equals(nuevoSprite.getRutaImagen())) {
@@ -122,11 +121,11 @@ public class EstadoKoopaNormal extends EstadoDeKoopa {
 	}
 	
 	public void moverIzq() {
-		posX=posX-1;
+		posX = posX - 1;
 	}
 	
 	public void moverDer() {
-		posX=posX+1;
+		posX = posX + 1;
 	}
 
 	// Getters

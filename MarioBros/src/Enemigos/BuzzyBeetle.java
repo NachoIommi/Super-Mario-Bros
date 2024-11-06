@@ -17,7 +17,7 @@ public class BuzzyBeetle extends Enemigo{
 	protected int posY;
 	protected Hitbox hitbox;
 
-	public double toleranciaAltura=20;
+	public double toleranciaAltura = 20;
 	
 	public BuzzyBeetle(Sprite s, int x, int y, Nivel nivelActual) {
 		super(nivelActual);
@@ -42,11 +42,9 @@ public class BuzzyBeetle extends Enemigo{
 	}
 	
 	public void morir() {
-		
 		hitbox = new Hitbox(0 ,0,0 ,0);
 		murio = true;
 		actualizarSprite();
-		
 	}
 	
 	public void aceptarVisita(Visitor v) {
@@ -55,7 +53,7 @@ public class BuzzyBeetle extends Enemigo{
 	
 	public void moverse() {
 		if(tocandoBloqueIzquierda) 
-			tocoParedIzquierda=true;
+			tocoParedIzquierda = true;
 		
 	
 		if(!tocoParedIzquierda) {
@@ -69,13 +67,13 @@ public class BuzzyBeetle extends Enemigo{
 				
 				
 		if (tocandoBloqueDerecha) {
-			tocoParedDerecha=true;
-			tocoParedIzquierda=false; // lo hago caminar a la izquierda de vuelta
+			tocoParedDerecha = true;
+			tocoParedIzquierda = false;
 		}
 		hitbox.actualizar (posX, posY);	
 		
 		if (!tocandoBloqueAbajo) 
-	        posY=posY+1;
+	        posY = posY + 1;
 		
 		hitbox.actualizar (posX, posY);	
 	}
@@ -112,10 +110,10 @@ public class BuzzyBeetle extends Enemigo{
 	}
 
 	public void moverIzq() {
-		posX = posX-2;
+		posX = posX - 2;
 	}
 	public void moverDer() {
-		posX = posX+2;
+		posX = posX + 2;
 	}
 	
 	// Getters
@@ -136,7 +134,7 @@ public class BuzzyBeetle extends Enemigo{
 	}
 
 	public int getToleranciaAltura() {
-		return (int)toleranciaAltura;
+		return (int) toleranciaAltura;
 	}
 
 	public boolean necesitaActualizarSprite() {
